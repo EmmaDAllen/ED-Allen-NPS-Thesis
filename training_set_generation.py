@@ -136,7 +136,7 @@ def solve_instance(G, s, t, density, max_attacks=1):
         penalty=penalty,attack_limit=max_attacks)
 
     # Solve MIP
-    opt = pyo.SolverFactory('gurobi')
+    opt = pyo.SolverFactory('gurobi_direct')
     results = opt.solve(model)
 
     
