@@ -7,13 +7,45 @@ Created on Fri May 22 10:51:24 2026
 
 import torch
 import csv
+import sys
 
 from random_networks import generate_one_in_network
 from mip import solve_instance
 from tropical_attention import TropicalInterdictionModel
+from standard_transformer import StandardTransformerInterdictionModel
+from graph_neural_network import GNNInterdictionModel
 from interdiction_data import sample_to_tensors
 from metrics import shortest_path_after_attack
 
+def get_model(model_type, device):
+
+    if model_type == "tropical":
+        return TropicalInterdictionModel(
+            input_dim=7,
+            d_model=64,
+            n_heads=4,
+            num_layers=2,
+            device=device
+        ).to(device)
+
+    elif model_type == "transformer":
+        return StandardTransformerInterdictionModel(
+            input_dim=7,
+            d_model=64,
+            n_heads=4,
+            num_layers=2,
+            device=device
+        ).to(device)
+
+    elif model_type == "gnn":
+        return GNNInterdictionModel(
+            input_dim=7,
+            d_model=64,
+            num_layers=2
+        ).to(device)
+
+    else:
+        raise ValueError(f"Unknown model type: {model_type}")
 
 def evaluate():
     
@@ -21,12 +53,13 @@ def evaluate():
     device = "cuda" if torch.cuda.is_available() else "cpu"
 
     # instantiate empty tropical attention model
-    model = TropicalInterdictionModel(input_dim=7, d_model=64, n_heads=4,
-                                      num_layers=2, device=device).to(device)
+    model_type = sys.argv[1] if len(sys.argv) > 1 else "tropical"
+
+    model = get_model(model_type, device)
     
     # load saved moved weigts from training
     model.load_state_dict(
-        torch.load("tropical_interdiction_model.pt", map_location=device))
+        torch.load(f"{model_type}_model.pt", map_location=device))
 
     # put model in evaluation mode
     model.eval()
@@ -177,7 +210,7 @@ def evaluate():
         print(f"Average objective gap: {total_gap / total_instances:.4f}")
 
     # save all detailed results across all K values
-    with open("evaluation_results.csv", "w", newline="") as csvfile:
+    with open(f"evaluation_results_{model_type}.csv", "w", newline="") as csvfile:
         fieldnames = results_rows[0].keys()
 
         writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
