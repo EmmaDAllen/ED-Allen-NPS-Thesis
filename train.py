@@ -5,15 +5,47 @@ Created on Thu May 14 07:09:23 2026
 @author: emmallen
 """
 
+import sys
 import torch
 import torch.nn as nn
 from torch.utils.data import DataLoader, random_split
 
 from tropical_attention import TropicalInterdictionModel
+from standard_transformer import StandardTransformerInterdictionModel
+from graph_neural_network import GNNInterdictionModel
 from interdiction_data import InterdictionDataset
 from interdiction_data import collate_graphs
 from metrics import compute_metrics
 
+def get_model(model_type, device):
+
+    if model_type == "tropical":
+        return TropicalInterdictionModel(
+            input_dim=7,
+            d_model=64,
+            n_heads=4,
+            num_layers=2,
+            device=device
+        ).to(device)
+
+    elif model_type == "transformer":
+        return StandardTransformerInterdictionModel(
+            input_dim=7,
+            d_model=64,
+            n_heads=4,
+            num_layers=2,
+            device=device
+        ).to(device)
+
+    elif model_type == "gnn":
+        return GNNInterdictionModel(
+            input_dim=7,
+            d_model=64,
+            num_layers=2
+        ).to(device)
+
+    else:
+        raise ValueError(f"Unknown model type: {model_type}")
 
 def train():
     
@@ -46,8 +78,9 @@ def train():
         collate_fn=collate_graphs) # use padding function
 
     # creates tropical attention interdiction model and moves it to GPU/CPU
-    model = TropicalInterdictionModel(input_dim=7, d_model=64, n_heads=4,
-        num_layers=2, device=device).to(device)
+    model_type = sys.argv[1] if len(sys.argv) > 1 else "tropical"
+
+    model = get_model(model_type, device)
 
     # Class imbalance correction
     # weights positive labels more heavily - most edges are not inerdicted
@@ -155,7 +188,7 @@ def train():
               f"Exact: {total_exact_match / len(val_loader):.4f}")
 
     # saves training model weights
-    torch.save(model.state_dict(), "tropical_interdiction_model.pt")
+    torch.save(model.state_dict(), f"{model_type}_model.pt")
 
 
 if __name__ == "__main__":
