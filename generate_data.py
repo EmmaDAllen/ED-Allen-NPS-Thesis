@@ -14,10 +14,10 @@ Created on Wed Apr 22 12:42:40 2026
 
 import json
 
-from data.random_networks import generate_one_in_network 
-#from data.random_networks import generate_grid_network
-#from data.random_networks import generate_spatial_network
-#from data.random_networks import generate_hub_spoke_network
+from random_networks import generate_one_in_network 
+#from random_networks import generate_grid_network
+#from random_networks import generate_spatial_network
+#from random_networks import generate_hub_spoke_network
 
 from optimization.mip import solve_instance
 
