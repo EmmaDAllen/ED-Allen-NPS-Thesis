@@ -19,7 +19,7 @@ from random_networks import generate_one_in_network
 #from random_networks import generate_spatial_network
 #from random_networks import generate_hub_spoke_network
 
-from optimization.mip import solve_instance
+from mip import solve_instance
 
 
 
