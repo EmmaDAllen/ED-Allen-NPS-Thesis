@@ -12,7 +12,7 @@ from torch.utils.data import DataLoader, random_split
 
 from tropical_attention import TropicalInterdictionModel
 from standard_transformer import StandardTransformerInterdictionModel
-from graph_neural_network import GNNInterdictionModel
+from gnn import GNNInterdictionModel
 from interdiction_data import InterdictionDataset
 from interdiction_data import collate_graphs
 from metrics import compute_metrics
