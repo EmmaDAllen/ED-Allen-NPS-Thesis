@@ -34,7 +34,6 @@ def get_model(model_type, device):
             d_model=64,
             n_heads=4,
             num_layers=2,
-            device=device
         ).to(device)
 
     elif model_type == "gnn":
