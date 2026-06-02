@@ -9,10 +9,10 @@ import torch
 import torch.nn as nn
 from torch.utils.data import DataLoader, random_split
 
-from models.tropical_attention import TropicalInterdictionModel
-from data.interdiction_data import InterdictionDataset
-from data.interdiction_data import collate_graphs
-from training.metrics import compute_metrics
+from tropical_attention import TropicalInterdictionModel
+from interdiction_data import InterdictionDataset
+from interdiction_data import collate_graphs
+from metrics import compute_metrics
 
 
 def train():
