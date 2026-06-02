@@ -13,7 +13,7 @@ from random_networks import generate_one_in_network
 from mip import solve_instance
 from tropical_attention import TropicalInterdictionModel
 from standard_transformer import StandardTransformerInterdictionModel
-from graph_neural_network import GNNInterdictionModel
+from gnn import GNNInterdictionModel
 from interdiction_data import sample_to_tensors
 from metrics import shortest_path_after_attack
 
