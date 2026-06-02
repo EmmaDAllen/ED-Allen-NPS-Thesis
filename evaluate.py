@@ -8,11 +8,11 @@ Created on Fri May 22 10:51:24 2026
 import torch
 import csv
 
-from data.random_networks import generate_one_in_network
-from optimization.mip import solve_instance
-from models.tropical_attention import TropicalInterdictionModel
-from data.interdiction_data import sample_to_tensors
-from training.metrics import shortest_path_after_attack
+from random_networks import generate_one_in_network
+from mip import solve_instance
+from tropical_attention import TropicalInterdictionModel
+from interdiction_data import sample_to_tensors
+from metrics import shortest_path_after_attack
 
 
 def evaluate():
