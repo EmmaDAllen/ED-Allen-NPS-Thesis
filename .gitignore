@@ -1,7 +1,5 @@
 __pycache__/
 *.pyc
 training_data.json
-tropical_interdiction_model.pt
-evaluation_results.csv
-results/
+
 
