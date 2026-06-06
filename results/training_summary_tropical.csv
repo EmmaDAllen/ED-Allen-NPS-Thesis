@@ -1,0 +1,2 @@
+model_type,epochs,total_training_time_seconds,average_epoch_time_seconds
+tropical,50,601.7110817637295,12.034221635274589
