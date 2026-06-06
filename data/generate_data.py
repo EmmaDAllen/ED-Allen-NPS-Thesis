@@ -13,6 +13,7 @@ Created on Wed Apr 22 12:42:40 2026
 
 
 import json
+import time
 
 from data.random_networks import generate_one_in_network 
 #from random_networks import generate_grid_network
@@ -71,7 +72,8 @@ def generate_dataset(network_settings,replications_per_setting, attack_budgets,
             
                 print(f"Solved n={n}, m={m}, budget={attack_budget}, "
                       f"density={density:.2f}, rep={rep}, "
-                      f"objective={sample['path_length']:.2f}")
+                      f"objective={sample['path_length']:.2f}, "
+                      f"mip_solve_time={sample['mip_solve_time']:.4f}")
 
     print(f"\nGenerated {len(dataset)} solved training samples.")
     print(f"Skipped {skipped} instances.")

@@ -8,6 +8,7 @@ Created on Fri May 22 10:51:24 2026
 import torch
 import csv
 import sys
+import time
 
 from data.random_networks import generate_one_in_network
 from optimization.mip import solve_instance
@@ -84,7 +85,6 @@ def evaluate():
     # number of test graphs per network setting
     reps_per_setting = 20
     
-    
     # evaluate the model for multiple interdiction budgets
     test_attack_limits = [1, 2, 3, 5]
     
@@ -103,6 +103,8 @@ def evaluate():
         total_hamming = 0
         total_gap = 0.0
         total_instances = 0
+        total_mip_solve_time = 0.0
+        total_inference_time = 0.0
 
         print(f"\nEvaluating attack limit K={test_attack_limit}")
 
@@ -119,9 +121,16 @@ def evaluate():
                 G, s, t, density = generate_one_in_network(n=n, m=m, cost_low=1,
                                                            cost_high=10, seed=seed)
 
+                # start timer for MIP solve time
+                mip_start = time.perf_counter()
+                
                 # solve MIP to get optimal interdiction decision for this K
                 sample = solve_instance(G=G, s=s, t=t,density=density,
                     attack_limit=test_attack_limit)
+                
+                # end timer for MIP solve time and calculate total time
+                mip_end = time.perf_counter()
+                mip_total_time = mip_end - mip_start
     
                 # skip infeasible or non-optimal solves
                 if sample is None:
@@ -138,9 +147,25 @@ def evaluate():
                 mask = torch.ones(1, edge_features.shape[1], dtype=torch.bool,
                     device=device)
 
+                # synchronize GPU and start timer for model inference time
+                if device == "cuda":
+                    torch.cuda.synchronize()
+
+                # run model inference and get predicted interdiction decision, 
+                # while timing the inference time
+                inference_start = time.perf_counter()
+
                 # run model without computing gradients
                 with torch.no_grad():
                     logits = model(edge_features, edge_bias=edge_bias, mask=mask)
+
+                # 
+                if device == "cuda":
+                     torch.cuda.synchronize()
+
+                # end timer for model inference time and calculate total time
+                inference_end = time.perf_counter()
+                inference_time = inference_end - inference_start
 
                 # get edge scores for the single graph
                 real_logits = logits[0]
@@ -182,26 +207,27 @@ def evaluate():
                     "density": m / n,
                     "replication": rep,
                     "attack_limit": k,
-
                     "optimal_objective": optimal_objective,
                     "predicted_objective": predicted_objective,
                     "objective_gap": objective_gap,
-
                     "hamming_distance": hamming,
                     "exact_match": exact,
-
                     "num_correct_edges": sum(
                         p == o for p, o in zip(predicted_attack_list, optimal_attack_list)
                     ),
-
                     "num_predicted_attacks": sum(predicted_attack_list),
-                    "num_optimal_attacks": sum(optimal_attack_list),})
+                    "num_optimal_attacks": sum(optimal_attack_list),
+                    "mip_solve_time": sample.get("mip_solve_time", mip_total_time),
+                    "mip_total_time": mip_total_time,
+                    "inference_time": inference_time,})
 
                 # update summary metrics for this K
                 total_exact += exact
                 total_hamming += hamming
                 total_gap += objective_gap
                 total_instances += 1
+                total_mip_solve_time += sample.get("mip_solve_time", mip_total_time)
+                total_inference_time += inference_time
 
                 print(f"K={test_attack_limit}, n={n}, m={m}, rep={rep} | "
                     f"Opt={optimal_objective:.2f} | "
@@ -216,6 +242,8 @@ def evaluate():
         print(f"Exact match rate: {total_exact / total_instances:.4f}")
         print(f"Average Hamming distance: {total_hamming / total_instances:.4f}")
         print(f"Average objective gap: {total_gap / total_instances:.4f}")
+        print(f"Average MIP solve time: {total_mip_solve_time / total_instances:.6f} seconds")
+        print(f"Average model inference time: {total_inference_time / total_instances:.6f} seconds")
 
     # save all detailed results across all K values
     with open(f"evaluation_results_{model_type}.csv", "w", newline="") as csvfile:

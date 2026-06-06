@@ -9,6 +9,8 @@ import sys
 import torch
 import torch.nn as nn
 from torch.utils.data import DataLoader, random_split
+import time
+import csv
 
 from models.tropical_attention import TropicalInterdictionModel
 from models.standard_transformer import StandardTransformerInterdictionModel
@@ -100,10 +102,20 @@ def train():
     # creates optimizer that updates model weights
     optimizer = torch.optim.AdamW(model.parameters(), lr=1e-3, weight_decay=1e-4)
 
+    # number of training epochs
     epochs = 50
+
+    # starts tracking total training time
+    training_start_time = time.perf_counter()
+
+    # initializes list to store epoch results for csv output
+    epoch_rows = []
 
     # starts training loop
     for epoch in range(epochs):
+
+        # starts tracking epoch time
+        epoch_start_time = time.perf_counter()
         
         # puts model in training mode
         model.train()
@@ -184,19 +196,82 @@ def train():
                 total_hamming += hamming
                 total_exact_match += exact_match
 
+        # finishes tracking epoch time
+        epoch_end_time = time.perf_counter()
+
+        # calculates total epoch time in seconds
+        epoch_time = epoch_end_time - epoch_start_time
+
+        # calculates average losses and metrics for the epoch
+        avg_train_loss = total_train_loss / len(train_loader)
+        avg_val_loss = total_val_loss / len(val_loader)
+        avg_accuracy = total_accuracy / len(val_loader)
+        avg_precision = total_precision / len(val_loader)
+        avg_recall = total_recall / len(val_loader)
+        avg_f1 = total_f1 / len(val_loader)
+        avg_hamming = total_hamming / len(val_loader)
+        avg_exact_match = total_exact_match / len(val_loader)
+
+        # stores epoch results for csv output
+        epoch_rows.append({
+            "model_type": model_type,
+            "epoch": epoch + 1,
+            "train_loss": avg_train_loss,
+            "val_loss": avg_val_loss,
+            "accuracy": avg_accuracy,
+            "precision": avg_precision,
+            "recall": avg_recall,
+            "f1": avg_f1,
+            "hamming": avg_hamming,
+            "exact_match": avg_exact_match,
+            "epoch_time_seconds": epoch_time})
+
         # prints progress
         print(f"Epoch {epoch + 1:03d} | "
-              f"Train Loss: {total_train_loss / len(train_loader):.4f} | "
-              f"Val Loss: {total_val_loss / len(val_loader):.4f} | "
-              f"Acc: {total_accuracy / len(val_loader):.4f} | "
-              f"Prec: {total_precision / len(val_loader):.4f} | "
-              f"Rec: {total_recall / len(val_loader):.4f} | "
-              f"F1: {total_f1 / len(val_loader):.4f} | "
-              f"Hamming: {total_hamming / len(val_loader):.2f} | "
-              f"Exact: {total_exact_match / len(val_loader):.4f}")
+              f"Train Loss: {avg_train_loss:.4f} | "
+              f"Val Loss: {avg_val_loss:.4f} | "
+              f"Acc: {avg_accuracy:.4f} | "
+              f"Prec: {avg_precision:.4f} | "
+              f"Rec: {avg_recall:.4f} | "
+              f"F1: {avg_f1:.4f} | "
+              f"Hamming: {avg_hamming:.2f} | "
+              f"Exact: {avg_exact_match:.4f} | "
+              f"Time: {epoch_time:.2f}s")
+
+    # finishes tracking total training time
+    training_end_time = time.perf_counter()
+
+    # calculates total training time in seconds
+    total_training_time = training_end_time - training_start_time
+
+    print(f"\nTotal training time for {model_type}: "
+          f"{total_training_time:.2f} seconds")
+    print(f"Average epoch time: "
+          f"{total_training_time / epochs:.2f} seconds")
+    
+    # saves epoch results to csv file for later analysis
+    with open(f"results/training_log_{model_type}.csv", "w", newline="") as csvfile:
+        fieldnames = epoch_rows[0].keys()
+        writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+        writer.writeheader()
+        writer.writerows(epoch_rows)
+
+    # saves training summary to csv file for later analysis
+    with open(f"results/training_summary_{model_type}.csv", "w", newline="") as csvfile:
+        fieldnames = ["model_type","epochs", "total_training_time_seconds",
+        "average_epoch_time_seconds"]
+
+        writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+        writer.writeheader()
+        writer.writerow({
+            "model_type": model_type,
+            "epochs": epochs,
+            "total_training_time_seconds": total_training_time,
+            "average_epoch_time_seconds": total_training_time / epochs
+    })
 
     # saves training model weights
-    torch.save(model.state_dict(), f"{model_type}_model.pt")
+    torch.save(model.state_dict(), f"saved_models/{model_type}_model.pt")
 
 
 if __name__ == "__main__":

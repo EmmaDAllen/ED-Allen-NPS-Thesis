@@ -7,6 +7,7 @@ Created on Sat May 30 05:36:20 2026
 
 import networkx as nx
 import pyomo.environ as pyo
+import time
 
 
 def build_instance_data(G, s, t):
@@ -112,8 +113,14 @@ def solve_instance(G, s, t, density, attack_limit):
 
     # Solve MIP
     opt = pyo.SolverFactory('gurobi')
-    results = opt.solve(model)
 
+    # time the solve step
+    solve_start = time.perf_counter()
+    results = opt.solve(model)
+    solve_end = time.perf_counter()
+
+    # calculate solve time in seconds
+    mip_solve_time = solve_end - solve_start
     
     status = results.solver.status
     termination = results.solver.termination_condition
@@ -144,6 +151,8 @@ def solve_instance(G, s, t, density, attack_limit):
         # target value = shortest path
         "path_length": float(pyo.value(model.pathLength)),
         
+        # additional info for analysis
+        "mip_solve_time": mip_solve_time,
         "solver_status": str(status),
         "termination_condition": str(termination)}
 
