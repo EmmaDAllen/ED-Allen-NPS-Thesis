@@ -68,7 +68,8 @@ def evaluate():
     
     # load saved moved weigts from training
     model.load_state_dict(
-        torch.load(f"{model_type}_model.pt", map_location=device))
+    torch.load(f"saved_models/{model_type}_model.pt",
+               map_location=device))
 
     # put model in evaluation mode
     model.eval()
