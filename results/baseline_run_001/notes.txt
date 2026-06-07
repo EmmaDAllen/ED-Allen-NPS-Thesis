@@ -1,0 +1,25 @@
+Baseline tropical attention model
+Graphs: 900 One-In networks
+Node sizes: 30, 50, 75
+Densities: 2.5, 4.0, 6.0
+Replications: 100 per setting
+Attack budget: 1
+d_model: 64
+n_heads: 4
+num_layers: 2
+epochs: 50
+batch_size: 4
+optimizer: AdamW
+learning_rate: 1e-3
+weight_decay: 1e-4
+edge_bias: path-continuity bias, v_i == u_j
+
+Final epoch:
+Train Loss: 0.2833
+Val Loss: 0.4112
+Accuracy: 0.9940
+Precision: 0.4000
+Recall: 0.4000
+F1: 0.4000
+Hamming: 1.20
+Exact Match: 0.4000
