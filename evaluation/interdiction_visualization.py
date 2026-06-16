@@ -65,18 +65,15 @@ def path_edges_from_nodes(path_nodes):
 
 
 def shortest_path_after_attack_edges_and_nodes(G, s, t, attack_edges):
+
     G_temp = G.copy()
     G_temp.remove_edges_from(attack_edges)
 
-    path_nodes = nx.shortest_path(
-        G_temp, source=s, target=t, weight="dist"
-    )
+    path_nodes = nx.shortest_path(G_temp, source=s, target=t, weight="dist")
 
     path_edges = path_edges_from_nodes(path_nodes)
 
-    path_length = nx.shortest_path_length(
-        G_temp, source=s, target=t, weight="dist"
-    )
+    path_length = nx.shortest_path_length(G_temp, source=s, target=t, weight="dist")
 
     return path_nodes, path_edges, path_length
 
@@ -251,6 +248,8 @@ def main():
 
     mip_attack_str = ", ".join([f"{u}→{v}" for u, v in mip_attack_edges])
     model_attack_str = ", ".join([f"{u}→{v}" for u, v in model_attack_edges])
+    # verification of objective value
+    predicted_objective = shortest_path_after_attack(sample,predicted_attack_list)
 
     # draw figure
     pos = nx.spring_layout(G, seed=42)
@@ -262,11 +261,11 @@ def main():
         original_path_edges,[])
 
     draw_panel(axes[1],G,pos,    
-        f"MIP interdiction\nAttack: {mip_attack_str}\nLength={mip_length}\nPath: {mip_path_str}",
+        f"MIP interdiction\nAttack: {mip_attack_str}\nLength={sample['path_length']}\nPath: {mip_path_str}",
         mip_path_edges,mip_attack_edges)
 
     draw_panel(axes[2],G,pos,   
-        f"{model_type} interdiction\nAttack: {model_attack_str}\nLength={model_length}\nPath: {model_path_str}",
+        f"{model_type} interdiction\nAttack: {model_attack_str}\nLength={predicted_objective}\nPath: {model_path_str}",
         model_path_edges,model_attack_edges)
 
     fig.suptitle(
@@ -278,6 +277,20 @@ def main():
 
     output_path = (f"results/figures/interdiction_{model_type}_"
         f"n{n}_m{m}_k{k}_rep{rep}.png")
+    
+    print("MIP path nodes:", mip_path_nodes)
+    print("MIP path edges:", mip_path_edges)
+    print("MIP nx length:", mip_length)
+
+    print("Model path nodes:", model_path_nodes)
+    print("Model path edges:", model_path_edges)
+    print("Model nx length:", model_length)
+
+    def path_length_from_edges(G, path_edges):
+        return sum(G[u][v]["dist"] for u, v in path_edges)
+    
+    print("Manual MIP path length:", path_length_from_edges(G, mip_path_edges))
+    print("Manual model path length:", path_length_from_edges(G, model_path_edges))
 
     plt.tight_layout()
     plt.savefig(output_path, dpi=300, bbox_inches="tight")
@@ -289,9 +302,6 @@ def main():
     print(f"MIP attack edges: {mip_attack_edges}")
     print(f"MIP objective: {sample['path_length']}")
     print(f"{model_type} attack edges: {model_attack_edges}")
-
-    # verification of objective value
-    predicted_objective = shortest_path_after_attack(sample,predicted_attack_list)
     print(f"Predicted objective: {predicted_objective}")
 
 
