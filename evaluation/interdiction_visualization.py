@@ -272,9 +272,11 @@ def main():
     plt.show()
 
     print(f"Saved figure to {output_path}")
+    print("Original path edges:", original_path_edges)
+    print("Original path length:", original_length)
     print(f"MIP attack edges: {mip_attack_edges}")
+    print(f"MIP objective: {sample['path_length']}")
     print(f"{model_type} attack edges: {model_attack_edges}")
-    print(f"Optimal objective: {sample['path_length']}")
 
     # verification of objective value
     predicted_objective = shortest_path_after_attack(sample,predicted_attack_list)
