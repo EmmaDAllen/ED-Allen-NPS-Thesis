@@ -5,7 +5,7 @@ import networkx as nx
 import matplotlib.pyplot as plt
 
 from data.random_networks import generate_one_in_network
-from data.interdiction_dataset import sample_to_tensors
+from data.interdiction_data import sample_to_tensors
 from optimization.mip import solve_instance
 
 from models.tropical_attention import TropicalInterdictionModel
@@ -143,7 +143,6 @@ def main():
         5. Computes shortest paths before and after interdiction.
         6. Saves a three-panel visualization."""
 
-
     # read command line arguments
     parser = argparse.ArgumentParser(
         description="Visualize shortest-path interdiction for one test graph.")
@@ -234,7 +233,7 @@ def main():
 
     # compute shortest paths
     original_path_nodes = nx.shortest_path(
-        G,source=s,target=t,weight="distance")
+        G,source=s,target=t,weight="dist")
 
     original_path_edges = path_edges_from_nodes(original_path_nodes)
 
