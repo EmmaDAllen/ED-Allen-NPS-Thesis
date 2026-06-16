@@ -1,6 +1,5 @@
 
 import os
-from random import sample
 import torch
 import argparse
 import networkx as nx
@@ -79,9 +78,13 @@ def shortest_path_edges_after_attack(G, s, t, attack_edges):
     # compute new shortest path after edges are removed
     path_nodes = nx.shortest_path(
         G_temp,source=s,target=t,weight="dist")
+    
+    path_edges = path_edges_from_nodes(path_nodes)
+
+    path_length = nx.shortest_path_length(G_temp, source=s, target=t, weight="dist")
 
     # convert node path into edge form 
-    return path_edges_from_nodes(path_nodes)
+    return path_nodes, path_edges, path_length
 
 
 def get_attack_edges(sample, attack_list):
@@ -242,23 +245,35 @@ def main():
     original_length = nx.shortest_path_length(
         G,source=s,target=t,weight="dist")
 
-    mip_path_edges = shortest_path_edges_after_attack(
-        G,s,t,mip_attack_edges)
+    mip_path_nodes, mip_path_edges, mip_length = shortest_path_after_attack(
+    G, s, t, mip_attack_edges)
 
-    model_path_edges = shortest_path_edges_after_attack(
-        G,s,t,model_attack_edges)
+    model_path_nodes, model_path_edges, model_length = shortest_path_after_attack(
+    G, s, t, model_attack_edges)
+
+    original_path_str = " → ".join(map(str, original_path_nodes))
+    mip_path_str = " → ".join(map(str, mip_path_nodes))
+    model_path_str = " → ".join(map(str, model_path_nodes))
+
+    mip_attack_str = ", ".join([f"{u}→{v}" for u, v in mip_attack_edges])
+    model_attack_str = ", ".join([f"{u}→{v}" for u, v in model_attack_edges])
 
     # draw figure
     pos = nx.spring_layout(G, seed=42)
 
     fig, axes = plt.subplots(1, 3, figsize=(15, 5))
 
-    draw_panel(axes[0],G,pos,"Original shortest path",original_path_edges,[])
+    draw_panel(axes[0],G,pos,
+        f"Original shortest path\nLength={original_length}\nPath: {original_path_str}",
+        original_path_edges,[])
 
-    draw_panel(axes[1],G,pos,"MIP interdiction",mip_path_edges,mip_attack_edges)
+    draw_panel(axes[1],G,pos,    
+        f"MIP interdiction\nAttack: {mip_attack_str}\nLength={mip_length}\nPath: {mip_path_str}",
+        mip_path_edges,mip_attack_edges)
 
-    draw_panel(axes[2],G,pos,f"{model_type} interdiction",model_path_edges,
-        model_attack_edges)
+    draw_panel(axes[2],G,pos,   
+        f"{model_type} interdiction\nAttack: {model_attack_str}\nLength={model_length}\nPath: {model_path_str}",
+        model_path_edges,model_attack_edges)
 
     fig.suptitle(
         f"Shortest-path interdiction example: {model_type}, n={n}, m={m}, K={k}, rep={rep}",
