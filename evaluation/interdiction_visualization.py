@@ -1,5 +1,6 @@
 
 import os
+from random import sample
 import torch
 import argparse
 import networkx as nx
@@ -83,12 +84,12 @@ def shortest_path_edges_after_attack(G, s, t, attack_edges):
     return path_edges_from_nodes(path_nodes)
 
 
-def get_attack_edges(G, attack_list):
+def get_attack_edges(sample, attack_list):
 
     """Converts a 0/1 attack list into actual graph edges. """
 
     # get graph edge in the same order used in the model
-    edge_list = list(G.edges())
+    edge_list = list(zip(sample["u"], sample["v"]))
 
     # keep only edges where the attack list has a 1 (interdicted)
     return [edge_list[i]
@@ -229,8 +230,8 @@ def main():
     optimal_attack_list = sample["attack"]
 
     # convert attack vectors to edge tuples
-    mip_attack_edges = get_attack_edges(G, optimal_attack_list)
-    model_attack_edges = get_attack_edges(G, predicted_attack_list)
+    mip_attack_edges = get_attack_edges(sample, optimal_attack_list)
+    model_attack_edges = get_attack_edges(sample, predicted_attack_list)
 
     # compute shortest paths
     original_path_nodes = nx.shortest_path(
