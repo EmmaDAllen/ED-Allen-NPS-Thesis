@@ -239,6 +239,9 @@ def main():
 
     original_path_edges = path_edges_from_nodes(original_path_nodes)
 
+    original_length = nx.shortest_path_length(
+        G,source=s,target=t,weight="dist")
+
     mip_path_edges = shortest_path_edges_after_attack(
         G,s,t,mip_attack_edges)
 
