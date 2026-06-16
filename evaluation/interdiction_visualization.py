@@ -1,6 +1,5 @@
 
 import os
-from random import sample
 import torch
 import argparse
 import networkx as nx
@@ -23,7 +22,7 @@ def get_model(model_type, device):
 
     if model_type == "tropical":
         return TropicalInterdictionModel(
-            input_dim=7,
+            input_dim=8,
             d_model=64,
             n_heads=4,
             num_layers=2,
@@ -32,7 +31,7 @@ def get_model(model_type, device):
 
     elif model_type == "transformer":
         return StandardTransformerInterdictionModel(
-            input_dim=7,
+            input_dim=8,
             d_model=64,
             n_heads=4,
             num_layers=2
@@ -40,14 +39,14 @@ def get_model(model_type, device):
 
     elif model_type == "gnn":
         return GNNInterdictionModel(
-            input_dim=7,
+            input_dim=8,
             d_model=64,
             num_layers=2
         ).to(device)
 
     elif model_type == "edge_transformer":
         return EdgeBiasTransformerInterdictionModel(
-            input_dim=7,
+            input_dim=8,
             d_model=64,
             n_heads=4,
             num_layers=2
@@ -180,7 +179,7 @@ def main():
     print(f"Graph setting: n={n}, m={m}, K={k}, rep={rep}")
 
     # use same seed in evaluate to visualize same networks
-    seed = 999999 + 100000 * n + 100 * m + 10000 * k + rep
+    seed = 999999 + 100000 * n + 100 * m + rep
 
     # generate graph
     G, s, t, density = generate_one_in_network(
@@ -275,8 +274,9 @@ def main():
         model_path_edges,model_attack_edges)
 
     fig.suptitle(
-        f"Shortest-path interdiction example: {model_type}, n={n}, m={m}, K={k}, penalty={penalty},
-        rep={rep}",fontsize=14)
+        f"Shortest-path interdiction example: {model_type}, "
+        f"n={n}, m={m}, K={k}, penalty={penalty}, rep={rep}",
+        fontsize=14)
 
     # save figures
     os.makedirs("results/figures", exist_ok=True)

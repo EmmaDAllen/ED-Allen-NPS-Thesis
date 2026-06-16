@@ -121,7 +121,7 @@ def evaluate():
                 for rep in range(reps_per_setting):
 
                     # unique seed for reproducibility
-                    seed = base_seed + 100000 * n + 100 * m + 10000 * test_attack_limit + rep
+                    seed = base_seed + 100000 * n + 100 * m + rep
 
                     # generate test network
                     G, s, t, density = generate_one_in_network(n=n, m=m, cost_low=1,

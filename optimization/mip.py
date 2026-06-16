@@ -142,7 +142,7 @@ def solve_instance(G, s, t, density, attack_limit,interdiction_penalty=1):
         "source": s,
         "sink": t,
         "attack_limit": attack_limit,
-        "interdiction_penalty" = interdiction_penalty,
+        "interdiction_penalty": interdiction_penalty,
         "u": [u for (u, v) in edge_list],
         "v": [v for (u, v) in edge_list],
         "dist": [cost[(u, v)] for (u, v) in edge_list],
