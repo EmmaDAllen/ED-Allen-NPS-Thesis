@@ -10,7 +10,7 @@ import pyomo.environ as pyo
 import time
 
 
-def build_instance_data(G, s, t):
+def build_instance_data(G, s, t,interdiction_penalty=1):
     
     '''Convert graph into sets and parameters for the MIP model.
 
@@ -29,7 +29,7 @@ def build_instance_data(G, s, t):
     # edge weights = shortest path costs
     cost = {(u, v): G[u][v]["dist"] for (u, v) in arcs}
     # interdiction penalty = currently set to 1
-    penalty = {(u, v): 1 for (u, v) in arcs}
+    penalty = {(u, v): interdiction_penalty for (u, v) in arcs}
 
     # flow balance supply values
     supply = {i: 0 for i in nodes}
@@ -91,7 +91,7 @@ def build_dualILP(nodes, arcs, cost, supply, penalty, attack_limit=1):
     return model
 
 
-def solve_instance(G, s, t, density, attack_limit):
+def solve_instance(G, s, t, density, attack_limit,interdiction_penalty=1):
     
     '''Solves one interdiction instance and returns a training sample.
 
@@ -105,7 +105,7 @@ def solve_instance(G, s, t, density, attack_limit):
         return None
 
     # initialize network dat a using function build_instance_data
-    nodes, arcs, cost, penalty, supply = build_instance_data(G, s, t)
+    nodes, arcs, cost, penalty, supply = build_instance_data(G, s, t, interdiction_penalty)
 
     # use new data from build_instance_data to build the MIP using build_dualILP
     model = build_dualILP(nodes=nodes,arcs=arcs,cost=cost,supply=supply,
@@ -142,6 +142,7 @@ def solve_instance(G, s, t, density, attack_limit):
         "source": s,
         "sink": t,
         "attack_limit": attack_limit,
+        "interdiction_penalty" = interdiction_penalty,
         "u": [u for (u, v) in edge_list],
         "v": [v for (u, v) in edge_list],
         "dist": [cost[(u, v)] for (u, v) in edge_list],

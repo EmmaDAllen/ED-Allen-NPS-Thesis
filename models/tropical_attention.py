@@ -175,7 +175,7 @@ class TropicalAttention(nn.Module):
             # sets valid attention scores to a huge negative number (ignored)
             attn_scores = attn_scores.masked_fill(~pair_mask, -1e9)
         
-
+        
         # combines attention scores and value vectors using tropical multiplication
         # instead of attention_weight * value == attention_score + value
         sum_sv = attn_scores.unsqueeze(-1) + v.unsqueeze(1)  # [B, S, S, D]
@@ -198,7 +198,7 @@ class TropicalInterdictionModel(nn.Module):
     '''defines full model for interdiction problem'''
     
     # defines default setup
-    def __init__(self, input_dim=7, d_model=64, n_heads=4, num_layers=2, device="cpu"):
+    def __init__(self, input_dim=8, d_model=64, n_heads=4, num_layers=2, device="cpu"):
         
         # initializes PyTorch parent class
         super(TropicalInterdictionModel, self).__init__()

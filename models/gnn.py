@@ -49,7 +49,7 @@ class GNNInterdictionModel(nn.Module):
 
     """Graph neural network baseline for edge interdiction prediction."""
 
-    def __init__(self, input_dim=7, d_model=64, num_layers=2):
+    def __init__(self, input_dim=8, d_model=64, num_layers=2):
 
         super(GNNInterdictionModel, self).__init__()
 

@@ -104,7 +104,7 @@ def shortest_path_after_attack(sample, predicted_attack):
                                   predicted_attack):
         
         # interdicted edges receive an additional cost penalty
-        new_dist = dist + attack
+        new_dist = dist + sample["interdiction_penalty"] * attack
         G.add_edge(u, v, dist=new_dist)
 
     # compute resulting shortest path length

@@ -1,5 +1,6 @@
 
 import os
+from random import sample
 import torch
 import argparse
 import networkx as nx
@@ -64,15 +65,15 @@ def path_edges_from_nodes(path_nodes):
     return list(zip(path_nodes[:-1], path_nodes[1:]))
 
 
-def shortest_path_after_attack_edges_and_nodes(G, s, t, attack_edges):
+def shortest_path_after_attack_edges_and_nodes(G, s, t, attack_edges, interdiction_penalty):
 
     G_temp = G.copy()
-    G_temp.remove_edges_from(attack_edges)
+
+    for u, v in attack_edges:
+        G_temp[u][v]["dist"] += interdiction_penalty
 
     path_nodes = nx.shortest_path(G_temp, source=s, target=t, weight="dist")
-
     path_edges = path_edges_from_nodes(path_nodes)
-
     path_length = nx.shortest_path_length(G_temp, source=s, target=t, weight="dist")
 
     return path_nodes, path_edges, path_length
@@ -159,6 +160,9 @@ def main():
 
     parser.add_argument(
         "--rep",type=int,default=0,help="Replication number used to reproduce a test graph.")
+    
+    parser.add_argument(
+        "--penalty",type=int,default=1,help="Interdiction cost penalty added to attacked arcs.")
 
     args = parser.parse_args()
 
@@ -167,7 +171,7 @@ def main():
     m = args.m
     k = args.k
     rep = args.rep
-
+    penalty = args.penalty
     # use GPU if available, otherwise CPU
     device = "cuda" if torch.cuda.is_available() else "cpu"
 
@@ -184,7 +188,7 @@ def main():
 
     # solve exact MIP
     sample = solve_instance(
-        G=G,s=s,t=t,density=density,attack_limit=k)
+        G=G,s=s,t=t,density=density,attack_limit=k,interdiction_penalty=penalty)
 
     if sample is None:
         raise RuntimeError("MIP solve failed for this example.")
@@ -236,11 +240,13 @@ def main():
     original_length = nx.shortest_path_length(
         G,source=s,target=t,weight="dist")
 
+    interdiction_penalty = sample.get("interdiction_penalty", 1)
+
     mip_path_nodes, mip_path_edges, mip_length = shortest_path_after_attack_edges_and_nodes(
-    G, s, t, mip_attack_edges)
+        G, s, t, mip_attack_edges, interdiction_penalty)
 
     model_path_nodes, model_path_edges, model_length = shortest_path_after_attack_edges_and_nodes(
-    G, s, t, model_attack_edges)
+        G, s, t, model_attack_edges, interdiction_penalty)
 
     original_path_str = " → ".join(map(str, original_path_nodes))
     mip_path_str = " → ".join(map(str, mip_path_nodes))
@@ -269,14 +275,14 @@ def main():
         model_path_edges,model_attack_edges)
 
     fig.suptitle(
-        f"Shortest-path interdiction example: {model_type}, n={n}, m={m}, K={k}, rep={rep}",
-        fontsize=14)
+        f"Shortest-path interdiction example: {model_type}, n={n}, m={m}, K={k}, penalty={penalty},
+        rep={rep}",fontsize=14)
 
     # save figures
     os.makedirs("results/figures", exist_ok=True)
 
     output_path = (f"results/figures/interdiction_{model_type}_"
-        f"n{n}_m{m}_k{k}_rep{rep}.png")
+        f"n{n}_m{m}_k{k}_penalty{penalty}_rep{rep}.png")
     
     print("MIP path nodes:", mip_path_nodes)
     print("MIP path edges:", mip_path_edges)
