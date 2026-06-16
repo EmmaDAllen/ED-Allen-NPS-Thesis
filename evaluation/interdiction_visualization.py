@@ -64,26 +64,20 @@ def path_edges_from_nodes(path_nodes):
     return list(zip(path_nodes[:-1], path_nodes[1:]))
 
 
-def shortest_path_edges_after_attack(G, s, t, attack_edges):
-
-    """Removes the interdicted edges from a copy of the graph,
-    then computes the new shortest path from source s to target t."""
-
-    # copy original graph
+def shortest_path_after_attack_edges_and_nodes(G, s, t, attack_edges):
     G_temp = G.copy()
-
-    # remove the attacked/interdicted edges
     G_temp.remove_edges_from(attack_edges)
 
-    # compute new shortest path after edges are removed
     path_nodes = nx.shortest_path(
-        G_temp,source=s,target=t,weight="dist")
-    
+        G_temp, source=s, target=t, weight="dist"
+    )
+
     path_edges = path_edges_from_nodes(path_nodes)
 
-    path_length = nx.shortest_path_length(G_temp, source=s, target=t, weight="dist")
+    path_length = nx.shortest_path_length(
+        G_temp, source=s, target=t, weight="dist"
+    )
 
-    # convert node path into edge form 
     return path_nodes, path_edges, path_length
 
 
@@ -245,10 +239,10 @@ def main():
     original_length = nx.shortest_path_length(
         G,source=s,target=t,weight="dist")
 
-    mip_path_nodes, mip_path_edges, mip_length = shortest_path_after_attack(
+    mip_path_nodes, mip_path_edges, mip_length = shortest_path_after_attack_edges_and_nodes(
     G, s, t, mip_attack_edges)
 
-    model_path_nodes, model_path_edges, model_length = shortest_path_after_attack(
+    model_path_nodes, model_path_edges, model_length = shortest_path_after_attack_edges_and_nodes(
     G, s, t, model_attack_edges)
 
     original_path_str = " → ".join(map(str, original_path_nodes))
