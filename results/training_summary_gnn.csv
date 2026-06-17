@@ -1,2 +1,2 @@
 model_type,epochs,total_training_time_seconds,average_epoch_time_seconds
-gnn,50,243.47041452024132,4.869408290404826
+gnn,50,668.6951712146401,13.373903424292802
