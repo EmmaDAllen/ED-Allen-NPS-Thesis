@@ -71,11 +71,11 @@ def generate_dataset(network_settings,replications_per_setting, attack_budgets, 
                     sample['interdiction_penalty'] = penalty
                     dataset.append(sample)
 
-            
+                    
                     print(f"Solved n={n}, m={m}, budget={attack_budget}, "
-                        f"density={density:.2f}, rep={rep}, "
-                        f"objective={sample['path_length']:.2f}, "
-                        f"mip_solve_time={sample['mip_solve_time']:.4f}")
+                          f"penalty={penalty}, density={density:.2f}, rep={rep}, "
+                          f"objective={sample['path_length']:.2f}, "
+                          f"mip_solve_time={sample['mip_solve_time']:.4f}")
 
     print(f"\nGenerated {len(dataset)} solved training samples.")
     print(f"Skipped {skipped} instances.")
