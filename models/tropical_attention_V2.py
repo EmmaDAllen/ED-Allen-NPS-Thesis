@@ -307,3 +307,4 @@ class TropicalInterdictionModel(nn.Module):
 
 
 TropicalAttentionV2 = TropicalAttention
+TropicalInterdictionModelV2 = TropicalInterdictionModel
