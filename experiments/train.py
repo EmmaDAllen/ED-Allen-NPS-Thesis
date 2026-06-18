@@ -16,6 +16,7 @@ from models.tropical_attention import TropicalInterdictionModel
 from models.standard_transformer import StandardTransformerInterdictionModel
 from models.gnn import GNNInterdictionModel
 from models.edge_bias_transformer import EdgeBiasTransformerInterdictionModel
+from models.tropical_attention_V2 import TropicalInterdictionModel as TropicalInterdictionModelV2
 from data.interdiction_data import InterdictionDataset
 from data.interdiction_data import collate_graphs
 from evaluation.metrics import compute_metrics
@@ -52,6 +53,15 @@ def get_model(model_type, device):
             d_model=64,
             n_heads=4,
             num_layers=2
+        ).to(device)
+    
+    elif model_type == "tropical_v2":
+        return TropicalInterdictionModelV2(
+            input_dim=8,
+            d_model=64,
+            n_heads=4,
+            num_layers=2,
+            device=device
         ).to(device)
 
     else:

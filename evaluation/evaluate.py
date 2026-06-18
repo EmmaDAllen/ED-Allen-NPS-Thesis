@@ -18,6 +18,7 @@ from models.gnn import GNNInterdictionModel
 from models.edge_bias_transformer import EdgeBiasTransformerInterdictionModel
 from data.interdiction_data import sample_to_tensors
 from evaluation.metrics import shortest_path_after_attack
+from models.tropical_attention_V2 import TropicalInterdictionModel as TropicalInterdictionModelV2
 
 def get_model(model_type, device):
 
@@ -52,6 +53,17 @@ def get_model(model_type, device):
             n_heads=4,
             num_layers=2
         ).to(device)
+    
+        
+    elif model_type == "tropical_v2":
+        return TropicalInterdictionModelV2(
+            input_dim=8,
+            d_model=64,
+            n_heads=4,
+            num_layers=2,
+            device=device
+        ).to(device)
+
 
     else:
         raise ValueError(f"Unknown model type: {model_type}")
