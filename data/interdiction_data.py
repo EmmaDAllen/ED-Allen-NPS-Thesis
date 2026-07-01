@@ -9,6 +9,8 @@ import json
 import torch
 from torch.utils.data import Dataset
 
+COST_HIGH = 10
+PENALTY_HIGH = 10
 
 def sample_to_tensors(sample):
     
@@ -19,7 +21,7 @@ def sample_to_tensors(sample):
     # store interdiction budget
     attack_limit = sample["attack_limit"]
 
-    interdiction_penalty = sample["interdiction_penalty"]
+    penalty = torch.tensor(sample["penalty"], dtype=torch.float32)
 
     # converts edge heads to PyTorch tensor
     u = torch.tensor(sample["u"], dtype=torch.float32)
@@ -33,24 +35,25 @@ def sample_to_tensors(sample):
     # Normalize node IDs and distances
     u_norm = u / max(n - 1, 1)
     v_norm = v / max(n - 1, 1)
-    dist_norm = dist / 10.0
+    dist_norm = dist / COST_HIGH
+    penalty_norm = penalty / PENALTY_HIGH
+
 
     # source flag = 1 if edge leaves source node
     source_flag = (u == sample["source"]).float()
     # sink flag = 1 if edge leaves sink node
     sink_flag = (v == sample["sink"]).float()
 
-    # creates one density valye for every edge
+    # creates one density value for every edge
     density_feature = torch.full_like(u_norm, density / 10.0)
     # creates one budget value for every edge
     budget_feature = torch.full_like(u_norm, attack_limit / 10.0)
-    # creates one penalty value for every edge
-    penalty_feature = torch.full_like(u_norm, interdiction_penalty / 10.0)
+
 
     # combines edge features into one matrix
     edge_features = torch.stack([
         u_norm, v_norm, dist_norm, source_flag, sink_flag, density_feature,
-        budget_feature, penalty_feature], dim=1)
+        budget_feature, penalty_norm], dim=1)
 
     # edge bias: edge i can flow into edge j if v_i == u_j
     # creates edge to edge connectivity matrix

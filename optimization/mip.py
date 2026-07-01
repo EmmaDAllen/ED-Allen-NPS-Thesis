@@ -29,7 +29,7 @@ def build_instance_data(G, s, t,interdiction_penalty=1):
     # edge weights = shortest path costs
     cost = {(u, v): G[u][v]["dist"] for (u, v) in arcs}
     # interdiction penalty = currently set to 1
-    penalty = {(u, v): interdiction_penalty for (u, v) in arcs}
+    penalty = {(u, v): G[u][v]["penalty"] for (u, v) in arcs}
 
     # flow balance supply values
     supply = {i: 0 for i in nodes}
@@ -142,7 +142,7 @@ def solve_instance(G, s, t, density, attack_limit,interdiction_penalty=1):
         "source": s,
         "sink": t,
         "attack_limit": attack_limit,
-        "interdiction_penalty": interdiction_penalty,
+        "penalty": [penalty[(u, v)] for (u, v) in edge_list],
         "u": [u for (u, v) in edge_list],
         "v": [v for (u, v) in edge_list],
         "dist": [cost[(u, v)] for (u, v) in edge_list],
@@ -151,6 +151,9 @@ def solve_instance(G, s, t, density, attack_limit,interdiction_penalty=1):
         "attack": [int(round(pyo.value(model.Y[u, v]))) for (u, v) in edge_list],
         # target value = shortest path
         "path_length": float(pyo.value(model.pathLength)),
+
+        "cost_high": max(cost.values()),
+        "penalty_high": max(penalty.values()),
         
         # additional info for analysis
         "mip_solve_time": mip_solve_time,

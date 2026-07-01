@@ -22,7 +22,10 @@ from data.random_networks import generate_one_in_network
 
 from optimization.mip import solve_instance
 
-
+COST_LOW = 1
+COST_HIGH = 10
+PENALTY_LOW = 1
+PENALTY_HIGH = 10
 
 def generate_dataset(network_settings,replications_per_setting, attack_budgets, penalties,
     base_seed=1,output_file="training_data.json"):
@@ -42,38 +45,36 @@ def generate_dataset(network_settings,replications_per_setting, attack_budgets, 
     skipped = 0
 
     for attack_budget in attack_budgets:
-        for penalty in penalties:
-            for n, m in network_settings:
-                for rep in range(replications_per_setting):
+        for n, m in network_settings:
+            for rep in range(replications_per_setting):
             
-                    # unique seed per instance (ensures reproducibility)
-                    seed = base_seed + 100000 * n + 100 * m + rep
+                # unique seed per instance (ensures reproducibility)
+                seed = base_seed + 100000 * n + 100 * m + rep
 
-                    # generate random test network (One-In method)
-                    G, s, t, density = generate_one_in_network(n=n, m=m,cost_low=1,
-                                                           cost_high=10,seed=seed)
+                # generate random test network (One-In method)
+                G, s, t, density = generate_one_in_network(n=n, m=m,cost_low=COST_LOW, cost_high=COST_HIGH,
+                                                           penalty_low=PENALTY_LOW, penalty_high=PENALTY_HIGH,
+                                                           seed=seed)
 
-                    #G, s, t, density = generate_spatial_network(n=n,k=4,seed=seed)
-                    #G, s, t, density = generate_grid_network(rows=10,cols=10,seed=seed)
-                    #G, s, t, density = generate_hub_spoke_network(n=n,num_hubs=5,seed=seed)
+                #G, s, t, density = generate_spatial_network(n=n,k=4,seed=seed)
+                #G, s, t, density = generate_grid_network(rows=10,cols=10,seed=seed)
+                #G, s, t, density = generate_hub_spoke_network(n=n,num_hubs=5,seed=seed)
             
-                    # solve interdiction problem
-                    sample = solve_instance(G=G,s=s,t=t,density=density,
-                                        attack_limit=attack_budget,interdiction_penalty=penalty)
+                # solve interdiction problem
+                sample = solve_instance(G=G,s=s,t=t,density=density, attack_limit=attack_budget)
 
-                    if sample is None:
-                        skipped += 1
-                        continue
+                if sample is None:
+                    skipped += 1
+                    continue
 
-                    sample["graph_seed"] = seed
-                    sample["replication"] = rep
-                    sample["attack_budget"] = attack_budget
-                    sample['interdiction_penalty'] = penalty
-                    dataset.append(sample)
+                sample["graph_seed"] = seed
+                sample["replication"] = rep
+                sample["attack_budget"] = attack_budget
+                dataset.append(sample)
 
                     
-                    print(f"Solved n={n}, m={m}, budget={attack_budget}, "
-                          f"penalty={penalty}, density={density:.2f}, rep={rep}, "
+                print(f"Solved n={n}, m={m}, budget={attack_budget}, "
+                          f"density={density:.2f}, rep={rep}, "
                           f"objective={sample['path_length']:.2f}, "
                           f"mip_solve_time={sample['mip_solve_time']:.4f}")
 
@@ -103,12 +104,10 @@ if __name__ == "__main__":
     ]
     
     attack_budgets = [1, 2, 3, 5]
-    penalties = [1,5,10]
 
     dataset = generate_dataset(
         network_settings=network_settings,
         replications_per_setting=100,
         attack_budgets=attack_budgets,
-        penalties=penalties,
         base_seed=1,
         output_file="training_data.json")

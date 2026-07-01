@@ -1,0 +1,52 @@
+Minimal VS Code / HPC instructions
+=================================
+
+What to send/use:
+- TropicalAttention.py
+
+Where to put it:
+- Put TropicalAttention.py in the same folder as the training script, replacing the current TropicalAttention.py if that is what the script imports.
+- If the current script already uses this import, no import change is needed:
+
+    from TropicalAttention import TropicalAttention
+
+Install TensorBFS tropical-gemm in the same Python environment used by the Jupyter kernel / VS Code interpreter:
+
+    python -m pip install "tropical-gemm[torch]"
+
+On HPC, do this inside the activated conda/venv environment for the notebook kernel. If CUDA modules are required on your cluster, load those first, for example:
+
+    module load cuda
+    python -m pip install "tropical-gemm[torch]"
+
+Quick check from the same folder as TropicalAttention.py:
+
+    python - <<'PY'
+    import torch
+    from TropicalAttention import TropicalAttention, print_tropical_backend
+
+    print_tropical_backend()
+    device = "cuda" if torch.cuda.is_available() else "cpu"
+    m = TropicalAttention(d_model=64, n_heads=4, device=device).to(device)
+    x = torch.randn(2, 8, 64, device=device)
+    y, scores = m(x)
+    print("output:", y.shape)
+    print("scores:", scores.shape)
+    PY
+
+To force the run to fail if TensorBFS is not actually installed/imported:
+
+    REQUIRE_TENSORBFS=1 python your_training_script.py
+
+Expected model behavior:
+- Constructor matches the original Baran-style class:
+
+    TropicalAttention(d_model, n_heads, device, tropical_proj=True, tropical_norm=False, symmetric=True)
+
+- The forward pass still returns:
+
+    output, attn_scores = attn(x)
+
+Important limitation:
+- This minimal V3 file only supports symmetric=True.
+- It intentionally avoids the nonsymmetric branch to keep this drop-in small and unambiguous.

@@ -7,9 +7,9 @@ Created on Sun May  3 07:20:00 2026
 
 '''Random Test Network Generator
 
-Generates directed, root-connected random test networks using the One-In method.'''
+Generates directed, root-connected random test networks using the One-In method.
 
-'''Creates n nodes, forces every node except the source to have at least one 
+Creates n nodes, forces every node except the source to have at least one 
 incoming connection, randomly adds additional arcs until the graph has exactly m 
 arcs, checks whether every node can be reached from the source node - if not, 
 it throws the graph away and tries again, once a valid graph is created, it
@@ -20,7 +20,7 @@ import networkx as nx
 import math
 
 
-def generate_one_in_network(n, m, cost_low=1, cost_high=10, seed=None):
+def generate_one_in_network(n, m, cost_low=1, cost_high=10, penalty_low=1, penalty_high=10,seed=None):
     
     '''Generate a directed random test network using the One-In method.
 
@@ -97,6 +97,7 @@ def generate_one_in_network(n, m, cost_low=1, cost_high=10, seed=None):
     # assign random arc costs/distances between 1 and 10
     for u, v in G.edges():
         G[u][v]["dist"] = rng.randint(cost_low, cost_high)
+        G[u][v]["penalty"] = rng.randint(penalty_low, penalty_high)
 
     # return graph, source node, sink node, and density
     return G, s, t, density

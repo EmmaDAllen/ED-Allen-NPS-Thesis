@@ -1,0 +1,25 @@
+Hi [Name],
+
+I stripped this down to the minimal drop-in version.
+
+Use the attached TropicalAttention.py file as a replacement for the current TropicalAttention.py in your working folder. If your script already imports:
+
+    from TropicalAttention import TropicalAttention
+
+then you should not need to change the import. The constructor and forward call are intended to match the original code:
+
+    attn = TropicalAttention(d_model, n_heads, device, tropical_proj=True, tropical_norm=False, symmetric=True)
+    output, attn_scores = attn(x)
+
+In the same environment used by your Jupyter kernel / VS Code interpreter, install TensorBFS tropical-gemm:
+
+    python -m pip install "tropical-gemm[torch]"
+
+Then run the quick check in MINIMAL_INSTRUCTIONS.txt. If you want to force the script to fail when TensorBFS is not installed, run:
+
+    REQUIRE_TENSORBFS=1 python your_training_script.py
+
+The main implementation change is that the V3 path computes max(q-k) and min(q-k) through tropical GEMM calls instead of explicitly building the full q-k tensor.
+
+Best,
+Kurt

@@ -182,12 +182,11 @@ def main():
     seed = 999999 + 100000 * n + 100 * m + rep
 
     # generate graph
-    G, s, t, density = generate_one_in_network(
-        n=n,m=m,cost_low=1,cost_high=10,seed=seed)
+    G, s, t, density = generate_one_in_network(n=n,m=m,cost_low=1,cost_high=10,
+                                               penalty_low=1,penalty_high=10,seed=seed)
 
     # solve exact MIP
-    sample = solve_instance(
-        G=G,s=s,t=t,density=density,attack_limit=k,interdiction_penalty=penalty)
+    sample = solve_instance(G=G,s=s,t=t,density=density,attack_limit=k)
 
     if sample is None:
         raise RuntimeError("MIP solve failed for this example.")
