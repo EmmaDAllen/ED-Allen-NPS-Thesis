@@ -100,16 +100,12 @@ def evaluate():
     
     # evaluate the model for multiple interdiction budgets
     test_attack_limits = [1, 2, 3, 5]
-
-    # evaluate the model for multiple interdiction penalties
-    test_interdiction_penalties = [1, 5, 10]
     
     # base seed thats different from training data to create unseen test graphs
     base_seed = 999999
 
     # store one row of results per solved test instance
     results_rows = []
-    
     
     # loop through each interdiction budget
     for test_attack_limit in test_attack_limits:
@@ -122,7 +118,7 @@ def evaluate():
         total_mip_solve_time = 0.0
         total_inference_time = 0.0
 
-        print(f"\nEvaluating attack limit K={test_attack_limit}, penalty={test_penalty}")
+        print(f"\nEvaluating attack limit K={test_attack_limit}")
 
         # loop through each network size/density setting
         for n, m in test_settings:
@@ -241,7 +237,7 @@ def evaluate():
                 total_mip_solve_time += sample.get("mip_solve_time", mip_total_time)
                 total_inference_time += inference_time
 
-                print(f"K={test_attack_limit}, penalty={test_penalty}, n={n}, m={m}, rep={rep} | "
+                print(f"K={test_attack_limit}, n={n}, m={m}, rep={rep} | "
                         f"Opt={optimal_objective:.2f} | "
                         f"Pred={predicted_objective:.2f} | "
                         f"Gap={objective_gap:.4f} | "

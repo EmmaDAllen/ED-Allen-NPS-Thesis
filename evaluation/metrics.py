@@ -100,11 +100,11 @@ def shortest_path_after_attack(sample, predicted_attack):
     t = sample["sink"]
 
     # rebuild network using predicted interdiction decisions
-    for u, v, dist, attack in zip(sample["u"], sample["v"], sample["dist"],
+    for u, v, dist, penalty, attack in zip(sample["u"], sample["v"], sample["dist"], sample["penalty"],
                                   predicted_attack):
         
         # interdicted edges receive an additional cost penalty
-        new_dist = dist + sample["interdiction_penalty"] * attack
+        new_dist = dist + penalty*attack
         G.add_edge(u, v, dist=new_dist)
 
     # compute resulting shortest path length

@@ -27,8 +27,8 @@ COST_HIGH = 10
 PENALTY_LOW = 1
 PENALTY_HIGH = 10
 
-def generate_dataset(network_settings,replications_per_setting, attack_budgets, penalties,
-    base_seed=1,output_file="training_data.json"):
+def generate_dataset(network_settings,replications_per_setting, attack_budgets,
+                     base_seed=1,output_file="training_data.json"):
     
     '''Generates dataset across multiple network sizes and densities.
 
