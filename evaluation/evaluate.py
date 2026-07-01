@@ -86,14 +86,28 @@ def evaluate():
     # put model in evaluation mode
     model.eval()
 
-    # network size/densities used for testing
-    test_settings = [
-        (30, 75),
-        (30, 120),
-        (50, 125),
-        (50, 200),
-        (75, 188),
-        (75, 300),]
+    eval_mode = sys.argv[2] if len(sys.argv) > 2 else "id"
+
+    if eval_mode == "id":
+        test_settings = [
+            (30, 75),
+            (30, 120),
+            (50, 125),
+            (50, 200),
+            (75, 188),
+            (75, 300),]
+        
+    elif eval_mode == "ood_size":
+        test_settings = [
+            (100, 250),
+            (100, 400),
+            (150, 375),
+            (150, 600),
+            (200, 500),
+            (200, 800),]
+    
+    else:
+        raise ValueError(f"Unknown eval_mode: {eval_mode}")
 
     # number of test graphs per network setting
     reps_per_setting = 20
@@ -254,7 +268,7 @@ def evaluate():
         print(f"Average model inference time: {total_inference_time / total_instances:.6f} seconds")
 
     # save all detailed results across all K values
-    with open(f"results/evaluation_results_{model_type}.csv", "w", newline="") as csvfile:
+    with open(f"results/evaluation_results_{model_type}_{eval_mode}.csv", "w", newline="") as csvfile:
         fieldnames = results_rows[0].keys()
 
         writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
@@ -262,7 +276,7 @@ def evaluate():
         writer.writeheader()
         writer.writerows(results_rows)
 
-    print("\nSaved results/evaluation_results.csv")
+    print(f"\nSaved results/evaluation_results_{model_type}_{eval_mode}.csv")
 
 
 if __name__ == "__main__":
