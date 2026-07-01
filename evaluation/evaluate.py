@@ -235,8 +235,8 @@ def evaluate():
                         "objective_gap": objective_gap,
                         "hamming_distance": hamming,
                         "exact_match": exact,
-                        "num_correct_edges": sum(
-                        p == o for p, o in zip(predicted_attack_list, optimal_attack_list)),
+                        "num_correct_edges": sum((p == 1 and o == 1)
+                                                 for p, o in zip(predicted_attack_list, optimal_attack_list)),
                         "num_predicted_attacks": sum(predicted_attack_list),
                         "num_optimal_attacks": sum(optimal_attack_list),
                         "mip_solve_time": sample.get("mip_solve_time", mip_total_time),
