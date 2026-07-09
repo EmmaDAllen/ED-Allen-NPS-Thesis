@@ -20,7 +20,8 @@ import networkx as nx
 import math
 
 
-def generate_one_in_network(n, m, cost_low=1, cost_high=10, penalty_low=1, penalty_high=10,seed=None):
+def generate_one_in_network(n, m, cost_low=1, cost_high=10, penalty_low=1, penalty_high=10, capacity_low=1, 
+                            capacity_high=20, seed=None):
     
     '''Generate a directed random test network using the One-In method.
 
@@ -29,6 +30,10 @@ def generate_one_in_network(n, m, cost_low=1, cost_high=10, penalty_low=1, penal
         m: number of directed arcs
         cost_low: minimum arc cost
         cost_high: maximum arc cost
+        penalty_low: minimum arc penalty
+        penalty_high: maximum arc penalty
+        capacity_low: minimum arc capacity
+        capacity_high: maximum arc capacity
         seed: random seed
 
     Returns:
@@ -37,15 +42,19 @@ def generate_one_in_network(n, m, cost_low=1, cost_high=10, penalty_low=1, penal
         t: sink/target node
         density: m / n '''
 
+    # initialize random number generator with seed
     rng = random.Random(seed)
 
+    # initialize source and sink nodes, and compute density
     s = 0
     t = n - 1
     density = m / n
 
+    # checks that m is at least n-1 to ensure root connectivity is possible
     if m < n - 1:
         raise ValueError("Need m >= n - 1 to make root-connectivity possible.")
 
+    # checks that m is not too large for a directed graph without self-loops
     if m > n * (n - 1):
         raise ValueError("Too many arcs. Maximum for directed graph without self-loops is n*(n-1).")
 
@@ -56,7 +65,6 @@ def generate_one_in_network(n, m, cost_low=1, cost_high=10, penalty_low=1, penal
         G = nx.DiGraph()
         # add nodes, 0 to n-1
         G.add_nodes_from(range(n))
-
 
         # for every node
         for j in range(n):
@@ -88,9 +96,8 @@ def generate_one_in_network(n, m, cost_low=1, cost_high=10, penalty_low=1, penal
         # find all nodes reachable from source node s
         reachable_nodes = nx.descendants(G, s) | {s}
 
-        # Check whether every node is reachable from the source - if yes, 
-        # accept the graph and exit the loop, if no, start the loop over and 
-        # generates a new graph
+        # Check whether every node is reachable from the source - if yes, accept the graph and exit 
+        # the loop, if no, start the loop over and generates a new graph
         if len(reachable_nodes) == n:
             break
 
@@ -98,6 +105,7 @@ def generate_one_in_network(n, m, cost_low=1, cost_high=10, penalty_low=1, penal
     for u, v in G.edges():
         G[u][v]["dist"] = rng.randint(cost_low, cost_high)
         G[u][v]["penalty"] = rng.randint(penalty_low, penalty_high)
+        G[u][v]["capacity"] = rng.randint(capacity_low, capacity_high)
 
     # return graph, source node, sink node, and density
     return G, s, t, density

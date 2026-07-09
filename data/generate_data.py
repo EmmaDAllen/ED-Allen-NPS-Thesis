@@ -14,6 +14,7 @@ Created on Wed Apr 22 12:42:40 2026
 
 import json
 import time
+import argparse
 
 from data.random_networks import generate_one_in_network 
 #from random_networks import generate_grid_network
@@ -26,8 +27,10 @@ COST_LOW = 1
 COST_HIGH = 10
 PENALTY_LOW = 1
 PENALTY_HIGH = 10
+CAPACITY_LOW = 1
+CAPACITY_HIGH = 20
 
-def generate_dataset(network_settings,replications_per_setting, attack_budgets,
+def generate_dataset(network_settings,replications_per_setting, attack_budgets, problem_type="shortest_path",
                      base_seed=1,output_file="training_data.json"):
     
     '''Generates dataset across multiple network sizes and densities.
@@ -40,10 +43,11 @@ def generate_dataset(network_settings,replications_per_setting, attack_budgets,
     Output:
         JSON file containing training samples'''
     
-    
+    # initialize dataset and skipped counter
     dataset = []
     skipped = 0
 
+    # iterate through all combinations of network settings, attack budgets, and replications
     for attack_budget in attack_budgets:
         for n, m in network_settings:
             for rep in range(replications_per_setting):
@@ -54,14 +58,16 @@ def generate_dataset(network_settings,replications_per_setting, attack_budgets,
                 # generate random test network (One-In method)
                 G, s, t, density = generate_one_in_network(n=n, m=m,cost_low=COST_LOW, cost_high=COST_HIGH,
                                                            penalty_low=PENALTY_LOW, penalty_high=PENALTY_HIGH,
+                                                           capacity_low=CAPACITY_LOW, capacity_high=CAPACITY_HIGH,
                                                            seed=seed)
 
                 #G, s, t, density = generate_spatial_network(n=n,k=4,seed=seed)
                 #G, s, t, density = generate_grid_network(rows=10,cols=10,seed=seed)
                 #G, s, t, density = generate_hub_spoke_network(n=n,num_hubs=5,seed=seed)
             
-                # solve interdiction problem
-                sample = solve_instance(G=G,s=s,t=t,density=density, attack_limit=attack_budget)
+                # solve interdiction problem for respective attack budget and store sample
+                sample = solve_instance(G=G,s=s,t=t,density=density, attack_limit=attack_budget, 
+                                        problem_type="shortest_path")
 
                 if sample is None:
                     skipped += 1
@@ -70,6 +76,7 @@ def generate_dataset(network_settings,replications_per_setting, attack_budgets,
                 sample["graph_seed"] = seed
                 sample["replication"] = rep
                 sample["attack_budget"] = attack_budget
+                sample["problem_type"] = problem_type
                 dataset.append(sample)
 
                     
@@ -90,7 +97,24 @@ def generate_dataset(network_settings,replications_per_setting, attack_budgets,
 
 if __name__ == "__main__":
 
-    # experiment design: (n, m) pairs
+    parser = argparse.ArgumentParser()
+    parser.add_argument(
+        "--problem_type",
+        choices=["shortest_path", "max_flow", "min_cost_flow"],
+        default="shortest_path"
+    )
+    parser.add_argument(
+        "--output_file",
+        default=None
+    )
+
+    args = parser.parse_args()
+
+    output_file = args.output_file
+    if output_file is None:
+        output_file = f"training_data_{args.problem_type}.json"
+
+    # experiment design: (n, m) pairs - subject to change based on desired network sizes and densities
     network_settings = [
         (30, 75),
         (30, 120),
@@ -100,14 +124,15 @@ if __name__ == "__main__":
         (50, 300),
         (75, 188),
         (75, 300),
-        (75, 450),
-    ]
+        (75, 450),]
     
-    attack_budgets = [1, 2, 3, 5]
+    # experiment design: attack budgets to test - subject to change based on desired interdiction budgets
+    attack_budgets = [1, 2, 3, 4, 5]
 
     dataset = generate_dataset(
         network_settings=network_settings,
         replications_per_setting=100,
         attack_budgets=attack_budgets,
+        problem_type=args.problem_type,
         base_seed=1,
-        output_file="training_data.json")
+        output_file=output_file)

@@ -11,6 +11,7 @@ from torch.utils.data import Dataset
 
 COST_HIGH = 10
 PENALTY_HIGH = 10
+CAPACITY_HIGH = 20
 
 def sample_to_tensors(sample):
     
@@ -20,8 +21,10 @@ def sample_to_tensors(sample):
     density = sample["density"]
     # store interdiction budget
     attack_limit = sample["attack_limit"]
-
+    # store interdiction penalty
     penalty = torch.tensor(sample["penalty"], dtype=torch.float32)
+    # store interdiction capacity
+    capacity = torch.tensor(sample.get("capacity", [0] * len(sample["u"])), dtype=torch.float32)
 
     # converts edge heads to PyTorch tensor
     u = torch.tensor(sample["u"], dtype=torch.float32)
@@ -32,12 +35,12 @@ def sample_to_tensors(sample):
     # converts MIP attack labels to PyTorch tensor
     y = torch.tensor(sample["attack"], dtype=torch.float32)
 
-    # Normalize node IDs and distances
+    # Normalize node IDs, distances, and penalties
     u_norm = u / max(n - 1, 1)
     v_norm = v / max(n - 1, 1)
-    dist_norm = dist / COST_HIGH
-    penalty_norm = penalty / PENALTY_HIGH
-
+    dist_norm = dist / COST_HIGH # reference max cost value
+    penalty_norm = penalty / PENALTY_HIGH # reference max penalty value
+    capacity_norm = capacity / CAPACITY_HIGH # reference max capacity value
 
     # source flag = 1 if edge leaves source node
     source_flag = (u == sample["source"]).float()
@@ -49,11 +52,29 @@ def sample_to_tensors(sample):
     # creates one budget value for every edge
     budget_feature = torch.full_like(u_norm, attack_limit / 10.0)
 
+    problem_type = sample.get("problem_type", "shortest_path")
 
-    # combines edge features into one matrix
-    edge_features = torch.stack([
-        u_norm, v_norm, dist_norm, source_flag, sink_flag, density_feature,
-        budget_feature, penalty_norm], dim=1)
+    if problem_type == "shortest_path":
+
+        # combines edge features into one matrix
+        edge_features = torch.stack([
+            u_norm, v_norm, dist_norm, source_flag, sink_flag, density_feature,
+            budget_feature, penalty_norm], dim=1)
+        
+    elif problem_type == "max_flow":
+
+        # combines edge features into one matrix
+        edge_features = torch.stack([
+            u_norm, v_norm, capacity_norm,source_flag, sink_flag, density_feature,
+            budget_feature, penalty_norm], dim=1)
+        
+    elif problem_type == "min_cost_flow":
+
+        # combines edge features into one matrix
+        edge_features = torch.stack([
+            u_norm, v_norm, dist_norm, capacity_norm,source_flag, sink_flag, density_feature,
+            budget_feature, penalty_norm], dim=1)
+
 
     # edge bias: edge i can flow into edge j if v_i == u_j
     # creates edge to edge connectivity matrix
@@ -63,6 +84,7 @@ def sample_to_tensors(sample):
     edge_bias = 0.5 * edge_bias
 
     return edge_features, edge_bias, y, attack_limit
+
 
 class InterdictionDataset(Dataset):
     
@@ -76,7 +98,6 @@ class InterdictionDataset(Dataset):
         return len(self.data)
 
     def __getitem__(self, idx):
-        
         # get graph at index idx
         sample = self.data[idx]
         return sample_to_tensors(sample)
@@ -111,7 +132,7 @@ def collate_graphs(batch):
         
         # creates padded edge bias matrix
         edge_bias_padded = torch.zeros(max_edges, max_edges)
-        # copies real edge-bias values inot it
+        # copies real edge-bias values into it
         edge_bias_padded[:m, :m] = edge_bias
 
         # creates padded labels
