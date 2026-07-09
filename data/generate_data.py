@@ -67,7 +67,7 @@ def generate_dataset(network_settings,replications_per_setting, attack_budgets, 
             
                 # solve interdiction problem for respective attack budget and store sample
                 sample = solve_instance(G=G,s=s,t=t,density=density, attack_limit=attack_budget, 
-                                        problem_type="shortest_path")
+                                        problem_type=problem_type)
 
                 if sample is None:
                     skipped += 1

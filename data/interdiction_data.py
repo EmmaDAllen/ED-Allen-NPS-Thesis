@@ -74,6 +74,9 @@ def sample_to_tensors(sample):
         edge_features = torch.stack([
             u_norm, v_norm, dist_norm, capacity_norm,source_flag, sink_flag, density_feature,
             budget_feature, penalty_norm], dim=1)
+        
+    else:
+        raise ValueError(f"Unknown problem_type: {problem_type}")
 
 
     # edge bias: edge i can flow into edge j if v_i == u_j

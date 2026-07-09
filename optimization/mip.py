@@ -10,7 +10,7 @@ import pyomo.environ as pyo
 import time
 
 
-def build_instance_data(G, s, t, interdiction_penalty=1, problem_type="shortest_path"):
+def build_instance_data(G, s, t, problem_type="shortest_path"):
     
     '''Convert graph into sets and parameters for the MIP model.
 
@@ -18,6 +18,7 @@ def build_instance_data(G, s, t, interdiction_penalty=1, problem_type="shortest_
    - nodes: list of nodes
    - arcs: list of directed edges
    - cost: arc length dictionary
+   - capacity: arc capacity dictionary
    - penalty: interdiction penalty (currently uniform with value 1)
    - supply: flow balance (+1 at source, -1 at sink)'''
    
@@ -34,29 +35,19 @@ def build_instance_data(G, s, t, interdiction_penalty=1, problem_type="shortest_
     supply[s] = 1
     supply[t] = -1
 
-    if problem_type == "shortest_path":
+    cost = None
+    capacity = None
 
-        # arc distances / costs
+    if problem_type in ["shortest_path", "min_cost_flow"]:
         cost = {(u, v): G[u][v]["dist"] for (u, v) in arcs}
 
-        return nodes, arcs, cost, penalty, supply
-    
-    elif problem_type == "max_flow":
-
-        # arc capacities
+    if problem_type in ["max_flow", "min_cost_flow"]:
         capacity = {(u, v): G[u][v]["capacity"] for (u, v) in arcs}
 
-        return nodes, arcs, capacity, penalty, supply
-    
-    elif problem_type == "min_cost_flow":
+    if problem_type not in ["shortest_path", "max_flow", "min_cost_flow"]:
+        raise ValueError(f"Unknown problem_type: {problem_type}")
 
-        # per-unit flow costs
-        cost = {(u, v): G[u][v]["dist"] for (u, v) in arcs}
-
-        # arc capacities
-        capacity = {(u, v): G[u][v]["capacity"] for (u, v) in arcs}
-
-        return nodes, arcs, cost, capacity, penalty, supply
+    return nodes, arcs, cost, capacity, penalty, supply
 
 
 
@@ -112,9 +103,8 @@ def build_dualILP(nodes, arcs, cost, supply, penalty, attack_limit=1):
     return model
 
 
-def solve_shortest_path_instance(G, s, t, density, attack_limit,interdiction_penalty=1,
-                                 problem_type="shortest_path"):
-    
+def solve_shortest_path_instance(G, s, t, density, attack_limit, problem_type="shortest_path"):
+
     '''Solves one interdiction instance and returns a training sample.
 
    Returns:
@@ -126,8 +116,8 @@ def solve_shortest_path_instance(G, s, t, density, attack_limit,interdiction_pen
     if not nx.has_path(G, s, t):
         return None
 
-    # initialize network dat a using function build_instance_data
-    nodes, arcs, cost, penalty, supply = build_instance_data(G, s, t, interdiction_penalty)
+    # initialize network data using function build_instance_data
+    nodes, arcs, cost, capacity, penalty, supply = build_instance_data(G, s, t, problem_type="shortest_path")
 
     # use new data from build_instance_data to build the MIP using build_dualILP
     model = build_dualILP(nodes=nodes,arcs=arcs,cost=cost,supply=supply,
@@ -167,7 +157,8 @@ def solve_shortest_path_instance(G, s, t, density, attack_limit,interdiction_pen
         "penalty": [penalty[(u, v)] for (u, v) in edge_list],
         "u": [u for (u, v) in edge_list],
         "v": [v for (u, v) in edge_list],
-        "dist": [cost[(u, v)] for (u, v) in edge_list],
+        "dist": [cost[(u, v)] for (u, v) in edge_list] if cost is not None else [0] * len(edge_list),
+        "capacity": [capacity[(u, v)] for (u, v) in edge_list] if capacity is not None else [0] * len(edge_list),
         
         # what model is supposed to learn (attack values)
         "attack": [int(round(pyo.value(model.Y[u, v]))) for (u, v) in edge_list],
@@ -176,6 +167,7 @@ def solve_shortest_path_instance(G, s, t, density, attack_limit,interdiction_pen
 
         "cost_high": max(cost.values()),
         "penalty_high": max(penalty.values()),
+        "capacity_high": max(capacity.values()) if capacity is not None else 0,
         
         # additional info for analysis
         "mip_solve_time": mip_solve_time,
