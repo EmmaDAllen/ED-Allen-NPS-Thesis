@@ -15,7 +15,7 @@ class StandardTransformerInterdictionModel(nn.Module):
 
     """Standard Transformer baseline for edge interdiction prediction."""
 
-    def __init__(self, input_dim=8, d_model=64, n_heads=4,
+    def __init__(self, input_dim, d_model=64, n_heads=4,
                  num_layers=2, dropout=0.1):
 
         super(StandardTransformerInterdictionModel, self).__init__()

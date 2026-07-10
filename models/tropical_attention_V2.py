@@ -265,7 +265,7 @@ class TropicalAttention(nn.Module):
 
 
 class TropicalInterdictionModel(nn.Module):
-    def __init__(self, input_dim=8, d_model=64, n_heads=4, num_layers=2, device="cpu"):
+    def __init__(self, input_dim, d_model=64, n_heads=4, num_layers=2, device="cpu"):
         super().__init__()
 
         self.input_proj = nn.Linear(input_dim, d_model)

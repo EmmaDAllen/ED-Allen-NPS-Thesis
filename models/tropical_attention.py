@@ -198,7 +198,7 @@ class TropicalInterdictionModel(nn.Module):
     '''defines full model for interdiction problem'''
     
     # defines default setup
-    def __init__(self, input_dim=8, d_model=64, n_heads=4, num_layers=2, device="cpu"):
+    def __init__(self, input_dim, d_model=64, n_heads=4, num_layers=2, device="cpu"):
         
         # initializes PyTorch parent class
         super(TropicalInterdictionModel, self).__init__()

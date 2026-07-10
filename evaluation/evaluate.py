@@ -20,53 +20,52 @@ from data.interdiction_data import sample_to_tensors
 from evaluation.metrics import shortest_path_after_attack
 from models.tropical_attention_V2 import TropicalInterdictionModel as TropicalInterdictionModelV2
 
-def get_model(model_type, device):
+
+PROBLEM_INPUT_DIMS = {
+    "shortest_path": 8,
+    "max_flow": 8,
+    "min_cost_flow": 9
+}
+
+def get_model(model_type, problem_type, device):
+
+    if problem_type not in PROBLEM_INPUT_DIMS:
+        raise ValueError(f"Unknown problem type: {problem_type}")
+
+    input_dim = PROBLEM_INPUT_DIMS[problem_type]
+
 
     if model_type == "tropical":
         return TropicalInterdictionModel(
-            input_dim=8,
-            d_model=64,
-            n_heads=4,
-            num_layers=2,
-            device=device
+            input_dim=input_dim,d_model=64, n_heads=4,num_layers=2,device=device
         ).to(device)
 
     elif model_type == "transformer":
         return StandardTransformerInterdictionModel(
-            input_dim=8,
-            d_model=64,
-            n_heads=4,
-            num_layers=2,
+            input_dim=input_dim,d_model=64,n_heads=4,num_layers=2,
         ).to(device)
 
     elif model_type == "gnn":
         return GNNInterdictionModel(
-            input_dim=8,
-            d_model=64,
-            num_layers=2
+            input_dim=input_dim,d_model=64,num_layers=2
         ).to(device)
     
     elif model_type == "edge_transformer":
         return EdgeBiasTransformerInterdictionModel(
-            input_dim=8,
-            d_model=64,
-            n_heads=4,
-            num_layers=2
+            input_dim=input_dim,d_model=64,n_heads=4,num_layers=2
         ).to(device)
     
         
     elif model_type == "tropical_v2":
         return TropicalInterdictionModelV2(
-            input_dim=8,
-            d_model=64,
-            n_heads=4,
-            num_layers=2,
-            device=device
+            input_dim=input_dim,d_model=64,n_heads=4,num_layers=2,device=device
         ).to(device)
 
 
     else:
         raise ValueError(f"Unknown model type: {model_type}")
+
+
 
 def evaluate():
     

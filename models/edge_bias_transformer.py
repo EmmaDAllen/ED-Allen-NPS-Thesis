@@ -133,7 +133,7 @@ class EdgeBiasTransformerInterdictionModel(nn.Module):
     Graph structure is incorporated through edge_bias,
     which modifies attention scores between edges."""
 
-    def __init__(self, input_dim=8, d_model=64, n_heads=4,
+    def __init__(self, input_dim, d_model=64, n_heads=4,
                  num_layers=2, dropout=0.1):
 
         super(EdgeBiasTransformerInterdictionModel, self).__init__()
