@@ -12,7 +12,7 @@ import pyomo.environ as pyo
 import time
 
 
-def build_instance_data(G, s, t, problem_type="shortest_path"):
+def build_instance_data(G, s, t, problem_type="shortest_path",flow_demand=1):
     
     '''Convert graph into sets and parameters for the MIP model.
 
@@ -33,15 +33,19 @@ def build_instance_data(G, s, t, problem_type="shortest_path"):
     penalty = {(u, v): G[u][v]["penalty"] for (u, v) in arcs}
 
     # flow balance supply values
-    supply = {i: 0 for i in nodes}
-    supply[s] = 1
-    supply[t] = -1
+    #supply = {i: 0 for i in nodes}
+    #supply[s] = 1
+    #supply[t] = -1
 
     cost = None
     capacity = None
+    supply = None
 
     if problem_type in ["shortest_path", "min_cost_flow"]:
         cost = {(u, v): G[u][v]["dist"] for (u, v) in arcs}
+        supply = {i: 0 for i in nodes}
+        supply[s] = flow_demand
+        supply[t] = -flow_demand
 
     if problem_type in ["max_flow", "min_cost_flow"]:
         capacity = {(u, v): G[u][v]["capacity"] for (u, v) in arcs}
@@ -51,8 +55,10 @@ def build_instance_data(G, s, t, problem_type="shortest_path"):
 
     return nodes, arcs, cost, capacity, penalty, supply
 
+
+
 def build_training_sample(G,s,t,density,attack_limit,arcs,penalty,model,objective_name,objective_value,
-                          mip_solve_time,status,termination,cost=None,capacity=None):
+                          mip_solve_time,status,termination,problem_type,cost=None,capacity=None,flow_demand=None):
 
     """Construct the shared JSON training-sample structure."""
     
@@ -67,6 +73,8 @@ def build_training_sample(G,s,t,density,attack_limit,arcs,penalty,model,objectiv
         "source": s,
         "sink": t,
         "attack_limit": attack_limit,
+
+        "problem_type": problem_type,
 
         # Arc information
         "u": [u for u, v in edge_list],
@@ -97,6 +105,10 @@ def build_training_sample(G,s,t,density,attack_limit,arcs,penalty,model,objectiv
     if capacity is not None:
         sample["capacity"] = [capacity[u, v] for u, v in edge_list]
         sample["capacity_high"] = max(capacity.values())
+
+    if flow_demand is not None:
+        sample["flow_demand"] = flow_demand
+
 
     return sample
 
@@ -193,7 +205,7 @@ def solve_shortest_path_instance(G, s, t, density, attack_limit):
     return build_training_sample(G=G,s=s,t=t,density=density,attack_limit=attack_limit,arcs=arcs,
                                  penalty=penalty,model=model,objective_name="path_length",
                                  objective_value=pyo.value(model.pathLength),mip_solve_time=mip_solve_time,
-                                 status=status,termination=termination,cost=cost)
+                                 status=status,termination=termination,problem_type="shortest_path",cost=cost)
 
 
 
@@ -306,7 +318,7 @@ def solve_max_flow_instance(G, s, t, density, attack_limit):
     return build_training_sample(G=G,s=s,t=t,density=density,attack_limit=attack_limit,
                                  arcs=arcs,penalty=penalty,model=model,objective_name="max_flow",
                                  objective_value=pyo.value(model.maxFlow),mip_solve_time=mip_solve_time,
-                                 status=status,termination=termination,capacity=capacity)
+                                 status=status,termination=termination,problem_type="max_flow",capacity=capacity)
 
 
 
@@ -365,7 +377,7 @@ def build_min_cost_flow_ILP(nodes, arcs, cost, capacity, supply, penalty, source
     return model
 
 
-def solve_min_cost_flow_instance(G, s, t, density, attack_limit):
+def solve_min_cost_flow_instance(G, s, t, density, attack_limit,flow_demand):
 
     '''Solves one minimum-cost-flow interdiction instance and returns a training sample.
 
@@ -381,7 +393,8 @@ def solve_min_cost_flow_instance(G, s, t, density, attack_limit):
 
     # initialize network data using function build_instance_data
     nodes, arcs, cost, capacity, penalty, supply = build_instance_data(G,s,t,
-                                                                       problem_type="min_cost_flow")
+                                                                       problem_type="min_cost_flow",
+                                                                       flow_demand=flow_demand)
 
     # build the minimum-cost-flow interdiction MIP
     model = build_min_cost_flow_ILP(nodes=nodes,arcs=arcs,cost=cost,capacity=capacity,supply=supply,
@@ -409,12 +422,13 @@ def solve_min_cost_flow_instance(G, s, t, density, attack_limit):
     return build_training_sample(G=G,s=s,t=t,density=density,attack_limit=attack_limit,arcs=arcs,
                                  penalty=penalty,model=model,objective_name="min_cost_flow",
                                  objective_value=pyo.value(model.minCostFlow),mip_solve_time=mip_solve_time,
-                                 status=status,termination=termination,cost=cost,capacity=capacity)
+                                 status=status,termination=termination,problem_type="min_cost_flow",
+                                 cost=cost,capacity=capacity,flow_demand=flow_demand)
 
 
 
 
-def solve_instance(G,s,t,density,attack_limit,problem_type="shortest_path"):
+def solve_instance(G,s,t,density,attack_limit,problem_type="shortest_path", flow_demand=1):
 
     """Send an instance to the solver matching its problem type."""
 
@@ -425,7 +439,7 @@ def solve_instance(G,s,t,density,attack_limit,problem_type="shortest_path"):
         return solve_max_flow_instance(G=G,s=s,t=t,density=density,attack_limit=attack_limit)
 
     if problem_type == "min_cost_flow":
-        return solve_min_cost_flow_instance(G=G,s=s,t=t,density=density,attack_limit=attack_limit)
+        return solve_min_cost_flow_instance(G=G,s=s,t=t,density=density,attack_limit=attack_limit,flow_demand=flow_demand)
 
     raise ValueError(
         f"Unknown problem_type: {problem_type}. "

@@ -29,7 +29,7 @@ PROBLEM_INPUT_DIMS = {
 }
 
 
-def get_model(model_type, device):
+def get_model(model_type, problem_type, device):
 
     if problem_type not in PROBLEM_INPUT_DIMS:
         raise ValueError(f"Unknown problem type: {problem_type}")
@@ -73,8 +73,13 @@ def train():
     # uses gpu if available, otherwise cpu
     device = "cuda" if torch.cuda.is_available() else "cpu"
 
+    # creates tropical attention interdiction model and moves it to GPU/CPU
+    model_type = sys.argv[1] if len(sys.argv) > 1 else "tropical"
+    problem_type = sys.argv[2] if len(sys.argv) > 2 else "shortest_path"
+
     # load in solved training MIP data
-    dataset = InterdictionDataset("training_data.json")
+    dataset_file = f"training_data_{problem_type}.json"
+    dataset = InterdictionDataset(dataset_file)
     
     # use 70% for training
     train_size = int(0.7 * len(dataset))
@@ -96,10 +101,7 @@ def train():
     val_loader = DataLoader(val_dataset, batch_size=4, shuffle=False,
         collate_fn=collate_graphs) # use padding function
 
-    # creates tropical attention interdiction model and moves it to GPU/CPU
-    model_type = sys.argv[1] if len(sys.argv) > 1 else "tropical"
-
-    model = get_model(model_type, device)
+    model = get_model(model_type, problem_type, device)
 
     # Class imbalance correction
     # weights positive labels more heavily - most edges are not inerdicted
@@ -254,19 +256,21 @@ def train():
     total_training_time = training_end_time - training_start_time
 
     print(f"\nTotal training time for {model_type}: "
-          f"{total_training_time:.2f} seconds")
+           f"{total_training_time:.2f} seconds")
     print(f"Average epoch time: "
           f"{total_training_time / epochs:.2f} seconds")
     
+    run_name = f"{model_type}_{problem_type}"
+
     # saves epoch results to csv file for later analysis
-    with open(f"results/training_log_{model_type}.csv", "w", newline="") as csvfile:
+    with open(f"results/training_log_{run_name}.csv", "w", newline="") as csvfile:
         fieldnames = epoch_rows[0].keys()
         writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
         writer.writeheader()
         writer.writerows(epoch_rows)
 
     # saves training summary to csv file for later analysis
-    with open(f"results/training_summary_{model_type}.csv", "w", newline="") as csvfile:
+    with open(f"results/training_summary_{run_name}.csv", "w", newline="") as csvfile:
         fieldnames = ["model_type","epochs", "total_training_time_seconds",
         "average_epoch_time_seconds"]
 
@@ -280,7 +284,7 @@ def train():
     })
 
     # saves training model weights
-    torch.save(model.state_dict(), f"saved_models/{model_type}_model.pt")
+    torch.save(model.state_dict(), f"saved_models/{run_name}_model.pt")
 
 
 if __name__ == "__main__":

@@ -15,6 +15,7 @@ Created on Wed Apr 22 12:42:40 2026
 import json
 import time
 import argparse
+import networkx as nx
 
 from data.random_networks import generate_one_in_network 
 #from random_networks import generate_grid_network
@@ -25,10 +26,17 @@ from optimization.mip import solve_instance
 
 COST_LOW = 1
 COST_HIGH = 10
-PENALTY_LOW = 1
+PENALTY_LOW = 2
 PENALTY_HIGH = 10
 CAPACITY_LOW = 1
 CAPACITY_HIGH = 20
+
+OBJECTIVE_NAMES = {
+    "shortest_path": "path_length",
+    "max_flow": "max_flow",
+    "min_cost_flow": "min_cost_flow"
+}
+
 
 def generate_dataset(network_settings,replications_per_setting, attack_budgets, problem_type="shortest_path",
                      base_seed=1,output_file="training_data.json"):
@@ -42,6 +50,8 @@ def generate_dataset(network_settings,replications_per_setting, attack_budgets, 
 
     Output:
         JSON file containing training samples'''
+    
+    objective_name = OBJECTIVE_NAMES[problem_type]
     
     # initialize dataset and skipped counter
     dataset = []
@@ -60,6 +70,13 @@ def generate_dataset(network_settings,replications_per_setting, attack_budgets, 
                                                            penalty_low=PENALTY_LOW, penalty_high=PENALTY_HIGH,
                                                            capacity_low=CAPACITY_LOW, capacity_high=CAPACITY_HIGH,
                                                            seed=seed)
+                
+                if problem_type == "min_cost_flow":
+                    baseline_max_flow = nx.maximum_flow_value(G,_s=s,_t=t,capacity="capacity")
+                    flow_demand = max(1, int(0.5 * baseline_max_flow))
+
+                else:
+                    flow_demand = 1
 
                 #G, s, t, density = generate_spatial_network(n=n,k=4,seed=seed)
                 #G, s, t, density = generate_grid_network(rows=10,cols=10,seed=seed)
@@ -67,7 +84,7 @@ def generate_dataset(network_settings,replications_per_setting, attack_budgets, 
             
                 # solve interdiction problem for respective attack budget and store sample
                 sample = solve_instance(G=G,s=s,t=t,density=density, attack_limit=attack_budget, 
-                                        problem_type=problem_type)
+                                        problem_type=problem_type,flow_demand=flow_demand)
 
                 if sample is None:
                     skipped += 1
@@ -77,12 +94,17 @@ def generate_dataset(network_settings,replications_per_setting, attack_budgets, 
                 sample["replication"] = rep
                 sample["attack_budget"] = attack_budget
                 sample["problem_type"] = problem_type
+
+                if problem_type == "min_cost_flow":
+                    sample["flow_demand"] = flow_demand
+
                 dataset.append(sample)
 
                     
                 print(f"Solved n={n}, m={m}, budget={attack_budget}, "
                           f"density={density:.2f}, rep={rep}, "
-                          f"objective={sample['path_length']:.2f}, "
+                          f"flow_demand={flow_demand}, "
+                          f"objective={sample[objective_name]:.2f}, "
                           f"mip_solve_time={sample['mip_solve_time']:.4f}")
 
     print(f"\nGenerated {len(dataset)} solved training samples.")
@@ -99,7 +121,7 @@ if __name__ == "__main__":
 
     parser = argparse.ArgumentParser()
     parser.add_argument(
-        "--problem_type",
+        "problem_type",
         choices=["shortest_path", "max_flow", "min_cost_flow"],
         default="shortest_path"
     )
@@ -131,7 +153,7 @@ if __name__ == "__main__":
 
     dataset = generate_dataset(
         network_settings=network_settings,
-        replications_per_setting=100,
+        replications_per_setting=50,
         attack_budgets=attack_budgets,
         problem_type=args.problem_type,
         base_seed=1,

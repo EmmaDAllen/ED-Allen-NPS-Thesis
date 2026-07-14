@@ -20,7 +20,7 @@ import networkx as nx
 import math
 
 
-def generate_one_in_network(n, m, cost_low=1, cost_high=10, penalty_low=1, penalty_high=10, capacity_low=1, 
+def generate_one_in_network(n, m, cost_low=1, cost_high=10, penalty_low=2, penalty_high=10, capacity_low=1, 
                             capacity_high=20, seed=None):
     
     '''Generate a directed random test network using the One-In method.

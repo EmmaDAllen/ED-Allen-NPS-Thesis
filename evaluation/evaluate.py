@@ -5,6 +5,8 @@ Created on Fri May 22 10:51:24 2026
 @author: emmallen
 """
 
+from random import sample
+
 import torch
 import csv
 import sys
@@ -18,6 +20,8 @@ from models.gnn import GNNInterdictionModel
 from models.edge_bias_transformer import EdgeBiasTransformerInterdictionModel
 from data.interdiction_data import sample_to_tensors
 from evaluation.metrics import shortest_path_after_attack
+from evaluation.metrics import max_flow_after_attack
+from evaluation.metrics import min_cost_flow_after_attack
 from models.tropical_attention_V2 import TropicalInterdictionModel as TropicalInterdictionModelV2
 
 
@@ -74,18 +78,20 @@ def evaluate():
 
     # instantiate empty tropical attention model
     model_type = sys.argv[1] if len(sys.argv) > 1 else "tropical"
+    problem_type = sys.argv[2] if len(sys.argv) > 2 else "shortest_path"
+    eval_mode = sys.argv[3] if len(sys.argv) > 3 else "id"
 
-    model = get_model(model_type, device)
+    model = get_model(model_type, problem_type, device)
+
+    run_name = f"{model_type}_{problem_type}"
     
     # load saved moved weigts from training
     model.load_state_dict(
-    torch.load(f"saved_models/{model_type}_model.pt",
+    torch.load(f"saved_models/{run_name}_model.pt",
                map_location=device))
 
     # put model in evaluation mode
     model.eval()
-
-    eval_mode = sys.argv[2] if len(sys.argv) > 2 else "id"
 
     if eval_mode == "id":
         test_settings = [
@@ -112,7 +118,7 @@ def evaluate():
     reps_per_setting = 20
     
     # evaluate the model for multiple interdiction budgets
-    test_attack_limits = [1, 2, 3, 5]
+    test_attack_limits = [1, 2, 3, 4, 5]
     
     # base seed thats different from training data to create unseen test graphs
     base_seed = 999999
@@ -143,15 +149,15 @@ def evaluate():
                 seed = base_seed + 100000 * n + 100 * m + rep
 
                 # generate test network
-                G, s, t, density = generate_one_in_network(n=n, m=m, cost_low=1,cost_high=10, 
-                                                           penalty_low=1,penalty_high=10,seed=seed)
+                G, s, t, density = generate_one_in_network(n=n, m=m, cost_low=1,cost_high=10,penalty_low=1,
+                                                           penalty_high=10,capacity_low=1,capacity_high=20,seed=seed)
 
                 # start timer for MIP solve time
                 mip_start = time.perf_counter()
                 
                 # solve MIP to get optimal interdiction decision for this K
-                sample = solve_instance(G=G, s=s, t=t,density=density,
-                        attack_limit=test_attack_limit)
+                sample = solve_instance(G=G, s=s, t=t,density=density,attack_limit=test_attack_limit,
+                                        problem_type=problem_type)
                 
                 # end timer for MIP solve time and calculate total time
                 mip_end = time.perf_counter()
@@ -213,15 +219,21 @@ def evaluate():
                 hamming = sum(
                     p != o for p, o in zip(predicted_attack_list, optimal_attack_list))
 
-                # MIP optimal objective value
-                optimal_objective = sample["path_length"]
+                if problem_type == "shortest_path":
+                    optimal_objective = sample["path_length"]
+                    predicted_objective = shortest_path_after_attack(sample, predicted_attack_list)
+                    objective_gap = (optimal_objective - predicted_objective) / max(abs(optimal_objective), 1e-8)
+                
+                elif problem_type == "max_flow":
+                    optimal_objective = sample["max_flow"]
+                    predicted_objective = max_flow_after_attack(sample, predicted_attack_list)
+                    objective_gap = (predicted_objective - optimal_objective) / max(abs(optimal_objective), 1e-8)
 
-                # shortest path length after applying model's predicted attack
-                predicted_objective = shortest_path_after_attack(sample,predicted_attack_list)
+                elif problem_type == "min_cost_flow":
+                    optimal_objective = sample["min_cost_flow"]
+                    predicted_objective = min_cost_flow_after_attack(sample, predicted_attack_list)
+                    objective_gap = (optimal_objective - predicted_objective) / max(abs(optimal_objective), 1e-8)
 
-                # relative objective gap
-                objective_gap = (
-                    optimal_objective-predicted_objective)/max(abs(optimal_objective), 1e-8)
 
                 # save detailed instance-level result
                 results_rows.append({"n_nodes": n,
@@ -267,7 +279,7 @@ def evaluate():
         print(f"Average model inference time: {total_inference_time / total_instances:.6f} seconds")
 
     # save all detailed results across all K values
-    with open(f"results/evaluation_results_{model_type}_{eval_mode}.csv", "w", newline="") as csvfile:
+    with open(f"results/evaluation_results_{model_type}_{problem_type}_{eval_mode}.csv", "w", newline="") as csvfile:
         fieldnames = results_rows[0].keys()
 
         writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
@@ -275,7 +287,7 @@ def evaluate():
         writer.writeheader()
         writer.writerows(results_rows)
 
-    print(f"\nSaved results/evaluation_results_{model_type}_{eval_mode}.csv")
+    print(f"\nSaved results/evaluation_results_{model_type}_{problem_type}_{eval_mode}.csv")
 
 
 if __name__ == "__main__":

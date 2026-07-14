@@ -23,24 +23,25 @@ def sample_to_tensors(sample):
     attack_limit = sample["attack_limit"]
     # store interdiction penalty
     penalty = torch.tensor(sample["penalty"], dtype=torch.float32)
+
     # store interdiction capacity
-    capacity = torch.tensor(sample.get("capacity", [0] * len(sample["u"])), dtype=torch.float32)
+    # capacity = torch.tensor(sample.get("capacity", [0] * len(sample["u"])), dtype=torch.float32)
 
     # converts edge heads to PyTorch tensor
     u = torch.tensor(sample["u"], dtype=torch.float32)
     # converts edge tails to PyTorch tensor
     v = torch.tensor(sample["v"], dtype=torch.float32)
     # converts edge distances to PyTorch tensor
-    dist = torch.tensor(sample["dist"], dtype=torch.float32)
+    # dist = torch.tensor(sample["dist"], dtype=torch.float32)
     # converts MIP attack labels to PyTorch tensor
     y = torch.tensor(sample["attack"], dtype=torch.float32)
 
     # Normalize node IDs, distances, and penalties
     u_norm = u / max(n - 1, 1)
     v_norm = v / max(n - 1, 1)
-    dist_norm = dist / COST_HIGH # reference max cost value
+    # dist_norm = dist / COST_HIGH # reference max cost value
     penalty_norm = penalty / PENALTY_HIGH # reference max penalty value
-    capacity_norm = capacity / CAPACITY_HIGH # reference max capacity value
+    # capacity_norm = capacity / CAPACITY_HIGH # reference max capacity value
 
     # source flag = 1 if edge leaves source node
     source_flag = (u == sample["source"]).float()
@@ -56,6 +57,9 @@ def sample_to_tensors(sample):
 
     if problem_type == "shortest_path":
 
+        dist = torch.tensor(sample["dist"], dtype=torch.float32)
+        dist_norm = dist / COST_HIGH
+
         # combines edge features into one matrix
         edge_features = torch.stack([
             u_norm, v_norm, dist_norm, source_flag, sink_flag, density_feature,
@@ -63,16 +67,25 @@ def sample_to_tensors(sample):
         
     elif problem_type == "max_flow":
 
+        capacity = torch.tensor(sample["capacity"], dtype=torch.float32)
+        capacity_norm = capacity / CAPACITY_HIGH
+
         # combines edge features into one matrix
         edge_features = torch.stack([
-            u_norm, v_norm, capacity_norm,source_flag, sink_flag, density_feature,
+            u_norm, v_norm, capacity_norm, source_flag, sink_flag, density_feature,
             budget_feature, penalty_norm], dim=1)
         
     elif problem_type == "min_cost_flow":
 
+        dist = torch.tensor(sample["dist"], dtype=torch.float32)
+        capacity = torch.tensor(sample["capacity"], dtype=torch.float32)
+
+        dist_norm = dist / COST_HIGH
+        capacity_norm = capacity / CAPACITY_HIGH
+
         # combines edge features into one matrix
         edge_features = torch.stack([
-            u_norm, v_norm, dist_norm, capacity_norm,source_flag, sink_flag, density_feature,
+            u_norm, v_norm, dist_norm, capacity_norm, source_flag, sink_flag, density_feature,
             budget_feature, penalty_norm], dim=1)
         
     else:

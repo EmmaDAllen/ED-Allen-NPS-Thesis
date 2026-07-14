@@ -10,9 +10,8 @@ import networkx as nx
 
 def compute_metrics(logits, y, mask, attack_limits):
     
-    """Computes validation metrics by converting model logits
-    into a top-k interdiction decision and comparing that
-    decision to the optimal MIP solution."""
+    """Computes validation metrics by converting model logits into a top-k interdiction 
+    decision and comparing that decision to the optimal MIP solution."""
 
     # number of graphs in the batch
     batch_size = logits.shape[0]
@@ -87,10 +86,10 @@ def compute_metrics(logits, y, mask, attack_limits):
     return accuracy, precision, recall, f1, avg_hamming, exact_match_rate
 
 
+
 def shortest_path_after_attack(sample, predicted_attack):
     
-    """Computes the shortest-path length produced by a predicted
-    interdiction decision."""
+    """Computes the shortest-path length produced by a predicted interdiction decision."""
 
     # create directed graph from sample data    
     G = nx.DiGraph()
@@ -109,3 +108,93 @@ def shortest_path_after_attack(sample, predicted_attack):
 
     # compute resulting shortest path length
     return nx.shortest_path_length(G, source=s, target=t, weight="dist")
+
+
+
+def max_flow_after_attack(sample, predicted_attack):
+
+    """Computes the penalized maximum-flow objective produced by
+    a fixed predicted interdiction decision."""
+
+    nodes = range(sample["n_nodes"])
+    arcs = list(zip(sample["u"], sample["v"]))
+
+    s = sample["source"]
+    t = sample["sink"]
+
+    capacity = {arc: cap for arc, cap in zip(arcs, sample["capacity"])}
+
+    penalty = {arc: q for arc, q in zip(arcs, sample["penalty"])}
+
+    attack = {arc: y for arc, y in zip(arcs, predicted_attack)}
+
+    model = pyo.ConcreteModel()
+
+    model.N = pyo.Set(initialize=nodes)
+    model.A = pyo.Set(initialize=arcs, dimen=2)
+
+    # Flow on original arcs
+    model.X = pyo.Var(model.A,within=pyo.NonNegativeReals)
+
+    # Artificial return flow from sink to source
+    model.XReturn = pyo.Var(within=pyo.NonNegativeReals)
+
+    # Arc capacity constraints
+    def capacity_rule(model, i, j):
+        return model.X[i,j] <= capacity[i,j]
+    model.capacity_constraints = pyo.Constraint(model.A,rule=capacity_rule)
+
+    # Flow conservation
+    def flow_balance_rule(model, node):
+        inflow = sum(model.X[i,j] for i, j in model.A if j == node)
+
+        outflow = sum(model.X[i,j] for i, j in model.A if i == node)
+
+        if node == s:
+            inflow += model.XReturn
+
+        if node == t:
+            outflow += model.XReturn
+
+        return inflow == outflow
+
+    model.flow_balance = pyo.Constraint(model.N, rule=flow_balance_rule)
+
+    # Penalized maximum-flow objective
+    model.objective = pyo.Objective(
+        expr=model.XReturn - sum(penalty[i,j]*attack[i,j]*model.X[i,j] for i, j in model.A),
+        sense=pyo.maximize)
+
+    solver = pyo.SolverFactory("gurobi")
+    solver.solve(model)
+
+    return pyo.value(model.objective)
+
+
+
+def min_cost_flow_after_attack(sample, predicted_attack):
+
+    """Computes the minimum cost of sending one unit from source to sink
+    after predicted interdiction."""
+
+    G = nx.DiGraph()
+
+    s = sample["source"]
+    t = sample["sink"]
+    flow_demand = sample.get("flow_demand", 1)
+
+    # NetworkX uses negative demand for supply and positive demand
+    # for required inflow.
+    for node in range(sample["n_nodes"]):
+        G.add_node(node, demand=0)
+
+    G.nodes[s]["demand"] = -flow_demand
+    G.nodes[t]["demand"] = flow_demand
+
+    for u, v, dist, capacity, penalty, attack in zip(sample["u"],sample["v"],sample["dist"],sample["capacity"],
+                                                     sample["penalty"],predicted_attack):
+        new_cost = dist + penalty * attack
+
+        G.add_edge(u,v,weight=new_cost,capacity=capacity)
+
+    return nx.min_cost_flow_cost(G,demand="demand",capacity="capacity",weight="weight")
