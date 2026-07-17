@@ -11,6 +11,7 @@ import torch
 import csv
 import sys
 import time
+import networkx as nx
 
 from data.random_networks import generate_one_in_network
 from optimization.mip import solve_instance
