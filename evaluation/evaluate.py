@@ -27,7 +27,7 @@ from models.tropical_attention_V2 import TropicalInterdictionModel as TropicalIn
 
 PROBLEM_INPUT_DIMS = {
     "shortest_path": 8,
-    "max_flow": 8,
+    "max_flow": 7,
     "min_cost_flow": 9
 }
 
@@ -109,7 +109,11 @@ def evaluate():
             (150, 375),
             (150, 600),
             (200, 500),
-            (200, 800),]
+            (200, 800),
+            (300, 750),
+            (300, 1200),
+            (400, 1000),
+            (400, 1600),]
     
     else:
         raise ValueError(f"Unknown eval_mode: {eval_mode}")

@@ -24,7 +24,7 @@ from evaluation.metrics import compute_metrics
 
 PROBLEM_INPUT_DIMS = {
     "shortest_path": 8,
-    "max_flow": 8,
+    "max_flow": 7,
     "min_cost_flow": 9
 }
 

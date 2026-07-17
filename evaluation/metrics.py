@@ -113,62 +113,20 @@ def shortest_path_after_attack(sample, predicted_attack):
 
 def max_flow_after_attack(sample, predicted_attack):
 
-    """Computes the penalized maximum-flow objective produced by
-    a fixed predicted interdiction decision."""
+    """Compute remaining physical max flow after attacked arcs lose capacity."""
 
-    nodes = range(sample["n_nodes"])
-    arcs = list(zip(sample["u"], sample["v"]))
+    G = nx.DiGraph()
 
     s = sample["source"]
     t = sample["sink"]
 
-    capacity = {arc: cap for arc, cap in zip(arcs, sample["capacity"])}
+    for u, v, capacity, attack in zip(sample["u"],sample["v"],sample["capacity"],predicted_attack):
 
-    penalty = {arc: q for arc, q in zip(arcs, sample["penalty"])}
+        remaining_capacity = capacity * (1 - attack)
 
-    attack = {arc: y for arc, y in zip(arcs, predicted_attack)}
+        G.add_edge(u,v,capacity=remaining_capacity)
 
-    model = pyo.ConcreteModel()
-
-    model.N = pyo.Set(initialize=nodes)
-    model.A = pyo.Set(initialize=arcs, dimen=2)
-
-    # Flow on original arcs
-    model.X = pyo.Var(model.A,within=pyo.NonNegativeReals)
-
-    # Artificial return flow from sink to source
-    model.XReturn = pyo.Var(within=pyo.NonNegativeReals)
-
-    # Arc capacity constraints
-    def capacity_rule(model, i, j):
-        return model.X[i,j] <= capacity[i,j]
-    model.capacity_constraints = pyo.Constraint(model.A,rule=capacity_rule)
-
-    # Flow conservation
-    def flow_balance_rule(model, node):
-        inflow = sum(model.X[i,j] for i, j in model.A if j == node)
-
-        outflow = sum(model.X[i,j] for i, j in model.A if i == node)
-
-        if node == s:
-            inflow += model.XReturn
-
-        if node == t:
-            outflow += model.XReturn
-
-        return inflow == outflow
-
-    model.flow_balance = pyo.Constraint(model.N, rule=flow_balance_rule)
-
-    # Penalized maximum-flow objective
-    model.objective = pyo.Objective(
-        expr=model.XReturn - sum(penalty[i,j]*attack[i,j]*model.X[i,j] for i, j in model.A),
-        sense=pyo.maximize)
-
-    solver = pyo.SolverFactory("gurobi")
-    solver.solve(model)
-
-    return pyo.value(model.objective)
+    return nx.maximum_flow_value(G,_s=s,_t=t,capacity="capacity")
 
 
 

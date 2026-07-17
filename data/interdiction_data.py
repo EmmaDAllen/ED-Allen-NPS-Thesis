@@ -73,7 +73,7 @@ def sample_to_tensors(sample):
         # combines edge features into one matrix
         edge_features = torch.stack([
             u_norm, v_norm, capacity_norm, source_flag, sink_flag, density_feature,
-            budget_feature, penalty_norm], dim=1)
+            budget_feature], dim=1)
         
     elif problem_type == "min_cost_flow":
 

@@ -5,6 +5,7 @@ Created on Sat May 30 05:36:20 2026
 @author: emmallen
 """
 
+from random import sample
 from xml.parsers.expat import model
 
 import networkx as nx
@@ -58,7 +59,8 @@ def build_instance_data(G, s, t, problem_type="shortest_path",flow_demand=1):
 
 
 def build_training_sample(G,s,t,density,attack_limit,arcs,penalty,model,objective_name,objective_value,
-                          mip_solve_time,status,termination,problem_type,cost=None,capacity=None,flow_demand=None):
+                          mip_solve_time,status,termination,problem_type,cost=None,capacity=None,flow_demand=None, 
+                          baseline_max_flow=None):
 
     """Construct the shared JSON training-sample structure."""
     
@@ -109,6 +111,9 @@ def build_training_sample(G,s,t,density,attack_limit,arcs,penalty,model,objectiv
     if flow_demand is not None:
         sample["flow_demand"] = flow_demand
 
+    if baseline_max_flow is not None:
+        sample["baseline_max_flow"] = float(baseline_max_flow)
+
 
     return sample
 
@@ -149,7 +154,7 @@ def build_dualILP(nodes, arcs, cost, supply, penalty, attack_limit=1):
 
     # initerdiction budget constraint
     def attack_limit_rule(model):
-        return sum(model.Y[i, j] for (i, j) in model.A) <= model.attack_limit
+        return sum(model.Y[i, j] for (i, j) in model.A) == model.attack_limit
     model.attack_budget = pyo.Constraint(rule=attack_limit_rule)
 
     # objective function = maximize the distance between s-t
@@ -210,7 +215,7 @@ def solve_shortest_path_instance(G, s, t, density, attack_limit):
 
 
 
-def build_max_flow_ILP(nodes, arcs, capacity, penalty, source, sink, attack_limit=1):
+def build_max_flow_ILP(nodes, arcs, capacity, source, sink, attack_limit=1):
 
     '''Constructs the dual formulation of the maximum-flow interdiction problem.
 
@@ -223,7 +228,6 @@ def build_max_flow_ILP(nodes, arcs, capacity, penalty, source, sink, attack_limi
     Objective:
     - Minimize the defender's maximum s-t flow after interdiction'''
 
-    
     # initialize model
     model = pyo.ConcreteModel()
 
@@ -233,44 +237,29 @@ def build_max_flow_ILP(nodes, arcs, capacity, penalty, source, sink, attack_limi
 
     # initialize cost, penalty, supply and attack limits as pyomo objects
     model.capacity = pyo.Param(model.A, initialize=capacity)
-    model.penalty = pyo.Param(model.A, initialize=penalty)
     model.attack_limit = pyo.Param(initialize=attack_limit)
 
-    # sufficiently large upper bound for artificial return arc
-    max_capacity = max(capacity.values())
-    return_capacity = len(nodes) * max_capacity
+    # Node side of the s-t cut
+    model.X = pyo.Var(model.N,within=pyo.Binary)
+    # Interdiction decisions
+    model.Y = pyo.Var(model.A,within=pyo.Binary)
+    # Surviving arcs crossing the cut
+    model.Z = pyo.Var(model.A,within=pyo.Binary)
 
-    model.return_capacity = pyo.Param(initialize=return_capacity)
+    # Source and sink must be on opposite sides
+    model.source_side = pyo.Constraint(expr=model.X[source] == 1)
+    model.sink_side = pyo.Constraint(expr=model.X[sink] == 0)
 
-    # initialize decision variables described above
-    model.Pi = pyo.Var(model.N, within=pyo.Reals)
-    model.Y = pyo.Var(model.A, within=pyo.Binary)
-    model.Alpha = pyo.Var(model.A, within=pyo.NonNegativeReals)
-    model.AlphaReturn = pyo.Var(within=pyo.NonNegativeReals)
+    def cut_arc_rule(model, i, j):
+        return (model.Z[i,j]>= model.X[i] - model.X[j] - model.Y[i,j])
+    model.cut_arc_constraints = pyo.Constraint(model.A,rule=cut_arc_rule)
 
-    # dual feasibility constraint
-    def dual_constraint_rule(model, i, j):
-        return (model.Pi[i] - model.Pi[j] + model.Alpha[i,j] + model.penalty[i,j]*model.Y[i,j] >= 0)
-    model.dual_constraints = pyo.Constraint(model.A, rule=dual_constraint_rule)
-
-    # dual constraint for artificial return arc
-    def return_arc_constraint_rule(model):
-        return (model.Pi[sink] - model.Pi[source] + model.AlphaReturn >= 1)
-    model.return_arc_constraint = pyo.Constraint(rule=return_arc_constraint_rule)
-
-    # initerdiction budget constraint
     def attack_limit_rule(model):
-        return sum(model.Y[i, j] for (i, j) in model.A) <= model.attack_limit
+        return sum(model.Y[i,j] for i, j in model.A) == model.attack_limit
     model.attack_budget = pyo.Constraint(rule=attack_limit_rule)
 
-    # anchor one node potential
-    model.source_potential = pyo.Constraint(expr=model.Pi[source] == 0)
-
-    # objective: minimize maximum remaining flow
-    def objective_rule(model):
-        return (sum(model.capacity[i,j]*model.Alpha[i,j] for i, j in model.A) 
-                + model.return_capacity*model.AlphaReturn)
-    model.maxFlow = pyo.Objective(rule=objective_rule,sense=pyo.minimize)
+    model.maxFlow = pyo.Objective(
+        expr=sum(model.capacity[i,j] * model.Z[i,j] for i, j in model.A),sense=pyo.minimize)
 
     return model
 
@@ -292,9 +281,12 @@ def solve_max_flow_instance(G, s, t, density, attack_limit):
     # initialize network data using function build_instance_data
     nodes, arcs, _, capacity, penalty, _ = build_instance_data(G,s,t,problem_type="max_flow")
 
+    baseline_max_flow = nx.maximum_flow_value(G,_s=s,_t=t,capacity="capacity")
+
     # build the maximum-flow interdiction MIP
-    model = build_max_flow_ILP(nodes=nodes,arcs=arcs,capacity=capacity,penalty=penalty,
-                               source=s,sink=t,attack_limit=attack_limit)
+    model = build_max_flow_ILP(nodes=nodes,arcs=arcs,capacity=capacity,source=s,sink=t,
+                               attack_limit=attack_limit)
+    
 
     # solve MIP
     opt = pyo.SolverFactory("gurobi")
@@ -314,11 +306,16 @@ def solve_max_flow_instance(G, s, t, density, attack_limit):
     if termination != pyo.TerminationCondition.optimal:
         print(f"Skipped: solver ended with {termination}")
         return None
+    
+    if baseline_max_flow is not None:
+        sample["baseline_max_flow"] = float(baseline_max_flow)
+    
 
     return build_training_sample(G=G,s=s,t=t,density=density,attack_limit=attack_limit,
                                  arcs=arcs,penalty=penalty,model=model,objective_name="max_flow",
                                  objective_value=pyo.value(model.maxFlow),mip_solve_time=mip_solve_time,
-                                 status=status,termination=termination,problem_type="max_flow",capacity=capacity)
+                                 status=status,termination=termination,problem_type="max_flow",capacity=capacity,
+                                 baseline_max_flow=baseline_max_flow)
 
 
 
@@ -363,7 +360,7 @@ def build_min_cost_flow_ILP(nodes, arcs, cost, capacity, supply, penalty, source
 
     # interdiction budget constraint
     def attack_limit_rule(model):
-        return sum(model.Y[i,j] for i, j in model.A) <= model.attack_limit
+        return sum(model.Y[i,j] for i, j in model.A) == model.attack_limit
     model.attack_budget = pyo.Constraint(rule=attack_limit_rule)
     
     model.source_potential = pyo.Constraint(expr=model.Pi[source] == 0)
