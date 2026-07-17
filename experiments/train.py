@@ -8,9 +8,10 @@ Created on Thu May 14 07:09:23 2026
 import sys
 import torch
 import torch.nn as nn
-from torch.utils.data import DataLoader, random_split
+from torch.utils.data import DataLoader, random_split, Subset
 import time
 import csv
+import random
 
 from models.tropical_attention import TropicalInterdictionModel
 from models.standard_transformer import StandardTransformerInterdictionModel
@@ -81,16 +82,50 @@ def train():
     dataset_file = f"training_data_{problem_type}.json"
     dataset = InterdictionDataset(dataset_file)
     
-    # use 70% for training
-    train_size = int(0.7 * len(dataset))
-    # use 15% for validation
-    val_size = int(0.15 * len(dataset))
-    # use 15% for testing
-    test_size = len(dataset) - train_size - val_size
+    # Group sample indices by underlying graph seed.
+    seed_to_indices = {}
 
-    # randomly splits the dataset
-    train_dataset, val_dataset, test_dataset = random_split(dataset,
-    [train_size, val_size, test_size], generator=torch.Generator().manual_seed(1))
+    for index, sample in enumerate(dataset.data):
+        graph_seed = sample["graph_seed"]
+
+        if graph_seed not in seed_to_indices:
+            seed_to_indices[graph_seed] = []
+
+        seed_to_indices[graph_seed].append(index)
+
+
+    # Shuffle graph seeds reproducibly.
+    graph_seeds = list(seed_to_indices.keys())
+
+    split_rng = random.Random(1)
+    split_rng.shuffle(graph_seeds)
+
+
+    # Split at the graph level: 70% of graphs for training, 15% for validation, 15% for internal testing.
+    num_graphs = len(graph_seeds)
+
+    num_train_graphs = int(0.70 * num_graphs)
+    num_val_graphs = int(0.15 * num_graphs)
+
+    train_seeds = set(graph_seeds[:num_train_graphs])
+
+    val_seeds = set(graph_seeds[num_train_graphs: num_train_graphs + num_val_graphs])
+
+    test_seeds = set(graph_seeds[num_train_graphs + num_val_graphs:])
+
+    # Collect every attack-budget sample belonging to each graph.
+    train_indices = [index for seed in train_seeds for index in seed_to_indices[seed]]
+
+    val_indices = [index for seed in val_seeds for index in seed_to_indices[seed]]
+
+    test_indices = [index for seed in test_seeds for index in seed_to_indices[seed]]
+
+    # Create PyTorch subset objects.
+    train_dataset = Subset(dataset,train_indices)
+
+    val_dataset = Subset(dataset,val_indices)
+
+    test_dataset = Subset(dataset,test_indices)
 
 
     # creates batches for training - 4 graphs per batch, shuffle data

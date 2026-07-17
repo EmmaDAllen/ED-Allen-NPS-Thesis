@@ -74,9 +74,7 @@ def graph_from_sample(sample, attack_list=None):
     for i, (u, v) in enumerate(zip(sample["u"], sample["v"])):
 
         attack = attack_list[i]
-        edge_data = {
-            "penalty": sample["penalty"][i]
-        }
+        edge_data = {"penalty": sample["penalty"][i]}
 
         if "dist" in sample:
             edge_data["dist"] = sample["dist"][i]
@@ -136,15 +134,15 @@ def solve_max_flow_for_visualization(G, s, t):
 
 
 
-def solve_min_cost_flow_for_visualization(G, s, t):
+def solve_min_cost_flow_for_visualization(G, s, t,flow_demand):
 
     """Return minimum cost, positive-flow edges, and flow values."""
 
     for node in G.nodes():
         G.nodes[node]["demand"] = 0
 
-    G.nodes[s]["demand"] = -1
-    G.nodes[t]["demand"] = 1
+    G.nodes[s]["demand"] = -flow_demand
+    G.nodes[t]["demand"] = flow_demand
 
     flow_dict = nx.min_cost_flow(G,demand="demand",capacity="capacity",weight="dist")
 
@@ -177,7 +175,7 @@ def get_attack_edges(sample, attack_list):
 
 
 
-def solve_follower_for_visualization(G,s,t,problem_type):
+def solve_follower_for_visualization(G,s,t,problem_type, flow_demand=1):
 
     """Solve the selected follower problem for visualization."""
 
@@ -197,7 +195,7 @@ def solve_follower_for_visualization(G,s,t,problem_type):
 
     elif problem_type == "min_cost_flow":
 
-        objective, active_edges, flow_values = (solve_min_cost_flow_for_visualization(G,s,t))
+        objective, active_edges, flow_values = (solve_min_cost_flow_for_visualization(G,s,t,flow_demand))
 
         return {"objective": objective, "active_edges": active_edges, "flow_values": flow_values,
             "path_nodes": None}
@@ -304,11 +302,18 @@ def main():
     seed = 999999 + 100000 * n + 100 * m + rep
 
     # generate graph
-    G, s, t, density = generate_one_in_network(n=n,m=m,cost_low=1,cost_high=10,penalty_low=1,penalty_high=10,
+    G, s, t, density = generate_one_in_network(n=n,m=m,cost_low=1,cost_high=10,penalty_low=2,penalty_high=10,
                                                capacity_low=1,capacity_high=20,seed=seed)
+    
+    if problem_type == "min_cost_flow":
+        baseline_max_flow = nx.maximum_flow_value(G,_s=s,_t=t,capacity="capacity")
+        flow_demand = max(1,int(0.5 * baseline_max_flow))
+    else:
+        flow_demand = 1
 
     # solve exact MIP
-    sample = solve_instance(G=G,s=s,t=t,density=density,attack_limit=k,problem_type=problem_type)
+    sample = solve_instance(G=G,s=s,t=t,density=density,attack_limit=k,problem_type=problem_type,
+                            flow_demand=flow_demand)
 
     if sample is None:
         raise RuntimeError("MIP solve failed for this example.")
@@ -366,12 +371,14 @@ def main():
 
     model_G = graph_from_sample(sample,predicted_attack_list)
 
+    flow_demand = sample.get("flow_demand", 1)
+
     # Solve the selected follower problem on each network
-    original_solution = solve_follower_for_visualization(original_G,s,t,problem_type)
+    original_solution = solve_follower_for_visualization(original_G,s,t,problem_type,flow_demand=flow_demand)
 
-    mip_solution = solve_follower_for_visualization(mip_G,s,t,problem_type)
+    mip_solution = solve_follower_for_visualization(mip_G,s,t,problem_type,flow_demand=flow_demand)
 
-    model_solution = solve_follower_for_visualization(model_G,s,t,problem_type)
+    model_solution = solve_follower_for_visualization(model_G,s,t,problem_type,flow_demand=flow_demand)
 
     # Convert attacked edges into readable strings
     mip_attack_str = ", ".join(f"{u}→{v}" for u, v in mip_attack_edges)

@@ -153,15 +153,21 @@ def evaluate():
                 seed = base_seed + 100000 * n + 100 * m + rep
 
                 # generate test network
-                G, s, t, density = generate_one_in_network(n=n, m=m, cost_low=1,cost_high=10,penalty_low=1,
+                G, s, t, density = generate_one_in_network(n=n, m=m, cost_low=1,cost_high=10,penalty_low=2,
                                                            penalty_high=10,capacity_low=1,capacity_high=20,seed=seed)
 
                 # start timer for MIP solve time
                 mip_start = time.perf_counter()
+
+                if problem_type == "min_cost_flow":
+                    baseline_max_flow = nx.maximum_flow_value(G,_s=s,_t=t,capacity="capacity")
+                    flow_demand = max(1, int(0.5 * baseline_max_flow))
+                else:
+                    flow_demand = 1
                 
                 # solve MIP to get optimal interdiction decision for this K
                 sample = solve_instance(G=G, s=s, t=t,density=density,attack_limit=test_attack_limit,
-                                        problem_type=problem_type)
+                                        problem_type=problem_type, flow_demand=flow_demand)
                 
                 # end timer for MIP solve time and calculate total time
                 mip_end = time.perf_counter()
@@ -230,8 +236,9 @@ def evaluate():
                 
                 elif problem_type == "max_flow":
                     optimal_objective = sample["max_flow"]
+                    baseline_objective = sample["baseline_max_flow"]
                     predicted_objective = max_flow_after_attack(sample, predicted_attack_list)
-                    objective_gap = (predicted_objective - optimal_objective) / max(abs(optimal_objective), 1e-8)
+                    objective_gap = (predicted_objective - optimal_objective) / max(abs(baseline_objective), 1e-8)
 
                 elif problem_type == "min_cost_flow":
                     optimal_objective = sample["min_cost_flow"]

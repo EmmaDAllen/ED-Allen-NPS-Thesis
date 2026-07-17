@@ -287,7 +287,6 @@ def solve_max_flow_instance(G, s, t, density, attack_limit):
     model = build_max_flow_ILP(nodes=nodes,arcs=arcs,capacity=capacity,source=s,sink=t,
                                attack_limit=attack_limit)
     
-
     # solve MIP
     opt = pyo.SolverFactory("gurobi")
 
@@ -306,9 +305,6 @@ def solve_max_flow_instance(G, s, t, density, attack_limit):
     if termination != pyo.TerminationCondition.optimal:
         print(f"Skipped: solver ended with {termination}")
         return None
-    
-    if baseline_max_flow is not None:
-        sample["baseline_max_flow"] = float(baseline_max_flow)
     
 
     return build_training_sample(G=G,s=s,t=t,density=density,attack_limit=attack_limit,
