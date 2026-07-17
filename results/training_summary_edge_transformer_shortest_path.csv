@@ -1,0 +1,2 @@
+model_type,epochs,total_training_time_seconds,average_epoch_time_seconds
+edge_transformer,50,197.1639900149312,3.943279800298624
