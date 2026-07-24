@@ -6,12 +6,14 @@ Created on Thu May 14 07:09:23 2026
 """
 
 import sys
+import os
 import torch
 import torch.nn as nn
 from torch.utils.data import DataLoader, random_split, Subset
 import time
 import csv
 import random
+import schedulefree
 
 from models.tropical_attention import TropicalInterdictionModel
 from models.standard_transformer import StandardTransformerInterdictionModel
@@ -125,6 +127,7 @@ def train():
 
     val_dataset = Subset(dataset,val_indices)
 
+    # Reserved for future in-distribution evaluation.
     test_dataset = Subset(dataset,test_indices)
 
 
@@ -144,9 +147,19 @@ def train():
     # creates binary loss function 
     # compares predicted edge logits to MIP attack labels
     loss_fn = nn.BCEWithLogitsLoss(pos_weight=pos_weight, reduction="none")
-    
-    # creates optimizer that updates model weights
-    optimizer = torch.optim.AdamW(model.parameters(), lr=1e-3, weight_decay=1e-4)
+
+    learning_rate = 1e-3
+    optimizer = schedulefree.RAdamScheduleFree(model.parameters(),lr=learning_rate,weight_decay=1e-4)
+
+    run_name = f"{model_type}_{problem_type}"
+
+    os.makedirs("results", exist_ok=True)
+    os.makedirs("saved_models", exist_ok=True)
+
+    best_val_loss = float("inf")
+    best_epoch = None
+    best_model_path = f"saved_models/{run_name}_best_model.pt"
+    final_model_path = f"saved_models/{run_name}_final_model.pt"
 
     # number of training epochs
     epochs = 50
@@ -157,16 +170,20 @@ def train():
     # initializes list to store epoch results for csv output
     epoch_rows = []
 
+    # TRAINING LOOP
     # starts training loop
     for epoch in range(epochs):
 
         # starts tracking epoch time
         epoch_start_time = time.perf_counter()
         
-        # puts model in training mode
+        # puts model and optimizerin training mode
         model.train()
+        optimizer.train()
         # starts tracking training loss
         total_train_loss = 0.0
+        total_train_edges = 0
+        gradient_norm = 0.0
 
         # loops through training batches
         for edge_features, edge_bias, y, mask, attack_limits in train_loader:
@@ -178,28 +195,51 @@ def train():
             attack_limits = attack_limits.to(device)
 
             # clears old gradients
-            optimizer.zero_grad()
+            optimizer.zero_grad(set_to_none=True)
 
             # gets one prediction score per edge
             logits = model(edge_features, edge_bias=edge_bias, mask=mask)
 
             # computes loss for every edge
             loss_matrix = loss_fn(logits, y)
+
             # keeps only real edges, ignores padded edges, and averages the loss 
-            loss = loss_matrix[mask].mean()
-            
+            # loss = loss_matrix[mask].mean()
+
+            valid_edge_losses = loss_matrix[mask]
+
+            if valid_edge_losses.numel() == 0:
+                continue 
+
+            loss = valid_edge_losses.mean()
+
             # computes gradients
             loss.backward()
+
+            # Optional but recommended protection against unstable gradients.
+            gradient_norm = torch.nn.utils.clip_grad_norm_(model.parameters(),
+                                                           max_norm=1.0)
             # updates model weights
             optimizer.step()
 
-            # add batch's loss to epoch total
-            total_train_loss += loss.item()
+            num_valid_edges = mask.sum().item()
 
+            # add batch's loss to epoch total
+            total_train_loss += loss.item() * num_valid_edges
+            total_train_edges += num_valid_edges
+
+        if total_train_edges == 0:
+            raise RuntimeError("No valid training edges were found during this epoch.")
+
+    
+        # VALIDATION LOOP
+        #     
         # puts model in evaluation mode
         model.eval()
+        optimizer.eval()
         # starts tracking validation loss
         total_val_loss = 0.0
+        total_val_edges = 0
         
         # starts tracking metrics
         total_accuracy = 0.0
@@ -208,6 +248,8 @@ def train():
         total_f1 = 0.0
         total_hamming = 0.0
         total_exact_match = 0.0
+
+        num_val_batches = 0
 
         # turns off gradient calculation for validation
         with torch.no_grad(): 
@@ -225,11 +267,22 @@ def train():
 
                 # computes validation loss for every edge
                 loss_matrix = loss_fn(logits, y)
+
+                valid_edge_losses = loss_matrix[mask]
+
+                if valid_edge_losses.numel() == 0:
+                    continue
+
+                loss = valid_edge_losses.mean()
+                num_valid_edges = mask.sum().item()
+               
                 # ignores padded edges
-                loss = loss_matrix[mask].mean()
-                # adds validation loss
-                total_val_loss += loss.item()
+                # loss = loss_matrix[mask].mean()
                 
+                # adds validation loss
+                total_val_loss += loss.item() * num_valid_edges
+                total_val_edges += num_valid_edges
+
                 # call compute metrics function from metrics file
                 accuracy, precision, recall, f1, hamming, exact_match = compute_metrics(
                     logits=logits, y=y, mask=mask, attack_limits=attack_limits)
@@ -242,6 +295,11 @@ def train():
                 total_hamming += hamming
                 total_exact_match += exact_match
 
+                num_val_batches += 1
+
+        if total_val_edges == 0 or num_val_batches == 0:
+            raise RuntimeError("No valid validation edges were found during this epoch.")
+
         # finishes tracking epoch time
         epoch_end_time = time.perf_counter()
 
@@ -249,14 +307,35 @@ def train():
         epoch_time = epoch_end_time - epoch_start_time
 
         # calculates average losses and metrics for the epoch
-        avg_train_loss = total_train_loss / len(train_loader)
-        avg_val_loss = total_val_loss / len(val_loader)
-        avg_accuracy = total_accuracy / len(val_loader)
-        avg_precision = total_precision / len(val_loader)
-        avg_recall = total_recall / len(val_loader)
-        avg_f1 = total_f1 / len(val_loader)
-        avg_hamming = total_hamming / len(val_loader)
-        avg_exact_match = total_exact_match / len(val_loader)
+        avg_train_loss = total_train_loss / total_train_edges 
+        avg_val_loss = total_val_loss / total_val_edges 
+        avg_accuracy = total_accuracy / num_val_batches
+        avg_precision = total_precision / num_val_batches
+        avg_recall = total_recall / num_val_batches
+        avg_f1 = total_f1 / num_val_batches
+        avg_hamming = total_hamming / num_val_batches
+        avg_exact_match = total_exact_match / num_val_batches
+
+
+        is_best_epoch = avg_val_loss < best_val_loss
+
+        if is_best_epoch:
+            best_val_loss = avg_val_loss
+            best_epoch = epoch + 1
+
+            torch.save({
+                "epoch": epoch + 1,
+                "model_type": model_type,
+                "problem_type": problem_type,
+                "model_state_dict": model.state_dict(),
+                "optimizer_state_dict": optimizer.state_dict(),
+                "val_loss": avg_val_loss,
+                "val_f1": avg_f1,
+                "val_exact_match": avg_exact_match,
+                "learning_rate": learning_rate,}, best_model_path)
+
+            print(f"Saved new best model at epoch {best_epoch} "
+            f"with validation loss {best_val_loss:.6f}")
 
         # stores epoch results for csv output
         epoch_rows.append({
@@ -270,6 +349,8 @@ def train():
             "f1": avg_f1,
             "hamming": avg_hamming,
             "exact_match": avg_exact_match,
+            "final_batch_gradient_norm": float(gradient_norm),
+            "best_epoch_so_far": is_best_epoch,
             "epoch_time_seconds": epoch_time})
 
         # prints progress
@@ -283,17 +364,38 @@ def train():
               f"Hamming: {avg_hamming:.2f} | "
               f"Exact: {avg_exact_match:.4f} | "
               f"Time: {epoch_time:.2f}s")
-
+        
     # finishes tracking total training time
     training_end_time = time.perf_counter()
 
     # calculates total training time in seconds
     total_training_time = training_end_time - training_start_time
 
-    print(f"\nTotal training time for {model_type}: "
+    model.eval()
+    optimizer.eval()
+
+    torch.save({
+        "epoch": epochs,
+        "model_type": model_type,
+        "problem_type": problem_type,
+        "model_state_dict": model.state_dict(),
+        "optimizer_state_dict": optimizer.state_dict(),
+        "val_loss": avg_val_loss,
+        "val_f1": avg_f1,
+        "val_exact_match": avg_exact_match,
+        "learning_rate": learning_rate,},final_model_path)
+
+
+    print(f"\nTotal training time for {run_name}: "
            f"{total_training_time:.2f} seconds")
     print(f"Average epoch time: "
           f"{total_training_time / epochs:.2f} seconds")
+    print(f"Best epoch: {best_epoch} | "
+          f"Best validation loss: {best_val_loss:.6f}")
+
+    print(f"Best model saved to: {best_model_path}")
+    print(f"Final model saved to: {final_model_path}")
+
     
     run_name = f"{model_type}_{problem_type}"
 
@@ -306,20 +408,25 @@ def train():
 
     # saves training summary to csv file for later analysis
     with open(f"results/training_summary_{run_name}.csv", "w", newline="") as csvfile:
-        fieldnames = ["model_type","epochs", "total_training_time_seconds",
-        "average_epoch_time_seconds"]
+        fieldnames = ["model_type","problem_type","epochs","best_epoch","best_val_loss",
+                      "final_val_loss","total_training_time_seconds","average_epoch_time_seconds",
+                      "best_model_path","final_model_path",]
 
         writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
         writer.writeheader()
         writer.writerow({
-            "model_type": model_type,
-            "epochs": epochs,
-            "total_training_time_seconds": total_training_time,
-            "average_epoch_time_seconds": total_training_time / epochs
+        "model_type": model_type,
+        "problem_type": problem_type,
+        "epochs": epochs,
+        "best_epoch": best_epoch,
+        "best_val_loss": best_val_loss,
+        "final_val_loss": avg_val_loss,
+        "total_training_time_seconds": total_training_time,
+        "average_epoch_time_seconds": total_training_time / epochs,
+        "best_model_path": best_model_path,
+        "final_model_path": final_model_path,
     })
 
-    # saves training model weights
-    torch.save(model.state_dict(), f"saved_models/{run_name}_model.pt")
 
 
 if __name__ == "__main__":
