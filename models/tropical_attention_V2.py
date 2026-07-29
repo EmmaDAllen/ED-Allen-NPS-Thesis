@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-Tropical Attention V3 model for edge interdiction.
+Tropical Attention V2 model for edge interdiction.
 
 Keeps the same forward call:
     logits = model(edge_features, edge_bias=edge_bias, mask=mask)
@@ -131,8 +131,11 @@ def tropical_mm(a, b, mode="maxplus"):
         try:
             out = fn_batched(a3, b3)
             return out.reshape(*lead_shape, m, n).to(dtype=original_dtype)
-        except Exception:
-            pass
+        except Exception as exc:
+            warnings.warn(
+            f"TensorBFS batched {mode} multiplication failed. "
+            f"Using another implementation. Error: {exc}",
+            RuntimeWarning,)
 
     fn_2d = _get_tensorbfs_fn(mode, a3.device.type, batched=False)
 
@@ -144,6 +147,8 @@ def tropical_mm(a, b, mode="maxplus"):
     outs = [fn_2d(a3[i], b3[i]) for i in range(batch)]
 
     return torch.stack(outs, dim=0).reshape(*lead_shape, m, n).to(dtype=original_dtype)
+
+
 
 
 class TropicalLinear(nn.Module):
@@ -159,22 +164,17 @@ class TropicalLinear(nn.Module):
         return tropical_mm(x, self.W.transpose(0, 1), mode="maxplus")
 
 
+
+
 class TropicalAttention(nn.Module):
-    def __init__(
-        self,
-        d_model,
-        n_heads,
-        device=None,
-        tropical_proj=True,
-        tropical_norm=False,
-        symmetric=True,
-    ):
+    def __init__(self,d_model,n_heads,device=None,tropical_proj=True,tropical_norm=False,
+                 symmetric=True,use_edge_bias=True):
         super().__init__()
 
         assert d_model % n_heads == 0
 
         if not symmetric:
-            raise ValueError("This V3 implementation only supports symmetric=True.")
+            raise ValueError("This implementation only supports symmetric=True.")
 
         self.d_model = d_model
         self.d_k = d_model // n_heads
@@ -182,6 +182,12 @@ class TropicalAttention(nn.Module):
         self.tropical_proj = tropical_proj
         self.tropical_norm = tropical_norm
         self.symmetric = symmetric
+        self.use_edge_bias = use_edge_bias
+
+        # Add ordinary learned Q, K, and V projections.
+        self.query_linear = nn.Linear(d_model,d_model,bias=False,)
+        self.key_linear = nn.Linear(d_model,d_model,bias=False,)
+        self.value_linear = nn.Linear(d_model,d_model,bias=False,)
 
         self.out = nn.Linear(d_model, d_model, bias=False)
 
@@ -203,14 +209,20 @@ class TropicalAttention(nn.Module):
         batch_size, seq_len, _ = x.size()
         x_dtype = x.dtype
 
-        x_pos = torch.log1p(F.relu(x))
+        # Ordinary Q, K, and V projections.
+        q = self.query_linear(x)
+        k = self.key_linear(x)
+        v = self.value_linear(x)
+
+        q = torch.log1p(F.relu(q))
+        k = torch.log1p(F.relu(k))
+        v = torch.log1p(F.relu(v))
+
 
         if self.tropical_norm:
-            x_pos = self.normalize_tropical(x_pos)
-
-        q = x_pos
-        k = x_pos
-        v = x_pos
+            q = self.normalize_tropical(q)
+            k = self.normalize_tropical(k)
+            v = self.normalize_tropical(v)
 
         q = q.reshape(batch_size, seq_len, self.n_heads, self.d_k).permute(0, 2, 1, 3)
         k = k.reshape(batch_size, seq_len, self.n_heads, self.d_k).permute(0, 2, 1, 3)
@@ -234,26 +246,30 @@ class TropicalAttention(nn.Module):
 
         attn_scores = -(max_diff - min_diff)
 
-        if edge_bias is not None:
-            edge_bias = edge_bias.unsqueeze(1)
-            edge_bias = edge_bias.repeat(1, self.n_heads, 1, 1)
-            edge_bias = edge_bias.reshape(bh, seq_len, seq_len)
+        if self.use_edge_bias and edge_bias is not None:
 
-            attn_scores = attn_scores + edge_bias
+            expanded_bias = edge_bias.unsqueeze(1).expand(-1,self.n_heads,-1,-1,)
+
+            expanded_bias = expanded_bias.reshape(bh,seq_len,seq_len,)
+
+            attn_scores = (attn_scores + expanded_bias)
+
 
         if mask is not None:
-            head_mask = mask.unsqueeze(1).repeat(1, self.n_heads, 1)
+            head_mask = mask.unsqueeze(1).expand(-1, self.n_heads, -1)
             head_mask = head_mask.reshape(bh, seq_len)
 
             pair_mask = head_mask.unsqueeze(1) & head_mask.unsqueeze(2)
 
-            attn_scores = attn_scores.masked_fill(~pair_mask, -1e9)
+            mask_value = torch.finfo(attn_scores.dtype).min
+
+            attn_scores = attn_scores.masked_fill(~pair_mask, mask_value)
 
         context = tropical_mm(attn_scores, v, mode="maxplus")
 
         context = (
             context.reshape(batch_size, self.n_heads, seq_len, self.d_k)
-            .permute(0, 2, 1, 3)
+            .permute(0, 2, 1, 3).contiguous()
             .reshape(batch_size, seq_len, self.d_model)
         )
 
@@ -264,25 +280,59 @@ class TropicalAttention(nn.Module):
         return output, attn_scores
 
 
+
+
+class TropicalTransformerBlock(nn.Module):
+
+    def __init__(self,d_model,n_heads,device="cpu",dropout=0.1,use_edge_bias=True,):
+
+        super().__init__()
+
+        self.attn = TropicalAttention(d_model=d_model,n_heads=n_heads,device=device,tropical_proj=True,
+                                      tropical_norm=False,symmetric=True,use_edge_bias=use_edge_bias,)
+
+        self.ff = nn.Sequential(
+            nn.Linear(d_model,4 * d_model,),
+            nn.ReLU(),
+            nn.Linear(4 * d_model,d_model,),
+        )
+
+        self.norm1 = nn.LayerNorm(d_model)
+        self.norm2 = nn.LayerNorm(d_model)
+
+        self.dropout = nn.Dropout(dropout)
+
+    def forward(self, x, edge_bias=None, mask=None):
+
+        residual = x
+
+        attn_out, attn_scores = self.attn(x,edge_bias=edge_bias,mask=mask,)
+
+        x = self.norm1(residual + self.dropout(attn_out))
+
+        residual = x
+
+        ff_out = self.ff(x)
+
+        x = self.norm2(residual + self.dropout(ff_out))
+
+        return x, attn_scores
+
+
+
+
 class TropicalInterdictionModel(nn.Module):
-    def __init__(self, input_dim, d_model=64, n_heads=4, num_layers=2, device="cpu"):
+    def __init__(self, input_dim, d_model=64, n_heads=4, num_layers=2, dropout=0.1, 
+                 device="cpu",use_edge_bias=True):
         super().__init__()
 
         self.input_proj = nn.Linear(input_dim, d_model)
 
-        self.layers = nn.ModuleList(
-            [
-                TropicalAttention(
-                    d_model=d_model,
-                    n_heads=n_heads,
-                    device=device,
-                    tropical_proj=True,
-                    tropical_norm=False,
-                    symmetric=True,
-                )
+        self.layers = nn.ModuleList([
+                 TropicalTransformerBlock(d_model=d_model,n_heads=n_heads,device=device,
+                    dropout=dropout, use_edge_bias=use_edge_bias)
                 for _ in range(num_layers)
-            ]
-        )
+            ])
 
         self.classifier = nn.Sequential(
             nn.Linear(d_model, d_model),
@@ -294,14 +344,13 @@ class TropicalInterdictionModel(nn.Module):
         x = self.input_proj(edge_features)
 
         for layer in self.layers:
-            residual = x
             x, _ = layer(x, edge_bias=edge_bias, mask=mask)
-            x = x + residual
 
         logits = self.classifier(x).squeeze(-1)
 
         if mask is not None:
-            logits = logits.masked_fill(~mask, -1e9)
+            mask_value = torch.finfo(logits.dtype).min
+            logits = logits.masked_fill(~mask, mask_value)
 
         return logits
 

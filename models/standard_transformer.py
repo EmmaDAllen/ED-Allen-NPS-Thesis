@@ -15,8 +15,7 @@ class StandardTransformerInterdictionModel(nn.Module):
 
     """Standard Transformer baseline for edge interdiction prediction."""
 
-    def __init__(self, input_dim, d_model=64, n_heads=4,
-                 num_layers=2, dropout=0.1):
+    def __init__(self, input_dim, d_model=64, n_heads=4,num_layers=2, dropout=0.1):
 
         super(StandardTransformerInterdictionModel, self).__init__()
 
@@ -29,7 +28,9 @@ class StandardTransformerInterdictionModel(nn.Module):
             nhead=n_heads,
             dim_feedforward=4 * d_model,
             dropout=dropout,
-            batch_first=True
+            activation="relu"
+            batch_first=True,
+            norm_first=False
         )
 
         # Stack multiple encoder layers
@@ -57,16 +58,14 @@ class StandardTransformerInterdictionModel(nn.Module):
             padding_mask = None
 
         # Apply standard transformer encoder
-        x = self.encoder(
-            x,
-            src_key_padding_mask=padding_mask
-        )
+        x = self.encoder(x,src_key_padding_mask=padding_mask)
 
         # Predict edge scores
         logits = self.classifier(x).squeeze(-1)
 
         # Prevent padded edges from being selected
         if mask is not None:
-            logits = logits.masked_fill(~mask, -1e9)
+            mask_value = torch.finfo(logits.dtype).min
+            logits = logits.masked_fill(~mask, mask_value)
 
         return logits

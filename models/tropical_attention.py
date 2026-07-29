@@ -39,13 +39,15 @@ class TropicalLinear(nn.Module):
         # tropical addition = takes max across input features
         y, _ = torch.max(Wx, dim=-1)
         return y
+
+
     
 class TropicalAttention(nn.Module):
     
     '''Class that defines one Tropical Attnetion layer'''
     
     def __init__(self, d_model, n_heads, device, tropical_proj=True, tropical_norm=False,
-                 symmetric=True):
+                 symmetric=True,use_edge_bias=True):
         
         # initializes parent PyTorch class
         super(TropicalAttention, self).__init__()
@@ -54,12 +56,22 @@ class TropicalAttention(nn.Module):
         assert d_model % n_heads == 0
         
         # sets up dimension per attention head
+        self.d_model = d_model
         self.d_k = d_model // n_heads
         self.n_heads = n_heads
         self.tropical_proj = tropical_proj
         self.tropical_norm = tropical_norm
         self.symmetric = symmetric
-        
+        self.use_edge_bias = use_edge_bias
+
+        if not symmetric:
+            raise ValueError("This implementation currently requires symmetric=True.")
+
+        # Ordinary learned Q, K, and V projections. These match the projection stage used in standard attention.
+        self.query_linear = nn.Linear(d_model,d_model,bias=False,)
+        self.key_linear = nn.Linear(d_model,d_model,bias=False,)
+        self.value_linear = nn.Linear(d_model,d_model,bias=False,)
+    
         # final normal linear layers without bias
         self.out = nn.Linear(d_model, d_model, bias=False)
 
@@ -92,6 +104,16 @@ class TropicalAttention(nn.Module):
         batch_size, seq_len, _ = x.size()
         
         # this stage = q, k, v are all based on same x
+
+        # Apply separate learned Q, K, and V projections.
+        q = self.query_linear(x)
+        k = self.key_linear(x)
+        v = self.value_linear(x)
+
+        # Move projected values into the nonnegative log domain.
+        q = torch.log1p(F.relu(q))
+        k = torch.log1p(F.relu(k))
+        v = torch.log1p(F.relu(v))
         
         # if normalization is enabled
         if self.tropical_norm:
@@ -99,16 +121,9 @@ class TropicalAttention(nn.Module):
             # 1. ReLU removes negative values
             # 2. log1p applies log(1 + x)
             # 3. normalize_tropical subtracts lambda
-            q = self.normalize_tropical(torch.log1p(F.relu(x)))
-            k = self.normalize_tropical(torch.log1p(F.relu(x)))
-            v = self.normalize_tropical(torch.log1p(F.relu(x)))
-            
-        # if normalization is not enabled
-        else:
-            # do the same thing but without subtracting lambda
-            q = torch.log1p(F.relu(x))
-            k = torch.log1p(F.relu(x))
-            v = torch.log1p(F.relu(x))
+            q = self.normalize_tropical(q)
+            k = self.normalize_tropical(k)
+            v = self.normalize_tropical(v)
         
         # reshape and permute queries for multi-head attention
         # shape changes from [B,S,d_model] to [B,H,S,d_k]
@@ -141,8 +156,8 @@ class TropicalAttention(nn.Module):
             
             # Calculate tropical distance
             # gets max and min feature differences for each edge pair
-            max_diff, _ = diff.max(dim=-1)  # [B, S, S]
-            min_diff, _ = diff.min(dim=-1)  # [B, S, S]
+            max_diff = diff.max(dim=-1).values  # [B, S, S]
+            min_diff = diff.min(dim=-1).values  # [B, S, S]
             
             # computes tropical/Hilbert projective distance
             d_trop = max_diff - min_diff    # [B, S, S]
@@ -154,26 +169,28 @@ class TropicalAttention(nn.Module):
         # Add edge bias = if edge bias matrix is passed in
         # encourages model to apy more attention to connected, adjacent, or structurally
         # important edges
-        if edge_bias is not None:
-            # changes shape from [B,S,S] to [B,1,S,S]
-            edge_bias = edge_bias.unsqueeze(1)  # [B, 1, S, S]
-            # compies same bias across all heads
-            edge_bias = edge_bias.repeat(1, self.n_heads, 1, 1)
-            # matches reshaped attention score shapes
-            edge_bias = edge_bias.reshape(B, seq_len, seq_len)
-            # adds graph structure information directly into attention
-            attn_scores = attn_scores + edge_bias
+        # Add structural graph bias only when explicitly enabled.
+        if self.use_edge_bias and edge_bias is not None:
+
+            expanded_bias = edge_bias.unsqueeze(1).expand(-1,self.n_heads,-1,-1,)
+
+            expanded_bias = expanded_bias.reshape(B,seq_len,seq_len,)
+
+            attn_scores = attn_scores + expanded_bias
+
+           
 
         # mask padded edges = if some edge positions are padded 
         if mask is not None:
             # copies mask across attention heads
-            mask = mask.unsqueeze(1).repeat(1, self.n_heads, 1)
-            # matches combined batch-head shape
-            mask = mask.reshape(B, seq_len)
-            # creates pairwise mask so attention is only allowed between valid edges
-            pair_mask = mask.unsqueeze(1) & mask.unsqueeze(2)
+            head_mask = mask.unsqueeze(1).expand(-1,self.n_heads,-1,)
+
+            head_mask = head_mask.reshape(B,seq_len,)
+
+            pair_mask = (head_mask.unsqueeze(1) & head_mask.unsqueeze(2))
+            mask_value = torch.finfo(attn_scores.dtype).min
             # sets valid attention scores to a huge negative number (ignored)
-            attn_scores = attn_scores.masked_fill(~pair_mask, -1e9)
+            attn_scores = attn_scores.masked_fill(~pair_mask, mask_value)
         
         
         # combines attention scores and value vectors using tropical multiplication
@@ -191,14 +208,60 @@ class TropicalAttention(nn.Module):
         output = self.out(context)
         
         return output, attn_scores
+
+
+
+
+class TropicalTransformerBlock(nn.Module):
+
+    """Complete Transformer encoder block using tropical attention."""
+
+    def __init__(self,d_model,n_heads,device="cpu",dropout=0.1,use_edge_bias=True):
+
+        super(TropicalTransformerBlock, self).__init__()
+
+        self.attn = TropicalAttention(d_model=d_model,n_heads=n_heads,device=device,tropical_proj=True,
+                                      tropical_norm=False,symmetric=True,use_edge_bias=use_edge_bias,)
+
+        # Same feed-forward structure used by the other Transformers.
+        self.ff = nn.Sequential(
+            nn.Linear(d_model,4 * d_model,),
+            nn.ReLU(),
+            nn.Linear(4 * d_model,d_model,),)
+
+        self.norm1 = nn.LayerNorm(d_model)
+        self.norm2 = nn.LayerNorm(d_model)
+
+        self.dropout = nn.Dropout(dropout)
+
+    def forward(self, x, edge_bias=None, mask=None):
+
+        # Tropical-attention residual block.
+        residual = x
+
+        attn_out, attn_scores = self.attn(x, edge_bias=edge_bias,mask=mask,)
+
+        x = self.norm1(residual + self.dropout(attn_out))
+
+        # Feed-forward residual block.
+        residual = x
+
+        ff_out = self.ff(x)
+
+        x = self.norm2(residual + self.dropout(ff_out))
+
+        return x, attn_scores
     
+
+
     
 class TropicalInterdictionModel(nn.Module):
     
     '''defines full model for interdiction problem'''
     
     # defines default setup
-    def __init__(self, input_dim, d_model=64, n_heads=4, num_layers=2, device="cpu"):
+    def __init__(self, input_dim, d_model=64, n_heads=4, num_layers=2, dropout=0.1, 
+                 device="cpu", use_edge_bias=True):
         
         # initializes PyTorch parent class
         super(TropicalInterdictionModel, self).__init__()
@@ -208,8 +271,8 @@ class TropicalInterdictionModel(nn.Module):
 
         # creates list of tropical attention layers
         self.layers = nn.ModuleList([
-            TropicalAttention(d_model=d_model, n_heads=n_heads, device=device,
-                tropical_proj=True, tropical_norm=False, symmetric=True)
+            TropicalTransformerBlock(d_model=d_model, n_heads=n_heads, device=device,
+                dropout=dropout, use_edge_bias=use_edge_bias)
             for _ in range(num_layers)]) # repeats for every layer defined
 
         # creates final prediction head
@@ -226,20 +289,19 @@ class TropicalInterdictionModel(nn.Module):
 
         # loops through each tropical attention layer
         for layer in self.layers:
-            # saves original input to layer
-            residual = x
+
             # applies tropical attention
             x, _ = layer(x, edge_bias=edge_bias, mask=mask)
-            # adds residual connection
-            x = x + residual
+
 
         # applies classifier to each edge
         logits = self.classifier(x).squeeze(-1)
 
         # invalid padded edges get very large negative score = 
         if mask is not None:
+            mask_value = torch.finfo(logits.dtype).min
             # prevents model from selecting fake / padded edges
-            logits = logits.masked_fill(~mask, -1e9)
+            logits = logits.masked_fill(~mask, mask_value)
 
         # returns one interdiction score per edge
         return logits

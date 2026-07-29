@@ -23,10 +23,10 @@ class SimpleGNNLayer(nn.Module):
         self.neighbor_linear = nn.Linear(d_model, d_model)
         self.activation = nn.ReLU()
 
-    def forward(self, x, edge_bias, mask=None):
+    def forward(self, x, adjacency, mask=None):
 
         # Convert edge bias into binary adjacency
-        adjacency = (edge_bias > 0).float()
+        adjacency = (adjacency > 0).float()
 
         # Remove padded rows/columns from contributing messages
         if mask is not None:
@@ -74,13 +74,15 @@ class GNNInterdictionModel(nn.Module):
         if edge_bias is None:
             raise ValueError("GNNInterdictionModel requires edge_bias adjacency.")
 
+        adjacency = edge_bias
+
         # Convert edge features into hidden embeddings
         x = self.input_proj(edge_features)
 
         # Apply message passing layers with residual connections
         for layer in self.layers:
             residual = x
-            x = layer(x, edge_bias=edge_bias, mask=mask)
+            x = layer(x, adjacency=adjacency, mask=mask)
             x = x + residual
 
         # Predict edge scores
@@ -88,6 +90,7 @@ class GNNInterdictionModel(nn.Module):
 
         # Prevent padded edges from being selected
         if mask is not None:
-            logits = logits.masked_fill(~mask, -1e9)
+            mask_value = torch.finfo(logits.dtype).min
+            logits = logits.masked_fill(~mask, mask_value)
 
         return logits

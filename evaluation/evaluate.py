@@ -5,8 +5,6 @@ Created on Fri May 22 10:51:24 2026
 @author: emmallen
 """
 
-from random import sample
-
 import torch
 import csv
 import sys
@@ -42,12 +40,12 @@ def get_model(model_type, problem_type, device):
 
     if model_type == "tropical":
         return TropicalInterdictionModel(
-            input_dim=input_dim,d_model=64, n_heads=4,num_layers=2,device=device
+            input_dim=input_dim,d_model=64, n_heads=4,num_layers=2,device=device,dropout=0.1,use_edge_bias=True
         ).to(device)
 
     elif model_type == "transformer":
         return StandardTransformerInterdictionModel(
-            input_dim=input_dim,d_model=64,n_heads=4,num_layers=2,
+            input_dim=input_dim,d_model=64,n_heads=4,num_layers=2,dropout=0.1
         ).to(device)
 
     elif model_type == "gnn":
@@ -57,13 +55,13 @@ def get_model(model_type, problem_type, device):
     
     elif model_type == "edge_transformer":
         return EdgeBiasTransformerInterdictionModel(
-            input_dim=input_dim,d_model=64,n_heads=4,num_layers=2
+            input_dim=input_dim,d_model=64,n_heads=4,num_layers=2,dropout=0.1
         ).to(device)
     
         
     elif model_type == "tropical_v2":
         return TropicalInterdictionModelV2(
-            input_dim=input_dim,d_model=64,n_heads=4,num_layers=2,device=device
+            input_dim=input_dim,d_model=64,n_heads=4,num_layers=2,device=device,dropout=0.1,use_edge_bias=True
         ).to(device)
 
 
@@ -80,21 +78,23 @@ def evaluate():
     # instantiate empty tropical attention model
     model_type = sys.argv[1] if len(sys.argv) > 1 else "tropical"
     problem_type = sys.argv[2] if len(sys.argv) > 2 else "shortest_path"
-    eval_mode = sys.argv[3] if len(sys.argv) > 3 else "id"
+    eval_mode = (sys.argv[3] if len(sys.argv) > 3 else "id_new")
 
     model = get_model(model_type, problem_type, device)
 
     run_name = f"{model_type}_{problem_type}"
     
-    # load saved moved weigts from training
-    model.load_state_dict(
-    torch.load(f"saved_models/{run_name}_model.pt",
-               map_location=device))
+    # load the best validation checkpoint saved during training
+    checkpoint_path = (f"saved_models/{run_name}_best_model.pt")
+
+    checkpoint = torch.load(checkpoint_path,map_location=device,weights_only=False,)
+
+    model.load_state_dict(checkpoint["model_state_dict"])
 
     # put model in evaluation mode
     model.eval()
 
-    if eval_mode == "id":
+    if eval_mode == "id_new":
         test_settings = [
             (30, 75),
             (30, 120),
@@ -126,7 +126,7 @@ def evaluate():
     test_attack_limits = [1, 2, 3, 4, 5]
     
     # base seed thats different from training data to create unseen test graphs
-    base_seed = 999999
+    base_seed = 5
 
     # store one row of results per solved test instance
     results_rows = []
@@ -154,14 +154,14 @@ def evaluate():
                 seed = base_seed + 100000 * n + 100 * m + rep
 
                 # generate test network
-                G, s, t, density = generate_one_in_network(n=n, m=m, cost_low=1,cost_high=10,penalty_low=2,
+                G, s, t, density = generate_one_in_network(n=n, m=m, cost_low=1,cost_high=10,penalty_low=1,
                                                            penalty_high=10,capacity_low=1,capacity_high=20,seed=seed)
 
                 # start timer for MIP solve time
                 mip_start = time.perf_counter()
 
                 if problem_type == "min_cost_flow":
-                    baseline_max_flow = nx.maximum_flow_value(G,_s=s,_t=t,capacity="capacity")
+                    baseline_max_flow = nx.maximum_flow_value(G,s=s,t=t,capacity="capacity")
                     flow_demand = max(1, int(0.5 * baseline_max_flow))
                 else:
                     flow_demand = 1
@@ -179,7 +179,7 @@ def evaluate():
                     continue
 
                 # convert solved sample into model inputs
-                edge_features, edge_bias, _, attack_limit = sample_to_tensors(sample)
+                edge_features, edge_bias, _, _ = sample_to_tensors(sample)
 
                 # add batch dimension and move tensors to GPU/CPU
                 edge_features = edge_features.unsqueeze(0).to(device)
@@ -211,13 +211,23 @@ def evaluate():
                 # get edge scores for the single graph
                 real_logits = logits[0]
 
-                # number of edges to interdict
-                k = int(attack_limit)
+                # use the interdiction budget stored in the solved sample
+                k = int(sample["attack_limit"])
 
-                # select top-k model-scored edges
+                # verify that the requested budget is valid
+                num_edges = real_logits.numel()
+
+                if not 0 <= k <= num_edges:
+                    raise ValueError( f"Invalid attack limit K={k} for a graph "
+                                f"with {num_edges} edges.")
+
+                # select the top-k model-scored edges
                 predicted_attack = torch.zeros_like(real_logits)
-                topk_indices = torch.topk(real_logits, k=k).indices
-                predicted_attack[topk_indices] = 1.0
+
+                if k > 0:
+                    topk_indices = torch.topk(real_logits,k=k,).indices
+
+                    predicted_attack[topk_indices] = 1.0
 
                 # convert predictions and optimal labels to normal Python lists
                 predicted_attack_list = predicted_attack.cpu().int().tolist()
@@ -248,9 +258,14 @@ def evaluate():
 
 
                 # save detailed instance-level result
-                results_rows.append({"n_nodes": n,
-                        "n_edges": m,
-                        "density": m / n,
+                results_rows.append({
+                        "model_type": model_type,
+                        "problem_type": problem_type,
+                        "eval_mode": eval_mode,
+                        "graph_seed": seed,
+                        "n_nodes": sample["n_nodes"],
+                        "n_edges": len(sample["u"]),
+                        "density": sample["density"],
                         "replication": rep,
                         "attack_limit": k,
                         "optimal_objective": optimal_objective,

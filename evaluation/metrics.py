@@ -71,19 +71,8 @@ def compute_metrics(logits, y, mask, attack_limits):
         if torch.equal(pred, real_y):
             exact_match += 1
 
-    # overall edge classification accuracy
-    accuracy = total_correct / total_edges
 
-    # overall precision, recall, and F1 score
-    precision = total_tp / max(total_tp + total_fp, 1)
-    recall = total_tp / max(total_tp + total_fn, 1)
-    f1 = 2 * precision * recall / max(precision + recall, 1e-8)
-
-    # average hamming distance and exact match rates
-    avg_hamming = total_hamming / batch_size
-    exact_match_rate = exact_match / batch_size
-
-    return accuracy, precision, recall, f1, avg_hamming, exact_match_rate
+    return (total_correct, total_edges, total_tp,total_fp,total_fn,total_hamming,exact_match,batch_size)
 
 
 
@@ -126,7 +115,7 @@ def max_flow_after_attack(sample, predicted_attack):
 
         G.add_edge(u,v,capacity=remaining_capacity)
 
-    return nx.maximum_flow_value(G,_s=s,_t=t,capacity="capacity")
+    return nx.maximum_flow_value(G,s=s,t=t,capacity="capacity")
 
 
 

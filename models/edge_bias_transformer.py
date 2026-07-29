@@ -13,13 +13,12 @@ import torch.nn.functional as F
 
 class EdgeBiasAttention(nn.Module):
 
-    """Multi-head self-attention layer with graph edge bias.
+    """Multi-head self-attention with an additive graph-structure bias.
 
-    Each edge can attend to every other edge in the graph.
-    Attention scores are modified using edge_bias so that
-    graph structure influences which edges receive attention."""
+    edge_bias[b, i, j] is added directly to the attention score between
+    edge-token i and edge-token j. Larger values increase attention."""
 
-    def __init__(self, d_model, n_heads):
+    def __init__(self, d_model, n_heads, dropout=0.1):
 
         super(EdgeBiasAttention, self).__init__()
 
@@ -36,6 +35,7 @@ class EdgeBiasAttention(nn.Module):
 
         # recombine outputs from all attention heads
         self.out = nn.Linear(d_model, d_model, bias=False)
+        self.attn_dropout = nn.Dropout(dropout)
 
     def forward(self, x, edge_bias=None, mask=None):
 
@@ -62,10 +62,12 @@ class EdgeBiasAttention(nn.Module):
         # prevent padded edges from receiving attention
         if mask is not None:
             pair_mask = mask.unsqueeze(1).unsqueeze(2) & mask.unsqueeze(1).unsqueeze(3)
-            scores = scores.masked_fill(~pair_mask, -1e9)
+            mask_value = torch.finfo(scores.dtype).min
+            scores = scores.masked_fill(~pair_mask, mask_value)
 
         # convert scores into attention probabilities
         attn_weights = F.softmax(scores, dim=-1)
+        attn_weights = self.attn_dropout(attn_weights)
 
         # aggregate information from all edges
         context = torch.matmul(attn_weights, V)
@@ -93,7 +95,7 @@ class EdgeBiasTransformerBlock(nn.Module):
 
         super(EdgeBiasTransformerBlock, self).__init__()
 
-        self.attn = EdgeBiasAttention(d_model, n_heads)
+        self.attn = EdgeBiasAttention(d_model, n_heads, dropout=dropout)
 
         # position-wise feed forward network 
         self.ff = nn.Sequential(
@@ -170,6 +172,7 @@ class EdgeBiasTransformerInterdictionModel(nn.Module):
 
         # ensure padded edges are not selected 
         if mask is not None:
-            logits = logits.masked_fill(~mask, -1e9)
+            mask_value = torch.finfo(logits.dtype).min
+            logits = logits.masked_fill(~mask, mask_value)
 
         return logits
