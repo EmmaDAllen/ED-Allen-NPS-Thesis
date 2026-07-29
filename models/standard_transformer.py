@@ -23,15 +23,8 @@ class StandardTransformerInterdictionModel(nn.Module):
         self.input_proj = nn.Linear(input_dim, d_model)
 
         # One transformer encoder layer
-        encoder_layer = nn.TransformerEncoderLayer(
-            d_model=d_model,
-            nhead=n_heads,
-            dim_feedforward=4 * d_model,
-            dropout=dropout,
-            activation="relu"
-            batch_first=True,
-            norm_first=False
-        )
+        encoder_layer = nn.TransformerEncoderLayer(d_model=d_model,nhead=n_heads,dim_feedforward=4 * d_model,
+                                                   dropout=dropout,activation="relu"batch_first=True,norm_first=False)
 
         # Stack multiple encoder layers
         self.encoder = nn.TransformerEncoder(
