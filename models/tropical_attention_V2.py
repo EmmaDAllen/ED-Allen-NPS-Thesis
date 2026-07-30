@@ -1,10 +1,29 @@
 # -*- coding: utf-8 -*-
 """
-Tropical Attention V2 model for edge interdiction.
+Created on Tue Jun  2 09:50:16 2026
 
-Keeps the same forward call:
-    logits = model(edge_features, edge_bias=edge_bias, mask=mask)
+@author: emmallen
 """
+
+
+"""tropical_attention_V2.py
+
+Version 2 of the Tropical Attention Transformer for edge interdiction.
+
+This implementation uses generalized tropical matrix multiplication for the model's
+max-plus and min-plus operations. When available, the TensorBFS tropical-gemm package 
+provides optimized implementations. Otherwise, the model automatically uses an equivalent
+PyTorch fallback.
+
+The mathematical attention mechanism remains consistent with Version 1: ordinary learned 
+Q/K/V projections are followed by tropical projections, attention scores are based on symmetric
+Hilbert projective distance, and context vectors are computed through max-plus aggregation.
+
+The model retains the common forward interface:
+    logits = model(
+        edge_features,
+        edge_bias=edge_bias,
+        mask=mask,)"""
 
 import os
 import warnings
@@ -13,6 +32,11 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 
+
+_TENSORBFS_IMPORT_ERROR = None
+
+# attempt to load the optional TensorBFS tropical matrix-multiplication backend 
+# model remains functional using the PyTorch fallback when the package is unavailable
 try:
     import tropical_gemm.pytorch as _tg
     _TENSORBFS_AVAILABLE = True
@@ -21,50 +45,104 @@ except Exception as _e:
     _TENSORBFS_AVAILABLE = False
     _TENSORBFS_IMPORT_ERROR = _e
 
+# when REQUIRE_TENSORBFS=1, prevent silent fallback and require the optimized TensorBFS 
+# backend to be available
 _REQUIRE_TENSORBFS = os.getenv("REQUIRE_TENSORBFS", "0") == "1"
+
+# track whether the fallback warning has already been issued so it
+# appears only once during execution
 _WARNED_FALLBACK = False
 
 
 def print_tropical_backend():
+
+    """Print diagnostic information about the active tropical backend.
+
+    The function reports whether TensorBFS tropical-gemm was imported,
+    whether its GPU backend is available, and which tropical matrix
+    multiplication functions were detected."""
+
     if not _TENSORBFS_AVAILABLE:
+        # report the import error and indicate that the PyTorch fallback will be used
         print(f"TensorBFS tropical-gemm: NOT AVAILABLE ({_TENSORBFS_IMPORT_ERROR})")
         print("Using PyTorch fallback.")
         return
 
+    # identify all tropical matrix-multiplication functions exposed  by the installed TensorBFS module
     funcs = sorted(name for name in dir(_tg) if "tropical" in name and "matmul" in name)
+    # TensorBFS may expose its GPU availability through GPU_AVAILABLE - use "unknown" when the 
+    # installed version does not define it
     gpu_available = getattr(_tg, "GPU_AVAILABLE", "unknown")
     print(f"TensorBFS tropical-gemm: AVAILABLE | GPU_AVAILABLE={gpu_available}")
     print("matmul functions found:", funcs)
 
 
 def _torch_tropical_mm(a, b, mode):
+
+    """Compute tropical matrix multiplication using native PyTorch.
+
+    For matrices A and B, max-plus multiplication computes
+
+        C[i, j] = max_k(A[i, k] + B[k, j]),
+
+    while min-plus multiplication computes
+
+        C[i, j] = min_k(A[i, k] + B[k, j]).
+
+    Leading batch dimensions are handled through PyTorch broadcasting.
+
+    Parameters:
+    a : torch.Tensor
+        Left input with shape (..., m, k).
+    b : torch.Tensor
+        Right input with shape (..., k, n).
+    mode : {"maxplus", "minplus"}
+        Tropical semiring used for the reduction.
+
+    Returns:
+    torch.Tensor
+        Tropical matrix product with shape (..., m, n)."""
+
+    # max-plus multiplication replaces ordinary multiplication with
+    # addition and ordinary summation with a maximum
     if mode == "maxplus":
         return (a.unsqueeze(-1) + b.unsqueeze(-3)).amax(dim=-2)
+
+    # min-plus multiplication replaces ordinary multiplication with
+    # addition and ordinary summation with a minimum
     if mode == "minplus":
         return (a.unsqueeze(-1) + b.unsqueeze(-3)).amin(dim=-2)
+
+    
     raise ValueError(f"Unknown tropical matmul mode: {mode}")
 
 
 def _get_tensorbfs_fn(mode, device_type, batched):
+
+    """Find the most appropriate TensorBFS tropical-matmul function.
+
+    Candidate function names are ordered from most specialized to most general. 
+    Batched GPU implementations are preferred when the inputs are batched CUDA tensors."""
+
+    # TensorBFS cannot supply a function when the package was not imported
     if not _TENSORBFS_AVAILABLE:
         return None
 
     names = []
 
+    # prefer a batched GPU implementation when both capabilities are required by the input
     if batched and device_type == "cuda":
-        names += [
-            f"tropical_{mode}_matmul_batched_gpu",
-            f"tropical_{mode}_matmul_gpu_batched",
-        ]
+        names += [f"tropical_{mode}_matmul_batched_gpu", f"tropical_{mode}_matmul_gpu_batched",]
 
+    # fall back successively to batched, GPU-only, and generic implementations
     if batched:
         names += [f"tropical_{mode}_matmul_batched"]
-
     if device_type == "cuda":
         names += [f"tropical_{mode}_matmul_gpu"]
 
     names += [f"tropical_{mode}_matmul"]
 
+    # return the first function exposed by the installed TensorBFS version
     for name in names:
         fn = getattr(_tg, name, None)
         if fn is not None:
@@ -73,29 +151,76 @@ def _get_tensorbfs_fn(mode, device_type, batched):
     return None
 
 
+
 def _expand_leading(x, lead_shape):
+
+    """Broadcast a matrix tensor across a target set of leading dimensions.
+
+    The final two dimensions are treated as matrix dimensions and are preserved. Any 
+    missing leading dimensions are inserted as singleton dimensions before broadcasting.
+
+    Parameters:
+    x : torch.Tensor
+        Tensor with shape (..., rows, columns).
+    lead_shape : tuple
+        Desired broadcast shape preceding the final matrix dimensions.
+
+    Returns:
+    torch.Tensor: Broadcast tensor with shape (*lead_shape, rows, columns)."""
+
+
+    # determine how many leading singleton dimensions must be inserted
+    # before broadcasting
     pad = len(lead_shape) - len(x.shape[:-2])
 
+    # tensor cannot be broadcast to a target with fewer leading
+    # dimensions than it already contains
     if pad < 0:
         raise ValueError(
-            f"Cannot broadcast shape {tuple(x.shape)} to leading shape {tuple(lead_shape)}"
-        )
+            f"Cannot broadcast shape {tuple(x.shape)} to leading shape {tuple(lead_shape)}")
 
-    return x.reshape((1,) * pad + tuple(x.shape)).expand(
-        *lead_shape, *x.shape[-2:]
-    )
+    # insert missing dimensions and broadcast across the requested leading shape while 
+    # preserving the two matrix dimensions
+    return x.reshape((1,) * pad + tuple(x.shape)).expand(*lead_shape, *x.shape[-2:])
+
+
 
 
 def tropical_mm(a, b, mode="maxplus"):
+
+    """Compute broadcast-compatible tropical matrix multiplication.
+
+    The function attempts to use TensorBFS tropical-gemm when available. If an appropriate
+    optimized implementation cannot be used, it falls back to an equivalent native PyTorch 
+    implementation.
+
+    Parameters:
+    a : torch.Tensor
+        Left operand with shape (..., m, k).
+    b : torch.Tensor
+        Right operand with shape (..., k, n).
+    mode : {"maxplus", "minplus"}, default="maxplus"
+        Tropical matrix multiplication operation.
+
+    Returns:
+    torch.Tensor = Tropical matrix product with shape (..., m, n).
+
+    Raises: 
+    ValueError if the inner matrix dimensions are incompatible.
+    RuntimeError if TensorBFS is explicitly required but unavailable or does not expose a 
+    required multiplication function."""
+
     global _WARNED_FALLBACK
 
+    # inner matrix dimensions must agree, just as they must for ordinary matrix multiplication
     if a.shape[-1] != b.shape[-2]:
-        raise ValueError(
-            f"Bad tropical matmul shapes: {tuple(a.shape)} and {tuple(b.shape)}"
-        )
+        raise ValueError(f"Bad tropical matmul shapes: {tuple(a.shape)} and {tuple(b.shape)}")
 
+    # preserve the original dtype so the final result can be returned consistently with the
+    # model inputs
     original_dtype = a.dtype
 
+    # TensorBFS operations are performed using contiguous float32 tensors
     a = a.contiguous().float()
     b = b.contiguous().float()
 
@@ -103,14 +228,13 @@ def tropical_mm(a, b, mode="maxplus"):
         if _REQUIRE_TENSORBFS:
             raise RuntimeError(
                 "REQUIRE_TENSORBFS=1 but tropical-gemm is not importable. "
-                "Install with: python -m pip install 'tropical-gemm[torch]'"
-            )
+                "Install with: python -m pip install 'tropical-gemm[torch]'")
 
         if not _WARNED_FALLBACK:
             warnings.warn(
                 "TensorBFS tropical-gemm not found; using PyTorch fallback.",
-                RuntimeWarning,
-            )
+                RuntimeWarning,)
+            
             _WARNED_FALLBACK = True
 
         return _torch_tropical_mm(a, b, mode).to(dtype=original_dtype)
@@ -267,11 +391,9 @@ class TropicalAttention(nn.Module):
 
         context = tropical_mm(attn_scores, v, mode="maxplus")
 
-        context = (
-            context.reshape(batch_size, self.n_heads, seq_len, self.d_k)
+        context = (context.reshape(batch_size, self.n_heads, seq_len, self.d_k)
             .permute(0, 2, 1, 3).contiguous()
-            .reshape(batch_size, seq_len, self.d_model)
-        )
+            .reshape(batch_size, seq_len, self.d_model))
 
         context = torch.expm1(context).to(dtype=x_dtype)
 
@@ -294,8 +416,7 @@ class TropicalTransformerBlock(nn.Module):
         self.ff = nn.Sequential(
             nn.Linear(d_model,4 * d_model,),
             nn.ReLU(),
-            nn.Linear(4 * d_model,d_model,),
-        )
+            nn.Linear(4 * d_model,d_model,),)
 
         self.norm1 = nn.LayerNorm(d_model)
         self.norm2 = nn.LayerNorm(d_model)
@@ -329,16 +450,14 @@ class TropicalInterdictionModel(nn.Module):
         self.input_proj = nn.Linear(input_dim, d_model)
 
         self.layers = nn.ModuleList([
-                 TropicalTransformerBlock(d_model=d_model,n_heads=n_heads,device=device,
+            TropicalTransformerBlock(d_model=d_model,n_heads=n_heads,device=device,
                     dropout=dropout, use_edge_bias=use_edge_bias)
-                for _ in range(num_layers)
-            ])
+                for _ in range(num_layers)])
 
         self.classifier = nn.Sequential(
             nn.Linear(d_model, d_model),
             nn.ReLU(),
-            nn.Linear(d_model, 1),
-        )
+            nn.Linear(d_model, 1),)
 
     def forward(self, edge_features, edge_bias=None, mask=None):
         x = self.input_proj(edge_features)
