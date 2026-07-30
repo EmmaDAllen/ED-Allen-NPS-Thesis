@@ -238,7 +238,7 @@ def train():
             edge_features = edge_features.to(device,dtype=torch.float32)
             edge_bias = edge_bias.to(device,dtype=torch.float32)
             y = y.to(device,dtype=torch.float32)
-            mask = mask.to(device,dtype=torch.float32)
+            mask = mask.to(device=device, dtype=torch.bool)
             attack_limits = attack_limits.to(device)
 
             # clears old gradients
