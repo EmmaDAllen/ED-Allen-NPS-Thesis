@@ -139,8 +139,7 @@ if __name__ == "__main__":
         default="shortest_path")
 
     # optional output filename - default uses command line arguments
-    parser.add_argument("output_file",
-        default=None)
+    parser.add_argument("output_file",nargs="?",default=None,help="Optional output filename.")
 
     # parse command line arguments
     args = parser.parse_args()
