@@ -267,7 +267,7 @@ def train():
             gradient_norm = torch.nn.utils.clip_grad_norm_(model.parameters(),
                                                            max_norm=1.0)
 
-            gradient_norm_value = float(gradient_norm)
+            gradient_norm_value = gradient_norm.item()
 
             total_gradient_norm += gradient_norm_value
 
@@ -300,16 +300,21 @@ def train():
         # starts tracking validation loss
         total_val_loss = 0.0
         total_val_edges = 0
-        
-        # starts tracking metrics
-        total_accuracy = 0.0
-        total_precision = 0.0
-        total_recall = 0.0
-        total_f1 = 0.0
-        total_hamming = 0.0
-        total_exact_match = 0.0
 
+        # edge-level totals across the entire validation set
+        total_correct = 0
+        total_edges = 0
+
+        # classification totals across the entire validation set
+        total_tp = 0
+        total_fp = 0
+        total_fn = 0
+
+        # graph-level totals across the entire validation set
+        total_hamming = 0
+        total_exact_match = 0
         num_val_samples = 0
+        
 
         # turns off gradient calculation for validation
         with torch.no_grad(): 
@@ -343,20 +348,22 @@ def train():
                 total_val_loss += loss.item() * num_valid_edges
                 total_val_edges += num_valid_edges
 
-                # call compute metrics function from metrics file
-                accuracy, precision, recall, f1, hamming, exact_match = compute_metrics(
-                    logits=logits, y=y, mask=mask, attack_limits=attack_limits)
+                (batch_correct, batch_edges, batch_tp, batch_fp, batch_fn, batch_hamming,
+                batch_exact_match, batch_size,) = compute_metrics(logits=logits,y=y,mask=mask,
+                                                                  attack_limits=attack_limits)
 
-                batch_size = edge_features.size(0)
+                # accumulate raw edge-level counts
+                total_correct += batch_correct
+                total_edges += batch_edges
 
-                # increment all metrics appropriately
-                total_accuracy += accuracy * batch_size
-                total_precision += precision * batch_size
-                total_recall += recall * batch_size
-                total_f1 += f1 * batch_size
-                total_hamming += hamming * batch_size
-                total_exact_match += exact_match * batch_size
+                # accumulate raw classification counts
+                total_tp += batch_tp
+                total_fp += batch_fp
+                total_fn += batch_fn
 
+                # accumulate raw graph-level counts
+                total_hamming += batch_hamming
+                total_exact_match += batch_exact_match
                 num_val_samples += batch_size
 
 
@@ -369,15 +376,26 @@ def train():
         # calculates total epoch time in seconds
         epoch_time = epoch_end_time - epoch_start_time
 
-        # calculates average losses and metrics for the epoch
-        avg_train_loss = total_train_loss / total_train_edges 
+        # calculate average training and validation loss per valid edge
+        avg_train_loss = total_train_loss / total_train_edges
         avg_val_loss = total_val_loss / total_val_edges 
-        avg_accuracy = total_accuracy / num_val_samples
-        avg_precision = total_precision / num_val_samples
-        avg_recall = total_recall / num_val_samples
-        avg_f1 = total_f1 / num_val_samples
-        avg_hamming = total_hamming / num_val_samples
-        avg_exact_match = total_exact_match / num_val_samples
+
+        # edge-level accuracy
+        avg_accuracy = total_correct / max(total_edges, 1)
+
+        # micro-averaged precision and recall across all validation edges
+        avg_precision = total_tp / max(total_tp + total_fp, 1)
+        avg_recall = total_tp / max(total_tp + total_fn, 1)
+
+        # F1 calculated from global precision and recall
+        if avg_precision + avg_recall > 0:
+            avg_f1 = (2 * avg_precision * avg_recall / (avg_precision + avg_recall))
+        else:
+            avg_f1 = 0.0
+
+        # graph-level metrics
+        avg_hamming = total_hamming / max(num_val_samples, 1)
+        avg_exact_match = total_exact_match / max(num_val_samples, 1)
 
 
         is_best_epoch = avg_val_loss < best_val_loss
