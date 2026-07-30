@@ -228,7 +228,7 @@ def train():
         # starts tracking training loss
         total_train_loss = 0.0
         total_train_edges = 0
-        gradient_norm = 0.0
+        total_gradient_norm = 0.0
         max_gradient_norm = 0.0
         num_gradient_updates = 0
 
