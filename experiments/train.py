@@ -13,9 +13,13 @@ This script trains the Tropical Attention Transformer, Tropical Attention Transf
 Standard Transformer, Edge-Bias Transformer, and GNN baseline on shortest-path, maximum-flow, 
 and minimum-cost-flow interdiction datasets.
 
+Usage
+Run from the repository root with:
 
+    PYTHONPATH=. python experiments/train.py MODEL_TYPE PROBLEM_TYPE
+
+    
 The script:
-
 1. Selects the requested model and interdiction problem.
 2. Loads the corresponding MIP-labeled dataset.
 3. Splits the dataset by graph seed so all attack-budget versions of the same graph remain
@@ -88,32 +92,37 @@ def get_model(model_type, problem_type, device):
     # number of layers, and dropout probability = holding these settings constant makes 
     # the model comparison more controlled.
 
-    # tropical attention model
+    # tropical attention model with edge bias
     if model_type == "tropical":
+        # construct Tropical Attention Transformer
         return TropicalInterdictionModel(
             input_dim=input_dim,d_model=64,n_heads=4,num_layers=2,dropout=0.1,device=device,use_edge_bias=True
         ).to(device)
 
-    # standard transformer model
+    # standard transformer model without edge bias
     elif model_type == "transformer":
+        # construct the standard Transformer baseline
         return StandardTransformerInterdictionModel(
             input_dim=input_dim,d_model=64,n_heads=4,num_layers=2,dropout=0.1
         ).to(device)
 
-    # gnn model
+    # gnn model 
     elif model_type == "gnn":
+        # construct the edge-to-edge message-passing GNN baseline
         return GNNInterdictionModel(
             input_dim=input_dim,d_model=64,num_layers=2
         ).to(device)
 
     # edge bias transformer model
     elif model_type == "edge_transformer":
+        # construct the Transformer with additive graph-structure bias
         return EdgeBiasTransformerInterdictionModel(
             input_dim=input_dim,d_model=64,n_heads=4,num_layers=2,dropout=0.1
         ).to(device)
 
-    # version 2 tropical attention model
+    # version 2 tropical attention model with edge bias and slightly different architecture
     elif model_type == "tropical_v2":
+        # construct Tropical Attention Transformer Version 2
         return TropicalInterdictionModelV2(
             input_dim=input_dim,d_model=64,n_heads=4,num_layers=2,device=device,dropout=0.1,use_edge_bias=True
         ).to(device)
@@ -177,6 +186,7 @@ def train():
     # uses cude gpu if available, otherwise cpu
     device = "cuda" if torch.cuda.is_available() else "cpu"
 
+    # sys.argv[0] contains the script name
     # sys.argv[1], when supplied, is the requested model type, default = tropical
     model_type = sys.argv[1] if len(sys.argv) > 1 else "tropical"
     # sys.argv[2], when supplied, is the interdiction problem type, deafult = shortest path
