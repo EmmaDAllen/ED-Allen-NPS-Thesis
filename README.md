@@ -62,3 +62,4 @@ This project investigates whether a learning-based approach can approximate opti
 
 
 ## References
+Copyright (c) 2025 Baran Hashemi
