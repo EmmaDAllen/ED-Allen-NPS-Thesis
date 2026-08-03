@@ -23,10 +23,11 @@ This project investigates whether a learning-based approach can approximate opti
 
 - Generate random directed networks using NetworkX
 - Solve shortest-path interdiction instances using MIP (ground truth)
-- Train a tropical attention neural network to learn:
+- Train a tropical attention transformer to learn:
   - Interdiction decisions (binary arc selection)
   - Resulting shortest-path objective value
 - Evaluate model performance on unseen networks
+- Compare results against Standard Edge-Biased Transformer and GNN
 
 ### Extension
 - Incorporate structural features derived from Benders decomposition:
@@ -37,12 +38,14 @@ This project investigates whether a learning-based approach can approximate opti
 
 ## Repository Structure
 
-├── data/ # Generated network instances
-├── models/ # Trained model checkpoints
-├── notebooks/ # Experimentation and analysis
-├── src/ # Core code (data generation, MIP, training)
-├── results/ # Evaluation outputs and figures
-├── README.md
+- data/ # generated network instances
+- evaluation/ # evaluation, visualization, and metrics
+- experiments/ # main training block
+- models/ # model frameworks
+- optimization/ # mixed integer programming
+- results # csv outputs/figures/plots
+- README.md
+- requirements.txt # required packages to run code
 
 
 
