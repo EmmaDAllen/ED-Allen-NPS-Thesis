@@ -1,2 +1,2 @@
 model_type,problem_type,epochs,best_epoch,best_val_loss,final_val_loss,total_training_time_seconds,average_epoch_time_seconds,best_model_path,final_model_path
-tropical_v2,shortest_path,50,9,0.5030378082842292,0.8699157729867193,339.21822925889865,6.784364585177973,saved_models/tropical_v2_shortest_path_best_model.pt,saved_models/tropical_v2_shortest_path_final_model.pt
+tropical_v2,shortest_path,50,24,0.495790760271951,0.7883718651939384,356.6077124113217,7.132154248226434,saved_models/tropical_v2_shortest_path_best_model.pt,saved_models/tropical_v2_shortest_path_final_model.pt

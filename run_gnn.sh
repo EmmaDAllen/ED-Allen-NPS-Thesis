@@ -1,0 +1,13 @@
+#!/bin/bash
+#SBATCH --job-name=gnn_ood
+#SBATCH --partition=beards
+#SBATCH --time=10:00:00
+#SBATCH --cpus-per-task=8
+#SBATCH --mem=128G
+#SBATCH --output=logs/gnn_ood_%j.out
+#SBATCH --error=logs/gnn_ood_%j.err
+
+source ~/thesis/bin/activate
+cd ~/ED-Allen-NPS-Thesis
+
+PYTHONPATH=. python evaluation/evaluate.py gnn shortest_path ood_size
