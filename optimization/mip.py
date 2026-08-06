@@ -186,8 +186,8 @@ def solve_shortest_path_instance(G, s, t, density, attack_limit):
     model = build_shortest_pathILP(nodes=nodes,arcs=arcs,cost=cost,supply=supply,
         penalty=penalty,attack_limit=attack_limit)
 
-    # Solve MIP using gurobi solver
-    opt = pyo.SolverFactory('gurobi')
+    # Solve MIP using highs solver
+    opt = pyo.SolverFactory('highs')
 
     # time the solve step
     solve_start = time.perf_counter()
@@ -291,8 +291,8 @@ def solve_max_flow_instance(G,s,t,density, attack_limit):
     model = build_max_flow_ILP(nodes=nodes,arcs=arcs,capacity=capacity,source=s,sink=t,
                                attack_limit=attack_limit)
     
-    # solve MIP using gurobi solver
-    opt = pyo.SolverFactory("gurobi")
+    # solve MIP using highs solver
+    opt = pyo.SolverFactory("highs") 
 
     # time the solve step
     solve_start = time.perf_counter()
@@ -402,7 +402,7 @@ def solve_min_cost_flow_instance(G, s, t, density, attack_limit,flow_demand):
                                     penalty=penalty,source=s,attack_limit=attack_limit)
 
     # solve MIP
-    opt = pyo.SolverFactory("gurobi")
+    opt = pyo.SolverFactory("highs")
 
     # time the solve step
     solve_start = time.perf_counter()
