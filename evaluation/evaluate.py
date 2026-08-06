@@ -207,7 +207,7 @@ def evaluate():
 
         # Evaluate model size generalization on graphs that are larger than those used 
         # during training
-        network_test_settings = [
+        test_settings = [
             # 100 nodes
             (100, 200),
             (100, 250),
