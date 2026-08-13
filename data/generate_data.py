@@ -62,59 +62,61 @@ def generate_dataset(network_settings,replications_per_setting, attack_budgets, 
     skipped = 0
 
 
-    MIN_EDGE_CONNECTIVITY = 3
-    MAX_GENERATION_ATTEMPTS = 1000
+    max_attack_budget = max(attack_budgets)
 
-    # iterate through all combinations of network settings, attack budgets, and replications
+    # iterate through all network settings and replications; each accepted graph is then 
+    # solved for every attack budget
     # enumerates every experiemntal configuration to generate a diverse dataset
-    for attack_budget in attack_budgets:
-        for n, m in network_settings:
-            for rep in range(replications_per_setting):
+    
+    for n, m in network_settings:
+        for rep in range(replications_per_setting):
             
-                # unique deterministic seed per instance (ensures reproducibility)
-                seed = base_seed + 100000 * n + 100 * m + rep
+            # unique deterministic seed per instance (ensures reproducibility)
+            seed = base_seed + 100000 * n + 100 * m + rep
 
 
-                if problem_type == "max_flow":
+            if problem_type == "max_flow":
 
-                    graph_found = False
+                attempt = 0
 
-                    for attempt in range(MAX_GENERATION_ATTEMPTS):
+                while True:
 
-                        candidate_seed = seed * MAX_GENERATION_ATTEMPTS + attempt
+                    candidate_seed = seed * 1000000 + attempt
 
-                        G, s, t, density = generate_one_in_network(n=n,m=m,cost_low=COST_LOW,
+                    G, s, t, density = generate_one_in_network(n=n,m=m,cost_low=COST_LOW,
                             cost_high=COST_HIGH,penalty_low=PENALTY_LOW,penalty_high=PENALTY_HIGH,
                             capacity_low=CAPACITY_LOW,capacity_high=CAPACITY_HIGH,seed=candidate_seed)
 
-                        edge_connectivity = nx.edge_connectivity(G,s,t)
+                    edge_connectivity = nx.edge_connectivity(G,s,t)
+                
 
-                        if edge_connectivity >= MIN_EDGE_CONNECTIVITY:
-                            graph_found = True
-                            seed = candidate_seed
-                            break
+                    if edge_connectivity > max_attack_budget:
+                        seed = candidate_seed
+                        break
 
-                    if not graph_found:
-                        skipped += 1
-                        continue
+                    attempt += 1
 
-                else:
 
-                    # generate random test network (One-In method)
-                    G, s, t, density = generate_one_in_network(n=n, m=m,cost_low=COST_LOW, cost_high=COST_HIGH,
+            else:
+
+                # generate random test network (One-In method)
+                G, s, t, density = generate_one_in_network(n=n, m=m,cost_low=COST_LOW, cost_high=COST_HIGH,
                                                            penalty_low=PENALTY_LOW, penalty_high=PENALTY_HIGH,
                                                            capacity_low=CAPACITY_LOW, capacity_high=CAPACITY_HIGH,
                                                            seed=seed)
                 
-                # min cost flow problem requires a feasible flow demand to be specified 
-                # rather than a fixed value, we compute a flow demand based on the maximum flow of the network and 
-                # require only  haldf of that amount so every instance is feasible = design choice to ensure that the
-                # generated instances are solvable and provide meaningful training data for the model.
-                if problem_type == "min_cost_flow":
-                    baseline_max_flow = nx.maximum_flow_value(G,s,t,capacity="capacity")
-                    flow_demand = max(1, int(0.5 * baseline_max_flow))
-                else:
-                    flow_demand = 1
+            # min cost flow problem requires a feasible flow demand to be specified 
+            # rather than a fixed value, we compute a flow demand based on the maximum flow of the network and 
+            # require only  haldf of that amount so every instance is feasible = design choice to ensure that the
+            # generated instances are solvable and provide meaningful training data for the model.
+            if problem_type == "min_cost_flow":
+                baseline_max_flow = nx.maximum_flow_value(G,s,t,capacity="capacity")
+                flow_demand = max(1, int(0.5 * baseline_max_flow))
+            else:
+                flow_demand = 1
+
+
+            for attack_budget in attack_budgets:
             
                 # solve generated network interdiction problem for respective attack budget and store sample
                 # using respective MIP formulation
