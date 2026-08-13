@@ -81,7 +81,7 @@ def generate_dataset(network_settings,replications_per_setting, attack_budgets, 
                 # require only  haldf of that amount so every instance is feasible = design choice to ensure that the
                 # generated instances are solvable and provide meaningful training data for the model.
                 if problem_type == "min_cost_flow":
-                    baseline_max_flow = nx.maximum_flow_value(G,s=s,t=t,capacity="capacity")
+                    baseline_max_flow = nx.maximum_flow_value(G,s,t,capacity="capacity")
                     flow_demand = max(1, int(0.5 * baseline_max_flow))
                 else:
                     flow_demand = 1
