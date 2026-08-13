@@ -1,2 +1,2 @@
 model_type,problem_type,epochs,best_epoch,best_val_loss,final_val_loss,total_training_time_seconds,average_epoch_time_seconds,best_model_path,final_model_path
-transformer,max_flow,50,4,0.2502590319462229,0.47226915523700386,205.3488608058542,4.106977216117084,saved_models/transformer_max_flow_best_model.pt,saved_models/transformer_max_flow_final_model.pt
+transformer,max_flow,50,11,0.2554800212437842,0.38933116157930475,205.69314198940992,4.113862839788198,saved_models/transformer_max_flow_best_model.pt,saved_models/transformer_max_flow_final_model.pt

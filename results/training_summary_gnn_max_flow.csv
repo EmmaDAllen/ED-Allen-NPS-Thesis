@@ -1,2 +1,2 @@
 model_type,problem_type,epochs,best_epoch,best_val_loss,final_val_loss,total_training_time_seconds,average_epoch_time_seconds,best_model_path,final_model_path
-gnn,max_flow,50,12,0.2739264392063512,0.3368738615589905,136.45859835576266,2.7291719671152532,saved_models/gnn_max_flow_best_model.pt,saved_models/gnn_max_flow_final_model.pt
+gnn,max_flow,50,11,0.25945222312149335,0.3320712258567968,136.74026427604258,2.7348052855208516,saved_models/gnn_max_flow_best_model.pt,saved_models/gnn_max_flow_final_model.pt

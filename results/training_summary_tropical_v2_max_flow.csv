@@ -1,2 +1,2 @@
 model_type,problem_type,epochs,best_epoch,best_val_loss,final_val_loss,total_training_time_seconds,average_epoch_time_seconds,best_model_path,final_model_path
-tropical_v2,max_flow,50,4,0.3006215091598927,0.8154431064635996,333.775160074234,6.6755032014846805,saved_models/tropical_v2_max_flow_best_model.pt,saved_models/tropical_v2_max_flow_final_model.pt
+tropical_v2,max_flow,50,7,0.26756644832942394,0.9283251879207358,331.19355825614184,6.623871165122837,saved_models/tropical_v2_max_flow_best_model.pt,saved_models/tropical_v2_max_flow_final_model.pt
