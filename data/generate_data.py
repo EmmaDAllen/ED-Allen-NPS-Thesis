@@ -61,6 +61,10 @@ def generate_dataset(network_settings,replications_per_setting, attack_budgets, 
     # counts number of instances skipped due to infeasibility or solver issues
     skipped = 0
 
+
+    max_attack_budget = max(attack_budgets)
+    MAX_GENERATION_ATTEMPTS = 1000
+
     # iterate through all combinations of network settings, attack budgets, and replications
     # enumerates every experiemntal configuration to generate a diverse dataset
     for attack_budget in attack_budgets:
@@ -70,8 +74,34 @@ def generate_dataset(network_settings,replications_per_setting, attack_budgets, 
                 # unique deterministic seed per instance (ensures reproducibility)
                 seed = base_seed + 100000 * n + 100 * m + rep
 
-                # generate random test network (One-In method)
-                G, s, t, density = generate_one_in_network(n=n, m=m,cost_low=COST_LOW, cost_high=COST_HIGH,
+
+                if problem_type == "max_flow":
+
+                    graph_found = False
+
+                    for attempt in range(MAX_GENERATION_ATTEMPTS):
+
+                        candidate_seed = seed * MAX_GENERATION_ATTEMPTS + attempt
+
+                        G, s, t, density = generate_one_in_network(n=n,m=m,cost_low=COST_LOW,
+                            cost_high=COST_HIGH,penalty_low=PENALTY_LOW,penalty_high=PENALTY_HIGH,
+                            capacity_low=CAPACITY_LOW,capacity_high=CAPACITY_HIGH,seed=candidate_seed)
+
+                        edge_connectivity = nx.edge_connectivity(G,s,t)
+
+                        if edge_connectivity > max_attack_budget:
+                            graph_found = True
+                            seed = candidate_seed
+                            break
+
+                    if not graph_found:
+                        skipped += 1
+                        continue
+
+                else:
+
+                    # generate random test network (One-In method)
+                    G, s, t, density = generate_one_in_network(n=n, m=m,cost_low=COST_LOW, cost_high=COST_HIGH,
                                                            penalty_low=PENALTY_LOW, penalty_high=PENALTY_HIGH,
                                                            capacity_low=CAPACITY_LOW, capacity_high=CAPACITY_HIGH,
                                                            seed=seed)
