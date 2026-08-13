@@ -62,7 +62,7 @@ def generate_dataset(network_settings,replications_per_setting, attack_budgets, 
     skipped = 0
 
 
-    max_attack_budget = max(attack_budgets)
+    MIN_EDGE_CONNECTIVITY = 3
     MAX_GENERATION_ATTEMPTS = 1000
 
     # iterate through all combinations of network settings, attack budgets, and replications
@@ -89,7 +89,7 @@ def generate_dataset(network_settings,replications_per_setting, attack_budgets, 
 
                         edge_connectivity = nx.edge_connectivity(G,s,t)
 
-                        if edge_connectivity > max_attack_budget:
+                        if edge_connectivity >= MIN_EDGE_CONNECTIVITY:
                             graph_found = True
                             seed = candidate_seed
                             break
