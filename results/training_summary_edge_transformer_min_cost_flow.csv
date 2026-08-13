@@ -1,0 +1,2 @@
+model_type,problem_type,epochs,best_epoch,best_val_loss,final_val_loss,total_training_time_seconds,average_epoch_time_seconds,best_model_path,final_model_path
+edge_transformer,min_cost_flow,50,8,0.5895503509303358,1.5179744622060791,218.95686260983348,4.37913725219667,saved_models/edge_transformer_min_cost_flow_best_model.pt,saved_models/edge_transformer_min_cost_flow_final_model.pt

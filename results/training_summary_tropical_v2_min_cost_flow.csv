@@ -1,0 +1,2 @@
+model_type,problem_type,epochs,best_epoch,best_val_loss,final_val_loss,total_training_time_seconds,average_epoch_time_seconds,best_model_path,final_model_path
+tropical_v2,min_cost_flow,50,8,0.4457582889615014,1.418167045912568,339.5598893798888,6.791197787597776,saved_models/tropical_v2_min_cost_flow_best_model.pt,saved_models/tropical_v2_min_cost_flow_final_model.pt

@@ -1,0 +1,2 @@
+model_type,problem_type,epochs,best_epoch,best_val_loss,final_val_loss,total_training_time_seconds,average_epoch_time_seconds,best_model_path,final_model_path
+gnn,min_cost_flow,50,14,0.5077541253004045,0.5702796358322847,141.0089675169438,2.820179350338876,saved_models/gnn_min_cost_flow_best_model.pt,saved_models/gnn_min_cost_flow_final_model.pt

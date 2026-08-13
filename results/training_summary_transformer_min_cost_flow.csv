@@ -1,0 +1,2 @@
+model_type,problem_type,epochs,best_epoch,best_val_loss,final_val_loss,total_training_time_seconds,average_epoch_time_seconds,best_model_path,final_model_path
+transformer,min_cost_flow,50,5,0.6136187860629404,1.3472512896566644,208.9018969545141,4.178037939090282,saved_models/transformer_min_cost_flow_best_model.pt,saved_models/transformer_min_cost_flow_final_model.pt
