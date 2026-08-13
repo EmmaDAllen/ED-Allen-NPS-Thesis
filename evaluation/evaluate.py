@@ -264,7 +264,58 @@ def evaluate():
     results_rows = []
 
 
+    # PRE-GENERATE EVALUATION GRAPHS
 
+    evaluation_graphs = []
+
+    max_attack_budget = max(test_attack_limits)
+
+    for n, m in test_settings:
+
+        for rep in range(reps_per_setting):
+
+            # deterministic base seed for this network realization
+            seed = base_seed + 100000 * n + 100 * m + rep
+
+            # Max-flow evaluation uses the same structural screening
+            # criterion used for max-flow training-data generation.
+            if problem_type == "max_flow":
+
+                attempt = 0
+
+                while True:
+                    candidate_seed = seed * 1000000 + attempt
+                
+                    G, s, t, density = generate_one_in_network(n=n,m=m,cost_low=1,cost_high=10,
+                                                                penalty_low=1,penalty_high=10,
+                                                                capacity_low=1,capacity_high=20,
+                                                                seed=candidate_seed)
+                    edge_connectivity = nx.edge_connectivity(G,s,t)
+                
+                    # Require more edge-disjoint s-t paths than the
+                    # largest interdiction budget being evaluated.
+                    if edge_connectivity > max_attack_budget:
+                        seed = candidate_seed
+                        break
+                
+                    attempt += 1
+                
+            else:
+                # generate one directed test graph = returned values: G: NetworkX directed graph,
+                # s: source-node identifier, t: sink-node identifier, density: arc-to-node ratio or 
+                # density measure returned by the graph-generation function
+                G, s, t, density = generate_one_in_network(n=n, m=m, cost_low=1,cost_high=10,penalty_low=1,
+                                                            penalty_high=10,capacity_low=1,capacity_high=20,seed=seed)
+
+
+            evaluation_graphs.append({"G": G,"s": s, "t": t, "density": density, "seed": seed,
+                                           "n": n, "m": m, "rep": rep})
+
+
+        print(f"\nGenerated {len(evaluation_graphs)} "
+        f"evaluation graphs for {problem_type}.")
+
+    
     # INTERDICTION BUDGET LOOP
     
     # loop through each interdiction budget
@@ -295,318 +346,309 @@ def evaluate():
         print(f"\nEvaluating attack limit K={test_attack_limit}")
 
 
+        for graph_data in evaluation_graphs:
 
-
-        # NETWORK SETTING LOOP
-
-        # each tuple contains: n = number of graph nodes, m = number of directed graph arcs
-        for n, m in test_settings:
-
-            # generate several independently seeded graphs for the current size and arc-count setting
-            for rep in range(reps_per_setting):
-
-                # Construct a deterministic graph seed from the graph size, arc count, and replication 
-                # number = makes every test graph reproducible while giving each graph setting and
-                # replication a unique seed
-                seed = base_seed + 100000 * n + 100 * m + rep
-
-                # generate one directed test graph = returned values: G: NetworkX directed graph,
-                # s: source-node identifier, t: sink-node identifier, density: arc-to-node ratio or 
-                # density measure returned by the graph-generation function
-                G, s, t, density = generate_one_in_network(n=n, m=m, cost_low=1,cost_high=10,penalty_low=1,
-                                                           penalty_high=10,capacity_low=1,capacity_high=20,seed=seed)
+            # retrieve the already-generated graph
+            G = graph_data["G"]
+            s = graph_data["s"]
+            t = graph_data["t"]
+            density = graph_data["density"]
+            seed = graph_data["seed"]
+            n = graph_data["n"]
+            m = graph_data["m"]
+            rep = graph_data["rep"]
 
 
 
-                # EXACT MIP SOLUTION
+            # EXACT MIP SOLUTION
 
-                # start an external wall-clock timer immediately before any problem-specific
-                # preprocessing and the MIP solve = mip_total_time therefore includes both 
-                # preprocessing and the solve_instance() function call
-                mip_start = time.perf_counter()
+            # start an external wall-clock timer immediately before any problem-specific
+            # preprocessing and the MIP solve = mip_total_time therefore includes both 
+            # preprocessing and the solve_instance() function call
+            mip_start = time.perf_counter()
 
-                if problem_type == "min_cost_flow":
+            if problem_type == "min_cost_flow":
 
-                    # compute the maximum feasible source-to-sink flow before interdiction
-                    # this establishes an upper bound for a feasible minimum-cost-flow demand
-                    baseline_max_flow = nx.maximum_flow_value(G,s=s,t=t,capacity="capacity")
+                # compute the maximum feasible source-to-sink flow before interdiction
+                # this establishes an upper bound for a feasible minimum-cost-flow demand
+                baseline_max_flow = nx.maximum_flow_value(G,s=s,t=t,capacity="capacity")
 
-                    # set the min-cost-flow demand to 50% of the graph's pre-interdiction maximum flow
-                    # max(1, ...) prevents zero demand on graphs with very small baseline flow
-                    flow_demand = max(1, int(0.5 * baseline_max_flow))
+                # set the min-cost-flow demand to 50% of the graph's pre-interdiction maximum flow
+                # max(1, ...) prevents zero demand on graphs with very small baseline flow
+                flow_demand = max(1, int(0.5 * baseline_max_flow))
 
-                else:
-                    # shortest-path and maximum-flow interdiction do not use the min-cost-flow 
-                    # demand argument, default value is still supplied to maintain one shared
-                    # solve_instance() interface
-                    flow_demand = 1
+            else:
+                # shortest-path and maximum-flow interdiction do not use the min-cost-flow 
+                # demand argument, default value is still supplied to maintain one shared
+                # solve_instance() interface
+                flow_demand = 1
                 
-                # solve the selected network-interdiction problem exactly for the current graph and attack
-                # budget - the returned sample includes: graph structure, edge attributes, optimal attack
-                # labels, optimal objective, attack budget, and solver timing/status information.
-                sample = solve_instance(G=G, s=s, t=t,density=density,attack_limit=test_attack_limit,
+            # solve the selected network-interdiction problem exactly for the current graph and attack
+            # budget - the returned sample includes: graph structure, edge attributes, optimal attack
+            # labels, optimal objective, attack budget, and solver timing/status information.
+            sample = solve_instance(G=G, s=s, t=t,density=density,attack_limit=test_attack_limit,
                                         problem_type=problem_type, flow_demand=flow_demand)
                 
-                # stop the external wall-clock timer after solve_instance returns
-                mip_end = time.perf_counter()
+            # stop the external wall-clock timer after solve_instance returns
+            mip_end = time.perf_counter()
 
-                # total elapsed time surrounding the complete solve call                
-                mip_total_time = mip_end - mip_start
+            # total elapsed time surrounding the complete solve call                
+            mip_total_time = mip_end - mip_start
     
-                # solve_instance() returns None when the generated graph does not produce a valid optimal 
-                # sample, such as an infeasible min-cost-flow instance or unsuccessful solver termination
-                # these instances are omitted from model evaluation
-                if sample is None:
-                    continue
+            # solve_instance() returns None when the generated graph does not produce a valid optimal 
+            # sample, such as an infeasible min-cost-flow instance or unsuccessful solver termination
+            # these instances are omitted from model evaluation
+            if sample is None:
+                continue
 
 
 
-                # CONVERT SOLVED SAMPLE TO MOPDEL INPUT TENSORS
+            # CONVERT SOLVED SAMPLE TO MOPDEL INPUT TENSORS
 
-                # Convert the stored graph sample into: 
-                # edge_features: Shape (num_edges, input_dim)
-                # edge_bias: Shape (num_edges, num_edges)
-                # the attack labels and attack limit returned by sample_to_tensors() are not needed 
-                # here because the original sample dictionary already contains them
-                edge_features, edge_bias, _, _ = sample_to_tensors(sample)
+            # Convert the stored graph sample into: 
+            # edge_features: Shape (num_edges, input_dim)
+            # edge_bias: Shape (num_edges, num_edges)
+            # the attack labels and attack limit returned by sample_to_tensors() are not needed 
+            # here because the original sample dictionary already contains them
+            edge_features, edge_bias, _, _ = sample_to_tensors(sample)
 
-                # add a batch dimension because all model forward functions expect:
-                # (batch_size, num_edges, feature_dimension)
-                # evaluation processes one graph at a time, so the batch size is 1
-                edge_features = edge_features.unsqueeze(0).to(device)
+            # add a batch dimension because all model forward functions expect:
+            # (batch_size, num_edges, feature_dimension)
+            # evaluation processes one graph at a time, so the batch size is 1
+            edge_features = edge_features.unsqueeze(0).to(device)
 
-                # add a batch dimension to the pairwise graph-bias matrix:(num_edges, num_edges)
-                # == (1, num_edges, num_edges)
-                edge_bias = edge_bias.unsqueeze(0).to(device)
+            # add a batch dimension to the pairwise graph-bias matrix:(num_edges, num_edges)
+            # == (1, num_edges, num_edges)
+            edge_bias = edge_bias.unsqueeze(0).to(device)
 
-                # no padding is required because this evaluation batch contains only one graph
-                # mark every edge position as valid
-                mask = torch.ones(1, edge_features.shape[1], dtype=torch.bool,device=device)
-
-
+            # no padding is required because this evaluation batch contains only one graph
+            # mark every edge position as valid
+            mask = torch.ones(1, edge_features.shape[1], dtype=torch.bool,device=device)
 
 
-                # MODEL INFERENCE TIMING 
 
-                # CUDA operations execute asynchronously - Synchronizing before the timer ensures
-                # all prior GPU work has completed and is not accidentally counted as part of this 
-                # model's inference time
-                if device == "cuda":
-                    torch.cuda.synchronize()
 
-                # record the beginning of the timed forward pass
-                inference_start = time.perf_counter()
+            # MODEL INFERENCE TIMING 
 
-                # disable autograd because evaluation does not require gradients or parameter updates
-                with torch.no_grad():
+            # CUDA operations execute asynchronously - Synchronizing before the timer ensures
+            # all prior GPU work has completed and is not accidentally counted as part of this 
+            # model's inference time
+            if device == "cuda":
+                torch.cuda.synchronize()
 
-                    # produce one raw interdiction score for every edge 
-                    # logits shape: (1, num_edges)
-                    logits = model(edge_features, edge_bias=edge_bias, mask=mask)
+            # record the beginning of the timed forward pass
+            inference_start = time.perf_counter()
 
-                # wait until the asynchronous CUDA forward pass has completed before stopping the timer
-                if device == "cuda":
-                    torch.cuda.synchronize()
+            # disable autograd because evaluation does not require gradients or parameter updates
+            with torch.no_grad():
 
-                # record the end of the timed model forward pass
-                inference_end = time.perf_counter()
+                # produce one raw interdiction score for every edge 
+                # logits shape: (1, num_edges)
+                logits = model(edge_features, edge_bias=edge_bias, mask=mask)
 
-                # wall-clock time required for one model inference
-                inference_time = inference_end - inference_start
+            # wait until the asynchronous CUDA forward pass has completed before stopping the timer
+            if device == "cuda":
+                torch.cuda.synchronize()
 
-                # remove the batch dimension to obtain one score per edge
-                # real_logits shape: (num_edges,)
-                real_logits = logits[0]
+            # record the end of the timed model forward pass
+            inference_end = time.perf_counter()
 
-                # retrieve the interdiction budget stored in the solved sample
-                # should equal test_attack_limit
-                k = int(sample["attack_limit"])
+            # wall-clock time required for one model inference
+            inference_time = inference_end - inference_start
 
-                # count the number of real edges scored by the model
-                num_edges = real_logits.numel()
+            # remove the batch dimension to obtain one score per edge
+            # real_logits shape: (num_edges,)
+            real_logits = logits[0]
 
-                # the number of selected edges must be between zero and the total
-                # number of graph edges
-                if not 0 <= k <= num_edges:
-                    raise ValueError( f"Invalid attack limit K={k} for a graph "
+            # retrieve the interdiction budget stored in the solved sample
+            # should equal test_attack_limit
+            k = int(sample["attack_limit"])
+
+            # count the number of real edges scored by the model
+            num_edges = real_logits.numel()
+
+            # the number of selected edges must be between zero and the total
+            # number of graph edges
+            if not 0 <= k <= num_edges:
+                raise ValueError( f"Invalid attack limit K={k} for a graph "
                                 f"with {num_edges} edges.")
 
 
 
 
-                # CONVERT LOGITS TO A DISCRETE INTERDICTION SET
+            # CONVERT LOGITS TO A DISCRETE INTERDICTION SET
 
-                # initialize every edge as not interdicted
-                # predicted_attack shape: (num_edges,)
-                predicted_attack = torch.zeros_like(real_logits)
+            # initialize every edge as not interdicted
+            # predicted_attack shape: (num_edges,)
+            predicted_attack = torch.zeros_like(real_logits)
 
-                if k > 0:
+            if k > 0:
 
-                    # identify the indices of the k edges receiving the largest model logits
-                    # ensures the predicted attack set satisfies the interdiction budget exactly
-                    topk_indices = torch.topk(real_logits,k=k,).indices
+                # identify the indices of the k edges receiving the largest model logits
+                # ensures the predicted attack set satisfies the interdiction budget exactly
+                topk_indices = torch.topk(real_logits,k=k,).indices
 
-                    # mark the selected edges as interdicted in the predicted attack vector
-                    predicted_attack[topk_indices] = 1.0
+                # mark the selected edges as interdicted in the predicted attack vector
+                predicted_attack[topk_indices] = 1.0
 
-                # convert the GPU tensor into a regular Python list of integer labels for 
-                # comparison and objective evaluation
-                predicted_attack_list = predicted_attack.cpu().int().tolist()
+            # convert the GPU tensor into a regular Python list of integer labels for 
+            # comparison and objective evaluation
+            predicted_attack_list = predicted_attack.cpu().int().tolist()
 
-                # retrieve the MIP-optimal binary attack vector - the ordering matches the 
-                # stored edge ordering in the sample and the model input tensors
-                optimal_attack_list = sample["attack"]
-
-
+            # retrieve the MIP-optimal binary attack vector - the ordering matches the 
+            # stored edge ordering in the sample and the model input tensors
+            optimal_attack_list = sample["attack"]
 
 
-                # ATTACK-SET PREDICTION METRICS
 
-                # Exact match equals 1 only when every predicted edge  label agrees with the 
-                # MIP-optimal attack vector
-                exact = int(predicted_attack_list == optimal_attack_list)
 
-                # hamming distance counts how many edge labels differ between the predicted 
-                # and optimal attack vectors - because both vectors select k edges, each incorrect
-                # replacement usually contributes two mismatches: one missed optimal edge,
-                # one incorrectly selected edge
-                hamming = sum(
+            # ATTACK-SET PREDICTION METRICS
+
+            # Exact match equals 1 only when every predicted edge  label agrees with the 
+            # MIP-optimal attack vector
+            exact = int(predicted_attack_list == optimal_attack_list)
+
+            # hamming distance counts how many edge labels differ between the predicted 
+            # and optimal attack vectors - because both vectors select k edges, each incorrect
+            # replacement usually contributes two mismatches: one missed optimal edge,
+            # one incorrectly selected edge
+            hamming = sum(
                     p != o for p, o in zip(predicted_attack_list, optimal_attack_list))
 
 
 
 
-                # DOWNSTREAM OBJECTIVE EVALUATION
+            # DOWNSTREAM OBJECTIVE EVALUATION
 
-                if problem_type == "shortest_path":
+            if problem_type == "shortest_path":
 
-                    # the attacker seeks to maximize the shortest source-to-sink path length
-                    # sample["path_length"] = objective achieved by the MIP-optimal interdiction set
-                    optimal_objective = sample["path_length"]
+                # the attacker seeks to maximize the shortest source-to-sink path length
+                # sample["path_length"] = objective achieved by the MIP-optimal interdiction set
+                optimal_objective = sample["path_length"]
 
-                    # re-solve the follower shortest-path problem after applying the model-predicted 
-                    # interdiction set
-                    predicted_objective = shortest_path_after_attack(sample, predicted_attack_list)
+                # re-solve the follower shortest-path problem after applying the model-predicted 
+                # interdiction set
+                predicted_objective = shortest_path_after_attack(sample, predicted_attack_list)
 
-                    # the optimal attack should produce an objective at least as large as the predicted attack
-                    # gap = (optimal - predicted) / |optimal| = a gap of zero means the prediction achieves the 
-                    # same objective value as the optimal interdiction, even when the exact attack sets differ
-                    objective_gap = (optimal_objective - predicted_objective) / max(abs(optimal_objective), 1e-8)
+                # the optimal attack should produce an objective at least as large as the predicted attack
+                # gap = (optimal - predicted) / |optimal| = a gap of zero means the prediction achieves the 
+                # same objective value as the optimal interdiction, even when the exact attack sets differ
+                objective_gap = (optimal_objective - predicted_objective) / max(abs(optimal_objective), 1e-8)
 
                 
-                elif problem_type == "max_flow":
+            elif problem_type == "max_flow":
 
-                    # the attacker seeks to minimize the surviving source-to-sink maximum flow
-                    optimal_objective = sample["max_flow"]
+                # the attacker seeks to minimize the surviving source-to-sink maximum flow
+                optimal_objective = sample["max_flow"]
 
-                    # store the graph's maximum-flow value before any interdiction - used to normalize the gap
-                    baseline_objective = sample["baseline_max_flow"]
+                # store the graph's maximum-flow value before any interdiction - used to normalize the gap
+                baseline_objective = sample["baseline_max_flow"]
 
-                    # recompute surviving maximum flow after applying the model-predicted interdiction set
-                    predicted_objective = max_flow_after_attack(sample, predicted_attack_list)
-
-
-                    # MIP-optimal attack should leave flow no larger than the model-predicted attack
-                    # gap = (predicted - optimal) / |baseline| = normalizing by baseline flow avoids 
-                    # instability when the optimal surviving flow equals zero
-                    objective_gap = (predicted_objective - optimal_objective) / max(abs(baseline_objective), 1e-8)
+                # recompute surviving maximum flow after applying the model-predicted interdiction set
+                predicted_objective = max_flow_after_attack(sample, predicted_attack_list)
 
 
-                elif problem_type == "min_cost_flow":
-
-                    # the attacker seeks to maximize the defender's minimum feasible flow cost
-                    optimal_objective = sample["min_cost_flow"]
-
-                    # recompute minimum-cost flow after applying the model-predicted interdiction set
-                    predicted_objective = min_cost_flow_after_attack(sample, predicted_attack_list)
-
-                    # MIP-optimal attack should produce a cost at least as large as the model-predicted attack
-                    # gap = (optimal - predicted) / |optimal|
-                    objective_gap = (optimal_objective - predicted_objective) / max(abs(optimal_objective), 1e-8)
-
-                else:
-                    # branch should be unreachable because problem_type was already checked in get_model()
-                    raise ValueError(f"Unknown problem type: {problem_type}")                
+                # MIP-optimal attack should leave flow no larger than the model-predicted attack
+                # gap = (predicted - optimal) / |baseline| = normalizing by baseline flow avoids 
+                # instability when the optimal surviving flow equals zero
+                objective_gap = (predicted_objective - optimal_objective) / max(abs(baseline_objective), 1e-8)
 
 
+            elif problem_type == "min_cost_flow":
+
+                # the attacker seeks to maximize the defender's minimum feasible flow cost
+                optimal_objective = sample["min_cost_flow"]
+
+                # recompute minimum-cost flow after applying the model-predicted interdiction set
+                predicted_objective = min_cost_flow_after_attack(sample, predicted_attack_list)
+
+                # MIP-optimal attack should produce a cost at least as large as the model-predicted attack
+                # gap = (optimal - predicted) / |optimal|
+                objective_gap = (optimal_objective - predicted_objective) / max(abs(optimal_objective), 1e-8)
+
+            else:
+                # branch should be unreachable because problem_type was already checked in get_model()
+                raise ValueError(f"Unknown problem type: {problem_type}")                
 
 
-                # SAVE DETAILED INSTANCE-LEVEL METRICS
 
-                # append one row describing the current solved graph, model prediction, objective 
-                # quality, and runtime
-                results_rows.append({
 
-                        # experiment identifiers
-                        "model_type": model_type,
-                        "problem_type": problem_type,
-                        "eval_mode": eval_mode,
+            # SAVE DETAILED INSTANCE-LEVEL METRICS
 
-                        # graph identifiers and structure
-                        "graph_seed": seed,
-                        "n_nodes": sample["n_nodes"],
-                        "n_edges": len(sample["u"]),
-                        "density": sample["density"],
-                        "replication": rep,
+            # append one row describing the current solved graph, model prediction, objective 
+            # quality, and runtime
+            results_rows.append({
 
-                        # interdiction budget
-                        "attack_limit": k,
+                    # experiment identifiers
+                    "model_type": model_type,
+                    "problem_type": problem_type,
+                    "eval_mode": eval_mode,
 
-                        # downstream objective values
-                        "optimal_objective": optimal_objective,
-                        "predicted_objective": predicted_objective,
-                        "objective_gap": objective_gap,
+                    # graph identifiers and structure
+                    "graph_seed": seed,
+                    "n_nodes": sample["n_nodes"],
+                    "n_edges": len(sample["u"]),
+                    "density": sample["density"],
+                    "replication": rep,
 
-                        # attack set comparison metrics
-                        "hamming_distance": hamming,
-                        "exact_match": exact,
+                    # interdiction budget
+                    "attack_limit": k,
 
-                        # number of edges that both the model and MIP selected for interdiction
-                        "num_correct_edges": sum((p == 1 and o == 1)
+                    # downstream objective values
+                    "optimal_objective": optimal_objective,
+                    "predicted_objective": predicted_objective,
+                    "objective_gap": objective_gap,
+
+                    # attack set comparison metrics
+                    "hamming_distance": hamming,
+                    "exact_match": exact,
+
+                    # number of edges that both the model and MIP selected for interdiction
+                    "num_correct_edges": sum((p == 1 and o == 1)
                                                  for p, o in zip(predicted_attack_list, optimal_attack_list)),
 
-                        # number of model-selected interdictions
-                        "num_predicted_attacks": sum(predicted_attack_list),
+                    # number of model-selected interdictions
+                    "num_predicted_attacks": sum(predicted_attack_list),
 
-                        # number of MIP-selected interdictions
-                        "num_optimal_attacks": sum(optimal_attack_list),
+                    # number of MIP-selected interdictions
+                    "num_optimal_attacks": sum(optimal_attack_list),
 
-                        # internal solver time reported by solve_instance when available
-                        # fall back to the externally measured total time if sample does not contain a solver timer
-                        "mip_solve_time": sample.get("mip_solve_time", mip_total_time),
+                    # internal solver time reported by solve_instance when available
+                    # fall back to the externally measured total time if sample does not contain a solver timer
+                    "mip_solve_time": sample.get("mip_solve_time", mip_total_time),
 
-                        # total wall-clock time around preprocessing and solve_instance()
-                        "mip_total_time": mip_total_time,
+                    # total wall-clock time around preprocessing and solve_instance()
+                    "mip_total_time": mip_total_time,
 
-                        # timed model forward-pass duration                     
-                        "inference_time": inference_time,})
-
-
+                    # timed model forward-pass duration                     
+                    "inference_time": inference_time,})
 
 
-                # UPDATE PER-BUDGET SUMMARY ACCUMULATORS
 
-                # add 1 when the complete predicted attack set matches the optimal set
-                total_exact += exact
 
-                # add this graph's edge-label disagreement count
-                total_hamming += hamming
+            # UPDATE PER-BUDGET SUMMARY ACCUMULATORS
 
-                # add this graph's normalized downstream objective gap
-                total_gap += objective_gap
+            # add 1 when the complete predicted attack set matches the optimal set
+            total_exact += exact
 
-                # record one more successfully evaluated instance
-                total_instances += 1
+            # add this graph's edge-label disagreement count
+            total_hamming += hamming
 
-                # add the solver's internal optimization time when available
-                total_mip_solve_time += sample.get("mip_solve_time", mip_total_time)
+            # add this graph's normalized downstream objective gap
+            total_gap += objective_gap
 
-                # add the model forward-pass time
-                total_inference_time += inference_time
+            # record one more successfully evaluated instance
+            total_instances += 1
 
-                # print the current instance's results so evaluation
-                # progress can be monitored while the script runs
-                print(f"K={test_attack_limit}, n={n}, m={m}, rep={rep} | "
+            # add the solver's internal optimization time when available
+            total_mip_solve_time += sample.get("mip_solve_time", mip_total_time)
+
+            # add the model forward-pass time
+            total_inference_time += inference_time
+
+            # print the current instance's results so evaluation
+            # progress can be monitored while the script runs
+            print(f"K={test_attack_limit}, n={n}, m={m}, rep={rep} | "
                         f"Opt={optimal_objective:.2f} | "
                         f"Pred={predicted_objective:.2f} | "
                         f"Gap={objective_gap:.4f} | "
