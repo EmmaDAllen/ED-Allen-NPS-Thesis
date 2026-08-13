@@ -1,0 +1,2 @@
+model_type,problem_type,epochs,best_epoch,best_val_loss,final_val_loss,total_training_time_seconds,average_epoch_time_seconds,best_model_path,final_model_path
+edge_transformer,max_flow,50,4,0.25356405025121315,0.3951436269863879,217.78927981108427,4.355785596221685,saved_models/edge_transformer_max_flow_best_model.pt,saved_models/edge_transformer_max_flow_final_model.pt

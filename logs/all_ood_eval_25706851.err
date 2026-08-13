@@ -1,0 +1,45 @@
+Traceback (most recent call last):
+  File "/home/emma.allen/ED-Allen-NPS-Thesis/evaluation/evaluate.py", line 681, in <module>
+    evaluate()
+  File "/home/emma.allen/ED-Allen-NPS-Thesis/evaluation/evaluate.py", line 167, in evaluate
+    model = get_model(model_type, problem_type, device)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/emma.allen/ED-Allen-NPS-Thesis/evaluation/evaluate.py", line 89, in get_model
+    raise ValueError(f"Unknown problem type: {problem_type}")
+ValueError: Unknown problem type: ood_size
+Traceback (most recent call last):
+  File "/home/emma.allen/ED-Allen-NPS-Thesis/evaluation/evaluate.py", line 681, in <module>
+    evaluate()
+  File "/home/emma.allen/ED-Allen-NPS-Thesis/evaluation/evaluate.py", line 167, in evaluate
+    model = get_model(model_type, problem_type, device)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/emma.allen/ED-Allen-NPS-Thesis/evaluation/evaluate.py", line 89, in get_model
+    raise ValueError(f"Unknown problem type: {problem_type}")
+ValueError: Unknown problem type: ood_size
+Traceback (most recent call last):
+  File "/home/emma.allen/ED-Allen-NPS-Thesis/evaluation/evaluate.py", line 681, in <module>
+    evaluate()
+  File "/home/emma.allen/ED-Allen-NPS-Thesis/evaluation/evaluate.py", line 167, in evaluate
+    model = get_model(model_type, problem_type, device)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/emma.allen/ED-Allen-NPS-Thesis/evaluation/evaluate.py", line 89, in get_model
+    raise ValueError(f"Unknown problem type: {problem_type}")
+ValueError: Unknown problem type: ood_size
+Traceback (most recent call last):
+  File "/home/emma.allen/ED-Allen-NPS-Thesis/evaluation/evaluate.py", line 681, in <module>
+    evaluate()
+  File "/home/emma.allen/ED-Allen-NPS-Thesis/evaluation/evaluate.py", line 167, in evaluate
+    model = get_model(model_type, problem_type, device)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/emma.allen/ED-Allen-NPS-Thesis/evaluation/evaluate.py", line 89, in get_model
+    raise ValueError(f"Unknown problem type: {problem_type}")
+ValueError: Unknown problem type: ood_size
+Traceback (most recent call last):
+  File "/home/emma.allen/ED-Allen-NPS-Thesis/evaluation/evaluate.py", line 681, in <module>
+    evaluate()
+  File "/home/emma.allen/ED-Allen-NPS-Thesis/evaluation/evaluate.py", line 167, in evaluate
+    model = get_model(model_type, problem_type, device)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/emma.allen/ED-Allen-NPS-Thesis/evaluation/evaluate.py", line 89, in get_model
+    raise ValueError(f"Unknown problem type: {problem_type}")
+ValueError: Unknown problem type: ood_size
