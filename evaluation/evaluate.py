@@ -371,7 +371,7 @@ def evaluate():
 
                 # compute the maximum feasible source-to-sink flow before interdiction
                 # this establishes an upper bound for a feasible minimum-cost-flow demand
-                baseline_max_flow = nx.maximum_flow_value(G,s=s,t=t,capacity="capacity")
+                baseline_max_flow = nx.maximum_flow_value(G,s,t,capacity="capacity")
 
                 # set the min-cost-flow demand to 50% of the graph's pre-interdiction maximum flow
                 # max(1, ...) prevents zero demand on graphs with very small baseline flow
