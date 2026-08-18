@@ -203,6 +203,14 @@ def evaluate():
     with open(graph_path, "rb") as f:
         evaluation_graphs = pickle.load(f)
 
+    expected_graphs = len(test_settings) * 20
+
+    if len(evaluation_graphs) != expected_graphs:
+        raise ValueError(
+            f"Expected {expected_graphs} evaluation graphs, "
+            f"but found {len(evaluation_graphs)} in {graph_path}. "
+            f"Graph generation may not be complete.")
+
     print(f"\nLoaded {len(evaluation_graphs)} " 
           f"pre-generated evaluation graphs from {graph_path}.")
 
