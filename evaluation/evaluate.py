@@ -31,6 +31,7 @@ import csv
 import sys
 import time
 import networkx as nx
+import pickle
 
 from data.random_networks import generate_one_in_network
 from optimization.mip import solve_instance
@@ -185,135 +186,25 @@ def evaluate():
     # disables training-specific behavior such as dropout
     model.eval()
 
-
-
-    # EVALUATION GRAPH SETTINGS
-
-    if eval_mode == "id_new":
-
-        # Evaluate on new random graphs having the same node and arc settings used to 
-        # generate the training dataset - the actual graph realizations remain unseen 
-        # because a different base seed is used below
-        test_settings = [
-            (30, 75),
-            (30, 120),
-            (50, 125),
-            (50, 200),
-            (75, 188),
-            (75, 300),]
-
-        
-    elif eval_mode == "ood_size":
-
-        # Evaluate model size generalization on graphs that are larger than those used 
-        # during training
-        test_settings = [
-            # 100 nodes
-            (100, 200),
-            (100, 250),
-            (100, 300),
-            (100, 400),
-            (100, 500),
-            (100, 600),
-            (100, 800),
-
-            # 200 nodes
-            (200, 400),
-            (200, 500),
-            (200, 600),
-            (200, 800),
-            (200, 1000),
-            (200, 1200),
-            (200, 1600),
-
-            # 400 nodes
-            (400, 800),
-            (400, 1000),
-            (400, 1200),
-            (400, 1600),
-            (400, 2000),
-            (400, 2400),
-            (400, 3200),
-
-            # 600 nodes
-            (600, 1200),
-            (600, 1500),
-            (600, 1800),
-            (600, 2400),
-            (600, 3000),
-            (600, 3600),
-            (600, 4800),]
-    
-    else:
-        raise ValueError(f"Unknown eval_mode: {eval_mode}")
-
-
-    # generate 20 independently seeded graph realizations for every node/arc setting and every 
-    # interdiction budget
-    reps_per_setting = 20
-    
    # evaluate all five interdiction budgets used in the experiments
     test_attack_limits = [1, 2, 3, 4, 5]
-    
-    # use a base seed different from the training-data base seed so the evaluation graphs are
-    # newly generated and were not observed during training
-    base_seed = 5
 
     # store one dictionary for every successfully solved and evaluated graph instance - these 
     # rows will later be written to one CSV file
     results_rows = []
 
 
-    # PRE-GENERATE EVALUATION GRAPHS
 
-    evaluation_graphs = []
+    # LOAD PRE-GENERATED EVALUATION GRAPHS
 
-    max_attack_budget = max(test_attack_limits)
+    graph_path = (f"evaluation_graphs/"
+                  f"{problem_type}_{eval_mode}_graphs.pkl")
 
-    for n, m in test_settings:
+    with open(graph_path, "rb") as f:
+        evaluation_graphs = pickle.load(f)
 
-        for rep in range(reps_per_setting):
-
-            # deterministic base seed for this network realization
-            seed = base_seed + 100000 * n + 100 * m + rep
-
-            # Max-flow evaluation uses the same structural screening
-            # criterion used for max-flow training-data generation.
-            if problem_type == "max_flow":
-
-                attempt = 0
-
-                while True:
-                    candidate_seed = seed * 1000000 + attempt
-                
-                    G, s, t, density = generate_one_in_network(n=n,m=m,cost_low=1,cost_high=10,
-                                                                penalty_low=1,penalty_high=10,
-                                                                capacity_low=1,capacity_high=20,
-                                                                seed=candidate_seed)
-                    edge_connectivity = nx.edge_connectivity(G,s,t)
-                
-                    # Require more edge-disjoint s-t paths than the
-                    # largest interdiction budget being evaluated.
-                    if edge_connectivity > max_attack_budget:
-                        seed = candidate_seed
-                        break
-                
-                    attempt += 1
-                
-            else:
-                # generate one directed test graph = returned values: G: NetworkX directed graph,
-                # s: source-node identifier, t: sink-node identifier, density: arc-to-node ratio or 
-                # density measure returned by the graph-generation function
-                G, s, t, density = generate_one_in_network(n=n, m=m, cost_low=1,cost_high=10,penalty_low=1,
-                                                            penalty_high=10,capacity_low=1,capacity_high=20,seed=seed)
-
-
-            evaluation_graphs.append({"G": G,"s": s, "t": t, "density": density, "seed": seed,
-                                           "n": n, "m": m, "rep": rep})
-
-
-        print(f"\nGenerated {len(evaluation_graphs)} "
-        f"evaluation graphs for {problem_type}.")
+    print(f"\nLoaded {len(evaluation_graphs)} " 
+          f"pre-generated evaluation graphs from {graph_path}.")
 
     
     # INTERDICTION BUDGET LOOP
