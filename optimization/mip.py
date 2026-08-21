@@ -78,6 +78,7 @@ def build_training_sample(G,s,t,density,attack_limit,arcs,penalty,model,objectiv
         "u": [u for u, v in edge_list], # arc heads
         "v": [v for u, v in edge_list], # arc tails
         "penalty": [penalty[u, v] for u, v in edge_list], # arc penalties
+        "interdictable": [int(G[u][v].get("interdictable", True)) for u, v in edge_list],
 
         # optimal interdiction decisions
         "attack": [int(round(pyo.value(model.Y[u, v]))) for u, v in edge_list],
@@ -119,7 +120,7 @@ def build_training_sample(G,s,t,density,attack_limit,arcs,penalty,model,objectiv
 
 
 
-def build_shortest_pathILP(nodes,arcs,cost,supply,penalty,attack_limit=1):
+def build_shortest_pathILP(nodes,arcs,cost,supply,penalty,interdictable,attack_limit=1):
     
     '''Constructs the dual formulation of the shortest path interdiction problem.
 
@@ -136,6 +137,7 @@ def build_shortest_pathILP(nodes,arcs,cost,supply,penalty,attack_limit=1):
     # initialize nodes and arcs as pyomo objects
     model.N = pyo.Set(initialize=list(nodes), ordered=True)
     model.A = pyo.Set(within=model.N*model.N, initialize=list(arcs))
+    model.interdictable = pyo.Param(model.A,initialize=interdictable,within=pyo.Binary)
 
     # initialize cost, penalty, supply and attack limits as pyomo objects
     model.cost = pyo.Param(model.A, initialize=cost)
@@ -146,6 +148,11 @@ def build_shortest_pathILP(nodes,arcs,cost,supply,penalty,attack_limit=1):
     # initialize decision variables described above
     model.Pi = pyo.Var(model.N, within=pyo.Reals)
     model.Y = pyo.Var(model.A, within=pyo.Binary)
+
+    # prevent interdiction of arcs marked as noninterdictable
+    def interdiction_eligibility_rule(model, i, j):
+        return model.Y[i, j] <= model.interdictable[i, j]
+    model.interdiction_eligibility = pyo.Constraint(model.A,rule=interdiction_eligibility_rule)
 
     # dual feasibility constraint
     def dual_constraint_rule(model,i,j):
@@ -182,9 +189,11 @@ def solve_shortest_path_instance(G, s, t, density, attack_limit):
     # initialize network data using function build_instance_data
     nodes, arcs, cost, _, penalty, supply = build_instance_data(G,s,t,problem_type="shortest_path")
 
+    interdictable = {(u, v): int(G[u][v].get("interdictable", True)) for (u, v) in arcs}
+
     # use new data from build_instance_data to build the MIP using build_dualILP
     model = build_shortest_pathILP(nodes=nodes,arcs=arcs,cost=cost,supply=supply,
-        penalty=penalty,attack_limit=attack_limit)
+        penalty=penalty,interdictable=interdictable,attack_limit=attack_limit)
 
     # Solve MIP using highs solver
     opt = pyo.SolverFactory('highs')

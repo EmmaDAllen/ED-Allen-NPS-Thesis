@@ -1,7 +1,12 @@
 
 """generate_evaluation_graphs.py
 
-Generate and save fixed graph sets for max flow model evaluation.
+Generate and save fixed graph sets for network interdiction model evaluation.
+
+The script creates evaluation graphs separately from evaluate.py so that every
+trained model is evaluated on exactly the same graph instances. Generated graphs
+are saved incrementally, allowing interrupted generation jobs to resume without
+regenerating previously accepted graphs.
 
 Usage:
     PYTHONPATH=. python -u evaluation/generate_evaluation_graphs.py PROBLEM_TYPE EVAL_MODE"""
@@ -12,9 +17,23 @@ import pickle
 import networkx as nx
 
 from data.random_networks import generate_one_in_network
+from data.generate_wood_data import generate_wood_grid
 
 
 def get_test_settings(eval_mode):
+
+
+    """Return the network size and density settings associated with an evaluation mode.
+
+    id_new:
+        Uses the same network sizes and densities represented in training, but
+        evaluation graphs are generated using new random seeds.
+
+    ood_size:
+        Uses substantially larger networks than those represented in training
+        to evaluate model generalization to unseen graph sizes."""
+
+
 
     if eval_mode == "id_new":
 
@@ -64,13 +83,85 @@ def get_test_settings(eval_mode):
             (600, 3600),
             (600, 4800),]
 
+    elif eval_mode == "wood":
+
+        return [
+            (13, 7, 7, 10, 5, 1, 5),
+            (14, 7, 7, 10, 5, 1, 10),
+            (15, 8, 8, 10, 5, 1, 5),
+            (16, 8, 8, 10, 5, 1, 10),
+            (17, 9, 9, 10, 5, 1, 5),
+            (18, 9, 9, 10, 5, 1, 10),
+            (19, 12, 12, 10, 5, 1, 5),
+            (20, 12, 12, 10, 5, 1, 10),]
+
+
     else:
         raise ValueError(f"Unknown eval_mode: {eval_mode}")
+
 
 
 def generate_evaluation_graphs(problem_type, eval_mode):
 
     test_settings = get_test_settings(eval_mode)
+    
+        
+    # WOOD BENCHMARKS
+    
+    if eval_mode == "wood":
+    
+        if problem_type != "shortest_path":
+                raise ValueError("Wood evaluation graphs are for shortest_path only.")
+    
+        base_seed = 5
+        evaluation_graphs = []
+    
+        for (problem,rows,cols,cost_max,delay_max,resource_max,resource_budget,) in test_settings:
+    
+            seed = base_seed + problem
+    
+            G, s, t, density = generate_wood_grid(rows=rows,cols=cols,cost_max=cost_max,delay_max=delay_max,
+                                                      resource_max=resource_max,seed=seed,)
+    
+            evaluation_graphs.append({
+                        "G": G,
+                        "s": s,
+                        "t": t,
+                        "density": density,
+                        "seed": seed,
+    
+                        # Useful benchmark metadata
+                        "wood_problem": problem,
+                        "rows": rows,
+                        "cols": cols,
+    
+                        # Actual graph size
+                        "n": G.number_of_nodes(),
+                        "m": G.number_of_edges(),
+    
+                        # Wood parameters
+                        "cost_max": cost_max,
+                        "delay_max": delay_max,
+                        "resource_max": resource_max,
+                        "attack_budget": resource_budget,})
+    
+            print(
+                    f"Generated Wood problem {problem} | "
+                    f"{rows}x{cols} | "
+                    f"nodes={G.number_of_nodes()} | "
+                    f"arcs={G.number_of_edges()} | "
+                    f"budget={resource_budget}",
+                    flush=True,)
+    
+        with open(output_path, "wb") as f:
+                pickle.dump(evaluation_graphs, f)
+    
+        print(f"\nFinished. Saved {len(evaluation_graphs)} "
+                f"Wood graphs to {output_path}",
+                flush=True,)
+    
+        return
+    
 
     reps_per_setting = 20
     test_attack_limits = [1, 2, 3, 4, 5]

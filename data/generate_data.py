@@ -61,45 +61,70 @@ def generate_dataset(network_settings,replications_per_setting, attack_budgets, 
     # counts number of instances skipped due to infeasibility or solver issues
     skipped = 0
 
-
+    # largest interdiction budget used in the experiment for max-flow instances, this is used to 
+    # establish the minimum required source-to-sink edge connectivity of an accepted training graph
     max_attack_budget = max(attack_budgets)
+
+    # NETWORK GENERATION LOOP
 
     # iterate through all network settings and replications; each accepted graph is then 
     # solved for every attack budget
-    # enumerates every experiemntal configuration to generate a diverse dataset
-    
     for n, m in network_settings:
         for rep in range(replications_per_setting):
             
-            # unique deterministic seed per instance (ensures reproducibility)
+            # construct a deterministic base seed from the graph dimensions and
+            # replication number so the experimental instances are reproducible
             seed = base_seed + 100000 * n + 100 * m + rep
 
 
+            # MAX-FLOW GRAPH GENERATION
+
+            # max-flow interdiction requires additional filtering because sparse One-In graphs may
+            # contain small source-to-sink cuts. If the minimum s-t cut contains no more edges than 
+            # the interdiction budget, the attacker can remove the entire cut and reduce the surviving
+            # maximum flow to zero. To avoid a training dataset dominated by these trivial zero-flow cases,
+            # repeatedly generate candidate graphs until the s-t edge connectivity is strictly greater than
+            #  the largest attack budget used in the experiment.
             if problem_type == "max_flow":
 
+                # count candidate graphs tested for the current experimental replication
                 attempt = 0
 
                 while True:
 
+                # derive a unique deterministic seed for each candidate graph while
+                # preserving reproducibility of the rejection-sampling procedure
                     candidate_seed = seed * 1000000 + attempt
 
+                    # generate a candidate One-In directed network
                     G, s, t, density = generate_one_in_network(n=n,m=m,cost_low=COST_LOW,
                             cost_high=COST_HIGH,penalty_low=PENALTY_LOW,penalty_high=PENALTY_HIGH,
                             capacity_low=CAPACITY_LOW,capacity_high=CAPACITY_HIGH,seed=candidate_seed)
 
+                    # compute the minimum number of directed edges whose removal would
+                    # disconnect the source from the sink
                     edge_connectivity = nx.edge_connectivity(G,s,t)
                 
-
+                    # accept the graph only when every tested interdiction budget is smaller than its s-t
+                    # edge connectivity; therefore an attacker using K <= max_attack_budget cannot disconnect
+                    # s from t solely by removing K edges
                     if edge_connectivity > max_attack_budget:
+
+                        # save the actual accepted candidate seed rather than the original
+                        # base seed so this exact graph can be regenerated later
                         seed = candidate_seed
                         break
 
+                    # reject the current candidate and generate another deterministic graph
                     attempt += 1
 
 
+            # SHORTEST-PATH AND MIN-COST-FLOW GRAPH GENERATION
+            # shortest-path and min-cost-flow interdiction problems do not require additional filtering
             else:
 
-                # generate random test network (One-In method)
+                # these problem types do not use the max-flow edge-connectivity filter;
+                # generate one One-In network directly from the deterministic graph seed
                 G, s, t, density = generate_one_in_network(n=n, m=m,cost_low=COST_LOW, cost_high=COST_HIGH,
                                                            penalty_low=PENALTY_LOW, penalty_high=PENALTY_HIGH,
                                                            capacity_low=CAPACITY_LOW, capacity_high=CAPACITY_HIGH,
@@ -116,6 +141,11 @@ def generate_dataset(network_settings,replications_per_setting, attack_budgets, 
                 flow_demand = 1
 
 
+
+            # INTERDICTION BUDGET LOOP
+
+            # solve the same accepted graph separately for every requested attack budget this produces training
+            # examples for K = 1, ..., max_attack_budget while holding the underlying graph realization constant
             for attack_budget in attack_budgets:
             
                 # solve generated network interdiction problem for respective attack budget and store sample
@@ -128,32 +158,42 @@ def generate_dataset(network_settings,replications_per_setting, attack_budgets, 
                     skipped += 1
                     continue
 
+
+                # EXPERIMENT METADATA
+
                 # record experiment metadata for later analysis and reproducibility
                 sample["graph_seed"] = seed
                 sample["replication"] = rep
                 sample["attack_budget"] = attack_budget
                 sample["problem_type"] = problem_type
 
-                # flow demand only applies to min cost flow problems
+                # flow demand is a problem-specific parameter and therefore is stored
+                # only for minimum-cost-flow interdiction samples
                 if problem_type == "min_cost_flow":
                     sample["flow_demand"] = flow_demand
 
-                # store the completed sample
+                # store the completed sample to dataset
                 dataset.append(sample)
 
-                # Print progress information while the dataset is being generated
-                # to monitor real time generation
+
+                # PROGRESS OUTPUT
+
+                # print instance-level progress while the dataset is being generated
+                # so long-running generation jobs can be monitored in real time
                 print(f"Solved n={n}, m={m}, budget={attack_budget}, "
                           f"density={density:.2f}, rep={rep}, "
                           f"flow_demand={flow_demand}, "
                           f"objective={sample[objective_name]:.2f}, "
                           f"mip_solve_time={sample['mip_solve_time']:.4f}")
 
-    # Report overall dataset statistics.
+
+    # DATASET SUMMARY AND OUTPUT
+
+    # report the total number of successfully solved and skipped instances
     print(f"\nGenerated {len(dataset)} solved training samples.")
     print(f"Skipped {skipped} instances.")
 
-    # save dataset
+    # save the complete training dataset as formatted JSON
     with open(output_file, "w") as f:
         json.dump(dataset, f, indent=2)
 

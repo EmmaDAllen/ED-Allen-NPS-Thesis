@@ -44,6 +44,7 @@ from evaluation.metrics import shortest_path_after_attack
 from evaluation.metrics import max_flow_after_attack
 from evaluation.metrics import min_cost_flow_after_attack
 from models.tropical_attention_V2 import TropicalInterdictionModel as TropicalInterdictionModelV2
+from evaluation.generate_evaluation_graphs import get_test_settings
 
 
 
@@ -203,7 +204,23 @@ def evaluate():
     with open(graph_path, "rb") as f:
         evaluation_graphs = pickle.load(f)
 
-    expected_graphs = len(test_settings) * 20
+
+    if eval_mode == "wood":
+
+        # Wood test problems specify their own interdiction budget r0.
+        # Because the selected Wood instances have unit interdiction
+        # resource requirements, r0 is equivalent to attack limit K.
+        evaluation_cases = [ (graph_data["attack_budget"], graph_data)
+                            for graph_data in evaluation_graphs]
+        expected_graphs = len(get_test_settings("wood"))
+
+    else:
+
+        # Standard evaluation applies every attack budget K=1,...,5 to every evaluation graph
+        evaluation_cases = [(k, graph_data) for k in test_attack_limits
+                             for graph_data in evaluation_graphs]
+        expected_graphs = len(get_test_settings(eval_mode)) * 20
+
 
     if len(evaluation_graphs) != expected_graphs:
         raise ValueError(
@@ -216,9 +233,11 @@ def evaluate():
 
     
     # INTERDICTION BUDGET LOOP
+
+    evaluation_budgets = sorted(set(k for k, _ in evaluation_cases))
     
     # loop through each interdiction budget
-    for test_attack_limit in test_attack_limits:
+    for test_attack_limit in evaluation_budgets:
 
         # reset summary accumulators at the beginning of each budget == printed averages 
         # describe only the current K value
@@ -244,8 +263,11 @@ def evaluate():
 
         print(f"\nEvaluating attack limit K={test_attack_limit}")
 
+        graphs_for_budget = [graph_data for k, graph_data in evaluation_cases
+                             if k == test_attack_limit]
 
-        for graph_data in evaluation_graphs:
+
+        for graph_data in graphs_for_budget:
 
             # retrieve the already-generated graph
             G = graph_data["G"]
@@ -255,7 +277,8 @@ def evaluate():
             seed = graph_data["seed"]
             n = graph_data["n"]
             m = graph_data["m"]
-            rep = graph_data["rep"]
+            rep = graph_data.get("rep", None)
+            wood_problem = graph_data.get("wood_problem", None)
 
 
 
@@ -377,15 +400,38 @@ def evaluate():
 
             # CONVERT LOGITS TO A DISCRETE INTERDICTION SET
 
+
+            # identify which edges are eligible for interdiction
+            # Wood source/first-column and last-column/sink arcs have
+            # interdictable=False; ordinary One-In edges default to True
+            interdictable_mask = torch.tensor(sample["interdictable"],dtype=torch.bool,
+                                              device=device,)
+
+            # make sure the requested attack budget does not exceed
+            # the number of arcs that are actually eligible for interdiction
+            num_interdictable = int(interdictable_mask.sum().item())
+
+            if k > num_interdictable:
+                raise ValueError(
+                    f"Attack limit K={k} exceeds the number of "
+                    f"interdictable arcs ({num_interdictable}).")
+
             # initialize every edge as not interdicted
             # predicted_attack shape: (num_edges,)
             predicted_attack = torch.zeros_like(real_logits)
 
             if k > 0:
 
+                # copy model scores so the original logits remain unchanged
+                masked_logits = real_logits.clone()
+
+                # assign -infinity to noninterdictable edges so they can never
+                # appear among the model's top-k predicted interdictions
+                masked_logits[~interdictable_mask] = float("-inf")
+
                 # identify the indices of the k edges receiving the largest model logits
                 # ensures the predicted attack set satisfies the interdiction budget exactly
-                topk_indices = torch.topk(real_logits,k=k,).indices
+                topk_indices = torch.topk(masked_logits,k=k,).indices
 
                 # mark the selected edges as interdicted in the predicted attack vector
                 predicted_attack[topk_indices] = 1.0
@@ -482,6 +528,7 @@ def evaluate():
                     "model_type": model_type,
                     "problem_type": problem_type,
                     "eval_mode": eval_mode,
+                    "wood_problem": wood_problem,
 
                     # graph identifiers and structure
                     "graph_seed": seed,
