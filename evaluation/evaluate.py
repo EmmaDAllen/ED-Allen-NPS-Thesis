@@ -159,6 +159,7 @@ def evaluate():
     # sys.argv[3] specifies whether evaluation uses newly generated in-distribution settings 
     # or larger out-of-distribution graphs, default: id_new
     eval_mode = (sys.argv[3] if len(sys.argv) > 3 else "id_new")
+    experiment_tag = sys.argv[3] if len(sys.argv) > 3 else None
 
 
 
@@ -170,7 +171,12 @@ def evaluate():
 
     # combine the model and problem names to reproduce the checkpoint naming convention used 
     # by train.py
-    run_name = f"{model_type}_{problem_type}"
+
+    if experiment_tag:
+        run_name = f"{model_type}_{problem_type}_{experiment_tag}"
+    else:
+        run_name = f"{model_type}_{problem_type}"
+
     
     # load the checkpoint corresponding to the epoch with the lowest validation loss during training
     checkpoint_path = (f"saved_models/{run_name}_best_model.pt")
@@ -287,7 +293,7 @@ def evaluate():
             m = graph_data["m"]
             rep = graph_data.get("rep", None)
             wood_problem = graph_data.get("wood_problem", None)
-
+            network_name = graph_data.get("network_name", None)
 
 
             # EXACT MIP SOLUTION
@@ -537,14 +543,17 @@ def evaluate():
                     "problem_type": problem_type,
                     "eval_mode": eval_mode,
                     "wood_problem": wood_problem,
+                    "network_name": network_name,
 
                     # graph identifiers and structure
                     "graph_seed": seed,
                     "n_nodes": sample["n_nodes"],
                     "n_edges": len(sample["u"]),
+
                     "density": sample["density"],
                     "replication": rep,
-
+                    "source": s,
+                    "sink": t,
                     # interdiction budget
                     "attack_limit": k,
 

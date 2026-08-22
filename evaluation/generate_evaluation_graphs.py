@@ -107,7 +107,11 @@ def get_test_settings(eval_mode):
 def generate_evaluation_graphs(problem_type, eval_mode):
 
     test_settings = get_test_settings(eval_mode)
-    
+
+    os.makedirs("evaluation_graphs", exist_ok=True)
+
+    output_path = (f"evaluation_graphs/"
+                   f"{problem_type}_{eval_mode}_graphs.pkl")
         
     # WOOD BENCHMARKS
     
@@ -170,7 +174,7 @@ def generate_evaluation_graphs(problem_type, eval_mode):
 
         evaluation_graphs = [{"G": G, "s": s, "t": t, "density": density,
                               "n": G.number_of_nodes(), "m": G.number_of_edges(),
-                              "network_name": "external_transportation_network",}]
+                              "network_name": "external_transportation_network", "seed": 5,}]
 
         with open(output_path, "wb") as f:
             pickle.dump(evaluation_graphs,f,)
@@ -190,10 +194,6 @@ def generate_evaluation_graphs(problem_type, eval_mode):
 
     total_expected = len(test_settings) * reps_per_setting
 
-    os.makedirs("evaluation_graphs", exist_ok=True)
-
-    output_path = (f"evaluation_graphs/"
-                   f"{problem_type}_{eval_mode}_graphs.pkl")
 
     if os.path.exists(output_path):
         with open(output_path, "rb") as f:

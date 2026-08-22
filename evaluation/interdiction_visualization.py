@@ -41,6 +41,7 @@ import torch
 import argparse
 import networkx as nx
 import matplotlib.pyplot as plt
+import pickle
 
 from data.random_networks import generate_one_in_network
 from data.interdiction_data import sample_to_tensors
@@ -219,7 +220,8 @@ def graph_from_sample(sample, attack_list=None):
         attack = attack_list[edge_index]
 
         # every problem stores an edge-specific interdiction penalty
-        edge_data = {"penalty": sample["penalty"][edge_index]}
+        edge_data = {"penalty": sample["penalty"][edge_index],
+                     "interdictable": bool(sample["interdictable"][edge_index]),}
 
         # shortest-path and minimum-cost-flow samples store distance or
         # cost values under the dist field
@@ -552,6 +554,10 @@ def main():
         choices=["shortest_path","max_flow","min_cost_flow"],
         default="shortest_path")
 
+    parser.add_argument("--eval_mode",nargs="?", type=str,
+        choices=["id_new", "ood_size", "wood", "external"],
+        default="id_new",)
+
     # number of graph nodes
     parser.add_argument("--n",type=int,default=30)
 
@@ -573,6 +579,7 @@ def main():
     m = args.m
     k = args.k
     rep = args.rep
+    eval_mode = args.eval_mode
 
     # validate basic graph and attack settings before generating data
     if n < 2:
@@ -596,14 +603,59 @@ def main():
 
     # REPRODUCE ONE EVALUATION GRAPH
 
-    # match the graph-seeding rule used in evaluate.py so the same
-    # combination of n, m, and rep regenerates the same graph
-    base_seed = 5
-    seed = base_seed + 100000 * n + 100 * m + rep
+    # LOAD FIXED EVALUATION GRAPH
 
-    # match all graph-generation parameters used in evaluate.py
-    G, s, t, density = generate_one_in_network(n=n,m=m,cost_low=1,cost_high=10,penalty_low=1,penalty_high=10,
-                                               capacity_low=1,capacity_high=20,seed=seed)
+    graph_path = (f"evaluation_graphs/"
+        f"{problem_type}_{eval_mode}_graphs.pkl")
+
+    with open(graph_path, "rb") as f:
+        evaluation_graphs = pickle.load(f)
+
+    if eval_mode in ("id_new", "ood_size"):
+
+        matching_graphs = [graph_data for graph_data in evaluation_graphs
+                           if graph_data["n"] == n and graph_data["m"] == m
+                           and graph_data["rep"] == rep]
+
+        if not matching_graphs:
+            raise ValueError(f"No evaluation graph found for "
+                f"n={n}, m={m}, rep={rep}.")
+
+        graph_data = matching_graphs[0]
+
+
+    elif eval_mode == "wood":
+
+        matching_graphs = [graph_data for graph_data in evaluation_graphs
+                           if graph_data["wood_problem"] == rep]
+
+        if not matching_graphs:
+            raise ValueError(f"No Wood problem {rep} found.")
+
+        graph_data = matching_graphs[0]
+
+        # Wood uses the problem-specific stored budget
+        k = graph_data["attack_budget"]
+
+    elif eval_mode == "external":
+
+        if len(evaluation_graphs) != 1:
+            raise ValueError("Expected exactly one external evaluation graph.")
+
+        graph_data = evaluation_graphs[0]
+
+
+    G = graph_data["G"]
+    s = graph_data["s"]
+    t = graph_data["t"]
+    density = graph_data["density"]
+
+    n = graph_data["n"]
+    m = graph_data["m"]
+
+    seed = graph_data.get("seed", None)
+    wood_problem = graph_data.get("wood_problem", None)
+    network_name = graph_data.get("network_name", None)
 
 
     # the interdiction budget cannot exceed the number of generated directed edges
@@ -702,14 +754,31 @@ def main():
         raise ValueError(f"Invalid attack limit K={k} for a graph "
             f"with {num_edges} edges.")
 
+    # identify arcs that are eligible for interdiction
+    interdictable_mask = torch.tensor(sample["interdictable"],dtype=torch.bool,device=device,)
+
+    num_interdictable = int(interdictable_mask.sum().item())
+
+    if k > num_interdictable:
+        raise ValueError(f"Attack limit K={k} exceeds the number "
+            f"of interdictable arcs ({num_interdictable}).")
+
     # initialize an all-zero binary predicted attack vector
     predicted_attack = torch.zeros_like(real_logits)
-    # select the k edges with the largest model logits
-    topk_indices = torch.topk(real_logits, k=k).indices
-    # mark those edges as interdicted
-    predicted_attack[topk_indices] = 1.0
-    # convert the prediction to ordinary integer labels
-    predicted_attack_list = predicted_attack.cpu().int().tolist()
+
+    if k > 0:
+
+        masked_logits = real_logits.clone()
+
+        # forbidden arcs can never be selected
+        masked_logits[~interdictable_mask] = float("-inf")
+        # select the k edges with the largest model logits
+        topk_indices = torch.topk(masked_logits,k=k,).indices
+        # mark those edges as interdicted
+        predicted_attack[topk_indices] = 1.0
+        # convert the prediction to ordinary integer labels
+        predicted_attack_list = predicted_attack.cpu().int().tolist()
+
 
     # retrieve the exact MIP-optimal binary attack vector
     optimal_attack_list = sample["attack"]
@@ -812,12 +881,23 @@ def main():
         active_edges=model_solution["active_edges"],attack_edges=model_attack_edges,
         flow_values=model_solution["flow_values"])
 
-    
+    if eval_mode == "wood":
+
+        graph_label = (f"Wood problem {wood_problem}")
+
+    elif eval_mode == "external":
+
+        graph_label = (network_name or "External network")
+
+    else:
+
+        graph_label = (f"n={n}, m={m}, rep={rep}")
+
     # add experiment settings above the complete figure
     fig.suptitle(f"{display_problem} interdiction example: "
-        f"{display_model}, n={n}, m={m}, "
-        f"K={k}, rep={rep}",
-        fontsize=14,)
+        f"{display_model}\n"
+        f"{graph_label}, K={k}", fontsize=14)
+
 
 
     # SAVE AND DISPLAY FIGURE

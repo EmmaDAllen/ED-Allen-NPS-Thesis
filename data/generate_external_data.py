@@ -53,7 +53,14 @@ def load_external_network(node_path,arc_path,source,sink,penalty_low=1,penalty_h
  
     # ADD NODES
 
+    node_ids = node_df["node"].astype(int).tolist()
+
+    node_map = {original_id: new_id for new_id, original_id in enumerate(node_ids)}
+
     for _, row in node_df.iterrows():
+
+        original_node = int(row["node"])
+        node = node_map[original_node]
 
         G.add_node(int(row["node"]), lat=row["lat"], lon=row["lon"], supply=row["supply"])
 
@@ -64,17 +71,18 @@ def load_external_network(node_path,arc_path,source,sink,penalty_low=1,penalty_h
 
     for _, row in arc_df.iterrows():
 
+        original_u = int(row["from_node"])
+        original_v = int(row["to_node"])
+
         u = int(row["from_node"])
         v = int(row["to_node"])
 
         # Generate penalty on the same scale used during training
-        penalty = rng.randint(PENALTY_LOW, PENALTY_HIGH,)
+        penalty = int(rng.integers(penalty_low,penalty_high + 1))
 
         # ADD DIRECTED ARCS
 
-        G.add_edge(
-            u,
-            v,
+        G.add_edge(u, v,
 
             # Rescaled external transportation cost
             dist=float(row["scaled_cost"]),
@@ -97,6 +105,8 @@ def load_external_network(node_path,arc_path,source,sink,penalty_low=1,penalty_h
 
     # VALIDATION
 
+
+
     if source not in G:
         raise ValueError(f"Source node {source} does not exist.")
 
@@ -107,13 +117,15 @@ def load_external_network(node_path,arc_path,source,sink,penalty_low=1,penalty_h
         raise ValueError(f"No directed path exists from " f"{source} to {sink}.")
 
     density = (G.number_of_edges() / G.number_of_nodes())
+    source_internal = node_map[source]
+    sink_internal = node_map[sink]
 
     print(
         f"Loaded external network | "
         f"nodes={G.number_of_nodes()} | "
         f"arcs={G.number_of_edges()} | "
         f"density={density:.4f} | "
-        f"source={source} | "
-        f"sink={sink}")
+        f"source={source_internal} | "
+        f"sink={sink_internal}")
 
-    return G, source, sink, density
+    return G, source_internal, sink_internal, density

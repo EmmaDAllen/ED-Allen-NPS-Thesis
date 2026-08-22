@@ -191,6 +191,7 @@ def train():
     model_type = sys.argv[1] if len(sys.argv) > 1 else "tropical"
     # sys.argv[2], when supplied, is the interdiction problem type, deafult = shortest path
     problem_type = sys.argv[2] if len(sys.argv) > 2 else "shortest_path"
+    experiment_tag = sys.argv[3] if len(sys.argv) > 3 else None
 
 
 
@@ -382,8 +383,13 @@ def train():
     # scheduler, weight_decay=1e-4 applies L2-style parameter regularization
     optimizer = schedulefree.RAdamScheduleFree(model.parameters(),lr=learning_rate,weight_decay=1e-4)
 
-    # combine the model and problem names to uniquely identify the run
-    run_name = f"{model_type}_{problem_type}"
+
+    # combine the model name, problem name, and experiment tag to uniquely identify the run
+    if experiment_tag:
+        run_name = f"{model_type}_{problem_type}_{experiment_tag}"
+    else:
+        run_name = f"{model_type}_{problem_type}"
+
 
     # create directories for metrics and model checkpoints
     os.makedirs("results", exist_ok=True)
