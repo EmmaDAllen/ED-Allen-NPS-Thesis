@@ -18,6 +18,7 @@ import networkx as nx
 
 from data.random_networks import generate_one_in_network
 from data.generate_wood_data import generate_wood_grid
+from data.generate_external_data import load_external_network
 
 
 def get_test_settings(eval_mode):
@@ -95,6 +96,8 @@ def get_test_settings(eval_mode):
             (19, 12, 12, 10, 5, 1, 5),
             (20, 12, 12, 10, 5, 1, 10),]
 
+    elif eval_mode == "external":
+        return None
 
     else:
         raise ValueError(f"Unknown eval_mode: {eval_mode}")
@@ -118,35 +121,27 @@ def generate_evaluation_graphs(problem_type, eval_mode):
     
         for (problem,rows,cols,cost_max,delay_max,resource_max,resource_budget,) in test_settings:
     
+
             seed = base_seed + problem
     
+
             G, s, t, density = generate_wood_grid(rows=rows,cols=cols,cost_max=cost_max,delay_max=delay_max,
                                                       resource_max=resource_max,seed=seed,)
     
-            evaluation_graphs.append({
-                        "G": G,
-                        "s": s,
-                        "t": t,
-                        "density": density,
-                        "seed": seed,
+
+            evaluation_graphs.append({"G": G, "s": s, "t": t,"density": density,"seed": seed,
     
                         # Useful benchmark metadata
-                        "wood_problem": problem,
-                        "rows": rows,
-                        "cols": cols,
+                        "wood_problem": problem, "rows": rows, "cols": cols,
     
                         # Actual graph size
-                        "n": G.number_of_nodes(),
-                        "m": G.number_of_edges(),
+                        "n": G.number_of_nodes(), "m": G.number_of_edges(),
     
                         # Wood parameters
-                        "cost_max": cost_max,
-                        "delay_max": delay_max,
-                        "resource_max": resource_max,
+                        "cost_max": cost_max,"delay_max": delay_max,"resource_max": resource_max,
                         "attack_budget": resource_budget,})
     
-            print(
-                    f"Generated Wood problem {problem} | "
+            print(f"Generated Wood problem {problem} | "
                     f"{rows}x{cols} | "
                     f"nodes={G.number_of_nodes()} | "
                     f"arcs={G.number_of_edges()} | "
@@ -161,7 +156,30 @@ def generate_evaluation_graphs(problem_type, eval_mode):
                 flush=True,)
     
         return
-    
+
+    # EXTERNAL NETWORK
+
+    if eval_mode == "external":
+
+        if problem_type != "shortest_path":
+            raise ValueError("External evaluation currently supports shortest_path only.")
+
+        G, s, t, density = load_external_network(node_path="data/external/node_data.csv",
+            arc_path="data/external/arc_data.csv",source=YOUR_SOURCE,sink=YOUR_SINK,
+            penalty_seed=5,)
+
+        evaluation_graphs = [{"G": G, "s": s, "t": t, "density": density,
+                              "n": G.number_of_nodes(), "m": G.number_of_edges(),
+                              "network_name": "external_transportation_network",}]
+
+        with open(output_path, "wb") as f:
+            pickle.dump(evaluation_graphs,f,)
+
+        print(f"\nFinished. Saved external network to "
+            f"{output_path}",flush=True,)
+
+        return
+
 
     reps_per_setting = 20
     test_attack_limits = [1, 2, 3, 4, 5]

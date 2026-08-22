@@ -214,6 +214,14 @@ def evaluate():
                             for graph_data in evaluation_graphs]
         expected_graphs = len(get_test_settings("wood"))
 
+
+    elif eval_mode == "external":
+
+        evaluation_cases = [(k, graph_data) for k in test_attack_limits
+                            for graph_data in evaluation_graphs]
+
+        expected_graphs = 1
+
     else:
 
         # Standard evaluation applies every attack budget K=1,...,5 to every evaluation graph
