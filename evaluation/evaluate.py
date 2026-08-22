@@ -32,6 +32,7 @@ import sys
 import time
 import networkx as nx
 import pickle
+import os
 
 from data.random_networks import generate_one_in_network
 from optimization.mip import solve_instance
@@ -159,7 +160,7 @@ def evaluate():
     # sys.argv[3] specifies whether evaluation uses newly generated in-distribution settings 
     # or larger out-of-distribution graphs, default: id_new
     eval_mode = (sys.argv[3] if len(sys.argv) > 3 else "id_new")
-    experiment_tag = sys.argv[3] if len(sys.argv) > 3 else None
+    experiment_tag = sys.argv[4] if len(sys.argv) > 4 else None
 
 
 
@@ -660,11 +661,14 @@ def evaluate():
         raise RuntimeError("Evaluation completed without any valid result rows.")
 
     # construct an output filename uniquely identifying the model problem, and evaluation mode
-    results_path = ( "results/"
-        f"evaluation_results_"
-        f"{model_type}_"
-        f"{problem_type}_"
-        f"{eval_mode}.csv")
+    if experiment_tag:
+        results_path = ("results/" f"evaluation_results_" f"{model_type}_"
+            f"{problem_type}_" f"{eval_mode}_" f"{experiment_tag}.csv")
+
+    else:
+        results_path = ("results/" f"evaluation_results_" f"{model_type}_"
+            f"{problem_type}_" f"{eval_mode}.csv")
+
 
     # write one CSV row per successfully evaluated graph instance
     with open(results_path, "w", newline="") as csvfile:

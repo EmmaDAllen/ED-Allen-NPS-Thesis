@@ -62,7 +62,7 @@ def load_external_network(node_path,arc_path,source,sink,penalty_low=1,penalty_h
         original_node = int(row["node"])
         node = node_map[original_node]
 
-        G.add_node(int(row["node"]), lat=row["lat"], lon=row["lon"], supply=row["supply"])
+        G.add_node(node,original_node=original_node,lat=row["lat"],lon=row["lon"],supply=row["supply"])
 
 
     # GENERATE INTERDICTION PENALTIES
@@ -74,8 +74,8 @@ def load_external_network(node_path,arc_path,source,sink,penalty_low=1,penalty_h
         original_u = int(row["from_node"])
         original_v = int(row["to_node"])
 
-        u = int(row["from_node"])
-        v = int(row["to_node"])
+        u = node_map[original_u]
+        v = node_map[original_v]
 
         # Generate penalty on the same scale used during training
         penalty = int(rng.integers(penalty_low,penalty_high + 1))
@@ -113,12 +113,14 @@ def load_external_network(node_path,arc_path,source,sink,penalty_low=1,penalty_h
     if sink not in G:
         raise ValueError(f"Sink node {sink} does not exist.")
 
-    if not nx.has_path(G, source, sink):
+    source_internal = node_map[source]
+    sink_internal = node_map[sink]
+
+    if not nx.has_path(G, source_internal, sink_internal):
         raise ValueError(f"No directed path exists from " f"{source} to {sink}.")
 
     density = (G.number_of_edges() / G.number_of_nodes())
-    source_internal = node_map[source]
-    sink_internal = node_map[sink]
+
 
     print(
         f"Loaded external network | "

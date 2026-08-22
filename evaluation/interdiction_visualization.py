@@ -558,6 +558,8 @@ def main():
         choices=["id_new", "ood_size", "wood", "external"],
         default="id_new",)
 
+    parser.add_argument("--experiment_tag",nargs="?", type=str,default=None,)
+
     # number of graph nodes
     parser.add_argument("--n",type=int,default=30)
 
@@ -580,6 +582,7 @@ def main():
     k = args.k
     rep = args.rep
     eval_mode = args.eval_mode
+    experiment_tag = args.experiment_tag
 
     # validate basic graph and attack settings before generating data
     if n < 2:
@@ -700,7 +703,11 @@ def main():
     model = get_model(model_type, problem_type, device)
 
     # reproduce the checkpoint naming convention from train.py
-    run_name = f"{model_type}_{problem_type}"
+
+    if experiment_tag:
+        run_name = (f"{model_type}_{problem_type}_{experiment_tag}")
+    else:
+        run_name = f"{model_type}_{problem_type}"
 
     # use the checkpoint with the lowest validation loss
     checkpoint_path = (f"saved_models/{run_name}_best_model.pt")
@@ -777,7 +784,7 @@ def main():
         # mark those edges as interdicted
         predicted_attack[topk_indices] = 1.0
         # convert the prediction to ordinary integer labels
-        predicted_attack_list = predicted_attack.cpu().int().tolist()
+    predicted_attack_list = predicted_attack.cpu().int().tolist()
 
 
     # retrieve the exact MIP-optimal binary attack vector

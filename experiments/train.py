@@ -267,7 +267,10 @@ def train():
     test_indices = sorted(index for seed in test_seeds for index in seed_to_indices[seed])
 
     # store the split separately for each problem type
-    split_path = f"results/data_split_{problem_type}.pt"
+    if experiment_tag:
+        split_path = f"results/data_split_{problem_type}_{experiment_tag}.pt"
+    else:
+        split_path = f"results/data_split_{problem_type}.pt"
 
     # ensure the results directory exists before attempting to save the split file
     os.makedirs("results", exist_ok=True)
@@ -797,8 +800,11 @@ def train():
 
 
     # SAVE EPOCH-LEVEL TRAINING LOG
-    
-    run_name = f"{model_type}_{problem_type}"
+    if experiment_tag:
+        run_name = f"{model_type}_{problem_type}_{experiment_tag}"
+    else:
+        run_name = f"{model_type}_{problem_type}"
+
 
     # save one row per epoch for plotting learning curves and comparing
     # training behavior across model architectures
