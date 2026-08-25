@@ -82,7 +82,6 @@ def get_model(model_type, problem_type, device):
         Initialized model moved onto the requested device.
 
     Raises
-
     ValueError
         If model_type or problem_type is not supported."""
 
@@ -160,6 +159,8 @@ def evaluate():
     # sys.argv[3] specifies whether evaluation uses newly generated in-distribution settings 
     # or larger out-of-distribution graphs, default: id_new
     eval_mode = (sys.argv[3] if len(sys.argv) > 3 else "id_new")
+    # sys.argv[4] optionally specifies an experiment tag used to distinguish retrained
+    # models from previous runs and prevent checkpoints/results from being overwritten    
     experiment_tag = sys.argv[4] if len(sys.argv) > 4 else None
 
 
@@ -170,9 +171,8 @@ def evaluate():
     # during training
     model = get_model(model_type, problem_type, device)
 
-    # combine the model and problem names to reproduce the checkpoint naming convention used 
-    # by train.py
-
+    # include the optional experiment tag in the run name so evaluation loads the
+    # checkpoint associated with the correct training run
     if experiment_tag:
         run_name = f"{model_type}_{problem_type}_{experiment_tag}"
     else:
@@ -194,7 +194,7 @@ def evaluate():
     # disables training-specific behavior such as dropout
     model.eval()
 
-   # evaluate all five interdiction budgets used in the experiments
+    # evaluate all five interdiction budgets used in the experiments
     test_attack_limits = [1, 2, 3, 4, 5]
 
     # store one dictionary for every successfully solved and evaluated graph instance - these 
@@ -205,38 +205,53 @@ def evaluate():
 
     # LOAD PRE-GENERATED EVALUATION GRAPHS
 
+    # construct the path to the pre-generated graph file corresponding to the
+    # selected interdiction problem and evaluation mode
     graph_path = (f"evaluation_graphs/"
                   f"{problem_type}_{eval_mode}_graphs.pkl")
 
+    # load the fixed evaluation graph set so each trained model is evaluated
+    # on the same previously generated network instances
     with open(graph_path, "rb") as f:
         evaluation_graphs = pickle.load(f)
 
 
+
+    # BUILD PROBLEM-SPECIFIC EVALUATION CASES
+
     if eval_mode == "wood":
 
-        # Wood test problems specify their own interdiction budget r0.
-        # Because the selected Wood instances have unit interdiction
-        # resource requirements, r0 is equivalent to attack limit K.
+        # Wood benchmark instances specify their own interdiction budget rather than
+        # applying every K=1,...,5 value to every graph. Pair each graph with the
+        # attack budget stored when the benchmark instance was generated.
         evaluation_cases = [ (graph_data["attack_budget"], graph_data)
                             for graph_data in evaluation_graphs]
+
+        # one graph is expected for each selected Wood benchmark configuration
         expected_graphs = len(get_test_settings("wood"))
 
 
     elif eval_mode == "external":
 
+        # external networks do not specify a benchmark-specific interdiction budget,
+        # so evaluate each network using all five experimental attack budgets
         evaluation_cases = [(k, graph_data) for k in test_attack_limits
                             for graph_data in evaluation_graphs]
 
+        # current external evaluation contains one pre-generated network
         expected_graphs = 1
+
 
     else:
 
         # Standard evaluation applies every attack budget K=1,...,5 to every evaluation graph
         evaluation_cases = [(k, graph_data) for k in test_attack_limits
                              for graph_data in evaluation_graphs]
+
+        # 20 graph replications are generated for every (n, m) configuration
         expected_graphs = len(get_test_settings(eval_mode)) * 20
 
-
+    # checkpoint to make sure each evaluation type has correct number of graphs to be evaluated
     if len(evaluation_graphs) != expected_graphs:
         raise ValueError(
             f"Expected {expected_graphs} evaluation graphs, "
@@ -246,9 +261,12 @@ def evaluate():
     print(f"\nLoaded {len(evaluation_graphs)} " 
           f"pre-generated evaluation graphs from {graph_path}.")
 
+
     
     # INTERDICTION BUDGET LOOP
 
+    # identify the unique interdiction budgets represented by the selected evaluation cases -
+    # this supports both standard K=1,...,5 evaluation and benchmark-specific Wood budgets
     evaluation_budgets = sorted(set(k for k, _ in evaluation_cases))
     
     # loop through each interdiction budget
@@ -278,13 +296,15 @@ def evaluate():
 
         print(f"\nEvaluating attack limit K={test_attack_limit}")
 
+        # retrieve only the graphs associated with the current interdiction budget
         graphs_for_budget = [graph_data for k, graph_data in evaluation_cases
                              if k == test_attack_limit]
 
 
+        # for each graph associated with current interdiction budget
         for graph_data in graphs_for_budget:
 
-            # retrieve the already-generated graph
+            # retrieve the already-generated graph metadata
             G = graph_data["G"]
             s = graph_data["s"]
             t = graph_data["t"]
@@ -292,6 +312,10 @@ def evaluate():
             seed = graph_data["seed"]
             n = graph_data["n"]
             m = graph_data["m"]
+
+            # retrieve metadata shared by all evaluation graphs; use optional fields for
+            # evaluation modes where replication, Wood problem number, or external network
+            # name may not be defined
             rep = graph_data.get("rep", None)
             wood_problem = graph_data.get("wood_problem", None)
             network_name = graph_data.get("network_name", None)
@@ -416,9 +440,8 @@ def evaluate():
             # CONVERT LOGITS TO A DISCRETE INTERDICTION SET
 
 
-            # identify which edges are eligible for interdiction
-            # Wood source/first-column and last-column/sink arcs have
-            # interdictable=False; ordinary One-In edges default to True
+            # identify which edges are eligible for interdiction Wood source/first-column and last-
+            # column /sink arcs have interdictable=False, One-In edges and external default to True
             interdictable_mask = torch.tensor(sample["interdictable"],dtype=torch.bool,
                                               device=device,)
 
@@ -543,6 +566,8 @@ def evaluate():
                     "model_type": model_type,
                     "problem_type": problem_type,
                     "eval_mode": eval_mode,
+
+                    # optional benchmark/external-network identifiers
                     "wood_problem": wood_problem,
                     "network_name": network_name,
 
@@ -550,11 +575,13 @@ def evaluate():
                     "graph_seed": seed,
                     "n_nodes": sample["n_nodes"],
                     "n_edges": len(sample["u"]),
-
                     "density": sample["density"],
                     "replication": rep,
+
+                    # source and sink identifiers used for this evaluation graph
                     "source": s,
                     "sink": t,
+
                     # interdiction budget
                     "attack_limit": k,
 
@@ -660,11 +687,13 @@ def evaluate():
     if not results_rows:
         raise RuntimeError("Evaluation completed without any valid result rows.")
 
-    # construct an output filename uniquely identifying the model problem, and evaluation mode
+    # include the optional experiment tag in the results filename so retrained-model
+    # evaluations are saved separately rather than overwriting previous results
     if experiment_tag:
         results_path = ("results/" f"evaluation_results_" f"{model_type}_"
             f"{problem_type}_" f"{eval_mode}_" f"{experiment_tag}.csv")
 
+    # preserve the original naming convention when no experiment tag is supplied
     else:
         results_path = ("results/" f"evaluation_results_" f"{model_type}_"
             f"{problem_type}_" f"{eval_mode}.csv")

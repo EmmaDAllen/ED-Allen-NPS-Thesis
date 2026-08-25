@@ -5,6 +5,42 @@ Created on Sat May 30 05:36:20 2026
 @author: emmallen
 """
 
+"""mip.py
+
+Build and solve mixed-integer programming formulations for network
+interdiction problems.
+
+This module provides the exact optimization models used to generate optimal
+interdiction decisions for training, evaluation, and visualization. It supports
+three network interdiction problem types:
+
+1. Shortest-path interdiction
+   Selects arcs to interdict in order to maximize the shortest-path distance
+   from the source to the sink.
+
+2. Maximum-flow interdiction
+   Selects arcs to interdict in order to minimize the maximum feasible flow
+   from the source to the sink.
+
+3. Minimum-cost-flow interdiction
+   Selects arcs to interdict in order to maximize the minimum cost required
+   to route a specified amount of flow through the network.
+
+The module converts NetworkX graph attributes into the sets and parameters
+required by the optimization models, constructs the corresponding Pyomo
+formulations, solves each instance using the configured optimization solver,
+and records the optimal interdiction decisions and objective values.
+
+Solved instances are converted into a common sample format containing graph
+structure, edge attributes, optimal interdiction labels, objective values,
+solver information, and MIP solve time. This common representation is used
+throughout the data-generation, evaluation, and visualization pipelines.
+
+The solve_instance() function provides a shared interface that routes each
+network instance to the appropriate interdiction formulation based on the
+selected problem type."""
+
+
 import networkx as nx
 import pyomo.environ as pyo
 import time
@@ -78,7 +114,11 @@ def build_training_sample(G,s,t,density,attack_limit,arcs,penalty,model,objectiv
         "u": [u for u, v in edge_list], # arc heads
         "v": [v for u, v in edge_list], # arc tails
         "penalty": [penalty[u, v] for u, v in edge_list], # arc penalties
-        "interdictable": [int(G[u][v].get("interdictable", True)) for u, v in edge_list],
+        
+        # store whether each arc is eligible for interdiction needed for Wood benchmark graphs, 
+        # where source and sink connection arcs are explicitly noninterdictable; arcs without 
+        # this attribute default to True
+        "interdictable": [int(G[u][v].get("interdictable", True)) for u, v in edge_list], 
 
         # optimal interdiction decisions
         "attack": [int(round(pyo.value(model.Y[u, v]))) for u, v in edge_list],
@@ -122,14 +162,20 @@ def build_training_sample(G,s,t,density,attack_limit,arcs,penalty,model,objectiv
 
 def build_shortest_pathILP(nodes,arcs,cost,supply,penalty,interdictable,attack_limit=1):
     
-    '''Constructs the dual formulation of the shortest path interdiction problem.
+    '''Constructs the dual formulation of the shortest-path interdiction problem.
 
     Decision variables:
     - Pi[i]: node potentials (dual variables)
     - Y[i,j]: binary interdiction decision on arc (i,j)
 
+    Arc eligibility:
+    - Interdictable arcs may be selected for interdiction.
+    - Arcs marked as noninterdictable are constrained to Y[i,j] = 0.
+
     Objective:
-    - Maximize shortest path length after interdiction'''
+    - Maximize the shortest-path length from source to sink after interdiction,
+    subject to the interdiction budget and arc eligibility restrictions.'''
+
     
     # initialize model
     model = pyo.ConcreteModel()
@@ -137,6 +183,9 @@ def build_shortest_pathILP(nodes,arcs,cost,supply,penalty,interdictable,attack_l
     # initialize nodes and arcs as pyomo objects
     model.N = pyo.Set(initialize=list(nodes), ordered=True)
     model.A = pyo.Set(within=model.N*model.N, initialize=list(arcs))
+
+    # store arc interdiction eligibility as a binary model parameter
+    # 1 indicates that an arc may be interdicted and 0 protects the arc
     model.interdictable = pyo.Param(model.A,initialize=interdictable,within=pyo.Binary)
 
     # initialize cost, penalty, supply and attack limits as pyomo objects
@@ -149,7 +198,8 @@ def build_shortest_pathILP(nodes,arcs,cost,supply,penalty,interdictable,attack_l
     model.Pi = pyo.Var(model.N, within=pyo.Reals)
     model.Y = pyo.Var(model.A, within=pyo.Binary)
 
-    # prevent interdiction of arcs marked as noninterdictable
+    # interdiction eligibilty constraint = prevent interdiction of arcs marked as 
+    # noninterdictable, while interdictable arcs retain the usual binary interdiction decision
     def interdiction_eligibility_rule(model, i, j):
         return model.Y[i, j] <= model.interdictable[i, j]
     model.interdiction_eligibility = pyo.Constraint(model.A,rule=interdiction_eligibility_rule)
@@ -165,12 +215,14 @@ def build_shortest_pathILP(nodes,arcs,cost,supply,penalty,interdictable,attack_l
     model.attack_budget = pyo.Constraint(rule=attack_limit_rule)
 
     # objective function = maximize the distance between s-t 
-    # supply[s] = 1, supply[t] = -1, supply[i] = 0 for all other nodes, so the objective is equivalent to maximizing Pi[s] - Pi[t]
+    # supply[s] = 1, supply[t] = -1, supply[i] = 0 for all other nodes, so the objective is equivalent
+    # to maximizing Pi[s] - Pi[t]
     def objective_rule(model):
         return sum(model.supply[i]*model.Pi[i] for i in model.N if supply[i] != 0)
     model.pathLength = pyo.Objective(rule=objective_rule, sense=pyo.maximize)
     
     return model
+
 
 
 def solve_shortest_path_instance(G, s, t, density, attack_limit):
@@ -189,6 +241,9 @@ def solve_shortest_path_instance(G, s, t, density, attack_limit):
     # initialize network data using function build_instance_data
     nodes, arcs, cost, _, penalty, supply = build_instance_data(G,s,t,problem_type="shortest_path")
 
+    # identify which arcs are eligible for interdiction Wood source/sink connection arcs are 
+    # explicitly marked interdictable=False; arcs without an eligibility attribute, including 
+    # standard synthetic graphs, default to interdictable
     interdictable = {(u, v): int(G[u][v].get("interdictable", True)) for (u, v) in arcs}
 
     # use new data from build_instance_data to build the MIP using build_dualILP
@@ -439,7 +494,40 @@ def solve_min_cost_flow_instance(G, s, t, density, attack_limit,flow_demand):
 
 def solve_instance(G,s,t,density,attack_limit,problem_type="shortest_path", flow_demand=1):
 
-    """Send an instance to the solver matching its problem type."""
+    """Solve a network interdiction instance using the appropriate MIP formulation.
+
+    This function provides a common interface for the three supported
+    interdiction problems and routes the supplied graph to the corresponding
+    problem-specific solver.
+
+    Parameters
+    G : networkx.DiGraph = Directed network containing the edge attributes required by the
+        selected interdiction problem.
+
+    s : int = Source node.
+
+    t : int = Sink node.
+
+    density : float = Arc-to-node ratio m/n of the network.
+
+    attack_limit : int = Maximum number of interdictions allowed.
+
+    problem_type : str
+        Interdiction formulation to solve: "shortest_path", "max_flow", or "min_cost_flow".
+
+    flow_demand : int or float, optional
+        Amount of source-to-sink flow that must be routed for minimum-cost-flow
+        interdiction. Not used by shortest-path or maximum-flow interdiction.
+
+    Returns
+    dict or None
+        Solved instance in the common sample format, including the optimal interdiction decision, 
+        objective value, graph attributes, and solver information. Returns None when the instance 
+        cannot be solved to optimality or does not satisfy required feasibility conditions.
+
+    Raises
+    ValueError = If an unsupported problem type is supplied."""
+
 
     if problem_type == "shortest_path":
         return solve_shortest_path_instance(G=G,s=s,t=t,density=density,attack_limit=attack_limit)

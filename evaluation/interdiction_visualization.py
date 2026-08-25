@@ -6,33 +6,55 @@ Created on Thu May 14 07:09:23 2026
 
 """interdiction_visualization.py
 
-Visualize one network-interdiction example using a trained model.
+Visualize and compare exact and model-predicted network interdiction decisions
+on one fixed evaluation graph.
 
-The script regenerates one test graph, solves the selected interdiction
-problem exactly using the MIP, loads a trained neural-network model, and
-compares the model-predicted interdiction set with the MIP-optimal set.
+The script loads a previously generated evaluation graph, solves the selected
+network interdiction problem exactly using the MIP, loads a trained neural
+network checkpoint, and compares the model-predicted interdiction set with the
+MIP-optimal interdiction set.
+
+The visualization supports shortest-path, maximum-flow, and minimum-cost-flow
+interdiction, as well as multiple evaluation graph types:
+
+1. id_new
+   New synthetic One-In graphs with sizes and densities represented in training.
+
+2. ood_size
+   Larger synthetic One-In graphs used to test size generalization.
+
+3. wood
+   Selected Wood-style shortest-path interdiction benchmark networks.
+
+4. external
+   A prepared external transportation network used for shortest-path
+   interdiction evaluation.
 
 Three network states are displayed:
 
-1. Original network with no interdiction
-2. Network after the MIP-optimal interdiction
-3. Network after the model-predicted interdiction
+1. Original network before interdiction.
+2. Network after the MIP-optimal interdiction.
+3. Network after the model-predicted interdiction.
 
-For shortest-path interdiction, the active shortest path is highlighted.
-For maximum-flow and minimum-cost-flow interdiction, edges carrying
-positive flow are highlighted and labeled with their flow values.
+For shortest-path interdiction, the active shortest path is highlighted. For
+maximum-flow and minimum-cost-flow interdiction, edges carrying positive flow
+are highlighted and labeled with their flow values. Interdicted arcs are shown
+separately so the MIP and model decisions can be visually compared.
 
-Usage
-Run from the repository root:
+The model prediction is restricted to arcs marked as interdictable, allowing
+benchmark networks to contain protected source/sink connection arcs.
 
+Usage:
     PYTHONPATH=. python visualization/interdiction_visualization.py MODEL_TYPE PROBLEM_TYPE
 
-Optional graph arguments:
-
-    --n      Number of nodes
-    --m      Number of directed arcs
-    --k      Interdiction budget
-    --rep    Replication number"""
+Optional arguments:
+    --eval_mode       Evaluation graph type: id_new, ood_size, wood, or external
+    --experiment_tag  Optional tag identifying a specific retrained model
+    --n               Number of nodes for synthetic graph selection
+    --m               Number of directed arcs for synthetic graph selection
+    --k               Interdiction budget
+    --rep             Replication number for synthetic graphs; Wood problem
+                      number when eval_mode=wood"""
 
 
 import os
@@ -69,22 +91,17 @@ def get_model(model_type, problem_type, device):
     """Construct the model architecture used by the saved checkpoint.
 
     Parameters
-    model_type : str
-        Neural-network architecture to construct.
+    model_type : str = Neural-network architecture to construct.
 
-    problem_type : str
-        Network-interdiction problem being visualized.
+    problem_type : str = Network-interdiction problem being visualized.
 
-    device : str or torch.device
-        CPU or CUDA device on which the model will run.
+    device : str or torch.device = CPU or CUDA device on which the model will run.
 
     Returns
-    torch.nn.Module
-        Initialized model moved onto the requested device.
+    torch.nn.Module = Initialized model moved onto the requested device.
 
     Raises
-    ValueError
-        If the model or problem type is not recognized."""
+    ValueError = If the model or problem type is not recognized."""
 
     
     # confirm that the selected problem has a known feature dimension
@@ -146,16 +163,13 @@ def validate_attack_list(sample, attack_list):
     """Confirm that an attack vector aligns with the sample edge ordering.
 
     Parameters
-    sample : dict
-        Graph sample containing the ordered u and v edge lists.
+    sample : dict = Graph sample containing the ordered u and v edge lists.
 
-    attack_list : sequence
-        Binary interdiction decision aligned with those edge lists.
+    attack_list : sequence = Binary interdiction decision aligned with those edge lists.
 
     Raises
-    ValueError
-        If the attack vector length does not equal the number of edges
-        or contains values other than zero and one."""
+    ValueError = If the attack vector length does not equal the number of edges
+    or contains values other than zero and one."""
 
     # The u list contains one entry per directed edge.
     num_edges = len(sample["u"])
@@ -186,17 +200,14 @@ def graph_from_sample(sample, attack_list=None):
         per-unit flow cost.
 
     Parameters
-    sample : dict
-        Solved graph sample containing ordered edge lists and edge
-        attributes.
+    sample : dict = Solved graph sample containing ordered edge lists and edge attributes.
 
     attack_list : sequence, optional
         Binary attack decision aligned with the stored edge ordering.
         When omitted, no edges are interdicted.
 
     Returns
-    networkx.DiGraph
-        Reconstructed graph with post-attack attributes."""
+    networkx.DiGraph = Reconstructed graph with post-attack attributes."""
 
     # create a new directed graph so the original graph is not modified
     G = nx.DiGraph()
@@ -270,24 +281,18 @@ def solve_shortest_path_for_visualization(G, s, t):
 
     Parameters
     G : networkx.DiGraph
-        Directed graph whose dist attributes include any interdiction
-        penalties.
+        Directed graph whose dist attributes include any interdiction penalties.
 
-    s : int
-        Source node.
+    s : int = Source node.
 
-    t : int
-        Sink node.
+    t : int = Sink node.
 
     Returns
-    path_length : float
-        Shortest source-to-sink path length.
+    path_length : float = Shortest source-to-sink path length.
 
-    path_edges : list[tuple]
-        Directed edges belonging to the selected shortest path.
+    path_edges : list[tuple] = Directed edges belonging to the selected shortest path.
 
-    path_nodes : list
-        Ordered nodes belonging to the selected shortest path."""
+    path_nodes : list = Ordered nodes belonging to the selected shortest path."""
 
 
     # compute one shortest source-to-sink node sequence
@@ -395,6 +400,7 @@ def solve_min_cost_flow_for_visualization(G, s, t,flow_demand):
 
 
 
+
 def get_attack_edges(sample, attack_list):
 
     """Convert a binary attack vector into directed edge tuples.
@@ -410,6 +416,7 @@ def get_attack_edges(sample, attack_list):
 
     # return only edges where the attack label = 1 (interdicted)
     return [edge_list[i] for i, val in enumerate(attack_list) if val == 1]
+
 
 
 
@@ -452,26 +459,21 @@ def solve_follower_for_visualization(G,s,t,problem_type, flow_demand=1):
 
 
 
+
 def draw_panel(ax, G, pos, title, active_edges, attack_edges, flow_values=None):
 
     """Draw one network-interdiction comparison panel.
 
     Visual conventions
-    Gray solid edges:
-        All graph edges.
+    Gray solid edges: All graph edges.
 
-    Blue solid edges:
-        Active shortest-path or positive-flow edges.
+    Blue solid edges: Active shortest-path or positive-flow edges.
 
-    Red dashed edges:
-        Interdicted edges.
+    Red dashed edges: Interdicted edges.
 
-    White nodes:
-        Graph nodes.
+    White nodes: Graph nodes.
 
-    Flow labels:
-        Positive flow values for maximum-flow or minimum-cost-flow
-        solutions."""
+    Flow labels: Positive flow values for maximum-flow or minimum-cost-flow solutions."""
     
 
     # use an empty mapping when the current problem has no flow labels
@@ -520,6 +522,7 @@ def draw_panel(ax, G, pos, title, active_edges, attack_edges, flow_values=None):
 
 
 
+
 def main():
 
     """Generate and visualize one interdiction example.
@@ -554,10 +557,14 @@ def main():
         choices=["shortest_path","max_flow","min_cost_flow"],
         default="shortest_path")
 
+    # evaluation mode determines which pre-generated graph collection is loaded:
+    # in-distribution, out-of-distribution size, Wood benchmark, or external network
     parser.add_argument("--eval_mode",nargs="?", type=str,
         choices=["id_new", "ood_size", "wood", "external"],
         default="id_new",)
 
+    # optional experiment tag identifies a retrained model checkpoint without
+    # overwriting or confusing it with results from an earlier training run
     parser.add_argument("--experiment_tag",nargs="?", type=str,default=None,)
 
     # number of graph nodes
@@ -601,6 +608,8 @@ def main():
     print(f"Model type: {model_type}")
     print(f"Problem type: {problem_type}")
     print(f"Graph setting: n={n}, m={m}, K={k}, rep={rep}")
+    print(f"Evaluation mode: {eval_mode}")
+    print(f"Experiment tag: {experiment_tag}")
 
 
 
@@ -608,18 +617,25 @@ def main():
 
     # LOAD FIXED EVALUATION GRAPH
 
+    # construct the path to the fixed evaluation graph collection corresponding
+    # to the selected problem type and evaluation mode
     graph_path = (f"evaluation_graphs/"
         f"{problem_type}_{eval_mode}_graphs.pkl")
 
+    # load the exact graph instances previously generated for evaluation so the
+    # visualization uses the same networks as the quantitative evaluation pipeline
     with open(graph_path, "rb") as f:
         evaluation_graphs = pickle.load(f)
 
     if eval_mode in ("id_new", "ood_size"):
 
+        # locate the single pre-generated synthetic graph matching the requested
+        # node count, edge count, and replication number
         matching_graphs = [graph_data for graph_data in evaluation_graphs
                            if graph_data["n"] == n and graph_data["m"] == m
                            and graph_data["rep"] == rep]
 
+        # fail explicitly if the requested evaluation instance is not present
         if not matching_graphs:
             raise ValueError(f"No evaluation graph found for "
                 f"n={n}, m={m}, rep={rep}.")
@@ -627,8 +643,11 @@ def main():
         graph_data = matching_graphs[0]
 
 
+
     elif eval_mode == "wood":
 
+        # for Wood evaluation, the --rep argument is reused as the Wood benchmark
+        # problem number rather than as a synthetic graph replication index
         matching_graphs = [graph_data for graph_data in evaluation_graphs
                            if graph_data["wood_problem"] == rep]
 
@@ -637,17 +656,22 @@ def main():
 
         graph_data = matching_graphs[0]
 
-        # Wood uses the problem-specific stored budget
+        # Wood benchmark instances specify their own interdiction budget, so replace
+        # the command-line K value with the budget stored for the selected problem
         k = graph_data["attack_budget"]
+
+
 
     elif eval_mode == "external":
 
+        # the current external evaluation file contains one fixed prepared network;
+        # require exactly one graph so the visualization target is unambiguous
         if len(evaluation_graphs) != 1:
             raise ValueError("Expected exactly one external evaluation graph.")
 
         graph_data = evaluation_graphs[0]
 
-
+    # retrieve graph information shared by every evaluation mode
     G = graph_data["G"]
     s = graph_data["s"]
     t = graph_data["t"]
@@ -656,6 +680,7 @@ def main():
     n = graph_data["n"]
     m = graph_data["m"]
 
+    # retrieve optional metadata that exists only for particular evaluation modes
     seed = graph_data.get("seed", None)
     wood_problem = graph_data.get("wood_problem", None)
     network_name = graph_data.get("network_name", None)
@@ -697,13 +722,14 @@ def main():
 
    
 
-   # LOAD TEH TRAINED MODEL CHECKPOINT
+   # LOAD THE TRAINED MODEL CHECKPOINT
 
     # construct the same architecture used during training
     model = get_model(model_type, problem_type, device)
 
     # reproduce the checkpoint naming convention from train.py
-
+    # include the optional experiment tag in the results filename so retrained-model
+    # evaluations are saved separately rather than overwriting previous results
     if experiment_tag:
         run_name = (f"{model_type}_{problem_type}_{experiment_tag}")
     else:
@@ -761,11 +787,14 @@ def main():
         raise ValueError(f"Invalid attack limit K={k} for a graph "
             f"with {num_edges} edges.")
 
-    # identify arcs that are eligible for interdiction
+    # identify which arcs are eligible for interdiction; Wood source/sink connection arcs 
+    # are marked noninterdictable, while ordinary synthetic/external arcs are generally eligible
     interdictable_mask = torch.tensor(sample["interdictable"],dtype=torch.bool,device=device,)
 
+    # count the number of arcs available to the model for selection
     num_interdictable = int(interdictable_mask.sum().item())
 
+    # ensure the requested interdiction budget can be satisfied using eligible arcs
     if k > num_interdictable:
         raise ValueError(f"Attack limit K={k} exceeds the number "
             f"of interdictable arcs ({num_interdictable}).")
@@ -775,17 +804,21 @@ def main():
 
     if k > 0:
 
+        # preserve the original model scores before applying eligibility restrictions
         masked_logits = real_logits.clone()
 
-        # forbidden arcs can never be selected
+        # assign negative infinity to forbidden arcs so they cannot appear among
+        # the model's top-k predicted interdictions
         masked_logits[~interdictable_mask] = float("-inf")
-        # select the k edges with the largest model logits
-        topk_indices = torch.topk(masked_logits,k=k,).indices
-        # mark those edges as interdicted
-        predicted_attack[topk_indices] = 1.0
-        # convert the prediction to ordinary integer labels
-    predicted_attack_list = predicted_attack.cpu().int().tolist()
 
+        # select the k edges with the largest model logits = highest scoring eligible arcs
+        topk_indices = torch.topk(masked_logits,k=k,).indices
+
+        # mark those edges as interdicted = convert selected indicies into binary vector
+        predicted_attack[topk_indices] = 1.0
+
+    # convert the prediction from a tensor into ordinary integer labels
+    predicted_attack_list = predicted_attack.cpu().int().tolist()
 
     # retrieve the exact MIP-optimal binary attack vector
     optimal_attack_list = sample["attack"]
@@ -805,7 +838,6 @@ def main():
 
 
     # RECONSTRUCT THE THREE GRAPH STATES
-
     original_G = graph_from_sample(sample,no_attack)
     mip_G = graph_from_sample(sample,optimal_attack_list)
     model_G = graph_from_sample(sample,predicted_attack_list)
@@ -888,16 +920,23 @@ def main():
         active_edges=model_solution["active_edges"],attack_edges=model_attack_edges,
         flow_values=model_solution["flow_values"])
 
+
+    # create an evaluation-mode-specific graph label for the overall figure title
     if eval_mode == "wood":
 
+        # identify the selected Wood benchmark by problem number
         graph_label = (f"Wood problem {wood_problem}")
+
 
     elif eval_mode == "external":
 
+        # use the stored external-network name when available
         graph_label = (network_name or "External network")
+
 
     else:
 
+        # identify standard synthetic graphs by size and replication number
         graph_label = (f"n={n}, m={m}, rep={rep}")
 
     # add experiment settings above the complete figure

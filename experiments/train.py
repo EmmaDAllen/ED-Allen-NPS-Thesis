@@ -191,6 +191,8 @@ def train():
     model_type = sys.argv[1] if len(sys.argv) > 1 else "tropical"
     # sys.argv[2], when supplied, is the interdiction problem type, deafult = shortest path
     problem_type = sys.argv[2] if len(sys.argv) > 2 else "shortest_path"
+    # sys.argv[3] optionally specifies an experiment tag used to distinguish retrained
+    # models from previous runs and prevent checkpoints/results from being overwritten
     experiment_tag = sys.argv[3] if len(sys.argv) > 3 else None
 
 
@@ -266,7 +268,8 @@ def train():
     # collect every dataset index associated with a test graph
     test_indices = sorted(index for seed in test_seeds for index in seed_to_indices[seed])
 
-    # store the split separately for each problem type
+    # include the optional experiment tag in the run name so evaluation loads the
+    # checkpoint associated with the correct training run
     if experiment_tag:
         split_path = f"results/data_split_{problem_type}_{experiment_tag}.pt"
     else:
@@ -387,7 +390,8 @@ def train():
     optimizer = schedulefree.RAdamScheduleFree(model.parameters(),lr=learning_rate,weight_decay=1e-4)
 
 
-    # combine the model name, problem name, and experiment tag to uniquely identify the run
+    # include the optional experiment tag in the run name so evaluation loads the
+    # checkpoint associated with the correct training run
     if experiment_tag:
         run_name = f"{model_type}_{problem_type}_{experiment_tag}"
     else:
@@ -800,6 +804,8 @@ def train():
 
 
     # SAVE EPOCH-LEVEL TRAINING LOG
+    # include the optional experiment tag in the run name so evaluation loads the
+    # checkpoint associated with the correct training run
     if experiment_tag:
         run_name = f"{model_type}_{problem_type}_{experiment_tag}"
     else:
@@ -837,8 +843,7 @@ def train():
         "total_training_time_seconds": total_training_time,
         "average_epoch_time_seconds": total_training_time / epochs,
         "best_model_path": best_model_path,
-        "final_model_path": final_model_path,
-    })
+        "final_model_path": final_model_path,})
 
 
 # execute train() only when this file is run directly = importing train.py from another 
