@@ -13,4 +13,4 @@ cd ~/ED-Allen-NPS-Thesis
 
 nvidia-smi
 
-PYTHONPATH=. python evaluation/evaluate.py edge_transformer shortest_path ood_size
+PYTHONPATH=. python -u evaluation/evaluate.py edge_transformer shortest_path ood_size retrain_v2

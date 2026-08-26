@@ -11,4 +11,4 @@
 source ~/thesis/bin/activate
 cd ~/ED-Allen-NPS-Thesis
 
-PYTHONPATH=. python evaluation/evaluate.py tropical_v2 min_cost_flow ood_size
+PYTHONPATH=. python evaluation/evaluate.py tropical_v2 min_cost_flow ood_size 

@@ -13,4 +13,4 @@ cd ~/ED-Allen-NPS-Thesis
 
 nvidia-smi
 
-PYTHONPATH=. python evaluation/evaluate.py tropical_v2 shortest_path ood_size
+PYTHONPATH=. python -u evaluation/evaluate.py tropical_v2 shortest_path ood_size retrain_v2
