@@ -1,0 +1,180 @@
+Wed Aug 26 17:27:25 2026       
++-----------------------------------------------------------------------------------------+
+| NVIDIA-SMI 595.58.03              Driver Version: 595.58.03      CUDA Version: 13.2     |
++-----------------------------------------+------------------------+----------------------+
+| GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |
+|                                         |                        |               MIG M. |
+|=========================================+========================+======================|
+|   0  NVIDIA A40                     On  |   00000000:43:00.0 Off |                    0 |
+|  0%   29C    P8             21W /  300W |       0MiB /  46068MiB |      0%      Default |
+|                                         |                        |                  N/A |
++-----------------------------------------+------------------------+----------------------+
+
++-----------------------------------------------------------------------------------------+
+| Processes:                                                                              |
+|  GPU   GI   CI              PID   Type   Process name                        GPU Memory |
+|        ID   ID                                                               Usage      |
+|=========================================================================================|
+|  No running processes found                                                             |
++-----------------------------------------------------------------------------------------+
+
+Loaded 8 pre-generated evaluation graphs from evaluation_graphs/shortest_path_wood_graphs.pkl.
+
+Evaluating attack limit K=5
+K=5, n=51, m=188, rep=None | Opt=24.00 | Pred=20.00 | Gap=0.1667 | Hamming=8 | Exact=0
+K=5, n=66, m=254, rep=None | Opt=22.00 | Pred=18.00 | Gap=0.1818 | Hamming=8 | Exact=0
+K=5, n=83, m=330, rep=None | Opt=18.00 | Pred=14.00 | Gap=0.2222 | Hamming=10 | Exact=0
+K=5, n=146, m=618, rep=None | Opt=28.00 | Pred=24.00 | Gap=0.1429 | Hamming=10 | Exact=0
+
+FINAL TEST RESULTS FOR K=5
+Instances evaluated: 4
+Exact match rate: 0.0000
+Average Hamming distance: 9.0000
+Average objective gap: 0.1784
+Average MIP solve time: 1.595569 seconds
+Average model inference time: 0.065164 seconds
+
+Evaluating attack limit K=10
+K=10, n=51, m=188, rep=None | Opt=19.00 | Pred=12.00 | Gap=0.3684 | Hamming=18 | Exact=0
+K=10, n=66, m=254, rep=None | Opt=22.00 | Pred=16.00 | Gap=0.2727 | Hamming=18 | Exact=0
+K=10, n=83, m=330, rep=None | Opt=24.00 | Pred=17.00 | Gap=0.2917 | Hamming=16 | Exact=0
+K=10, n=146, m=618, rep=None | Opt=32.00 | Pred=24.00 | Gap=0.2500 | Hamming=20 | Exact=0
+
+FINAL TEST RESULTS FOR K=10
+Instances evaluated: 4
+Exact match rate: 0.0000
+Average Hamming distance: 18.0000
+Average objective gap: 0.2957
+Average MIP solve time: 3.712257 seconds
+Average model inference time: 0.003186 seconds
+
+Saved results/evaluation_results_tropical_shortest_path_wood.csv
+
+Loaded 8 pre-generated evaluation graphs from evaluation_graphs/shortest_path_wood_graphs.pkl.
+
+Evaluating attack limit K=5
+K=5, n=51, m=188, rep=None | Opt=24.00 | Pred=20.00 | Gap=0.1667 | Hamming=8 | Exact=0
+K=5, n=66, m=254, rep=None | Opt=22.00 | Pred=18.00 | Gap=0.1818 | Hamming=8 | Exact=0
+K=5, n=83, m=330, rep=None | Opt=18.00 | Pred=14.00 | Gap=0.2222 | Hamming=10 | Exact=0
+K=5, n=146, m=618, rep=None | Opt=28.00 | Pred=24.00 | Gap=0.1429 | Hamming=10 | Exact=0
+
+FINAL TEST RESULTS FOR K=5
+Instances evaluated: 4
+Exact match rate: 0.0000
+Average Hamming distance: 9.0000
+Average objective gap: 0.1784
+Average MIP solve time: 1.569777 seconds
+Average model inference time: 0.207365 seconds
+
+Evaluating attack limit K=10
+K=10, n=51, m=188, rep=None | Opt=19.00 | Pred=12.00 | Gap=0.3684 | Hamming=18 | Exact=0
+K=10, n=66, m=254, rep=None | Opt=22.00 | Pred=16.00 | Gap=0.2727 | Hamming=18 | Exact=0
+K=10, n=83, m=330, rep=None | Opt=24.00 | Pred=15.00 | Gap=0.3750 | Hamming=18 | Exact=0
+K=10, n=146, m=618, rep=None | Opt=32.00 | Pred=24.00 | Gap=0.2500 | Hamming=20 | Exact=0
+
+FINAL TEST RESULTS FOR K=10
+Instances evaluated: 4
+Exact match rate: 0.0000
+Average Hamming distance: 18.5000
+Average objective gap: 0.3165
+Average MIP solve time: 3.751114 seconds
+Average model inference time: 0.006497 seconds
+
+Saved results/evaluation_results_tropical_v2_shortest_path_wood.csv
+
+Loaded 8 pre-generated evaluation graphs from evaluation_graphs/shortest_path_wood_graphs.pkl.
+
+Evaluating attack limit K=5
+K=5, n=51, m=188, rep=None | Opt=24.00 | Pred=20.00 | Gap=0.1667 | Hamming=8 | Exact=0
+K=5, n=66, m=254, rep=None | Opt=22.00 | Pred=14.00 | Gap=0.3636 | Hamming=10 | Exact=0
+K=5, n=83, m=330, rep=None | Opt=18.00 | Pred=12.00 | Gap=0.3333 | Hamming=8 | Exact=0
+K=5, n=146, m=618, rep=None | Opt=28.00 | Pred=23.00 | Gap=0.1786 | Hamming=10 | Exact=0
+
+FINAL TEST RESULTS FOR K=5
+Instances evaluated: 4
+Exact match rate: 0.0000
+Average Hamming distance: 9.0000
+Average objective gap: 0.2606
+Average MIP solve time: 1.593122 seconds
+Average model inference time: 0.061161 seconds
+
+Evaluating attack limit K=10
+K=10, n=51, m=188, rep=None | Opt=19.00 | Pred=9.00 | Gap=0.5263 | Hamming=18 | Exact=0
+K=10, n=66, m=254, rep=None | Opt=22.00 | Pred=15.00 | Gap=0.3182 | Hamming=14 | Exact=0
+K=10, n=83, m=330, rep=None | Opt=24.00 | Pred=15.00 | Gap=0.3750 | Hamming=20 | Exact=0
+K=10, n=146, m=618, rep=None | Opt=32.00 | Pred=22.00 | Gap=0.3125 | Hamming=16 | Exact=0
+
+FINAL TEST RESULTS FOR K=10
+Instances evaluated: 4
+Exact match rate: 0.0000
+Average Hamming distance: 17.0000
+Average objective gap: 0.3830
+Average MIP solve time: 3.705772 seconds
+Average model inference time: 0.002904 seconds
+
+Saved results/evaluation_results_transformer_shortest_path_wood.csv
+
+Loaded 8 pre-generated evaluation graphs from evaluation_graphs/shortest_path_wood_graphs.pkl.
+
+Evaluating attack limit K=5
+K=5, n=51, m=188, rep=None | Opt=24.00 | Pred=20.00 | Gap=0.1667 | Hamming=8 | Exact=0
+K=5, n=66, m=254, rep=None | Opt=22.00 | Pred=14.00 | Gap=0.3636 | Hamming=10 | Exact=0
+K=5, n=83, m=330, rep=None | Opt=18.00 | Pred=12.00 | Gap=0.3333 | Hamming=10 | Exact=0
+K=5, n=146, m=618, rep=None | Opt=28.00 | Pred=23.00 | Gap=0.1786 | Hamming=10 | Exact=0
+
+FINAL TEST RESULTS FOR K=5
+Instances evaluated: 4
+Exact match rate: 0.0000
+Average Hamming distance: 9.5000
+Average objective gap: 0.2606
+Average MIP solve time: 1.592560 seconds
+Average model inference time: 0.045476 seconds
+
+Evaluating attack limit K=10
+K=10, n=51, m=188, rep=None | Opt=19.00 | Pred=9.00 | Gap=0.5263 | Hamming=16 | Exact=0
+K=10, n=66, m=254, rep=None | Opt=22.00 | Pred=15.00 | Gap=0.3182 | Hamming=16 | Exact=0
+K=10, n=83, m=330, rep=None | Opt=24.00 | Pred=17.00 | Gap=0.2917 | Hamming=18 | Exact=0
+K=10, n=146, m=618, rep=None | Opt=32.00 | Pred=22.00 | Gap=0.3125 | Hamming=18 | Exact=0
+
+FINAL TEST RESULTS FOR K=10
+Instances evaluated: 4
+Exact match rate: 0.0000
+Average Hamming distance: 17.0000
+Average objective gap: 0.3622
+Average MIP solve time: 3.696862 seconds
+Average model inference time: 0.002298 seconds
+
+Saved results/evaluation_results_edge_transformer_shortest_path_wood.csv
+
+Loaded 8 pre-generated evaluation graphs from evaluation_graphs/shortest_path_wood_graphs.pkl.
+
+Evaluating attack limit K=5
+K=5, n=51, m=188, rep=None | Opt=24.00 | Pred=20.00 | Gap=0.1667 | Hamming=8 | Exact=0
+K=5, n=66, m=254, rep=None | Opt=22.00 | Pred=18.00 | Gap=0.1818 | Hamming=8 | Exact=0
+K=5, n=83, m=330, rep=None | Opt=18.00 | Pred=14.00 | Gap=0.2222 | Hamming=10 | Exact=0
+K=5, n=146, m=618, rep=None | Opt=28.00 | Pred=24.00 | Gap=0.1429 | Hamming=10 | Exact=0
+
+FINAL TEST RESULTS FOR K=5
+Instances evaluated: 4
+Exact match rate: 0.0000
+Average Hamming distance: 9.0000
+Average objective gap: 0.1784
+Average MIP solve time: 1.582529 seconds
+Average model inference time: 0.046652 seconds
+
+Evaluating attack limit K=10
+K=10, n=51, m=188, rep=None | Opt=19.00 | Pred=12.00 | Gap=0.3684 | Hamming=18 | Exact=0
+K=10, n=66, m=254, rep=None | Opt=22.00 | Pred=16.00 | Gap=0.2727 | Hamming=18 | Exact=0
+K=10, n=83, m=330, rep=None | Opt=24.00 | Pred=17.00 | Gap=0.2917 | Hamming=16 | Exact=0
+K=10, n=146, m=618, rep=None | Opt=32.00 | Pred=24.00 | Gap=0.2500 | Hamming=20 | Exact=0
+
+FINAL TEST RESULTS FOR K=10
+Instances evaluated: 4
+Exact match rate: 0.0000
+Average Hamming distance: 18.0000
+Average objective gap: 0.2957
+Average MIP solve time: 3.722815 seconds
+Average model inference time: 0.001419 seconds
+
+Saved results/evaluation_results_gnn_shortest_path_wood.csv
