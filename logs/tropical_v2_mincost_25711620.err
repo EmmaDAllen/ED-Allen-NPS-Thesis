@@ -1,0 +1,10 @@
+Traceback (most recent call last):
+  File "/home/emma.allen/ED-Allen-NPS-Thesis/evaluation/evaluate.py", line 723, in <module>
+    evaluate()
+  File "/home/emma.allen/ED-Allen-NPS-Thesis/evaluation/evaluate.py", line 374, in evaluate
+    baseline_max_flow = nx.maximum_flow_value(G,s=s,t=t,capacity="capacity")
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/emma.allen/thesis/lib64/python3.12/site-packages/networkx/utils/decorators.py", line 788, in func
+    return argmap._lazy_compile(__wrapper)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: maximum_flow_value() missing 2 required positional arguments: '_s' and '_t'

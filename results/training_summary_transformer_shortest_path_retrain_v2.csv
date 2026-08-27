@@ -1,0 +1,2 @@
+model_type,problem_type,epochs,best_epoch,best_val_loss,final_val_loss,total_training_time_seconds,average_epoch_time_seconds,best_model_path,final_model_path
+transformer,shortest_path,50,6,0.7161846330641649,1.2116947471384034,193.06983680836856,3.861396736167371,saved_models/transformer_shortest_path_retrain_v2_best_model.pt,saved_models/transformer_shortest_path_retrain_v2_final_model.pt
