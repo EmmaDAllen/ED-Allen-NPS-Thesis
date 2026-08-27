@@ -26,6 +26,8 @@ import pandas as pd
 import networkx as nx
 import numpy as np
 import argparse
+import os
+import pickle
 
 # EXTERNAL DATA SCALING CONSTANTS
 
@@ -267,3 +269,4 @@ if __name__ == "__main__":
     G, source_internal, sink_internal, density = load_external_network(node_path=args.node_path,arc_path=args.arc_path,
                                                      source=args.source,sink=args.sink,penalty_low=PENALTY_LOW,
                                                      penalty_high=PENALTY_HIGH,penalty_seed=args.penalty_seed,)
+

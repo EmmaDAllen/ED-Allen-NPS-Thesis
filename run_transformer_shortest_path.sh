@@ -13,4 +13,4 @@ cd ~/ED-Allen-NPS-Thesis
 
 nvidia-smi
 
-PYTHONPATH=. python -u evaluation/evaluate.py transformer shortest_path ood_size retrain_v2
+PYTHONPATH=. python -u evaluation/evaluate.py transformer shortest_path ood_size oldweights_newgraphs
