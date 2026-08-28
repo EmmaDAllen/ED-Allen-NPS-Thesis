@@ -63,7 +63,7 @@ def generate_dataset(network_settings,replications_per_setting, attack_budgets, 
 
     # minimum unweighted number of arcs separating source and sink
     # this prevents structurally shallow networks such as s -> v -> t
-    MIN_SHORTEST_PATH_HOPS = {30: 5, 50: 6, 75: 7}
+    MIN_SHORTEST_PATH_HOPS = {30: 4, 50: 4, 75: 5}
 
     # loose upper bounds on source-to-sink edge connectivity
     # these prevent extremely redundant networks while still allowing
