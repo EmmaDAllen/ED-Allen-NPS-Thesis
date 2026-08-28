@@ -62,13 +62,27 @@ def generate_dataset(network_settings,replications_per_setting, attack_budgets, 
     # SHORTEST-PATH STRUCTURAL FILTERING SETTINGS
 
     # minimum unweighted number of arcs separating source and sink
-    # this prevents structurally shallow networks such as s -> v -> t
-    MIN_SHORTEST_PATH_HOPS = {30: 4, 50: 4, 75: 5}
+    # thresholds depend on both network size and density so that the
+    # filtering removes trivially shallow networks without forcing
+    # high-density graphs to be rare structural outliers
+    MIN_SHORTEST_PATH_HOPS = {
+    # n = 30
+    (30, 2.0): 4,
+    (30, 3.0): 4,
+    (30, 4.0): 4,
+    (30, 6.0): 3,
 
-    # loose upper bounds on source-to-sink edge connectivity
-    # these prevent extremely redundant networks while still allowing
-    # naturally low-connectivity shortest-path instances
-    MAX_EDGE_CONNECTIVITY = {2.0: 3, 3.0: 4, 4.0: 6, 6.0: 8}
+    # n = 50
+    (50, 2.0): 4,
+    (50, 3.0): 4,
+    (50, 4.0): 4,
+    (50, 6.0): 3,
+
+    # n = 75
+    (75, 2.0): 5,
+    (75, 3.0): 5,
+    (75, 4.0): 5,
+    (75, 6.0): 4,}
 
     # maximum number of candidate graphs tested before failing
     MAX_GENERATION_ATTEMPTS = 100000
@@ -137,13 +151,9 @@ def generate_dataset(network_settings,replications_per_setting, attack_budgets, 
                 # density implied by requested n and m
                 target_density = m / n
 
-                # minimum structural source-sink separation
-                min_hops = MIN_SHORTEST_PATH_HOPS[n]
-
-                # match current density to nearest configured connectivity limit
-                density_key = min(MAX_EDGE_CONNECTIVITY, key=lambda x: abs(x - target_density))
-
-                max_edge_connectivity = MAX_EDGE_CONNECTIVITY[density_key]
+                # minimum structural source-sink separation depends on both
+                # network size and density
+                min_hops = MIN_SHORTEST_PATH_HOPS[(n, target_density)]
 
                 while True:
 
@@ -155,8 +165,7 @@ def generate_dataset(network_settings,replications_per_setting, attack_budgets, 
                             f"Could not generate valid shortest-path graph after "
                             f"{MAX_GENERATION_ATTEMPTS} attempts for "
                             f"n={n}, m={m}, density={target_density:.2f}. "
-                            f"Requirements: min_hops={min_hops}, "
-                            f"max_edge_connectivity={max_edge_connectivity}.")
+                            f"Requirement: min_hops={min_hops}.")
 
                     # deterministic candidate seed preserves reproducibility
                     candidate_seed = seed * 1000000 + attempt
@@ -185,12 +194,6 @@ def generate_dataset(network_settings,replications_per_setting, attack_budgets, 
                         attempt += 1
                         continue
 
-
-                    # reject only unusually high-redundancy graphs
-                    # no minimum connectivity requirement is imposed
-                    if edge_connectivity > max_edge_connectivity:
-                        attempt += 1
-                        continue
 
                     # candidate passed all structural checks
                     seed = candidate_seed
