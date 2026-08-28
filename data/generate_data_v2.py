@@ -337,7 +337,7 @@ if __name__ == "__main__":
 
     dataset = generate_dataset(
         network_settings=network_settings,
-        replications_per_setting=10,
+        replications_per_setting=50,
         attack_budgets=attack_budgets,
         problem_type=args.problem_type,
         base_seed=1,
