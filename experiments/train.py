@@ -200,7 +200,10 @@ def train():
     # DATASET LOADING 
 
     # choose the solved training-data file corresponding to the requested problem
-    dataset_file = f"training_data_{problem_type}.json"
+    if problem_type == "shortest_path":
+        dataset_file = "training_data_shortest_path_filtered.json"
+    else:
+        dataset_file = f"training_data_{problem_type}.json"
 
     # load the JSON data through the custom PyTorch Dataset class - each item represents one 
     # graph under one attack budget and includes edge features, edge bias, attack labels, and a mask
