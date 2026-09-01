@@ -13,8 +13,8 @@ source ~/thesis/bin/activate
 cd ~/ED-Allen-NPS-Thesis
 
 nvidia-smi
-PYTHONPATH=. python -u evaluation/evaluate.py tropical shortest_path wood retrain_v2
-PYTHONPATH=. python -u evaluation/evaluate.py tropical_v2 shortest_path wood retrain_v2
-PYTHONPATH=. python -u evaluation/evaluate.py transformer shortest_path wood retrain_v2
-PYTHONPATH=. python -u evaluation/evaluate.py edge_transformer shortest_path wood retrain_v2
-PYTHONPATH=. python -u evaluation/evaluate.py gnn shortest_path wood retrain_v2
+PYTHONPATH=. python -u evaluation/evaluate.py tropical shortest_path wood filtered
+PYTHONPATH=. python -u evaluation/evaluate.py tropical_v2 shortest_path wood filtered
+PYTHONPATH=. python -u evaluation/evaluate.py transformer shortest_path wood filtered
+PYTHONPATH=. python -u evaluation/evaluate.py edge_transformer shortest_path wood filtered
+PYTHONPATH=. python -u evaluation/evaluate.py gnn shortest_path wood filtered
