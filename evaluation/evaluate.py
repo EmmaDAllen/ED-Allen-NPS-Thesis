@@ -46,6 +46,7 @@ from evaluation.metrics import max_flow_after_attack
 from evaluation.metrics import min_cost_flow_after_attack
 from models.tropical_attention_V2 import TropicalInterdictionModel as TropicalInterdictionModelV2
 from evaluation.generate_evaluation_graphs import get_test_settings
+from itertools import combinations
 
 
 
@@ -133,6 +134,88 @@ def get_model(model_type, problem_type, device):
 
     else:
         raise ValueError(f"Unknown model type: {model_type}")
+
+
+
+
+def evaluate_attack_objective(sample, attack_list, problem_type):
+
+    """Evaluate the downstream network objective produced by one candidate
+    interdiction vector."""
+
+    if problem_type == "shortest_path":
+        return shortest_path_after_attack(sample, attack_list)
+
+    elif problem_type == "max_flow":
+        return max_flow_after_attack(sample, attack_list)
+
+    elif problem_type == "min_cost_flow":
+        return min_cost_flow_after_attack(sample, attack_list)
+
+    else:
+        raise ValueError(f"Unknown problem type: {problem_type}")
+
+
+def neural_candidate_search(sample, masked_logits, interdictable_mask, k,
+                            problem_type, candidate_pool_extra=3,):
+
+    """Use the model's highest-scoring arcs to define a small candidate pool,
+    enumerate feasible interdiction sets of size k within that pool, evaluate
+    each candidate using the follower problem, and return the best candidate.
+
+    candidate_pool_extra controls how many additional arcs beyond K are
+    considered.
+
+    Example:
+        K = 5
+        candidate_pool_extra = 3
+        candidate pool size = 8
+        number of candidates = C(8,5) = 56"""
+
+
+    num_edges = masked_logits.numel()
+    num_interdictable = int(interdictable_mask.sum().item())
+
+    # Number of high-scoring arcs retained for candidate generation.
+    pool_size = min(k + candidate_pool_extra, num_interdictable)
+
+    # Retrieve indices of highest-scoring eligible arcs.
+    pool_indices = torch.topk(masked_logits,k=pool_size).indices.cpu().tolist()
+
+    best_attack_list = None
+    best_objective = None
+    num_candidates = 0
+
+    # Enumerate every size-k subset of the candidate pool.
+    for candidate_indices in combinations(pool_indices, k):
+
+        num_candidates += 1
+
+        # Construct a complete binary attack vector in the same ordering
+        # used by sample["attack"].
+        candidate_attack = [0] * num_edges
+
+        for idx in candidate_indices:
+            candidate_attack[idx] = 1
+
+        candidate_objective = evaluate_attack_objective(sample, candidate_attack, problem_type,)
+
+        # Shortest path and min-cost-flow attackers maximize the
+        # downstream objective.
+        if problem_type in ["shortest_path", "min_cost_flow"]:
+
+            if (best_objective is None or candidate_objective > best_objective):
+                best_objective = candidate_objective
+                best_attack_list = candidate_attack
+
+        # Max-flow attacker minimizes surviving flow.
+        elif problem_type == "max_flow":
+
+            if (best_objective is None or candidate_objective < best_objective):
+                best_objective = candidate_objective
+                best_attack_list = candidate_attack
+
+    return best_attack_list, best_objective, pool_size, num_candidates
 
 
 
@@ -478,6 +561,22 @@ def evaluate():
             # comparison and objective evaluation
             predicted_attack_list = predicted_attack.cpu().int().tolist()
 
+
+
+            # MACHING LEARNING GUIDED CANDIDATE SEARCH
+
+            candidate_start = time.perf_counter()
+
+            candidate_attack_list, candidate_objective, candidate_pool_size, num_candidates = (
+                 neural_candidate_search(sample=sample,masked_logits=masked_logits,
+                                         interdictable_mask=interdictable_mask, k=k,
+                                         problem_type=problem_type,candidate_pool_extra=3,))
+
+            candidate_end = time.perf_counter()
+
+            candidate_search_time = candidate_end - candidate_start
+
+
             # retrieve the MIP-optimal binary attack vector - the ordering matches the 
             # stored edge ordering in the sample and the model input tensors
             optimal_attack_list = sample["attack"]
@@ -499,6 +598,15 @@ def evaluate():
                     p != o for p, o in zip(predicted_attack_list, optimal_attack_list))
 
 
+            # candidate metrics for the machine learning guided search
+            candidate_exact = int(candidate_attack_list == optimal_attack_list)
+
+            candidate_hamming = sum(c != o for c, o in zip(candidate_attack_list, optimal_attack_list))
+
+            candidate_correct_edges = sum(c == 1 and o == 1
+                                          for c, o in zip(candidate_attack_list, optimal_attack_list))
+
+
 
 
             # DOWNSTREAM OBJECTIVE EVALUATION
@@ -518,6 +626,8 @@ def evaluate():
                 # same objective value as the optimal interdiction, even when the exact attack sets differ
                 objective_gap = (optimal_objective - predicted_objective) / max(abs(optimal_objective), 1e-8)
 
+                candidate_objective_gap = (optimal_objective - candidate_objective) / max(abs(optimal_objective), 1e-8)
+
                 
             elif problem_type == "max_flow":
 
@@ -535,6 +645,7 @@ def evaluate():
                 # gap = (predicted - optimal) / |baseline| = normalizing by baseline flow avoids 
                 # instability when the optimal surviving flow equals zero
                 objective_gap = (predicted_objective - optimal_objective) / max(abs(baseline_objective), 1e-8)
+                candidate_objective_gap = (candidate_objective - optimal_objective) / max(abs(baseline_objective), 1e-8)
 
 
             elif problem_type == "min_cost_flow":
@@ -548,6 +659,7 @@ def evaluate():
                 # MIP-optimal attack should produce a cost at least as large as the model-predicted attack
                 # gap = (optimal - predicted) / |optimal|
                 objective_gap = (optimal_objective - predicted_objective) / max(abs(optimal_objective), 1e-8)
+                candidate_objective_gap = (optimal_objective - candidate_objective) / max(abs(optimal_objective), 1e-8)
 
             else:
                 # branch should be unreachable because problem_type was already checked in get_model()
@@ -612,7 +724,27 @@ def evaluate():
                     "mip_total_time": mip_total_time,
 
                     # timed model forward-pass duration                     
-                    "inference_time": inference_time,})
+                    "inference_time": inference_time,
+
+                    # neural-guided candidate-search results
+                    "candidate_objective": candidate_objective,
+                    "candidate_objective_gap": candidate_objective_gap,
+
+                    # number of model-ranked arcs considered before generating combinations
+                    "candidate_pool_size": candidate_pool_size,
+
+                    # number of size-K candidate interdiction sets actually evaluated
+                    "num_candidates": num_candidates,
+
+                    # time spent generating/evaluating candidate attack sets
+                    "candidate_search_time": candidate_search_time,
+
+                    # complete runtime of model inference plus candidate refinement
+                    "hybrid_total_time": inference_time + candidate_search_time,
+
+                    "candidate_exact_match": candidate_exact,
+                    "candidate_hamming_distance": candidate_hamming,
+                    "candidate_correct_edges": candidate_correct_edges})
 
 
 
