@@ -19,8 +19,8 @@ import argparse
 import networkx as nx
 import math
 
-from data.random_networks import (generate_one_in_network,generate_grid_network,
-    generate_layered_network, generate_star_mesh_network)
+from data.random_networks import (generate_one_in_network,generate_grid_network, 
+    generate_geometric_network, generate_layered_network, generate_star_mesh_network)
 from optimization.mip import solve_instance
 
 # Constants for generating random networks
@@ -66,6 +66,12 @@ def generate_graph_by_topology(topology,n, m, cost_low, cost_high, penalty_low, 
         return generate_grid_network(n=n,m=m,cost_low=cost_low,cost_high=cost_high,penalty_low=penalty_low,
                                      penalty_high=penalty_high,capacity_low=capacity_low,capacity_high=capacity_high,
                                      seed=seed)
+
+    elif topology == "geometric":
+
+        return generate_geometric_network(n=n,m=m,cost_low=cost_low,cost_high=cost_high,penalty_low=penalty_low,
+                                          penalty_high=penalty_high,capacity_low=capacity_low,capacity_high=capacity_high,
+                                          seed=seed)
 
     elif topology == "layered":
 
