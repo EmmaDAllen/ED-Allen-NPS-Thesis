@@ -212,6 +212,7 @@ def generate_grid_network(n,m,cost_low=1,cost_high=10,penalty_low=1,penalty_high
     return G, s, t, density
 
 
+
 def generate_layered_network(n, m, n_layers=None, cost_low=1, cost_high=10, penalty_low=1,
                             penalty_high=10, capacity_low=1, capacity_high=20, seed=None,):
 

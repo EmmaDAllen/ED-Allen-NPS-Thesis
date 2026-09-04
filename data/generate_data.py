@@ -17,6 +17,7 @@ import json
 import time
 import argparse
 import networkx as nx
+import math
 
 from data.random_networks import (generate_one_in_network,generate_grid_network,
     generate_layered_network)
@@ -372,7 +373,6 @@ if __name__ == "__main__":
 
     # TOPOLOGY EXPERIMENT
 
-
     # EXPERIMENT 1: Clean One-In control
 
     topology_mix = {"one_in": 1.0}
@@ -382,8 +382,8 @@ if __name__ == "__main__":
     # COMMENT OUT the One-In-only version above and uncomment this version when generating the
     # topology-augmented dataset
 
-
     # topology_mix = {"one_in": 0.70, "grid": 0.15, "layered": 0.15,}
+
 
 
     dataset = generate_dataset(
