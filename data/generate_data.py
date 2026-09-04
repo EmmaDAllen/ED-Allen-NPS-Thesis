@@ -20,7 +20,7 @@ import networkx as nx
 import math
 
 from data.random_networks import (generate_one_in_network,generate_grid_network,
-    generate_layered_network)
+    generate_layered_network, generate_star_mesh_network)
 from optimization.mip import solve_instance
 
 # Constants for generating random networks
@@ -72,6 +72,13 @@ def generate_graph_by_topology(topology,n, m, cost_low, cost_high, penalty_low, 
         return generate_layered_network(n=n,m=m,cost_low=cost_low,cost_high=cost_high,penalty_low=penalty_low,
                                         penalty_high=penalty_high,capacity_low=capacity_low,capacity_high=capacity_high,
                                         seed=seed)
+
+
+    elif topology == "star_mesh":
+
+        return generate_star_mesh_network(n=n,m=m,cost_low=cost_low,cost_high=cost_high,penalty_low=penalty_low,
+                                          penalty_high=penalty_high,capacity_low=capacity_low,capacity_high=capacity_high,
+                                          seed=seed)
 
     else:
         raise ValueError(f"Unknown topology: {topology}")
@@ -382,8 +389,7 @@ if __name__ == "__main__":
     # COMMENT OUT the One-In-only version above and uncomment this version when generating the
     # topology-augmented dataset
 
-    # topology_mix = {"one_in": 0.70, "grid": 0.15, "layered": 0.15,}
-
+    # topology_mix = {"one_in": 0.60, "grid": 0.10, "geometric": 0.10, "star_mesh": 0.10, "layered": 0.10}
 
 
     dataset = generate_dataset(
