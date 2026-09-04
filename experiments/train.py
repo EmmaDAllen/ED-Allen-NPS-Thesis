@@ -201,9 +201,26 @@ def train():
 
     # choose the solved training-data file corresponding to the requested problem
     if problem_type == "shortest_path":
-        dataset_file = "training_data_shortest_path_filtered.json"
+
+        if experiment_tag == "onein_final":
+            dataset_file = "training_data_shortest_path_onein_final.json"
+
+        elif experiment_tag == "filtered":
+            dataset_file = "training_data_shortest_path_filtered.json"
+
+        elif experiment_tag == "mixed_topology":
+            dataset_file = "training_data_shortest_path_mixed_topology.json"
+
+        else:
+            dataset_file = "training_data_shortest_path.json"
+
+    # max flow and min cost flow retain the original behavior
     else:
         dataset_file = f"training_data_{problem_type}.json"
+
+
+
+
 
     # load the JSON data through the custom PyTorch Dataset class - each item represents one 
     # graph under one attack budget and includes edge features, edge bias, attack labels, and a mask
