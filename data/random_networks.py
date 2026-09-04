@@ -476,14 +476,10 @@ def generate_star_mesh_network(n, m, cost_low=1, cost_high=10, penalty_low=1, pe
 
     # Connect the source to one or more hubs.
     # Using multiple entry hubs avoids making a single source arc an unavoidable bottleneck
-    source_hubs = rng.sample(
-        hubs,
-        min(2, len(hubs))
-    )
+    source_hubs = rng.sample(hubs, min(2, len(hubs)))
 
     for hub in source_hubs:
         G.add_edge(s, hub)
-
 
 
 
@@ -518,11 +514,9 @@ def generate_star_mesh_network(n, m, cost_low=1, cost_high=10, penalty_low=1, pe
 
         for node in members:
 
-            # Primary hub -> peripheral connection
+            # Primary hub-to-spoke connection.
+            # Start with one directed arc so the base topology remains sparse.
             G.add_edge(hub, node)
-
-            # Allow return movement as well.
-            G.add_edge(node, hub)
 
 
 
