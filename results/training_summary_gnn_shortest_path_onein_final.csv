@@ -1,0 +1,2 @@
+model_type,problem_type,epochs,best_epoch,best_val_loss,final_val_loss,total_training_time_seconds,average_epoch_time_seconds,best_model_path,final_model_path
+gnn,shortest_path,50,11,0.5620290547093348,0.6010807146136441,178.31994271464646,3.5663988542929292,saved_models/gnn_shortest_path_onein_final_best_model.pt,saved_models/gnn_shortest_path_onein_final_final_model.pt
