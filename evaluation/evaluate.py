@@ -156,15 +156,15 @@ def evaluate_attack_objective(sample, attack_list, problem_type):
         raise ValueError(f"Unknown problem type: {problem_type}")
 
 
-def neural_candidate_search(sample, masked_logits, interdictable_mask, k,
+
+def candidate_search(sample, masked_logits, interdictable_mask, k,
                             problem_type, candidate_pool_extra=3,):
 
-    """Use the model's highest-scoring arcs to define a small candidate pool,
-    enumerate feasible interdiction sets of size k within that pool, evaluate
-    each candidate using the follower problem, and return the best candidate.
+    """Use the model's highest-scoring arcs to define a small candidate pool, enumerate 
+    feasible interdiction sets of size k within that pool, evaluate each candidate using
+    the follower problem, and return the best candidate.
 
-    candidate_pool_extra controls how many additional arcs beyond K are
-    considered.
+    candidate_pool_extra controls how many additional arcs beyond K are considered.
 
     Example:
         K = 5
@@ -245,6 +245,9 @@ def evaluate():
     # sys.argv[4] optionally specifies an experiment tag used to distinguish retrained
     # models from previous runs and prevent checkpoints/results from being overwritten    
     experiment_tag = sys.argv[4] if len(sys.argv) > 4 else None
+    # sys.argv[5] optionally identifies a separate evaluation run
+    # so different candidate-search settings do not overwrite one another
+    evaluation_tag = sys.argv[5] if len(sys.argv) > 5 else None
 
 
 
@@ -568,9 +571,9 @@ def evaluate():
             candidate_start = time.perf_counter()
 
             candidate_attack_list, candidate_objective, candidate_pool_size, num_candidates = (
-                 neural_candidate_search(sample=sample,masked_logits=masked_logits,
+                 candidate_search(sample=sample,masked_logits=masked_logits,
                                          interdictable_mask=interdictable_mask, k=k,
-                                         problem_type=problem_type,candidate_pool_extra=3,))
+                                         problem_type=problem_type,candidate_pool_extra=4,))
 
             candidate_end = time.perf_counter()
 
@@ -821,10 +824,21 @@ def evaluate():
 
     # include the optional experiment tag in the results filename so retrained-model
     # evaluations are saved separately rather than overwriting previous results
-    if experiment_tag:
-        results_path = ("results/" f"evaluation_results_" f"{model_type}_"
-            f"{problem_type}_" f"{eval_mode}_" f"{experiment_tag}.csv")
+    if experiment_tag and evaluation_tag:
+        results_path = ("results/"
+            f"evaluation_results_{model_type}_"
+            f"{problem_type}_"
+            f"{eval_mode}_"
+            f"{experiment_tag}_"
+            f"{evaluation_tag}.csv")
 
+    elif experiment_tag:
+        results_path = ("results/"
+            f"evaluation_results_{model_type}_"
+            f"{problem_type}_"
+            f"{eval_mode}_"
+            f"{experiment_tag}.csv")
+        
     # preserve the original naming convention when no experiment tag is supplied
     else:
         results_path = ("results/" f"evaluation_results_" f"{model_type}_"
@@ -842,7 +856,7 @@ def evaluate():
         writer.writerows(results_rows)
 
 
-    print(f"\nSaved results/evaluation_results_{model_type}_{problem_type}_{eval_mode}.csv")
+    print(f"\nSaved {results_path}")
 
 
 # run evaluation only when this file is executed directly - importing evaluate.py from another 
