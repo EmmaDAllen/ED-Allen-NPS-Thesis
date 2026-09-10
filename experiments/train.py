@@ -211,6 +211,9 @@ def train():
         elif experiment_tag == "mixed_topology":
             dataset_file = "training_data_shortest_path_mixed_topology.json"
 
+        elif experiment_tag == "mixed_topology_v2":
+            dataset_file = "training_data_shortest_path_mixed_topology_v2.json"
+
         else:
             dataset_file = "training_data_shortest_path.json"
 
