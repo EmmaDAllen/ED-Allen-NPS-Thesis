@@ -1,0 +1,2 @@
+model_type,problem_type,epochs,best_epoch,best_val_loss,final_val_loss,total_training_time_seconds,average_epoch_time_seconds,best_model_path,final_model_path
+tropical,shortest_path,50,5,0.6185366649019017,1.2322929408605143,484.2593688480556,9.685187376961112,saved_models/tropical_shortest_path_mixed_topology_v2_best_model.pt,saved_models/tropical_shortest_path_mixed_topology_v2_final_model.pt
