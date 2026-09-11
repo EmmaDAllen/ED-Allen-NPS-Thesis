@@ -18,12 +18,17 @@ The script supports four evaluation modes:
    Generates larger One-In networks to evaluate generalization to network
    sizes outside the training distribution.
 
-3. wood
+3. value_ood
+   Generates One-In networks using the same sizes and densities represented
+   during training, but with arc costs and interdiction penalties outside
+   the training range.
+
+4. wood
    Generates selected Wood-style shortest-path interdiction benchmark
    networks using their specified grid dimensions, arc-attribute ranges,
    and interdiction budgets.
 
-4. external
+5. external
    Loads a directed external transportation network from node and arc CSV
    files, rescales its costs to the training-data scale, and prepares it for
    shortest-path interdiction evaluation.
@@ -85,6 +90,26 @@ def get_test_settings(eval_mode):
             (50, 200),
             (50, 300),
         
+            (75, 150),
+            (75, 225),
+            (75, 300),
+            (75, 450),]
+
+    elif eval_mode == "value_ood":
+
+        # Same network sizes and densities as ID evaluation.
+        # Only the arc cost and interdiction-penalty distributionsare shifted outside the training range.
+        return [
+            (30, 60),
+            (30, 90),
+            (30, 120),
+            (30, 180),
+
+            (50, 100),
+            (50, 150),
+            (50, 200),
+            (50, 300),
+
             (75, 150),
             (75, 225),
             (75, 300),
@@ -184,7 +209,7 @@ def generate_evaluation_graphs(problem_type, eval_mode, source=None, sink=None):
         "shortest_path", "max_flow", or "min_cost_flow".
 
     eval_mode : str
-        Evaluation graph type: "id_new", "ood_size", "wood", or "external".
+        Evaluation graph type: "id_new", "ood_size", "value_ood", "wood", or "external".
 
     source : int, optional
         Original source node identifier for external-network evaluation.
@@ -316,6 +341,33 @@ def generate_evaluation_graphs(problem_type, eval_mode, source=None, sink=None):
     reps_per_setting = 20
     test_attack_limits = [1, 2, 3, 4, 5]
 
+    # ARC ATTRIBUTE RANGES
+
+    # Value-OOD evaluation deliberately uses cost and penalty values outside
+    # the 1-10 ranges represented during training.
+    if eval_mode == "value_ood":
+
+        cost_low = 11
+        cost_high = 50
+
+        penalty_low = 11
+        penalty_high = 50
+
+    else:
+
+        # Standard synthetic evaluation ranges used during training
+        cost_low = 1
+        cost_high = 10
+
+        penalty_low = 1
+        penalty_high = 10
+
+
+    # Capacity range is unchanged because the current value-OOD experiment
+    # is focused on shortest-path cost and interdiction-penalty values.
+    capacity_low = 1
+    capacity_high = 20
+
     # maximum attack budget is used to establish the minimum required
     # source-to-sink edge connectivity for max-flow evaluation graphs
     max_attack_budget = max(test_attack_limits)
@@ -380,8 +432,8 @@ def generate_evaluation_graphs(problem_type, eval_mode, source=None, sink=None):
                     candidate_seed = seed * 1000000 + attempt
 
                     # generate a candidate One-In directed network
-                    G, s, t, density = generate_one_in_network(n=n,m=m,cost_low=1,cost_high=10,penalty_low=1,
-                                                               penalty_high=10,capacity_low=1,capacity_high=20,
+                    G, s, t, density = generate_one_in_network(n=n,m=m,cost_low=cost_low,cost_high=cost_high,penalty_low=penalty_low,
+                                                               penalty_high=penalty_high,capacity_low=capacity_low,capacity_high=capacity_high,
                                                                seed=candidate_seed,)
 
                     # compute the minimum number of directed arcs whose removal
@@ -423,8 +475,8 @@ def generate_evaluation_graphs(problem_type, eval_mode, source=None, sink=None):
             # so generate one graph directly using the deterministic evaluation seed
             elif problem_type in ("shortest_path", "min_cost_flow"):
 
-                G, s, t, density = generate_one_in_network(n=n,m=m,cost_low=1,cost_high=10,penalty_low=1,
-                                                           penalty_high=10,capacity_low=1,capacity_high=20,
+                G, s, t, density = generate_one_in_network(n=n,m=m,cost_low=cost_low,cost_high=cost_high,penalty_low=penalty_low,
+                                                           penalty_high=penalty_high,capacity_low=capacity_low,capacity_high=capacity_high,
                                                            seed=seed,)
 
             else:
@@ -436,7 +488,10 @@ def generate_evaluation_graphs(problem_type, eval_mode, source=None, sink=None):
 
             # store the graph and identifying metadata required by evaluate.py
             evaluation_graphs.append({"G": G,"s": s,"t": t,"density": density,"seed": seed,
-                                      "n": n,"m": m,"rep": rep,})
+                                      "n": n,"m": m,"rep": rep,     
+                                      # attribute ranges used to generate this evaluation graph
+                                      "cost_low": cost_low,"cost_high": cost_high,
+                                      "penalty_low": penalty_low,"penalty_high": penalty_high,})
 
             # record the completed graph key so it cannot be generated twice
             existing_keys.add((n, m, rep))
@@ -451,7 +506,7 @@ def generate_evaluation_graphs(problem_type, eval_mode, source=None, sink=None):
                   f"{len(evaluation_graphs)}/{total_expected} evaluation graphs.",flush=True,)
 
     # report completion and the location of the saved evaluation graph file
-    print(f"\nFinsihed. Saved {len(evaluation_graphs)} graphs to {output_path}",flush=True,)
+    print(f"\nFinished. Saved {len(evaluation_graphs)} graphs to {output_path}",flush=True,)
 
 
 if __name__ == "__main__":
