@@ -313,8 +313,11 @@ def evaluate():
         evaluation_cases = [ (graph_data["attack_budget"], graph_data)
                             for graph_data in evaluation_graphs]
 
-        # one graph is expected for each selected Wood benchmark configuration
-        expected_graphs = len(get_test_settings("wood"))
+        # 20 independent graph realizations are generated for each selected
+        # Wood benchmark configuration.
+        reps_per_wood_setting = 20
+
+        expected_graphs = (len(get_test_settings("wood"))* reps_per_wood_setting)
 
 
     elif eval_mode == "external":
@@ -405,6 +408,10 @@ def evaluate():
             rep = graph_data.get("rep", None)
             wood_problem = graph_data.get("wood_problem", None)
             network_name = graph_data.get("network_name", None)
+
+            # Wood grid dimensions are present only for Wood benchmark instances
+            rows = graph_data.get("rows", None)
+            cols = graph_data.get("cols", None)
 
 
             # EXACT MIP SOLUTION
@@ -684,6 +691,8 @@ def evaluate():
 
                     # optional benchmark/external-network identifiers
                     "wood_problem": wood_problem,
+                    "wood_rows": rows,
+                    "wood_cols": cols,
                     "network_name": network_name,
 
                     # graph identifiers and structure

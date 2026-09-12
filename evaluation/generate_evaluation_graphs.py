@@ -243,7 +243,11 @@ def generate_evaluation_graphs(problem_type, eval_mode, source=None, sink=None):
         # Wood benchmark evaluation is currently implemented only for
         # shortest-path interdiction
         if problem_type != "shortest_path":
-                raise ValueError("Wood evaluation graphs are for shortest_path only.")
+            raise ValueError("Wood evaluation graphs are for shortest_path only.")
+
+        # Number of independent random graph realizations generated for each
+        # Wood benchmark configuration
+        reps_per_wood_setting = 20
 
         # fixed base seed makes the generated benchmark instances reproducible
         base_seed = 5
@@ -253,19 +257,23 @@ def generate_evaluation_graphs(problem_type, eval_mode, source=None, sink=None):
 
         # unpack the parameters associated with each selected Wood test problem
         for (problem,rows,cols,cost_max,delay_max,resource_max,resource_budget,) in test_settings:
+
+            # generate multiple independent random realizations of the same
+            # structural Wood configuration
+            for rep in range(reps_per_wood_setting):
     
-            # derive a deterministic seed unique to the benchmark problem number
-            seed = base_seed + problem
+                # derive a deterministic seed unique to the benchmark problem number
+                seed = base_seed + 1000 * problem + rep
     
-            # generate the directed grid network using the selected Wood parameters
-            G, s, t, density = generate_wood_grid(rows=rows,cols=cols,cost_max=cost_max,delay_max=delay_max,
+                # generate the directed grid network using the selected Wood parameters
+                G, s, t, density = generate_wood_grid(rows=rows,cols=cols,cost_max=cost_max,delay_max=delay_max,
                                                       resource_max=resource_max,seed=seed,)
     
-            # store the graph together with benchmark metadata needed during evaluation
-            evaluation_graphs.append({"G": G, "s": s, "t": t,"density": density,"seed": seed,
+                # store the graph together with benchmark metadata needed during evaluation
+                evaluation_graphs.append({"G": G, "s": s, "t": t,"density": density,"seed": seed,
     
                         # Wood benchmark identifiers
-                        "wood_problem": problem, "rows": rows, "cols": cols,
+                        "wood_problem": problem, "rows": rows, "cols": cols, "rep": rep,
     
                         # actual generated graph dimensions
                         "n": G.number_of_nodes(), "m": G.number_of_edges(),
@@ -274,21 +282,23 @@ def generate_evaluation_graphs(problem_type, eval_mode, source=None, sink=None):
                         "cost_max": cost_max,"delay_max": delay_max,"resource_max": resource_max,
                         "attack_budget": resource_budget,})
 
-            # print benchmark-level progress during graph generation
-            print(f"Generated Wood problem {problem} | "
+                # print benchmark-level progress during graph generation
+                print(f"Generated Wood problem {problem} | "
+                    f"rep={rep + 1}/{reps_per_wood_setting} | "
                     f"{rows}x{cols} | "
                     f"nodes={G.number_of_nodes()} | "
                     f"arcs={G.number_of_edges()} | "
                     f"budget={resource_budget}",
                     flush=True,)
 
-        # save the complete fixed Wood benchmark collection for reuse by evaluate.py
+        # save one fixed Wood evaluation set so every trained model is tested
+        # on exactly the same graph realizations
         with open(output_path, "wb") as f:
-                pickle.dump(evaluation_graphs, f)
+            pickle.dump(evaluation_graphs, f)
     
         print(f"\nFinished. Saved {len(evaluation_graphs)} "
-                f"Wood graphs to {output_path}",
-                flush=True,)
+              f"Wood graphs to {output_path}",
+              flush=True,)
 
         # Wood generation is complete; do not continue into standard graph generation
         return

@@ -400,7 +400,7 @@ if __name__ == "__main__":
 
     dataset = generate_dataset(
         network_settings=network_settings,
-        replications_per_setting=50,
+        replications_per_setting=100,
         attack_budgets=attack_budgets,
         problem_type=args.problem_type,
         topology_mix=topology_mix,

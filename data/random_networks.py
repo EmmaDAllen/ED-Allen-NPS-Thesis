@@ -141,196 +141,256 @@ def _add_random_arcs_until_m(G, m, rng):
     G.add_edges_from(extra_arcs)
 
 
-def generate_grid_network(n, m=None, cost_low=1, cost_high=10, penalty_low=1, penalty_high=10,
-        capacity_low=1, capacity_high=20, seed=None):
+def generate_grid_network(n,m, cost_low=1, cost_high=10, penalty_low=1,penalty_high=10,
+                           capacity_low=1, capacity_high=20, seed=None,):
 
-    """Generate a directed Wood-style grid network.
+    """Generate a directed grid-structured network with exactly n nodes and m arcs.
 
-    The network contains a separate source and sink. The source connects to all nodes in the first 
-    grid column, and all nodes in the final grid column connect to the sink.
+    A separate source and sink are used. Interior nodes are arranged on an
+    approximately square grid. A directed grid backbone guarantees that every
+    interior node is reachable from the source and that at least one
+    source-to-sink path exists.
 
-    Interior grid arcs allow vertical movement as well as forward, upper-right, and lower-right movement.
-
-    The resulting number of arcs is determined primarily by the grid topology rather than by arbitrary
-    random arc insertion."""
-
-    rng = random.Random(seed)
-
-    if n < 6:
-        raise ValueError("Grid network requires at least 6 nodes.")
-
-    # reserve source and sink
-    s = 0
-    t = n - 1
-
-    num_grid_nodes = n - 2
-
-    # choose approximately square grid dimensions
-    rows = max(2, round(math.sqrt(num_grid_nodes)))
-    cols = math.ceil(num_grid_nodes / rows)
-
-    G = nx.DiGraph()
-    G.add_nodes_from(range(n))
-
-    # assign graph node IDs 1,...,n-2 to grid positions
-    def node_id(r, c):
-        idx = r * cols + c
-
-        if idx >= num_grid_nodes:
-            return None
-
-        return 1 + idx
-
-    # source -> first column
-    for r in range(rows):
-        v = node_id(r, 0)
-
-        if v is not None:
-            G.add_edge(s, v, dist=0, penalty=0, capacity=1, interdictable=False)
-
-    # grid arcs
-    for r in range(rows):
-        for c in range(cols):
-
-            u = node_id(r, c)
-
-            if u is None:
-                continue
-
-            candidate_positions = []
-
-            # vertical arcs in interior columns
-            if c not in (0, cols - 1):
-
-                if r > 0:
-                    candidate_positions.append((r - 1, c))
-
-                if r < rows - 1:
-                    candidate_positions.append((r + 1, c))
-
-            # forward / diagonal-forward arcs
-            if c < cols - 1:
-
-                candidate_positions.append((r, c + 1))
-
-                if r > 0:
-                    candidate_positions.append((r - 1, c + 1))
-
-                if r < rows - 1:
-                    candidate_positions.append((r + 1, c + 1))
-
-            for rr, cc in candidate_positions:
-
-                v = node_id(rr, cc)
-
-                if v is None:
-                    continue
-
-                G.add_edge(u, v, dist=rng.randint(cost_low, cost_high),
-                    penalty=rng.randint(penalty_low, penalty_high),
-                    capacity=rng.randint(capacity_low, capacity_high), interdictable=True)
-
-    # last valid node in each row -> sink
-    for r in range(rows):
-
-        row_nodes = [node_id(r, c) for c in range(cols) if node_id(r, c) is not None]
-
-        if row_nodes:
-
-            u = row_nodes[-1]
-
-            G.add_edge(u, t, dist=0, penalty=0, capacity=1, interdictable=False)
-
-    density = G.number_of_edges() / G.number_of_nodes()
-
-    return G, s, t, density
-
-
-
-def generate_layered_network(n, m, n_layers=None, cost_low=1, cost_high=10, penalty_low=1,
-                            penalty_high=10, capacity_low=1, capacity_high=20, seed=None,):
-
-    """Generate a directed layered network.
-
-    The source is placed in the first layer and sink in the last layer.
-    Interior nodes are divided across intermediate layers. Each node receives
-    at least one incoming arc from the previous layer, creating source-to-sink
-    connectivity. Additional random forward arcs are added until m arcs exist.
+    Additional arcs are then added until the requested total number of arcs m
+    is reached. Candidate arcs are prioritized so that Wood-style local grid
+    structure is preserved as much as possible before progressively allowing
+    less-local spatial connections.
 
     Returns:
         G: directed NetworkX graph
         s: source node
         t: sink node
-        density: m / n"""
+        density: actual arc-to-node ratio m / n"""
 
+    # initialize an independent random number generator so graph generation is
+    # reproducible for a given seed
     rng = random.Random(seed)
 
-    s = 0
-    t = n - 1
-    density = m / n
+    # require enough nodes to form a meaningful grid with separate source and sink
+    if n < 6:
+        raise ValueError("Grid network requires at least 6 nodes.")
 
+    # at least n - 1 arcs are required for a connected directed backbone
     if m < n - 1:
         raise ValueError("Need m >= n - 1.")
 
+    # prevent requests exceeding the number of possible directed arcs without
+    # self-loops
     if m > n * (n - 1):
         raise ValueError("Too many arcs.")
 
-    if n_layers is None:
-        n_layers = max(3, round(math.sqrt(n)))
+    # reserve node 0 for the source and node n - 1 for the sink
+    s = 0
+    t = n - 1
 
-    if n_layers > n:
-        raise ValueError("n_layers cannot exceed number of nodes.")
+    # all remaining nodes are placed into the grid
+    num_grid_nodes = n - 2
 
+    # choose approximately square grid dimensions based on the number of
+    # interior nodes
+    rows = max(2, round(math.sqrt(num_grid_nodes)))
+    cols = math.ceil(num_grid_nodes / rows)
+
+    # initialize directed graph and explicitly add all n nodes
     G = nx.DiGraph()
     G.add_nodes_from(range(n))
 
-    # source and sink occupy their own layers
-    interior_nodes = list(range(1, n - 1))
-    num_middle_layers = n_layers - 2
+    def node_id(r, c):
+        """Convert a grid row and column position to a graph node identifier."""
 
-    layers = [[s]]
+        # convert the two-dimensional grid location to a zero-based index
+        idx = r * cols + c
 
-    # divide interior nodes approximately evenly across layers
-    for i in range(num_middle_layers):
-        layer = interior_nodes[i::num_middle_layers]
-        layers.append(layer)
+        # the final row may not fill every column when n - 2 is not a perfect
+        # multiple of the number of columns
+        if idx >= num_grid_nodes:
+            return None
 
-    layers.append([t])
+        # grid nodes begin at 1 because node 0 is reserved for the source
+        return 1 + idx
 
-    # Guarantee every node in each layer has a predecessor from previous layer
-    for layer_idx in range(1, len(layers)):
-        prev_layer = layers[layer_idx - 1]
-        current_layer = layers[layer_idx]
 
-        for v in current_layer:
-            u = rng.choice(prev_layer)
-            G.add_edge(u, v)
+    # RECORD GRID POSITIONS
 
-    # Add extra forward arcs only.
-    # This preserves the layered/DAG-like structure.
-    possible_arcs = []
+    # map each interior graph node to its grid coordinates; these positions are
+    # later used to determine which candidate arcs are spatially local
+    positions = {}
 
-    for i in range(len(layers) - 1):
-        for j in range(i + 1, len(layers)):
-            for u in layers[i]:
-                for v in layers[j]:
-                    if u != v and not G.has_edge(u, v):
-                        possible_arcs.append((u, v))
+    for r in range(rows):
+        for c in range(cols):
 
+            node = node_id(r, c)
+
+            if node is not None:
+                positions[node] = (r, c)
+
+
+
+    # CREATE GRID BACKBONE
+
+    # connect the source to the first valid node in every grid row
+    # this gives each row a direct entry point from the source
+    for r in range(rows):
+
+        first_node = node_id(r, 0)
+
+        if first_node is not None:
+            G.add_edge(s, first_node)
+
+    # add left-to-right horizontal arcs within each row
+    # this backbone guarantees that every interior node can be reached from s
+    for r in range(rows):
+
+        # collect only valid nodes because the final row may be incomplete
+        row_nodes = [node_id(r, c) for c in range(cols) if node_id(r, c) is not None]
+
+        # connect consecutive nodes in the row from left to right
+        for i in range(len(row_nodes) - 1):
+            G.add_edge(row_nodes[i], row_nodes[i + 1])
+
+        # connect the final valid node in each row directly to the sink
+        # this guarantees at least one complete source-to-sink route per row
+        if row_nodes:
+            G.add_edge(row_nodes[-1], t)
+
+    # verify that the required backbone alone does not exceed the requested
+    # total number of arcs
+    if G.number_of_edges() > m:
+        raise ValueError(f"Grid backbone requires {G.number_of_edges()} arcs, but requested m={m}.")
+
+
+
+    # CONSTRUCT CANDIDATE ADDITIONAL ARCS
+
+    # additional arcs are ranked according to how closely they preserve local
+    # grid structure
+    candidates = []
+
+    # list of all interior grid nodes
+    interior_nodes = list(positions.keys())
+
+    # consider every possible directed arc between distinct interior nodes that
+    # is not already part of the backbone
+    for u in interior_nodes:
+
+        ru, cu = positions[u]
+
+        for v in interior_nodes:
+
+            # exclude self-loops and duplicate arcs
+            if u == v or G.has_edge(u, v):
+                continue
+
+            rv, cv = positions[v]
+
+            # vertical separation between the two grid locations
+            row_difference = abs(rv - ru)
+
+            # signed column difference preserves direction:
+            # positive values indicate movement toward the sink
+            column_difference = cv - cu
+
+            # Manhattan distance provides a simple measure of spatial locality
+            manhattan_distance = (abs(rv - ru) + abs(cv - cu))
+
+            # Priority 0:
+            # forward, upper-right, and lower-right arcs closely match the local
+            # directed structure used in the Wood-style grid networks
+            if (column_difference == 1 and row_difference <= 1):
+                priority = 0
+
+            # Priority 1:
+            # vertical arcs between directly adjacent nodes preserve strong
+            # local grid connectivity
+            elif (column_difference == 0 and row_difference == 1):
+                priority = 1
+
+            # Priority 2:
+            # allow other short spatial connections within Manhattan distance 2
+            elif manhattan_distance <= 2:
+                priority = 2
+
+            # Priority 3:
+            # allow longer arcs that still move generally forward toward the sink
+            elif column_difference > 0:
+                priority = 3
+
+            # Priority 4:
+            # remaining arcs include backward or less-local spatial connections
+            # and are used only when necessary to reach the requested density
+            else:
+                priority = 4
+
+            # include a random tie-breaker so networks generated with different
+            # seeds are not composed of exactly the same equally ranked arcs
+            candidates.append((priority,manhattan_distance, rng.random(), u, v,))
+
+    # sort candidate arcs first by structural priority, then by spatial distance,
+    # then randomly among otherwise similar candidates
+    candidates.sort(key=lambda x: (x[0], x[1], x[2]))
+
+    # determine how many additional arcs are needed to reach exactly m
     remaining_arcs = m - G.number_of_edges()
 
-    if remaining_arcs > len(possible_arcs):
-        raise ValueError(
-            f"Cannot create {m} forward arcs with {n_layers} layers. "
-            "Reduce m or use fewer layers."
-        )
+    # ensure there are enough valid candidate arcs to satisfy the requested
+    # network density
+    if remaining_arcs > len(candidates):
+        raise ValueError(f"Not enough valid grid arcs to reach m={m}.")
 
-    extra_arcs = rng.sample(possible_arcs, remaining_arcs)
-    G.add_edges_from(extra_arcs)
+    # add the highest-priority candidate arcs until the graph contains exactly m
+    for _, _, _, u, v in candidates[:remaining_arcs]:
+        G.add_edge(u, v)
 
-    _assign_arc_attributes(G,rng,cost_low,cost_high,penalty_low,penalty_high,
-                           capacity_low,capacity_high,)
 
+
+    # ASSIGN ARC ATTRIBUTES
+
+    # assign traversal costs, interdiction penalties, capacities, and
+    # interdiction eligibility after the complete graph structure is created
+    for u, v in G.edges():
+
+        # arcs leaving the source or entering the sink are treated as connector
+        # arcs and remain noninterdictable, consistent with the Wood-style
+        # network construction used elsewhere in the evaluation pipeline
+        if u == s or v == t:
+
+            # connector arcs do not contribute traversal distance
+            G[u][v]["dist"] = 0
+
+            # connector arcs cannot incur additional interdiction delay
+            G[u][v]["penalty"] = 0
+
+            # retain a default capacity for compatibility with the common graph
+            # representation used across interdiction problem types
+            G[u][v]["capacity"] = 1
+
+            # explicitly exclude connector arcs from interdiction
+            G[u][v]["interdictable"] = False
+
+        else:
+
+            # assign random traversal cost from the training-data range
+            G[u][v]["dist"] = rng.randint(cost_low,cost_high)
+
+            # assign random interdiction penalty from the training-data range
+            G[u][v]["penalty"] = rng.randint(penalty_low,penalty_high)
+
+            # assign random arc capacity for compatibility with the common
+            # network representation
+            G[u][v]["capacity"] = rng.randint(capacity_low,capacity_high)
+
+            # all interior grid arcs are eligible for interdiction
+            G[u][v]["interdictable"] = True
+
+    # calculate the realized arc-to-node ratio used as the density feature
+    density = G.number_of_edges() / G.number_of_nodes()
+
+    # final consistency check to guarantee that the generated graph honors the
+    # requested number of arcs exactly
+    if G.number_of_edges() != m:
+        raise RuntimeError(f"Expected {m} arcs but generated {G.number_of_edges()}.")
+
+    # return the completed network and metadata used by the training pipeline
     return G, s, t, density
 
 
