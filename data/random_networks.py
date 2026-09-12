@@ -478,6 +478,119 @@ def generate_geometric_network(n,m,cost_low=1,cost_high=10,penalty_low=1,penalty
 
 
 
+
+def generate_layered_network(n,m,n_layers=None,cost_low=1,cost_high=10,penalty_low=1,
+                             penalty_high=10,capacity_low=1,capacity_high=20,seed=None):
+
+    """Generate a directed layered network.
+
+    Nodes are divided into ordered layers from source to sink. Each node
+    receives at least one incoming arc from the immediately preceding layer,
+    creating a directed source-to-sink structure.
+
+    Additional forward arcs between layers are added until exactly m arcs
+    are present.
+
+    Returns:
+        G: directed NetworkX graph
+        s: source node
+        t: sink node
+        density: m / n"""
+
+    # initialize random number generator
+    rng = random.Random(seed)
+
+    # source, sink, and experimental density
+    s = 0
+    t = n - 1
+    density = m / n
+
+    # enough arcs are required to construct the base connected structure
+    if m < n - 1:
+        raise ValueError("Need m >= n - 1.")
+
+    # prevent requests exceeding the maximum number of directed arcs
+    if m > n * (n - 1):
+        raise ValueError("Too many arcs.")
+
+    # choose the number of layers automatically if one is not supplied
+    if n_layers is None:
+        n_layers = max(3, round(math.sqrt(n)))
+
+    # cannot have more layers than nodes
+    if n_layers > n:
+        raise ValueError("Number of layers cannot exceed number of nodes.")
+
+    # initialize directed graph
+    G = nx.DiGraph()
+    G.add_nodes_from(range(n))
+
+    # source and sink each occupy their own layer
+    # remaining nodes are distributed approximately evenly among
+    # the intermediate layers
+    interior_nodes = list(range(1, n - 1))
+
+    num_middle_layers = n_layers - 2
+
+    middle_layers = [interior_nodes[i::num_middle_layers] for i in range(num_middle_layers)]
+
+    layers = [[s]] + middle_layers + [[t]]
+
+    # BUILD LAYERED BACKBONE
+
+    # give every node in each layer at least one predecessor from the
+    # immediately preceding layer
+    for layer_idx in range(1, len(layers)):
+
+        previous_layer = layers[layer_idx - 1]
+        current_layer = layers[layer_idx]
+
+        for v in current_layer:
+
+            u = rng.choice(previous_layer)
+
+            G.add_edge(u, v)
+
+    # CONSTRUCT ADDITIONAL FORWARD ARCS
+
+    # collect every unused arc that moves from an earlier layer to a
+    # later layer; this preserves the directed layered structure
+    possible_arcs = []
+
+    for i in range(len(layers)):
+
+        for j in range(i + 1, len(layers)):
+
+            for u in layers[i]:
+
+                for v in layers[j]:
+
+                    if u != v and not G.has_edge(u, v):
+
+                        possible_arcs.append((u, v))
+
+    # determine how many additional arcs are required to reach exactly m
+    remaining_arcs = m - G.number_of_edges()
+
+    # make sure the requested density can be achieved using forward arcs
+    if remaining_arcs > len(possible_arcs):
+        raise ValueError(f"Not enough forward arcs available to reach requested m={m}.")
+
+    # randomly select the remaining forward arcs without replacement
+    extra_arcs = rng.sample( possible_arcs, remaining_arcs)
+
+    G.add_edges_from(extra_arcs)
+
+    # assign random traversal costs, interdiction penalties, and capacities
+    _assign_arc_attributes(G, rng, cost_low, cost_high, penalty_low, penalty_high,
+                            capacity_low, capacity_high,)
+
+    # return completed network and experimental metadata
+    return G, s, t, density
+
+
+
+
 def generate_star_mesh_network(n, m, cost_low=1, cost_high=10, penalty_low=1, penalty_high=10,
         capacity_low=1, capacity_high=20, seed=None):
 
