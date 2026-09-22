@@ -244,7 +244,7 @@ def generate_evaluation_graphs(problem_type, eval_mode):
 
         # Number of independent random graph realizations generated for each
         # Wood benchmark configuration
-        reps_per_wood_setting = 20
+        reps_per_wood_setting = 30
 
         # fixed base seed makes the generated benchmark instances reproducible
         base_seed = 5
@@ -374,9 +374,9 @@ def generate_evaluation_graphs(problem_type, eval_mode):
 
     # SYNTHETIC ONE-IN EVALUATION GRAPH GENERATION
 
-    # generate 20 independent graph replications for each (n, m) setting and
+    # generate 30 independent graph replications for each (n, m) setting and
     # evaluate the same five interdiction budgets used during model training
-    reps_per_setting = 20
+    reps_per_setting = 30
     test_attack_limits = [1, 2, 3, 4, 5]
 
     # ARC ATTRIBUTE RANGES

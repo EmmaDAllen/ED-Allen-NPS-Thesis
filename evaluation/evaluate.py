@@ -327,8 +327,8 @@ def evaluate():
         evaluation_cases = [(k, graph_data) for k in test_attack_limits
                             for graph_data in evaluation_graphs]
 
-        # current external evaluation contains one pre-generated network
-        expected_graphs = 1
+        # Six supply nodes x five demand nodes = 30 OD pairs.
+        expected_graphs = 30
 
 
     else:
@@ -398,7 +398,7 @@ def evaluate():
             s = graph_data["s"]
             t = graph_data["t"]
             density = graph_data["density"]
-            seed = graph_data["seed"]
+            seed = graph_data.get("seed", None)
             n = graph_data["n"]
             m = graph_data["m"]
 
@@ -408,6 +408,9 @@ def evaluate():
             rep = graph_data.get("rep", None)
             wood_problem = graph_data.get("wood_problem", None)
             network_name = graph_data.get("network_name", None)
+
+            source_original = graph_data.get("source_original", None)
+            sink_original = graph_data.get("sink_original", None)
 
             # Wood grid dimensions are present only for Wood benchmark instances
             rows = graph_data.get("rows", None)
@@ -705,6 +708,10 @@ def evaluate():
                     # source and sink identifiers used for this evaluation graph
                     "source": s,
                     "sink": t,
+
+                    # original external-network node identifiers
+                    "source_original": source_original,
+                    "sink_original": sink_original,
 
                     # interdiction budget
                     "attack_limit": k,
