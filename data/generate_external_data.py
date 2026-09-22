@@ -1,4 +1,3 @@
-
 """generate_external_data.py
 
 Load and prepare external network data for shortest-path interdiction evaluation.
@@ -13,84 +12,40 @@ Run from the repository root with:
 
 The script:
 1. Loads node and directed-arc data from external CSV files.
-2. Relabels external node identifiers to consecutive integer IDs required by the model.
-3. Rescales external arc costs to match the cost range used during model training.
-4. Generates reproducible synthetic interdiction penalties using the training penalty range.
-5. Constructs a directed NetworkX graph while preserving relevant external network attributes.
-6. Converts the user-specified source and sink from original external IDs to internal graph IDs.
-7. Verifies that the requested source and sink exist and that a directed path connects them.
-8. Computes the graph's arc-to-node ratio for use as the model's density feature.
-9. Returns the prepared graph, internal source and sink IDs, and network density for evaluation."""
+2. Validates required node and arc attributes.
+3. Relabels external node identifiers to consecutive integer IDs required by the model.
+4. Preserves the original external transportation costs.
+5. Loads deterministic detour-based interdiction penalties from the arc data.
+6. Constructs a directed NetworkX graph while preserving relevant external network attributes.
+7. Converts the user-specified source and sink from original external IDs to internal graph IDs.
+8. Verifies that the requested source and sink exist and that a directed path connects them.
+9. Computes the graph's arc-to-node ratio for use as the model's density feature.
+10. Returns the prepared graph, internal source and sink IDs, and network density for evaluation."""
 
 import pandas as pd
 import networkx as nx
-import numpy as np
 import argparse
 import os
 import pickle
 
-# EXTERNAL DATA SCALING CONSTANTS
-
-# Maximum edge-cost value used during shortest-path model training.
-# External network costs are rescaled relative to this value so their
-# magnitudes are comparable to the synthetic training data.
-COST_HIGH = 10
-
-# Bounds used to generate synthetic interdiction penalties for external arcs.
-# External transportation datasets do not contain interdiction penalties, so
-# penalties are sampled using the same range used during model training.
-PENALTY_LOW = 1
-PENALTY_HIGH = 10
 
 
 
-
-def load_external_network(node_path,arc_path,source,sink,penalty_low=1,penalty_high=10,penalty_seed=5,):
+def load_external_network(node_path,arc_path,source,sink):
 
     """Load an external directed network from node and arc CSV files.
 
-    External node identifiers are remapped to consecutive integer IDs because the model expects 
-    graph nodes indexed from 0 through n-1. The original node identifiers are retained as node 
-    attributes for reference. External arc costs are uniformly rescaled so that the maximum arc 
-    cost equals COST_HIGH=10, matching the scale used during shortest-path model training. 
-    Multiplicative scaling preserves the relative differences among arc costs and therefore does 
-    not change which paths are shortest. Because the external data do not contain interdiction penalties, 
-    synthetic penalties are generated uniformly from the same [1, 10] range used during training.
+    External node identifiers are remapped to consecutive integer IDs because the
+    model expects graph nodes indexed from 0 through n-1. Original node identifiers
+    and relevant node metadata are retained as attributes.
 
-    Parameters
-    node_path : str
-        Path to the CSV file containing external node information.
+    External transportation costs are preserved at their original values.
+    Interdiction penalties are read directly from the arc data and represent the
+    deterministic detour-based penalties constructed during external-data
+    preprocessing.
 
-    arc_path : str
-        Path to the CSV file containing external directed arc information.
-
-    source : int
-        Original external node identifier to use as the source.
-
-    sink : int
-        Original external node identifier to use as the sink.
-
-    penalty_low : int
-        Minimum synthetic interdiction penalty.
-
-    penalty_high : int
-        Maximum synthetic interdiction penalty.
-
-    penalty_seed : int
-        Random seed used to generate reproducible interdiction penalties.
-
-    Returns
-    G : networkx.DiGraph
-        Relabeled directed graph containing model-compatible edge attributes.
-
-    source_internal : int
-        Internal consecutive node ID corresponding to the requested source.
-
-    sink_internal : int
-        Internal consecutive node ID corresponding to the requested sink.
-
-    density : float
-        Arc-to-node ratio m/n for the loaded network."""
+    The requested source and sink are supplied using their original external node
+    identifiers and converted to the corresponding internal graph identifiers."""
 
 
     # LOAD EXTERNAL DATA
@@ -100,31 +55,40 @@ def load_external_network(node_path,arc_path,source,sink,penalty_low=1,penalty_h
     arc_df = pd.read_csv(arc_path)
 
 
-    # RESCALE EXTERNAL ARC COSTS
+    # validate required columns
+    required_node_columns = {"node","lat","lon","supply"}
 
-    # identify the largest cost in the original external network
-    original_cost_max = arc_df["cost"].max()
+    required_arc_columns = {"from_node","to_node","transport_mode","cost","capacity","penalty"}
 
-    # the scaling operation requires at least one positive arc cost
-    if original_cost_max <= 0:
-        raise ValueError("External network must contain positive arc costs.")
+    missing_node_columns = required_node_columns - set(node_df.columns)
+    missing_arc_columns = required_arc_columns - set(arc_df.columns)
 
-    # scale every external cost by the same multiplicative factor so that
-    # the largest cost equals COST_HIGH while preserving relative costs
-    cost_scale_factor = COST_HIGH / original_cost_max
+    if missing_node_columns:
+        raise ValueError(f"Missing node columns: {sorted(missing_node_columns)}")
 
-    arc_df["scaled_cost"] = (arc_df["cost"] * cost_scale_factor)
+    if missing_arc_columns:
+        raise ValueError(f"Missing arc columns: {sorted(missing_arc_columns)}")
 
-    print(f"Original cost range: "
-        f"{arc_df['cost'].min():.4f} - "
-        f"{arc_df['cost'].max():.4f}")
+    if arc_df["cost"].isna().any():
+        raise ValueError("External arc file contains missing costs.")
 
-    print( f"Scaled cost range: "
-        f"{arc_df['scaled_cost'].min():.4f} - "
-        f"{arc_df['scaled_cost'].max():.4f}")
+    if arc_df["penalty"].isna().any():
+        raise ValueError("External arc file contains missing penalties.")
 
-    print(f"Cost scale factor: {cost_scale_factor:.6f}")
+    if (arc_df["cost"] <= 0).any():
+        raise ValueError("External arc costs must be positive.")
 
+    if (arc_df["penalty"] <= 0).any():
+        raise ValueError("External interdiction penalties must be positive.")
+
+
+    # Check for duplicate directed node pairs because NetworkX DiGraph
+    # can store only one arc from u to v.
+    duplicate_endpoints = arc_df.duplicated(subset=["from_node", "to_node"]).sum()
+
+    if duplicate_endpoints > 0:
+        raise ValueError(f"External arc file contains {duplicate_endpoints} duplicate "
+            f"directed node pairs. A DiGraph would overwrite these arcs.")
 
 
     # INITIALIZE DIRECTED GRAPH
@@ -153,11 +117,8 @@ def load_external_network(node_path,arc_path,source,sink,penalty_low=1,penalty_h
         G.add_node(node,original_node=original_node,lat=row["lat"],lon=row["lon"],supply=row["supply"])
 
 
-    # GENERATE SYNTHETIC INTERDICTION PENALTIES
 
-    # initialize a deterministic random-number generator so the external
-    # evaluation instance receives the same penalties each time it is loaded
-    rng = np.random.default_rng(penalty_seed)
+
 
     # ADD DIRECTED ARCS
     for _, row in arc_df.iterrows():
@@ -170,21 +131,17 @@ def load_external_network(node_path,arc_path,source,sink,penalty_low=1,penalty_h
         u = node_map[original_u]
         v = node_map[original_v]
 
-        # external data do not contain interdiction penalties, so generate
-        # one using the same integer range represented in the training data
-        penalty = int(rng.integers(penalty_low,penalty_high + 1))
-
-
 
         # add the directed arc using attributes expected by the model and
         # preserve relevant external attributes for later analysis
         G.add_edge(u, v,
 
             # rescaled external transportation cost used as the shortest-path distance feature
-            dist=float(row["scaled_cost"]),
+            dist=float(row["cost"]),
 
-            # synthetic interdiction penalty on the training-data scale
-            penalty=penalty,
+            # deterministic detour-based interdiction penalty
+            penalty=float(row["penalty"]),
+
 
             # preserve available external network attributes
             capacity=float(row["capacity"]),
@@ -192,10 +149,7 @@ def load_external_network(node_path,arc_path,source,sink,penalty_low=1,penalty_h
 
             # external arcs are assumed eligible for interdiction unless the
             # dataset provides a substantive reason to exclude individual arcs
-            interdictable=True,
-
-            # preserve the unscaled transportation cost for reference
-            original_cost=float(row["cost"]))
+            interdictable=True)
         
 
 
@@ -257,16 +211,11 @@ if __name__ == "__main__":
     # original external node identifier to use as the sink
     parser.add_argument("sink",type=int,help="Original node ID to use as the sink.")
 
-    # optional seed controlling the synthetic interdiction penalties
-    parser.add_argument("--penalty_seed",type=int,default=5,
-        help=("Random seed for synthetic interdiction penalties (default: 5)."))
-
     # parse supplied command-line arguments
     args = parser.parse_args()
 
 
     # LOAD EXTERNAL NETWORK
-    G, source_internal, sink_internal, density = load_external_network(node_path=args.node_path,arc_path=args.arc_path,
-                                                     source=args.source,sink=args.sink,penalty_low=PENALTY_LOW,
-                                                     penalty_high=PENALTY_HIGH,penalty_seed=args.penalty_seed,)
+    G, source_internal, sink_internal, density = load_external_network(node_path=args.node_path,
+                                                    arc_path=args.arc_path,source=args.source,sink=args.sink)
 
