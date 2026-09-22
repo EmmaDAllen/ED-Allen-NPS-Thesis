@@ -313,9 +313,9 @@ def evaluate():
         evaluation_cases = [ (graph_data["attack_budget"], graph_data)
                             for graph_data in evaluation_graphs]
 
-        # 20 independent graph realizations are generated for each selected
+        # 30 independent graph realizations are generated for each selected
         # Wood benchmark configuration.
-        reps_per_wood_setting = 20
+        reps_per_wood_setting = 30
 
         expected_graphs = (len(get_test_settings("wood"))* reps_per_wood_setting)
 
@@ -337,8 +337,8 @@ def evaluate():
         evaluation_cases = [(k, graph_data) for k in test_attack_limits
                              for graph_data in evaluation_graphs]
 
-        # 20 graph replications are generated for every (n, m) configuration
-        expected_graphs = len(get_test_settings(eval_mode)) * 20
+        # 30 graph replications are generated for every (n, m) configuration
+        expected_graphs = len(get_test_settings(eval_mode)) * 30
 
     # checkpoint to make sure each evaluation type has correct number of graphs to be evaluated
     if len(evaluation_graphs) != expected_graphs:
