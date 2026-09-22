@@ -29,8 +29,8 @@ The script supports four evaluation modes:
    and interdiction budgets.
 
 5. external
-   Loads a directed external transportation network from node and arc CSV
-   files, rescales its costs to the training-data scale, and prepares it for
+   Loads a fixed directed rail/road transportation network from node and arc
+   CSV files and prepares all specified supply-to-demand OD pairs for
    shortest-path interdiction evaluation.
 
 For synthetic One-In networks, graph generation is saved incrementally so an
@@ -39,10 +39,7 @@ Maximum-flow networks are additionally screened for sufficient source-to-sink
 edge connectivity to avoid trivial complete-disconnection cases.
 
 Usage:
-    PYTHONPATH=. python -u evaluation/generate_evaluation_graphs.py PROBLEM_TYPE EVAL_MODE
-
-For external evaluation, also provide the original source and sink node IDs:
-    PYTHONPATH=. python -u evaluation/generate_evaluation_graphs.py shortest_path external SOURCE SINK"""
+    PYTHONPATH=. python -u evaluation/generate_evaluation_graphs.py PROBLEM_TYPE EVAL_MODE"""
 
 import os
 import sys
@@ -182,7 +179,7 @@ def get_test_settings(eval_mode):
 
 
 
-def generate_evaluation_graphs(problem_type, eval_mode, source=None, sink=None):
+def generate_evaluation_graphs(problem_type, eval_mode):
 
 
     """Generate and save a fixed graph set for the selected evaluation mode.
@@ -307,39 +304,70 @@ def generate_evaluation_graphs(problem_type, eval_mode, source=None, sink=None):
 
     # EXTERNAL NETWORK GENERATION
 
-    # load and save a fixed real-world/external network separately from the
-    # randomly generated ID and OOD evaluation instances
+    # Load and save fixed source-sink evaluation instances from the
+    # real-world rail/road transportation network.
     if eval_mode == "external":
 
-        # external evaluation requires the source and sink to be supplied explicitly
-        # using the original node identifiers from the external dataset
-        if source is None or sink is None:
-            raise ValueError("External evaluation requires source and sink node IDs.")
-
-        # external evaluation is currently implemented only for shortest-path interdiction
+        # External evaluation is currently implemented only for
+        # shortest-path interdiction.
         if problem_type != "shortest_path":
             raise ValueError("External evaluation currently supports shortest_path only.")
 
-        # source and sink are supplied using the original node identifiers from
-        # the external dataset and are converted internally by load_external_network()
-        G, s, t, density = load_external_network(node_path="data/external/node_data.csv",
-            arc_path="data/external/arc_data.csv",source=source,sink=sink,penalty_seed=5,)
+        # Natural supply and demand nodes defined by the external network.
+        # These use the ORIGINAL external node identifiers.
+        supply_nodes = [1, 2, 3, 4, 5, 10]
+        demand_nodes = [6, 7, 8, 9, 1077]
 
-        # store the prepared graph and metadata in the same general format used
-        # by the other evaluation modes so evaluate.py can process it uniformly
-        evaluation_graphs = [{"G": G, "s": s, "t": t, "density": density,
-                              "n": G.number_of_nodes(), "m": G.number_of_edges(),
-                              "network_name": "external_transportation_network", "seed": 5,}]
+        # Store one evaluation instance for every reachable supply-demand pair.
+        evaluation_graphs = []
 
-        # save the external network once so every trained model is evaluated on
-        # exactly the same graph and synthetic interdiction penalties
+        for source in supply_nodes:
+
+            for sink in demand_nodes:
+
+                # Load the same fixed physical network for each OD pair.
+                # load_external_network converts the original source and sink
+                # identifiers to the internal consecutive node IDs used by
+                # the model.
+                G, s, t, density = load_external_network(
+                    node_path="data/node_data.csv",
+                    arc_path="data/arc_data_with_detour_penalties.csv",
+                    source=source,sink=sink)
+
+                # Store the graph and OD-pair metadata in the same general
+                # format used by the other evaluation modes.
+                evaluation_graphs.append({"G": G,"s": s,"t": t, "density": density,
+                    "n": G.number_of_nodes(),"m": G.number_of_edges(),
+
+                    # Preserve original external OD identifiers for analysis.
+                    "source_original": source,"sink_original": sink,
+
+                    "network_name": "rail_road_transportation_network"})
+
+                print(f"Prepared external OD pair | "
+                    f"source={source} | "
+                    f"sink={sink} | "
+                    f"internal_source={s} | "
+                    f"internal_sink={t}",
+                    flush=True)
+
+        # Verify that the expected 6 x 5 = 30 OD pairs were created.
+        expected_pairs = len(supply_nodes) * len(demand_nodes)
+
+        if len(evaluation_graphs) != expected_pairs:
+            raise ValueError(f"Expected {expected_pairs} external OD pairs, "
+                f"but generated {len(evaluation_graphs)}.")
+
+        # Save one fixed external evaluation set so every trained model
+        # is evaluated on exactly the same physical network and OD pairs.
         with open(output_path, "wb") as f:
-            pickle.dump(evaluation_graphs,f,)
+            pickle.dump(evaluation_graphs, f)
 
-        print(f"\nFinished. Saved external network to "
-            f"{output_path}",flush=True,)
+        print(f"\nFinished. Saved {len(evaluation_graphs)} external OD pairs "
+            f"to {output_path}",flush=True)
 
-        # external graph preparation is complete; do not continue into synthetic generation
+        # External graph preparation is complete; do not continue into
+        # synthetic graph generation.
         return
 
 
@@ -359,7 +387,6 @@ def generate_evaluation_graphs(problem_type, eval_mode, source=None, sink=None):
 
         cost_low = 11
         cost_high = 50
-
         penalty_low = 11
         penalty_high = 50
 
@@ -368,7 +395,6 @@ def generate_evaluation_graphs(problem_type, eval_mode, source=None, sink=None):
         # Standard synthetic evaluation ranges used during training
         cost_low = 1
         cost_high = 10
-
         penalty_low = 1
         penalty_high = 10
 
@@ -526,9 +552,4 @@ if __name__ == "__main__":
     # sys.argv[2] selects the evaluation graph type
     eval_mode = sys.argv[2] if len(sys.argv) > 2 else "ood_size"
 
-    # external evaluation optionally accepts the original source and sink
-    # node identifiers as the third and fourth command-line arguments
-    source = int(sys.argv[3]) if len(sys.argv) > 3 else None
-    sink = int(sys.argv[4]) if len(sys.argv) > 4 else None
-
-    generate_evaluation_graphs(problem_type, eval_mode, source=source, sink=sink)
+    generate_evaluation_graphs(problem_type, eval_mode)
