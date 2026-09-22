@@ -75,7 +75,7 @@ def load_external_network(node_path,arc_path,source,sink):
     if arc_df["penalty"].isna().any():
         raise ValueError("External arc file contains missing penalties.")
 
-    if (arc_df["cost"] <= 0).any():
+    if (arc_df["cost"] < 0).any():
         raise ValueError("External arc costs must be positive.")
 
     if (arc_df["penalty"] <= 0).any():
