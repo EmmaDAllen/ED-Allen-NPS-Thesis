@@ -1,0 +1,1340 @@
+Tue Sep 22 20:12:51 2026       
++-----------------------------------------------------------------------------------------+
+| NVIDIA-SMI 595.58.03              Driver Version: 595.58.03      CUDA Version: 13.2     |
++-----------------------------------------+------------------------+----------------------+
+| GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |
+|                                         |                        |               MIG M. |
+|=========================================+========================+======================|
+|   0  NVIDIA A40                     On  |   00000000:03:00.0 Off |                    0 |
+|  0%   39C    P0             78W /  300W |       0MiB /  46068MiB |      3%      Default |
+|                                         |                        |                  N/A |
++-----------------------------------------+------------------------+----------------------+
+
++-----------------------------------------------------------------------------------------+
+| Processes:                                                                              |
+|  GPU   GI   CI              PID   Type   Process name                        GPU Memory |
+|        ID   ID                                                               Usage      |
+|=========================================================================================|
+|  No running processes found                                                             |
++-----------------------------------------------------------------------------------------+
+
+Loaded 240 pre-generated evaluation graphs from evaluation_graphs/shortest_path_wood_graphs.pkl.
+
+Evaluating attack limit K=5
+K=5, n=51, m=188, rep=0 | Opt=18.00 | Pred=15.00 | Gap=0.1667 | Hamming=8 | Exact=0
+K=5, n=51, m=188, rep=1 | Opt=17.00 | Pred=13.00 | Gap=0.2353 | Hamming=10 | Exact=0
+K=5, n=51, m=188, rep=2 | Opt=19.00 | Pred=16.00 | Gap=0.1579 | Hamming=3 | Exact=0
+K=5, n=51, m=188, rep=3 | Opt=19.00 | Pred=11.00 | Gap=0.4211 | Hamming=8 | Exact=0
+K=5, n=51, m=188, rep=4 | Opt=17.00 | Pred=12.00 | Gap=0.2941 | Hamming=7 | Exact=0
+K=5, n=51, m=188, rep=5 | Opt=20.00 | Pred=13.00 | Gap=0.3500 | Hamming=6 | Exact=0
+K=5, n=51, m=188, rep=6 | Opt=17.00 | Pred=11.00 | Gap=0.3529 | Hamming=8 | Exact=0
+K=5, n=51, m=188, rep=7 | Opt=18.00 | Pred=13.00 | Gap=0.2778 | Hamming=10 | Exact=0
+K=5, n=51, m=188, rep=8 | Opt=19.00 | Pred=13.00 | Gap=0.3158 | Hamming=8 | Exact=0
+K=5, n=51, m=188, rep=9 | Opt=20.00 | Pred=18.00 | Gap=0.1000 | Hamming=7 | Exact=0
+K=5, n=51, m=188, rep=10 | Opt=15.00 | Pred=11.00 | Gap=0.2667 | Hamming=10 | Exact=0
+K=5, n=51, m=188, rep=11 | Opt=20.00 | Pred=18.00 | Gap=0.1000 | Hamming=10 | Exact=0
+K=5, n=51, m=188, rep=12 | Opt=18.00 | Pred=8.00 | Gap=0.5556 | Hamming=10 | Exact=0
+K=5, n=51, m=188, rep=13 | Opt=17.00 | Pred=13.00 | Gap=0.2353 | Hamming=10 | Exact=0
+K=5, n=51, m=188, rep=14 | Opt=16.00 | Pred=9.00 | Gap=0.4375 | Hamming=10 | Exact=0
+K=5, n=51, m=188, rep=15 | Opt=16.00 | Pred=14.00 | Gap=0.1250 | Hamming=4 | Exact=0
+K=5, n=51, m=188, rep=16 | Opt=20.00 | Pred=15.00 | Gap=0.2500 | Hamming=8 | Exact=0
+K=5, n=51, m=188, rep=17 | Opt=19.00 | Pred=14.00 | Gap=0.2632 | Hamming=10 | Exact=0
+K=5, n=51, m=188, rep=18 | Opt=17.00 | Pred=13.00 | Gap=0.2353 | Hamming=10 | Exact=0
+K=5, n=51, m=188, rep=19 | Opt=18.00 | Pred=12.00 | Gap=0.3333 | Hamming=8 | Exact=0
+K=5, n=51, m=188, rep=20 | Opt=17.00 | Pred=11.00 | Gap=0.3529 | Hamming=10 | Exact=0
+K=5, n=51, m=188, rep=21 | Opt=15.00 | Pred=12.00 | Gap=0.2000 | Hamming=4 | Exact=0
+K=5, n=51, m=188, rep=22 | Opt=19.00 | Pred=14.00 | Gap=0.2632 | Hamming=8 | Exact=0
+K=5, n=51, m=188, rep=23 | Opt=16.00 | Pred=12.00 | Gap=0.2500 | Hamming=8 | Exact=0
+K=5, n=51, m=188, rep=24 | Opt=19.00 | Pred=13.00 | Gap=0.3158 | Hamming=8 | Exact=0
+K=5, n=51, m=188, rep=25 | Opt=18.00 | Pred=13.00 | Gap=0.2778 | Hamming=8 | Exact=0
+K=5, n=51, m=188, rep=26 | Opt=17.00 | Pred=10.00 | Gap=0.4118 | Hamming=10 | Exact=0
+K=5, n=51, m=188, rep=27 | Opt=20.00 | Pred=18.00 | Gap=0.1000 | Hamming=6 | Exact=0
+K=5, n=51, m=188, rep=28 | Opt=22.00 | Pred=19.00 | Gap=0.1364 | Hamming=10 | Exact=0
+K=5, n=51, m=188, rep=29 | Opt=19.00 | Pred=14.00 | Gap=0.2632 | Hamming=7 | Exact=0
+K=5, n=66, m=254, rep=0 | Opt=22.00 | Pred=12.00 | Gap=0.4545 | Hamming=10 | Exact=0
+K=5, n=66, m=254, rep=1 | Opt=19.00 | Pred=15.00 | Gap=0.2105 | Hamming=6 | Exact=0
+K=5, n=66, m=254, rep=2 | Opt=18.00 | Pred=14.00 | Gap=0.2222 | Hamming=8 | Exact=0
+K=5, n=66, m=254, rep=3 | Opt=21.00 | Pred=19.00 | Gap=0.0952 | Hamming=8 | Exact=0
+K=5, n=66, m=254, rep=4 | Opt=19.00 | Pred=12.00 | Gap=0.3684 | Hamming=8 | Exact=0
+K=5, n=66, m=254, rep=5 | Opt=17.00 | Pred=14.00 | Gap=0.1765 | Hamming=10 | Exact=0
+K=5, n=66, m=254, rep=6 | Opt=20.00 | Pred=18.00 | Gap=0.1000 | Hamming=4 | Exact=0
+K=5, n=66, m=254, rep=7 | Opt=19.00 | Pred=13.00 | Gap=0.3158 | Hamming=10 | Exact=0
+K=5, n=66, m=254, rep=8 | Opt=19.00 | Pred=14.00 | Gap=0.2632 | Hamming=10 | Exact=0
+K=5, n=66, m=254, rep=9 | Opt=20.00 | Pred=16.00 | Gap=0.2000 | Hamming=8 | Exact=0
+K=5, n=66, m=254, rep=10 | Opt=21.00 | Pred=18.00 | Gap=0.1429 | Hamming=6 | Exact=0
+K=5, n=66, m=254, rep=11 | Opt=16.00 | Pred=13.00 | Gap=0.1875 | Hamming=10 | Exact=0
+K=5, n=66, m=254, rep=12 | Opt=17.00 | Pred=14.00 | Gap=0.1765 | Hamming=10 | Exact=0
+K=5, n=66, m=254, rep=13 | Opt=18.00 | Pred=14.00 | Gap=0.2222 | Hamming=10 | Exact=0
+K=5, n=66, m=254, rep=14 | Opt=19.00 | Pred=15.00 | Gap=0.2105 | Hamming=6 | Exact=0
+K=5, n=66, m=254, rep=15 | Opt=16.00 | Pred=13.00 | Gap=0.1875 | Hamming=6 | Exact=0
+K=5, n=66, m=254, rep=16 | Opt=21.00 | Pred=17.00 | Gap=0.1905 | Hamming=4 | Exact=0
+K=5, n=66, m=254, rep=17 | Opt=19.00 | Pred=11.00 | Gap=0.4211 | Hamming=8 | Exact=0
+K=5, n=66, m=254, rep=18 | Opt=21.00 | Pred=17.00 | Gap=0.1905 | Hamming=8 | Exact=0
+K=5, n=66, m=254, rep=19 | Opt=23.00 | Pred=17.00 | Gap=0.2609 | Hamming=9 | Exact=0
+K=5, n=66, m=254, rep=20 | Opt=18.00 | Pred=16.00 | Gap=0.1111 | Hamming=10 | Exact=0
+K=5, n=66, m=254, rep=21 | Opt=19.00 | Pred=16.00 | Gap=0.1579 | Hamming=8 | Exact=0
+K=5, n=66, m=254, rep=22 | Opt=16.00 | Pred=14.00 | Gap=0.1250 | Hamming=6 | Exact=0
+K=5, n=66, m=254, rep=23 | Opt=21.00 | Pred=17.00 | Gap=0.1905 | Hamming=10 | Exact=0
+K=5, n=66, m=254, rep=24 | Opt=21.00 | Pred=19.00 | Gap=0.0952 | Hamming=10 | Exact=0
+K=5, n=66, m=254, rep=25 | Opt=17.00 | Pred=13.00 | Gap=0.2353 | Hamming=10 | Exact=0
+K=5, n=66, m=254, rep=26 | Opt=15.00 | Pred=12.00 | Gap=0.2000 | Hamming=10 | Exact=0
+K=5, n=66, m=254, rep=27 | Opt=19.00 | Pred=13.00 | Gap=0.3158 | Hamming=8 | Exact=0
+K=5, n=66, m=254, rep=28 | Opt=20.00 | Pred=14.00 | Gap=0.3000 | Hamming=8 | Exact=0
+K=5, n=66, m=254, rep=29 | Opt=21.00 | Pred=19.00 | Gap=0.0952 | Hamming=6 | Exact=0
+K=5, n=83, m=330, rep=0 | Opt=24.00 | Pred=21.00 | Gap=0.1250 | Hamming=6 | Exact=0
+K=5, n=83, m=330, rep=1 | Opt=25.00 | Pred=21.00 | Gap=0.1600 | Hamming=10 | Exact=0
+K=5, n=83, m=330, rep=2 | Opt=21.00 | Pred=18.00 | Gap=0.1429 | Hamming=10 | Exact=0
+K=5, n=83, m=330, rep=3 | Opt=21.00 | Pred=15.00 | Gap=0.2857 | Hamming=10 | Exact=0
+K=5, n=83, m=330, rep=4 | Opt=22.00 | Pred=16.00 | Gap=0.2727 | Hamming=10 | Exact=0
+K=5, n=83, m=330, rep=5 | Opt=16.00 | Pred=14.00 | Gap=0.1250 | Hamming=7 | Exact=0
+K=5, n=83, m=330, rep=6 | Opt=20.00 | Pred=14.00 | Gap=0.3000 | Hamming=10 | Exact=0
+K=5, n=83, m=330, rep=7 | Opt=21.00 | Pred=19.00 | Gap=0.0952 | Hamming=6 | Exact=0
+K=5, n=83, m=330, rep=8 | Opt=19.00 | Pred=17.00 | Gap=0.1053 | Hamming=6 | Exact=0
+K=5, n=83, m=330, rep=9 | Opt=20.00 | Pred=17.00 | Gap=0.1500 | Hamming=10 | Exact=0
+K=5, n=83, m=330, rep=10 | Opt=20.00 | Pred=15.00 | Gap=0.2500 | Hamming=10 | Exact=0
+K=5, n=83, m=330, rep=11 | Opt=22.00 | Pred=20.00 | Gap=0.0909 | Hamming=6 | Exact=0
+K=5, n=83, m=330, rep=12 | Opt=23.00 | Pred=15.00 | Gap=0.3478 | Hamming=10 | Exact=0
+K=5, n=83, m=330, rep=13 | Opt=19.00 | Pred=16.00 | Gap=0.1579 | Hamming=10 | Exact=0
+K=5, n=83, m=330, rep=14 | Opt=17.00 | Pred=12.00 | Gap=0.2941 | Hamming=6 | Exact=0
+K=5, n=83, m=330, rep=15 | Opt=23.00 | Pred=18.00 | Gap=0.2174 | Hamming=10 | Exact=0
+K=5, n=83, m=330, rep=16 | Opt=22.00 | Pred=18.00 | Gap=0.1818 | Hamming=8 | Exact=0
+K=5, n=83, m=330, rep=17 | Opt=21.00 | Pred=16.00 | Gap=0.2381 | Hamming=10 | Exact=0
+K=5, n=83, m=330, rep=18 | Opt=24.00 | Pred=17.00 | Gap=0.2917 | Hamming=10 | Exact=0
+K=5, n=83, m=330, rep=19 | Opt=21.00 | Pred=14.00 | Gap=0.3333 | Hamming=10 | Exact=0
+K=5, n=83, m=330, rep=20 | Opt=22.00 | Pred=17.00 | Gap=0.2273 | Hamming=9 | Exact=0
+K=5, n=83, m=330, rep=21 | Opt=24.00 | Pred=16.00 | Gap=0.3333 | Hamming=8 | Exact=0
+K=5, n=83, m=330, rep=22 | Opt=23.00 | Pred=19.00 | Gap=0.1739 | Hamming=10 | Exact=0
+K=5, n=83, m=330, rep=23 | Opt=20.00 | Pred=18.00 | Gap=0.1000 | Hamming=10 | Exact=0
+K=5, n=83, m=330, rep=24 | Opt=20.00 | Pred=18.00 | Gap=0.1000 | Hamming=10 | Exact=0
+K=5, n=83, m=330, rep=25 | Opt=27.00 | Pred=23.00 | Gap=0.1481 | Hamming=10 | Exact=0
+K=5, n=83, m=330, rep=26 | Opt=21.00 | Pred=16.00 | Gap=0.2381 | Hamming=10 | Exact=0
+K=5, n=83, m=330, rep=27 | Opt=22.00 | Pred=18.00 | Gap=0.1818 | Hamming=10 | Exact=0
+K=5, n=83, m=330, rep=28 | Opt=21.00 | Pred=17.00 | Gap=0.1905 | Hamming=10 | Exact=0
+K=5, n=83, m=330, rep=29 | Opt=19.00 | Pred=13.00 | Gap=0.3158 | Hamming=10 | Exact=0
+K=5, n=146, m=618, rep=0 | Opt=27.00 | Pred=20.00 | Gap=0.2593 | Hamming=10 | Exact=0
+K=5, n=146, m=618, rep=1 | Opt=28.00 | Pred=23.00 | Gap=0.1786 | Hamming=10 | Exact=0
+K=5, n=146, m=618, rep=2 | Opt=27.00 | Pred=23.00 | Gap=0.1481 | Hamming=8 | Exact=0
+K=5, n=146, m=618, rep=3 | Opt=24.00 | Pred=18.00 | Gap=0.2500 | Hamming=10 | Exact=0
+K=5, n=146, m=618, rep=4 | Opt=27.00 | Pred=20.00 | Gap=0.2593 | Hamming=10 | Exact=0
+K=5, n=146, m=618, rep=5 | Opt=31.00 | Pred=25.00 | Gap=0.1935 | Hamming=10 | Exact=0
+K=5, n=146, m=618, rep=6 | Opt=26.00 | Pred=21.00 | Gap=0.1923 | Hamming=10 | Exact=0
+K=5, n=146, m=618, rep=7 | Opt=26.00 | Pred=22.00 | Gap=0.1538 | Hamming=10 | Exact=0
+K=5, n=146, m=618, rep=8 | Opt=31.00 | Pred=25.00 | Gap=0.1935 | Hamming=8 | Exact=0
+K=5, n=146, m=618, rep=9 | Opt=28.00 | Pred=20.00 | Gap=0.2857 | Hamming=10 | Exact=0
+K=5, n=146, m=618, rep=10 | Opt=24.00 | Pred=15.00 | Gap=0.3750 | Hamming=10 | Exact=0
+K=5, n=146, m=618, rep=11 | Opt=23.00 | Pred=17.00 | Gap=0.2609 | Hamming=10 | Exact=0
+K=5, n=146, m=618, rep=12 | Opt=26.00 | Pred=22.00 | Gap=0.1538 | Hamming=8 | Exact=0
+K=5, n=146, m=618, rep=13 | Opt=26.00 | Pred=22.00 | Gap=0.1538 | Hamming=10 | Exact=0
+K=5, n=146, m=618, rep=14 | Opt=27.00 | Pred=18.00 | Gap=0.3333 | Hamming=10 | Exact=0
+K=5, n=146, m=618, rep=15 | Opt=30.00 | Pred=23.00 | Gap=0.2333 | Hamming=10 | Exact=0
+K=5, n=146, m=618, rep=16 | Opt=27.00 | Pred=21.00 | Gap=0.2222 | Hamming=10 | Exact=0
+K=5, n=146, m=618, rep=17 | Opt=24.00 | Pred=20.00 | Gap=0.1667 | Hamming=10 | Exact=0
+K=5, n=146, m=618, rep=18 | Opt=29.00 | Pred=26.00 | Gap=0.1034 | Hamming=8 | Exact=0
+K=5, n=146, m=618, rep=19 | Opt=27.00 | Pred=22.00 | Gap=0.1852 | Hamming=10 | Exact=0
+K=5, n=146, m=618, rep=20 | Opt=26.00 | Pred=23.00 | Gap=0.1154 | Hamming=10 | Exact=0
+K=5, n=146, m=618, rep=21 | Opt=27.00 | Pred=22.00 | Gap=0.1852 | Hamming=10 | Exact=0
+K=5, n=146, m=618, rep=22 | Opt=27.00 | Pred=23.00 | Gap=0.1481 | Hamming=10 | Exact=0
+K=5, n=146, m=618, rep=23 | Opt=26.00 | Pred=22.00 | Gap=0.1538 | Hamming=8 | Exact=0
+K=5, n=146, m=618, rep=24 | Opt=28.00 | Pred=26.00 | Gap=0.0714 | Hamming=6 | Exact=0
+K=5, n=146, m=618, rep=25 | Opt=27.00 | Pred=21.00 | Gap=0.2222 | Hamming=8 | Exact=0
+K=5, n=146, m=618, rep=26 | Opt=28.00 | Pred=22.00 | Gap=0.2143 | Hamming=10 | Exact=0
+K=5, n=146, m=618, rep=27 | Opt=29.00 | Pred=23.00 | Gap=0.2069 | Hamming=10 | Exact=0
+K=5, n=146, m=618, rep=28 | Opt=25.00 | Pred=17.00 | Gap=0.3200 | Hamming=10 | Exact=0
+K=5, n=146, m=618, rep=29 | Opt=28.00 | Pred=24.00 | Gap=0.1429 | Hamming=10 | Exact=0
+
+FINAL TEST RESULTS FOR K=5
+Instances evaluated: 120
+Exact match rate: 0.0000
+Average Hamming distance: 8.7083
+Average objective gap: 0.2227
+Average MIP solve time: 1.269686 seconds
+Average model inference time: 0.004571 seconds
+
+Evaluating attack limit K=10
+K=10, n=51, m=188, rep=0 | Opt=16.00 | Pred=13.00 | Gap=0.1875 | Hamming=16 | Exact=0
+K=10, n=51, m=188, rep=1 | Opt=19.00 | Pred=12.00 | Gap=0.3684 | Hamming=16 | Exact=0
+K=10, n=51, m=188, rep=2 | Opt=18.00 | Pred=11.00 | Gap=0.3889 | Hamming=16 | Exact=0
+K=10, n=51, m=188, rep=3 | Opt=18.00 | Pred=11.00 | Gap=0.3889 | Hamming=18 | Exact=0
+K=10, n=51, m=188, rep=4 | Opt=18.00 | Pred=9.00 | Gap=0.5000 | Hamming=16 | Exact=0
+K=10, n=51, m=188, rep=5 | Opt=20.00 | Pred=14.00 | Gap=0.3000 | Hamming=16 | Exact=0
+K=10, n=51, m=188, rep=6 | Opt=22.00 | Pred=17.00 | Gap=0.2273 | Hamming=12 | Exact=0
+K=10, n=51, m=188, rep=7 | Opt=21.00 | Pred=17.00 | Gap=0.1905 | Hamming=12 | Exact=0
+K=10, n=51, m=188, rep=8 | Opt=22.00 | Pred=13.00 | Gap=0.4091 | Hamming=16 | Exact=0
+K=10, n=51, m=188, rep=9 | Opt=24.00 | Pred=16.00 | Gap=0.3333 | Hamming=20 | Exact=0
+K=10, n=51, m=188, rep=10 | Opt=19.00 | Pred=14.00 | Gap=0.2632 | Hamming=14 | Exact=0
+K=10, n=51, m=188, rep=11 | Opt=18.00 | Pred=12.00 | Gap=0.3333 | Hamming=18 | Exact=0
+K=10, n=51, m=188, rep=12 | Opt=25.00 | Pred=17.00 | Gap=0.3200 | Hamming=16 | Exact=0
+K=10, n=51, m=188, rep=13 | Opt=19.00 | Pred=14.00 | Gap=0.2632 | Hamming=18 | Exact=0
+K=10, n=51, m=188, rep=14 | Opt=21.00 | Pred=16.00 | Gap=0.2381 | Hamming=12 | Exact=0
+K=10, n=51, m=188, rep=15 | Opt=21.00 | Pred=16.00 | Gap=0.2381 | Hamming=16 | Exact=0
+K=10, n=51, m=188, rep=16 | Opt=20.00 | Pred=12.00 | Gap=0.4000 | Hamming=18 | Exact=0
+K=10, n=51, m=188, rep=17 | Opt=20.00 | Pred=9.00 | Gap=0.5500 | Hamming=18 | Exact=0
+K=10, n=51, m=188, rep=18 | Opt=18.00 | Pred=14.00 | Gap=0.2222 | Hamming=14 | Exact=0
+K=10, n=51, m=188, rep=19 | Opt=23.00 | Pred=19.00 | Gap=0.1739 | Hamming=12 | Exact=0
+K=10, n=51, m=188, rep=20 | Opt=19.00 | Pred=14.00 | Gap=0.2632 | Hamming=11 | Exact=0
+K=10, n=51, m=188, rep=21 | Opt=21.00 | Pred=14.00 | Gap=0.3333 | Hamming=18 | Exact=0
+K=10, n=51, m=188, rep=22 | Opt=23.00 | Pred=16.00 | Gap=0.3043 | Hamming=16 | Exact=0
+K=10, n=51, m=188, rep=23 | Opt=21.00 | Pred=16.00 | Gap=0.2381 | Hamming=16 | Exact=0
+K=10, n=51, m=188, rep=24 | Opt=21.00 | Pred=16.00 | Gap=0.2381 | Hamming=16 | Exact=0
+K=10, n=51, m=188, rep=25 | Opt=20.00 | Pred=11.00 | Gap=0.4500 | Hamming=16 | Exact=0
+K=10, n=51, m=188, rep=26 | Opt=22.00 | Pred=16.00 | Gap=0.2727 | Hamming=20 | Exact=0
+K=10, n=51, m=188, rep=27 | Opt=22.00 | Pred=16.00 | Gap=0.2727 | Hamming=14 | Exact=0
+K=10, n=51, m=188, rep=28 | Opt=22.00 | Pred=12.00 | Gap=0.4545 | Hamming=20 | Exact=0
+K=10, n=51, m=188, rep=29 | Opt=18.00 | Pred=15.00 | Gap=0.1667 | Hamming=18 | Exact=0
+K=10, n=66, m=254, rep=0 | Opt=21.00 | Pred=13.00 | Gap=0.3810 | Hamming=18 | Exact=0
+K=10, n=66, m=254, rep=1 | Opt=26.00 | Pred=20.00 | Gap=0.2308 | Hamming=16 | Exact=0
+K=10, n=66, m=254, rep=2 | Opt=26.00 | Pred=19.00 | Gap=0.2692 | Hamming=20 | Exact=0
+K=10, n=66, m=254, rep=3 | Opt=25.00 | Pred=17.00 | Gap=0.3200 | Hamming=13 | Exact=0
+K=10, n=66, m=254, rep=4 | Opt=20.00 | Pred=14.00 | Gap=0.3000 | Hamming=15 | Exact=0
+K=10, n=66, m=254, rep=5 | Opt=24.00 | Pred=12.00 | Gap=0.5000 | Hamming=20 | Exact=0
+K=10, n=66, m=254, rep=6 | Opt=20.00 | Pred=15.00 | Gap=0.2500 | Hamming=20 | Exact=0
+K=10, n=66, m=254, rep=7 | Opt=22.00 | Pred=16.00 | Gap=0.2727 | Hamming=16 | Exact=0
+K=10, n=66, m=254, rep=8 | Opt=23.00 | Pred=16.00 | Gap=0.3043 | Hamming=16 | Exact=0
+K=10, n=66, m=254, rep=9 | Opt=22.00 | Pred=12.00 | Gap=0.4545 | Hamming=16 | Exact=0
+K=10, n=66, m=254, rep=10 | Opt=25.00 | Pred=16.00 | Gap=0.3600 | Hamming=14 | Exact=0
+K=10, n=66, m=254, rep=11 | Opt=26.00 | Pred=18.00 | Gap=0.3077 | Hamming=16 | Exact=0
+K=10, n=66, m=254, rep=12 | Opt=23.00 | Pred=18.00 | Gap=0.2174 | Hamming=16 | Exact=0
+K=10, n=66, m=254, rep=13 | Opt=24.00 | Pred=19.00 | Gap=0.2083 | Hamming=10 | Exact=0
+K=10, n=66, m=254, rep=14 | Opt=25.00 | Pred=15.00 | Gap=0.4000 | Hamming=20 | Exact=0
+K=10, n=66, m=254, rep=15 | Opt=23.00 | Pred=17.00 | Gap=0.2609 | Hamming=14 | Exact=0
+K=10, n=66, m=254, rep=16 | Opt=21.00 | Pred=16.00 | Gap=0.2381 | Hamming=18 | Exact=0
+K=10, n=66, m=254, rep=17 | Opt=23.00 | Pred=16.00 | Gap=0.3043 | Hamming=16 | Exact=0
+K=10, n=66, m=254, rep=18 | Opt=21.00 | Pred=16.00 | Gap=0.2381 | Hamming=18 | Exact=0
+K=10, n=66, m=254, rep=19 | Opt=18.00 | Pred=11.00 | Gap=0.3889 | Hamming=18 | Exact=0
+K=10, n=66, m=254, rep=20 | Opt=21.00 | Pred=17.00 | Gap=0.1905 | Hamming=18 | Exact=0
+K=10, n=66, m=254, rep=21 | Opt=22.00 | Pred=12.00 | Gap=0.4545 | Hamming=18 | Exact=0
+K=10, n=66, m=254, rep=22 | Opt=21.00 | Pred=14.00 | Gap=0.3333 | Hamming=12 | Exact=0
+K=10, n=66, m=254, rep=23 | Opt=21.00 | Pred=18.00 | Gap=0.1429 | Hamming=15 | Exact=0
+K=10, n=66, m=254, rep=24 | Opt=22.00 | Pred=17.00 | Gap=0.2273 | Hamming=14 | Exact=0
+K=10, n=66, m=254, rep=25 | Opt=23.00 | Pred=18.00 | Gap=0.2174 | Hamming=16 | Exact=0
+K=10, n=66, m=254, rep=26 | Opt=21.00 | Pred=16.00 | Gap=0.2381 | Hamming=13 | Exact=0
+K=10, n=66, m=254, rep=27 | Opt=23.00 | Pred=16.00 | Gap=0.3043 | Hamming=10 | Exact=0
+K=10, n=66, m=254, rep=28 | Opt=22.00 | Pred=16.00 | Gap=0.2727 | Hamming=18 | Exact=0
+K=10, n=66, m=254, rep=29 | Opt=26.00 | Pred=21.00 | Gap=0.1923 | Hamming=16 | Exact=0
+K=10, n=83, m=330, rep=0 | Opt=25.00 | Pred=19.00 | Gap=0.2400 | Hamming=20 | Exact=0
+K=10, n=83, m=330, rep=1 | Opt=24.00 | Pred=18.00 | Gap=0.2500 | Hamming=14 | Exact=0
+K=10, n=83, m=330, rep=2 | Opt=25.00 | Pred=16.00 | Gap=0.3600 | Hamming=18 | Exact=0
+K=10, n=83, m=330, rep=3 | Opt=24.00 | Pred=18.00 | Gap=0.2500 | Hamming=18 | Exact=0
+K=10, n=83, m=330, rep=4 | Opt=22.00 | Pred=15.00 | Gap=0.3182 | Hamming=20 | Exact=0
+K=10, n=83, m=330, rep=5 | Opt=25.00 | Pred=17.00 | Gap=0.3200 | Hamming=20 | Exact=0
+K=10, n=83, m=330, rep=6 | Opt=22.00 | Pred=14.00 | Gap=0.3636 | Hamming=20 | Exact=0
+K=10, n=83, m=330, rep=7 | Opt=27.00 | Pred=20.00 | Gap=0.2593 | Hamming=15 | Exact=0
+K=10, n=83, m=330, rep=8 | Opt=25.00 | Pred=18.00 | Gap=0.2800 | Hamming=18 | Exact=0
+K=10, n=83, m=330, rep=9 | Opt=29.00 | Pred=18.00 | Gap=0.3793 | Hamming=20 | Exact=0
+K=10, n=83, m=330, rep=10 | Opt=25.00 | Pred=15.00 | Gap=0.4000 | Hamming=17 | Exact=0
+K=10, n=83, m=330, rep=11 | Opt=27.00 | Pred=20.00 | Gap=0.2593 | Hamming=16 | Exact=0
+K=10, n=83, m=330, rep=12 | Opt=24.00 | Pred=16.00 | Gap=0.3333 | Hamming=18 | Exact=0
+K=10, n=83, m=330, rep=13 | Opt=23.00 | Pred=17.00 | Gap=0.2609 | Hamming=16 | Exact=0
+K=10, n=83, m=330, rep=14 | Opt=23.00 | Pred=17.00 | Gap=0.2609 | Hamming=14 | Exact=0
+K=10, n=83, m=330, rep=15 | Opt=23.00 | Pred=18.00 | Gap=0.2174 | Hamming=20 | Exact=0
+K=10, n=83, m=330, rep=16 | Opt=24.00 | Pred=17.00 | Gap=0.2917 | Hamming=16 | Exact=0
+K=10, n=83, m=330, rep=17 | Opt=26.00 | Pred=17.00 | Gap=0.3462 | Hamming=18 | Exact=0
+K=10, n=83, m=330, rep=18 | Opt=22.00 | Pred=13.00 | Gap=0.4091 | Hamming=16 | Exact=0
+K=10, n=83, m=330, rep=19 | Opt=22.00 | Pred=17.00 | Gap=0.2273 | Hamming=18 | Exact=0
+K=10, n=83, m=330, rep=20 | Opt=23.00 | Pred=16.00 | Gap=0.3043 | Hamming=16 | Exact=0
+K=10, n=83, m=330, rep=21 | Opt=28.00 | Pred=22.00 | Gap=0.2143 | Hamming=14 | Exact=0
+K=10, n=83, m=330, rep=22 | Opt=23.00 | Pred=15.00 | Gap=0.3478 | Hamming=20 | Exact=0
+K=10, n=83, m=330, rep=23 | Opt=25.00 | Pred=21.00 | Gap=0.1600 | Hamming=18 | Exact=0
+K=10, n=83, m=330, rep=24 | Opt=23.00 | Pred=16.00 | Gap=0.3043 | Hamming=18 | Exact=0
+K=10, n=83, m=330, rep=25 | Opt=26.00 | Pred=22.00 | Gap=0.1538 | Hamming=14 | Exact=0
+K=10, n=83, m=330, rep=26 | Opt=24.00 | Pred=17.00 | Gap=0.2917 | Hamming=20 | Exact=0
+K=10, n=83, m=330, rep=27 | Opt=29.00 | Pred=22.00 | Gap=0.2414 | Hamming=14 | Exact=0
+K=10, n=83, m=330, rep=28 | Opt=24.00 | Pred=17.00 | Gap=0.2917 | Hamming=16 | Exact=0
+K=10, n=83, m=330, rep=29 | Opt=26.00 | Pred=19.00 | Gap=0.2692 | Hamming=20 | Exact=0
+K=10, n=146, m=618, rep=0 | Opt=28.00 | Pred=21.00 | Gap=0.2500 | Hamming=20 | Exact=0
+K=10, n=146, m=618, rep=1 | Opt=31.00 | Pred=26.00 | Gap=0.1613 | Hamming=18 | Exact=0
+K=10, n=146, m=618, rep=2 | Opt=30.00 | Pred=18.00 | Gap=0.4000 | Hamming=20 | Exact=0
+K=10, n=146, m=618, rep=3 | Opt=29.00 | Pred=19.00 | Gap=0.3448 | Hamming=20 | Exact=0
+K=10, n=146, m=618, rep=4 | Opt=31.00 | Pred=23.00 | Gap=0.2581 | Hamming=18 | Exact=0
+K=10, n=146, m=618, rep=5 | Opt=28.00 | Pred=19.00 | Gap=0.3214 | Hamming=16 | Exact=0
+K=10, n=146, m=618, rep=6 | Opt=29.00 | Pred=22.00 | Gap=0.2414 | Hamming=18 | Exact=0
+K=10, n=146, m=618, rep=7 | Opt=26.00 | Pred=18.00 | Gap=0.3077 | Hamming=18 | Exact=0
+K=10, n=146, m=618, rep=8 | Opt=31.00 | Pred=22.00 | Gap=0.2903 | Hamming=18 | Exact=0
+K=10, n=146, m=618, rep=9 | Opt=31.00 | Pred=25.00 | Gap=0.1935 | Hamming=18 | Exact=0
+K=10, n=146, m=618, rep=10 | Opt=31.00 | Pred=18.00 | Gap=0.4194 | Hamming=18 | Exact=0
+K=10, n=146, m=618, rep=11 | Opt=33.00 | Pred=24.00 | Gap=0.2727 | Hamming=20 | Exact=0
+K=10, n=146, m=618, rep=12 | Opt=30.00 | Pred=19.00 | Gap=0.3667 | Hamming=18 | Exact=0
+K=10, n=146, m=618, rep=13 | Opt=30.00 | Pred=26.00 | Gap=0.1333 | Hamming=16 | Exact=0
+K=10, n=146, m=618, rep=14 | Opt=29.00 | Pred=22.00 | Gap=0.2414 | Hamming=20 | Exact=0
+K=10, n=146, m=618, rep=15 | Opt=30.00 | Pred=19.00 | Gap=0.3667 | Hamming=20 | Exact=0
+K=10, n=146, m=618, rep=16 | Opt=31.00 | Pred=25.00 | Gap=0.1935 | Hamming=18 | Exact=0
+K=10, n=146, m=618, rep=17 | Opt=31.00 | Pred=22.00 | Gap=0.2903 | Hamming=18 | Exact=0
+K=10, n=146, m=618, rep=18 | Opt=30.00 | Pred=23.00 | Gap=0.2333 | Hamming=18 | Exact=0
+K=10, n=146, m=618, rep=19 | Opt=28.00 | Pred=22.00 | Gap=0.2143 | Hamming=20 | Exact=0
+K=10, n=146, m=618, rep=20 | Opt=31.00 | Pred=24.00 | Gap=0.2258 | Hamming=20 | Exact=0
+K=10, n=146, m=618, rep=21 | Opt=26.00 | Pred=17.00 | Gap=0.3462 | Hamming=20 | Exact=0
+K=10, n=146, m=618, rep=22 | Opt=34.00 | Pred=28.00 | Gap=0.1765 | Hamming=16 | Exact=0
+K=10, n=146, m=618, rep=23 | Opt=30.00 | Pred=22.00 | Gap=0.2667 | Hamming=20 | Exact=0
+K=10, n=146, m=618, rep=24 | Opt=33.00 | Pred=22.00 | Gap=0.3333 | Hamming=20 | Exact=0
+K=10, n=146, m=618, rep=25 | Opt=32.00 | Pred=25.00 | Gap=0.2188 | Hamming=18 | Exact=0
+K=10, n=146, m=618, rep=26 | Opt=29.00 | Pred=20.00 | Gap=0.3103 | Hamming=20 | Exact=0
+K=10, n=146, m=618, rep=27 | Opt=27.00 | Pred=22.00 | Gap=0.1852 | Hamming=20 | Exact=0
+K=10, n=146, m=618, rep=28 | Opt=30.00 | Pred=23.00 | Gap=0.2333 | Hamming=20 | Exact=0
+K=10, n=146, m=618, rep=29 | Opt=27.00 | Pred=23.00 | Gap=0.1481 | Hamming=15 | Exact=0
+
+FINAL TEST RESULTS FOR K=10
+Instances evaluated: 120
+Exact match rate: 0.0000
+Average Hamming distance: 17.0000
+Average objective gap: 0.2885
+Average MIP solve time: 4.312013 seconds
+Average model inference time: 0.003005 seconds
+
+Saved results/evaluation_results_tropical_shortest_path_wood_mixed_60_10_reps100_candidate4.csv
+
+Loaded 240 pre-generated evaluation graphs from evaluation_graphs/shortest_path_wood_graphs.pkl.
+
+Evaluating attack limit K=5
+K=5, n=51, m=188, rep=0 | Opt=18.00 | Pred=13.00 | Gap=0.2778 | Hamming=8 | Exact=0
+K=5, n=51, m=188, rep=1 | Opt=17.00 | Pred=14.00 | Gap=0.1765 | Hamming=8 | Exact=0
+K=5, n=51, m=188, rep=2 | Opt=19.00 | Pred=16.00 | Gap=0.1579 | Hamming=3 | Exact=0
+K=5, n=51, m=188, rep=3 | Opt=19.00 | Pred=11.00 | Gap=0.4211 | Hamming=6 | Exact=0
+K=5, n=51, m=188, rep=4 | Opt=17.00 | Pred=12.00 | Gap=0.2941 | Hamming=5 | Exact=0
+K=5, n=51, m=188, rep=5 | Opt=20.00 | Pred=17.00 | Gap=0.1500 | Hamming=6 | Exact=0
+K=5, n=51, m=188, rep=6 | Opt=17.00 | Pred=11.00 | Gap=0.3529 | Hamming=10 | Exact=0
+K=5, n=51, m=188, rep=7 | Opt=18.00 | Pred=14.00 | Gap=0.2222 | Hamming=8 | Exact=0
+K=5, n=51, m=188, rep=8 | Opt=19.00 | Pred=16.00 | Gap=0.1579 | Hamming=6 | Exact=0
+K=5, n=51, m=188, rep=9 | Opt=20.00 | Pred=15.00 | Gap=0.2500 | Hamming=9 | Exact=0
+K=5, n=51, m=188, rep=10 | Opt=15.00 | Pred=10.00 | Gap=0.3333 | Hamming=10 | Exact=0
+K=5, n=51, m=188, rep=11 | Opt=20.00 | Pred=14.00 | Gap=0.3000 | Hamming=10 | Exact=0
+K=5, n=51, m=188, rep=12 | Opt=18.00 | Pred=15.00 | Gap=0.1667 | Hamming=6 | Exact=0
+K=5, n=51, m=188, rep=13 | Opt=17.00 | Pred=13.00 | Gap=0.2353 | Hamming=10 | Exact=0
+K=5, n=51, m=188, rep=14 | Opt=16.00 | Pred=9.00 | Gap=0.4375 | Hamming=10 | Exact=0
+K=5, n=51, m=188, rep=15 | Opt=16.00 | Pred=11.00 | Gap=0.3125 | Hamming=6 | Exact=0
+K=5, n=51, m=188, rep=16 | Opt=20.00 | Pred=15.00 | Gap=0.2500 | Hamming=8 | Exact=0
+K=5, n=51, m=188, rep=17 | Opt=19.00 | Pred=14.00 | Gap=0.2632 | Hamming=10 | Exact=0
+K=5, n=51, m=188, rep=18 | Opt=17.00 | Pred=14.00 | Gap=0.1765 | Hamming=6 | Exact=0
+K=5, n=51, m=188, rep=19 | Opt=18.00 | Pred=12.00 | Gap=0.3333 | Hamming=10 | Exact=0
+K=5, n=51, m=188, rep=20 | Opt=17.00 | Pred=11.00 | Gap=0.3529 | Hamming=10 | Exact=0
+K=5, n=51, m=188, rep=21 | Opt=15.00 | Pred=12.00 | Gap=0.2000 | Hamming=4 | Exact=0
+K=5, n=51, m=188, rep=22 | Opt=19.00 | Pred=14.00 | Gap=0.2632 | Hamming=6 | Exact=0
+K=5, n=51, m=188, rep=23 | Opt=16.00 | Pred=15.00 | Gap=0.0625 | Hamming=6 | Exact=0
+K=5, n=51, m=188, rep=24 | Opt=19.00 | Pred=13.00 | Gap=0.3158 | Hamming=8 | Exact=0
+K=5, n=51, m=188, rep=25 | Opt=18.00 | Pred=13.00 | Gap=0.2778 | Hamming=8 | Exact=0
+K=5, n=51, m=188, rep=26 | Opt=17.00 | Pred=14.00 | Gap=0.1765 | Hamming=6 | Exact=0
+K=5, n=51, m=188, rep=27 | Opt=20.00 | Pred=19.00 | Gap=0.0500 | Hamming=6 | Exact=0
+K=5, n=51, m=188, rep=28 | Opt=22.00 | Pred=20.00 | Gap=0.0909 | Hamming=8 | Exact=0
+K=5, n=51, m=188, rep=29 | Opt=19.00 | Pred=15.00 | Gap=0.2105 | Hamming=7 | Exact=0
+K=5, n=66, m=254, rep=0 | Opt=22.00 | Pred=17.00 | Gap=0.2273 | Hamming=6 | Exact=0
+K=5, n=66, m=254, rep=1 | Opt=19.00 | Pred=14.00 | Gap=0.2632 | Hamming=8 | Exact=0
+K=5, n=66, m=254, rep=2 | Opt=18.00 | Pred=14.00 | Gap=0.2222 | Hamming=8 | Exact=0
+K=5, n=66, m=254, rep=3 | Opt=21.00 | Pred=16.00 | Gap=0.2381 | Hamming=8 | Exact=0
+K=5, n=66, m=254, rep=4 | Opt=19.00 | Pred=12.00 | Gap=0.3684 | Hamming=8 | Exact=0
+K=5, n=66, m=254, rep=5 | Opt=17.00 | Pred=13.00 | Gap=0.2353 | Hamming=10 | Exact=0
+K=5, n=66, m=254, rep=6 | Opt=20.00 | Pred=17.00 | Gap=0.1500 | Hamming=6 | Exact=0
+K=5, n=66, m=254, rep=7 | Opt=19.00 | Pred=13.00 | Gap=0.3158 | Hamming=10 | Exact=0
+K=5, n=66, m=254, rep=8 | Opt=19.00 | Pred=15.00 | Gap=0.2105 | Hamming=6 | Exact=0
+K=5, n=66, m=254, rep=9 | Opt=20.00 | Pred=16.00 | Gap=0.2000 | Hamming=8 | Exact=0
+K=5, n=66, m=254, rep=10 | Opt=21.00 | Pred=15.00 | Gap=0.2857 | Hamming=10 | Exact=0
+K=5, n=66, m=254, rep=11 | Opt=16.00 | Pred=13.00 | Gap=0.1875 | Hamming=10 | Exact=0
+K=5, n=66, m=254, rep=12 | Opt=17.00 | Pred=14.00 | Gap=0.1765 | Hamming=10 | Exact=0
+K=5, n=66, m=254, rep=13 | Opt=18.00 | Pred=14.00 | Gap=0.2222 | Hamming=10 | Exact=0
+K=5, n=66, m=254, rep=14 | Opt=19.00 | Pred=17.00 | Gap=0.1053 | Hamming=4 | Exact=0
+K=5, n=66, m=254, rep=15 | Opt=16.00 | Pred=12.00 | Gap=0.2500 | Hamming=6 | Exact=0
+K=5, n=66, m=254, rep=16 | Opt=21.00 | Pred=17.00 | Gap=0.1905 | Hamming=8 | Exact=0
+K=5, n=66, m=254, rep=17 | Opt=19.00 | Pred=14.00 | Gap=0.2632 | Hamming=6 | Exact=0
+K=5, n=66, m=254, rep=18 | Opt=21.00 | Pred=16.00 | Gap=0.2381 | Hamming=8 | Exact=0
+K=5, n=66, m=254, rep=19 | Opt=23.00 | Pred=17.00 | Gap=0.2609 | Hamming=9 | Exact=0
+K=5, n=66, m=254, rep=20 | Opt=18.00 | Pred=16.00 | Gap=0.1111 | Hamming=10 | Exact=0
+K=5, n=66, m=254, rep=21 | Opt=19.00 | Pred=16.00 | Gap=0.1579 | Hamming=10 | Exact=0
+K=5, n=66, m=254, rep=22 | Opt=16.00 | Pred=13.00 | Gap=0.1875 | Hamming=8 | Exact=0
+K=5, n=66, m=254, rep=23 | Opt=21.00 | Pred=17.00 | Gap=0.1905 | Hamming=10 | Exact=0
+K=5, n=66, m=254, rep=24 | Opt=21.00 | Pred=20.00 | Gap=0.0476 | Hamming=6 | Exact=0
+K=5, n=66, m=254, rep=25 | Opt=17.00 | Pred=10.00 | Gap=0.4118 | Hamming=6 | Exact=0
+K=5, n=66, m=254, rep=26 | Opt=15.00 | Pred=12.00 | Gap=0.2000 | Hamming=8 | Exact=0
+K=5, n=66, m=254, rep=27 | Opt=19.00 | Pred=12.00 | Gap=0.3684 | Hamming=10 | Exact=0
+K=5, n=66, m=254, rep=28 | Opt=20.00 | Pred=16.00 | Gap=0.2000 | Hamming=6 | Exact=0
+K=5, n=66, m=254, rep=29 | Opt=21.00 | Pred=18.00 | Gap=0.1429 | Hamming=8 | Exact=0
+K=5, n=83, m=330, rep=0 | Opt=24.00 | Pred=19.00 | Gap=0.2083 | Hamming=10 | Exact=0
+K=5, n=83, m=330, rep=1 | Opt=25.00 | Pred=21.00 | Gap=0.1600 | Hamming=8 | Exact=0
+K=5, n=83, m=330, rep=2 | Opt=21.00 | Pred=18.00 | Gap=0.1429 | Hamming=10 | Exact=0
+K=5, n=83, m=330, rep=3 | Opt=21.00 | Pred=15.00 | Gap=0.2857 | Hamming=8 | Exact=0
+K=5, n=83, m=330, rep=4 | Opt=22.00 | Pred=17.00 | Gap=0.2273 | Hamming=8 | Exact=0
+K=5, n=83, m=330, rep=5 | Opt=16.00 | Pred=14.00 | Gap=0.1250 | Hamming=7 | Exact=0
+K=5, n=83, m=330, rep=6 | Opt=20.00 | Pred=14.00 | Gap=0.3000 | Hamming=10 | Exact=0
+K=5, n=83, m=330, rep=7 | Opt=21.00 | Pred=18.00 | Gap=0.1429 | Hamming=6 | Exact=0
+K=5, n=83, m=330, rep=8 | Opt=19.00 | Pred=17.00 | Gap=0.1053 | Hamming=8 | Exact=0
+K=5, n=83, m=330, rep=9 | Opt=20.00 | Pred=17.00 | Gap=0.1500 | Hamming=10 | Exact=0
+K=5, n=83, m=330, rep=10 | Opt=20.00 | Pred=15.00 | Gap=0.2500 | Hamming=8 | Exact=0
+K=5, n=83, m=330, rep=11 | Opt=22.00 | Pred=19.00 | Gap=0.1364 | Hamming=10 | Exact=0
+K=5, n=83, m=330, rep=12 | Opt=23.00 | Pred=15.00 | Gap=0.3478 | Hamming=10 | Exact=0
+K=5, n=83, m=330, rep=13 | Opt=19.00 | Pred=15.00 | Gap=0.2105 | Hamming=10 | Exact=0
+K=5, n=83, m=330, rep=14 | Opt=17.00 | Pred=12.00 | Gap=0.2941 | Hamming=6 | Exact=0
+K=5, n=83, m=330, rep=15 | Opt=23.00 | Pred=18.00 | Gap=0.2174 | Hamming=8 | Exact=0
+K=5, n=83, m=330, rep=16 | Opt=22.00 | Pred=18.00 | Gap=0.1818 | Hamming=10 | Exact=0
+K=5, n=83, m=330, rep=17 | Opt=21.00 | Pred=18.00 | Gap=0.1429 | Hamming=8 | Exact=0
+K=5, n=83, m=330, rep=18 | Opt=24.00 | Pred=18.00 | Gap=0.2500 | Hamming=8 | Exact=0
+K=5, n=83, m=330, rep=19 | Opt=21.00 | Pred=14.00 | Gap=0.3333 | Hamming=10 | Exact=0
+K=5, n=83, m=330, rep=20 | Opt=22.00 | Pred=17.00 | Gap=0.2273 | Hamming=9 | Exact=0
+K=5, n=83, m=330, rep=21 | Opt=24.00 | Pred=16.00 | Gap=0.3333 | Hamming=8 | Exact=0
+K=5, n=83, m=330, rep=22 | Opt=23.00 | Pred=20.00 | Gap=0.1304 | Hamming=10 | Exact=0
+K=5, n=83, m=330, rep=23 | Opt=20.00 | Pred=18.00 | Gap=0.1000 | Hamming=10 | Exact=0
+K=5, n=83, m=330, rep=24 | Opt=20.00 | Pred=17.00 | Gap=0.1500 | Hamming=10 | Exact=0
+K=5, n=83, m=330, rep=25 | Opt=27.00 | Pred=23.00 | Gap=0.1481 | Hamming=10 | Exact=0
+K=5, n=83, m=330, rep=26 | Opt=21.00 | Pred=16.00 | Gap=0.2381 | Hamming=10 | Exact=0
+K=5, n=83, m=330, rep=27 | Opt=22.00 | Pred=20.00 | Gap=0.0909 | Hamming=10 | Exact=0
+K=5, n=83, m=330, rep=28 | Opt=21.00 | Pred=17.00 | Gap=0.1905 | Hamming=6 | Exact=0
+K=5, n=83, m=330, rep=29 | Opt=19.00 | Pred=13.00 | Gap=0.3158 | Hamming=6 | Exact=0
+K=5, n=146, m=618, rep=0 | Opt=27.00 | Pred=19.00 | Gap=0.2963 | Hamming=10 | Exact=0
+K=5, n=146, m=618, rep=1 | Opt=28.00 | Pred=23.00 | Gap=0.1786 | Hamming=10 | Exact=0
+K=5, n=146, m=618, rep=2 | Opt=27.00 | Pred=22.00 | Gap=0.1852 | Hamming=10 | Exact=0
+K=5, n=146, m=618, rep=3 | Opt=24.00 | Pred=18.00 | Gap=0.2500 | Hamming=10 | Exact=0
+K=5, n=146, m=618, rep=4 | Opt=27.00 | Pred=19.00 | Gap=0.2963 | Hamming=8 | Exact=0
+K=5, n=146, m=618, rep=5 | Opt=31.00 | Pred=25.00 | Gap=0.1935 | Hamming=10 | Exact=0
+K=5, n=146, m=618, rep=6 | Opt=26.00 | Pred=22.00 | Gap=0.1538 | Hamming=10 | Exact=0
+K=5, n=146, m=618, rep=7 | Opt=26.00 | Pred=22.00 | Gap=0.1538 | Hamming=10 | Exact=0
+K=5, n=146, m=618, rep=8 | Opt=31.00 | Pred=25.00 | Gap=0.1935 | Hamming=10 | Exact=0
+K=5, n=146, m=618, rep=9 | Opt=28.00 | Pred=23.00 | Gap=0.1786 | Hamming=8 | Exact=0
+K=5, n=146, m=618, rep=10 | Opt=24.00 | Pred=15.00 | Gap=0.3750 | Hamming=10 | Exact=0
+K=5, n=146, m=618, rep=11 | Opt=23.00 | Pred=17.00 | Gap=0.2609 | Hamming=10 | Exact=0
+K=5, n=146, m=618, rep=12 | Opt=26.00 | Pred=22.00 | Gap=0.1538 | Hamming=8 | Exact=0
+K=5, n=146, m=618, rep=13 | Opt=26.00 | Pred=22.00 | Gap=0.1538 | Hamming=10 | Exact=0
+K=5, n=146, m=618, rep=14 | Opt=27.00 | Pred=18.00 | Gap=0.3333 | Hamming=8 | Exact=0
+K=5, n=146, m=618, rep=15 | Opt=30.00 | Pred=23.00 | Gap=0.2333 | Hamming=8 | Exact=0
+K=5, n=146, m=618, rep=16 | Opt=27.00 | Pred=21.00 | Gap=0.2222 | Hamming=10 | Exact=0
+K=5, n=146, m=618, rep=17 | Opt=24.00 | Pred=20.00 | Gap=0.1667 | Hamming=8 | Exact=0
+K=5, n=146, m=618, rep=18 | Opt=29.00 | Pred=24.00 | Gap=0.1724 | Hamming=10 | Exact=0
+K=5, n=146, m=618, rep=19 | Opt=27.00 | Pred=22.00 | Gap=0.1852 | Hamming=10 | Exact=0
+K=5, n=146, m=618, rep=20 | Opt=26.00 | Pred=23.00 | Gap=0.1154 | Hamming=10 | Exact=0
+K=5, n=146, m=618, rep=21 | Opt=27.00 | Pred=22.00 | Gap=0.1852 | Hamming=10 | Exact=0
+K=5, n=146, m=618, rep=22 | Opt=27.00 | Pred=23.00 | Gap=0.1481 | Hamming=8 | Exact=0
+K=5, n=146, m=618, rep=23 | Opt=26.00 | Pred=21.00 | Gap=0.1923 | Hamming=8 | Exact=0
+K=5, n=146, m=618, rep=24 | Opt=28.00 | Pred=25.00 | Gap=0.1071 | Hamming=6 | Exact=0
+K=5, n=146, m=618, rep=25 | Opt=27.00 | Pred=21.00 | Gap=0.2222 | Hamming=10 | Exact=0
+K=5, n=146, m=618, rep=26 | Opt=28.00 | Pred=22.00 | Gap=0.2143 | Hamming=10 | Exact=0
+K=5, n=146, m=618, rep=27 | Opt=29.00 | Pred=23.00 | Gap=0.2069 | Hamming=10 | Exact=0
+K=5, n=146, m=618, rep=28 | Opt=25.00 | Pred=23.00 | Gap=0.0800 | Hamming=8 | Exact=0
+K=5, n=146, m=618, rep=29 | Opt=28.00 | Pred=24.00 | Gap=0.1429 | Hamming=10 | Exact=0
+
+FINAL TEST RESULTS FOR K=5
+Instances evaluated: 120
+Exact match rate: 0.0000
+Average Hamming distance: 8.3750
+Average objective gap: 0.2165
+Average MIP solve time: 1.256592 seconds
+Average model inference time: 0.011677 seconds
+
+Evaluating attack limit K=10
+K=10, n=51, m=188, rep=0 | Opt=16.00 | Pred=9.00 | Gap=0.4375 | Hamming=20 | Exact=0
+K=10, n=51, m=188, rep=1 | Opt=19.00 | Pred=13.00 | Gap=0.3158 | Hamming=16 | Exact=0
+K=10, n=51, m=188, rep=2 | Opt=18.00 | Pred=11.00 | Gap=0.3889 | Hamming=14 | Exact=0
+K=10, n=51, m=188, rep=3 | Opt=18.00 | Pred=12.00 | Gap=0.3333 | Hamming=16 | Exact=0
+K=10, n=51, m=188, rep=4 | Opt=18.00 | Pred=7.00 | Gap=0.6111 | Hamming=20 | Exact=0
+K=10, n=51, m=188, rep=5 | Opt=20.00 | Pred=15.00 | Gap=0.2500 | Hamming=16 | Exact=0
+K=10, n=51, m=188, rep=6 | Opt=22.00 | Pred=18.00 | Gap=0.1818 | Hamming=12 | Exact=0
+K=10, n=51, m=188, rep=7 | Opt=21.00 | Pred=17.00 | Gap=0.1905 | Hamming=10 | Exact=0
+K=10, n=51, m=188, rep=8 | Opt=22.00 | Pred=13.00 | Gap=0.4091 | Hamming=16 | Exact=0
+K=10, n=51, m=188, rep=9 | Opt=24.00 | Pred=16.00 | Gap=0.3333 | Hamming=18 | Exact=0
+K=10, n=51, m=188, rep=10 | Opt=19.00 | Pred=13.00 | Gap=0.3158 | Hamming=16 | Exact=0
+K=10, n=51, m=188, rep=11 | Opt=18.00 | Pred=11.00 | Gap=0.3889 | Hamming=14 | Exact=0
+K=10, n=51, m=188, rep=12 | Opt=25.00 | Pred=20.00 | Gap=0.2000 | Hamming=14 | Exact=0
+K=10, n=51, m=188, rep=13 | Opt=19.00 | Pred=12.00 | Gap=0.3684 | Hamming=16 | Exact=0
+K=10, n=51, m=188, rep=14 | Opt=21.00 | Pred=14.00 | Gap=0.3333 | Hamming=12 | Exact=0
+K=10, n=51, m=188, rep=15 | Opt=21.00 | Pred=15.00 | Gap=0.2857 | Hamming=18 | Exact=0
+K=10, n=51, m=188, rep=16 | Opt=20.00 | Pred=12.00 | Gap=0.4000 | Hamming=18 | Exact=0
+K=10, n=51, m=188, rep=17 | Opt=20.00 | Pred=12.00 | Gap=0.4000 | Hamming=16 | Exact=0
+K=10, n=51, m=188, rep=18 | Opt=18.00 | Pred=11.00 | Gap=0.3889 | Hamming=14 | Exact=0
+K=10, n=51, m=188, rep=19 | Opt=23.00 | Pred=15.00 | Gap=0.3478 | Hamming=16 | Exact=0
+K=10, n=51, m=188, rep=20 | Opt=19.00 | Pred=13.00 | Gap=0.3158 | Hamming=11 | Exact=0
+K=10, n=51, m=188, rep=21 | Opt=21.00 | Pred=14.00 | Gap=0.3333 | Hamming=16 | Exact=0
+K=10, n=51, m=188, rep=22 | Opt=23.00 | Pred=16.00 | Gap=0.3043 | Hamming=16 | Exact=0
+K=10, n=51, m=188, rep=23 | Opt=21.00 | Pred=16.00 | Gap=0.2381 | Hamming=16 | Exact=0
+K=10, n=51, m=188, rep=24 | Opt=21.00 | Pred=14.00 | Gap=0.3333 | Hamming=18 | Exact=0
+K=10, n=51, m=188, rep=25 | Opt=20.00 | Pred=11.00 | Gap=0.4500 | Hamming=16 | Exact=0
+K=10, n=51, m=188, rep=26 | Opt=22.00 | Pred=13.00 | Gap=0.4091 | Hamming=18 | Exact=0
+K=10, n=51, m=188, rep=27 | Opt=22.00 | Pred=16.00 | Gap=0.2727 | Hamming=14 | Exact=0
+K=10, n=51, m=188, rep=28 | Opt=22.00 | Pred=17.00 | Gap=0.2273 | Hamming=18 | Exact=0
+K=10, n=51, m=188, rep=29 | Opt=18.00 | Pred=14.00 | Gap=0.2222 | Hamming=18 | Exact=0
+K=10, n=66, m=254, rep=0 | Opt=21.00 | Pred=15.00 | Gap=0.2857 | Hamming=18 | Exact=0
+K=10, n=66, m=254, rep=1 | Opt=26.00 | Pred=20.00 | Gap=0.2308 | Hamming=16 | Exact=0
+K=10, n=66, m=254, rep=2 | Opt=26.00 | Pred=19.00 | Gap=0.2692 | Hamming=18 | Exact=0
+K=10, n=66, m=254, rep=3 | Opt=25.00 | Pred=18.00 | Gap=0.2800 | Hamming=13 | Exact=0
+K=10, n=66, m=254, rep=4 | Opt=20.00 | Pred=13.00 | Gap=0.3500 | Hamming=17 | Exact=0
+K=10, n=66, m=254, rep=5 | Opt=24.00 | Pred=12.00 | Gap=0.5000 | Hamming=20 | Exact=0
+K=10, n=66, m=254, rep=6 | Opt=20.00 | Pred=15.00 | Gap=0.2500 | Hamming=18 | Exact=0
+K=10, n=66, m=254, rep=7 | Opt=22.00 | Pred=16.00 | Gap=0.2727 | Hamming=16 | Exact=0
+K=10, n=66, m=254, rep=8 | Opt=23.00 | Pred=16.00 | Gap=0.3043 | Hamming=14 | Exact=0
+K=10, n=66, m=254, rep=9 | Opt=22.00 | Pred=12.00 | Gap=0.4545 | Hamming=18 | Exact=0
+K=10, n=66, m=254, rep=10 | Opt=25.00 | Pred=19.00 | Gap=0.2400 | Hamming=14 | Exact=0
+K=10, n=66, m=254, rep=11 | Opt=26.00 | Pred=21.00 | Gap=0.1923 | Hamming=14 | Exact=0
+K=10, n=66, m=254, rep=12 | Opt=23.00 | Pred=18.00 | Gap=0.2174 | Hamming=18 | Exact=0
+K=10, n=66, m=254, rep=13 | Opt=24.00 | Pred=18.00 | Gap=0.2500 | Hamming=8 | Exact=0
+K=10, n=66, m=254, rep=14 | Opt=25.00 | Pred=18.00 | Gap=0.2800 | Hamming=16 | Exact=0
+K=10, n=66, m=254, rep=15 | Opt=23.00 | Pred=17.00 | Gap=0.2609 | Hamming=12 | Exact=0
+K=10, n=66, m=254, rep=16 | Opt=21.00 | Pred=14.00 | Gap=0.3333 | Hamming=18 | Exact=0
+K=10, n=66, m=254, rep=17 | Opt=23.00 | Pred=16.00 | Gap=0.3043 | Hamming=18 | Exact=0
+K=10, n=66, m=254, rep=18 | Opt=21.00 | Pred=16.00 | Gap=0.2381 | Hamming=18 | Exact=0
+K=10, n=66, m=254, rep=19 | Opt=18.00 | Pred=11.00 | Gap=0.3889 | Hamming=16 | Exact=0
+K=10, n=66, m=254, rep=20 | Opt=21.00 | Pred=17.00 | Gap=0.1905 | Hamming=18 | Exact=0
+K=10, n=66, m=254, rep=21 | Opt=22.00 | Pred=12.00 | Gap=0.4545 | Hamming=18 | Exact=0
+K=10, n=66, m=254, rep=22 | Opt=21.00 | Pred=14.00 | Gap=0.3333 | Hamming=14 | Exact=0
+K=10, n=66, m=254, rep=23 | Opt=21.00 | Pred=16.00 | Gap=0.2381 | Hamming=13 | Exact=0
+K=10, n=66, m=254, rep=24 | Opt=22.00 | Pred=12.00 | Gap=0.4545 | Hamming=16 | Exact=0
+K=10, n=66, m=254, rep=25 | Opt=23.00 | Pred=18.00 | Gap=0.2174 | Hamming=18 | Exact=0
+K=10, n=66, m=254, rep=26 | Opt=21.00 | Pred=16.00 | Gap=0.2381 | Hamming=13 | Exact=0
+K=10, n=66, m=254, rep=27 | Opt=23.00 | Pred=15.00 | Gap=0.3478 | Hamming=10 | Exact=0
+K=10, n=66, m=254, rep=28 | Opt=22.00 | Pred=16.00 | Gap=0.2727 | Hamming=16 | Exact=0
+K=10, n=66, m=254, rep=29 | Opt=26.00 | Pred=19.00 | Gap=0.2692 | Hamming=16 | Exact=0
+K=10, n=83, m=330, rep=0 | Opt=25.00 | Pred=19.00 | Gap=0.2400 | Hamming=18 | Exact=0
+K=10, n=83, m=330, rep=1 | Opt=24.00 | Pred=18.00 | Gap=0.2500 | Hamming=10 | Exact=0
+K=10, n=83, m=330, rep=2 | Opt=25.00 | Pred=16.00 | Gap=0.3600 | Hamming=16 | Exact=0
+K=10, n=83, m=330, rep=3 | Opt=24.00 | Pred=18.00 | Gap=0.2500 | Hamming=18 | Exact=0
+K=10, n=83, m=330, rep=4 | Opt=22.00 | Pred=17.00 | Gap=0.2273 | Hamming=18 | Exact=0
+K=10, n=83, m=330, rep=5 | Opt=25.00 | Pred=15.00 | Gap=0.4000 | Hamming=20 | Exact=0
+K=10, n=83, m=330, rep=6 | Opt=22.00 | Pred=14.00 | Gap=0.3636 | Hamming=20 | Exact=0
+K=10, n=83, m=330, rep=7 | Opt=27.00 | Pred=20.00 | Gap=0.2593 | Hamming=17 | Exact=0
+K=10, n=83, m=330, rep=8 | Opt=25.00 | Pred=18.00 | Gap=0.2800 | Hamming=16 | Exact=0
+K=10, n=83, m=330, rep=9 | Opt=29.00 | Pred=18.00 | Gap=0.3793 | Hamming=20 | Exact=0
+K=10, n=83, m=330, rep=10 | Opt=25.00 | Pred=17.00 | Gap=0.3200 | Hamming=15 | Exact=0
+K=10, n=83, m=330, rep=11 | Opt=27.00 | Pred=17.00 | Gap=0.3704 | Hamming=20 | Exact=0
+K=10, n=83, m=330, rep=12 | Opt=24.00 | Pred=16.00 | Gap=0.3333 | Hamming=18 | Exact=0
+K=10, n=83, m=330, rep=13 | Opt=23.00 | Pred=15.00 | Gap=0.3478 | Hamming=16 | Exact=0
+K=10, n=83, m=330, rep=14 | Opt=23.00 | Pred=17.00 | Gap=0.2609 | Hamming=14 | Exact=0
+K=10, n=83, m=330, rep=15 | Opt=23.00 | Pred=18.00 | Gap=0.2174 | Hamming=14 | Exact=0
+K=10, n=83, m=330, rep=16 | Opt=24.00 | Pred=20.00 | Gap=0.1667 | Hamming=14 | Exact=0
+K=10, n=83, m=330, rep=17 | Opt=26.00 | Pred=17.00 | Gap=0.3462 | Hamming=18 | Exact=0
+K=10, n=83, m=330, rep=18 | Opt=22.00 | Pred=13.00 | Gap=0.4091 | Hamming=14 | Exact=0
+K=10, n=83, m=330, rep=19 | Opt=22.00 | Pred=14.00 | Gap=0.3636 | Hamming=20 | Exact=0
+K=10, n=83, m=330, rep=20 | Opt=23.00 | Pred=15.00 | Gap=0.3478 | Hamming=18 | Exact=0
+K=10, n=83, m=330, rep=21 | Opt=28.00 | Pred=24.00 | Gap=0.1429 | Hamming=12 | Exact=0
+K=10, n=83, m=330, rep=22 | Opt=23.00 | Pred=15.00 | Gap=0.3478 | Hamming=16 | Exact=0
+K=10, n=83, m=330, rep=23 | Opt=25.00 | Pred=18.00 | Gap=0.2800 | Hamming=16 | Exact=0
+K=10, n=83, m=330, rep=24 | Opt=23.00 | Pred=16.00 | Gap=0.3043 | Hamming=16 | Exact=0
+K=10, n=83, m=330, rep=25 | Opt=26.00 | Pred=19.00 | Gap=0.2692 | Hamming=16 | Exact=0
+K=10, n=83, m=330, rep=26 | Opt=24.00 | Pred=16.00 | Gap=0.3333 | Hamming=18 | Exact=0
+K=10, n=83, m=330, rep=27 | Opt=29.00 | Pred=20.00 | Gap=0.3103 | Hamming=14 | Exact=0
+K=10, n=83, m=330, rep=28 | Opt=24.00 | Pred=14.00 | Gap=0.4167 | Hamming=16 | Exact=0
+K=10, n=83, m=330, rep=29 | Opt=26.00 | Pred=19.00 | Gap=0.2692 | Hamming=18 | Exact=0
+K=10, n=146, m=618, rep=0 | Opt=28.00 | Pred=21.00 | Gap=0.2500 | Hamming=20 | Exact=0
+K=10, n=146, m=618, rep=1 | Opt=31.00 | Pred=22.00 | Gap=0.2903 | Hamming=18 | Exact=0
+K=10, n=146, m=618, rep=2 | Opt=30.00 | Pred=17.00 | Gap=0.4333 | Hamming=20 | Exact=0
+K=10, n=146, m=618, rep=3 | Opt=29.00 | Pred=19.00 | Gap=0.3448 | Hamming=20 | Exact=0
+K=10, n=146, m=618, rep=4 | Opt=31.00 | Pred=22.00 | Gap=0.2903 | Hamming=18 | Exact=0
+K=10, n=146, m=618, rep=5 | Opt=28.00 | Pred=22.00 | Gap=0.2143 | Hamming=12 | Exact=0
+K=10, n=146, m=618, rep=6 | Opt=29.00 | Pred=22.00 | Gap=0.2414 | Hamming=18 | Exact=0
+K=10, n=146, m=618, rep=7 | Opt=26.00 | Pred=16.00 | Gap=0.3846 | Hamming=20 | Exact=0
+K=10, n=146, m=618, rep=8 | Opt=31.00 | Pred=22.00 | Gap=0.2903 | Hamming=18 | Exact=0
+K=10, n=146, m=618, rep=9 | Opt=31.00 | Pred=25.00 | Gap=0.1935 | Hamming=18 | Exact=0
+K=10, n=146, m=618, rep=10 | Opt=31.00 | Pred=17.00 | Gap=0.4516 | Hamming=20 | Exact=0
+K=10, n=146, m=618, rep=11 | Opt=33.00 | Pred=24.00 | Gap=0.2727 | Hamming=20 | Exact=0
+K=10, n=146, m=618, rep=12 | Opt=30.00 | Pred=19.00 | Gap=0.3667 | Hamming=18 | Exact=0
+K=10, n=146, m=618, rep=13 | Opt=30.00 | Pred=26.00 | Gap=0.1333 | Hamming=18 | Exact=0
+K=10, n=146, m=618, rep=14 | Opt=29.00 | Pred=22.00 | Gap=0.2414 | Hamming=16 | Exact=0
+K=10, n=146, m=618, rep=15 | Opt=30.00 | Pred=19.00 | Gap=0.3667 | Hamming=20 | Exact=0
+K=10, n=146, m=618, rep=16 | Opt=31.00 | Pred=22.00 | Gap=0.2903 | Hamming=18 | Exact=0
+K=10, n=146, m=618, rep=17 | Opt=31.00 | Pred=22.00 | Gap=0.2903 | Hamming=20 | Exact=0
+K=10, n=146, m=618, rep=18 | Opt=30.00 | Pred=23.00 | Gap=0.2333 | Hamming=20 | Exact=0
+K=10, n=146, m=618, rep=19 | Opt=28.00 | Pred=22.00 | Gap=0.2143 | Hamming=20 | Exact=0
+K=10, n=146, m=618, rep=20 | Opt=31.00 | Pred=24.00 | Gap=0.2258 | Hamming=20 | Exact=0
+K=10, n=146, m=618, rep=21 | Opt=26.00 | Pred=17.00 | Gap=0.3462 | Hamming=20 | Exact=0
+K=10, n=146, m=618, rep=22 | Opt=34.00 | Pred=28.00 | Gap=0.1765 | Hamming=16 | Exact=0
+K=10, n=146, m=618, rep=23 | Opt=30.00 | Pred=22.00 | Gap=0.2667 | Hamming=18 | Exact=0
+K=10, n=146, m=618, rep=24 | Opt=33.00 | Pred=22.00 | Gap=0.3333 | Hamming=18 | Exact=0
+K=10, n=146, m=618, rep=25 | Opt=32.00 | Pred=25.00 | Gap=0.2188 | Hamming=18 | Exact=0
+K=10, n=146, m=618, rep=26 | Opt=29.00 | Pred=20.00 | Gap=0.3103 | Hamming=20 | Exact=0
+K=10, n=146, m=618, rep=27 | Opt=27.00 | Pred=22.00 | Gap=0.1852 | Hamming=20 | Exact=0
+K=10, n=146, m=618, rep=28 | Opt=30.00 | Pred=22.00 | Gap=0.2667 | Hamming=18 | Exact=0
+K=10, n=146, m=618, rep=29 | Opt=27.00 | Pred=21.00 | Gap=0.2222 | Hamming=17 | Exact=0
+
+FINAL TEST RESULTS FOR K=10
+Instances evaluated: 120
+Exact match rate: 0.0000
+Average Hamming distance: 16.6500
+Average objective gap: 0.3035
+Average MIP solve time: 4.314587 seconds
+Average model inference time: 0.005974 seconds
+
+Saved results/evaluation_results_tropical_v2_shortest_path_wood_mixed_60_10_reps100_candidate4.csv
+
+Loaded 240 pre-generated evaluation graphs from evaluation_graphs/shortest_path_wood_graphs.pkl.
+
+Evaluating attack limit K=5
+K=5, n=51, m=188, rep=0 | Opt=18.00 | Pred=11.00 | Gap=0.3889 | Hamming=10 | Exact=0
+K=5, n=51, m=188, rep=1 | Opt=17.00 | Pred=14.00 | Gap=0.1765 | Hamming=6 | Exact=0
+K=5, n=51, m=188, rep=2 | Opt=19.00 | Pred=16.00 | Gap=0.1579 | Hamming=5 | Exact=0
+K=5, n=51, m=188, rep=3 | Opt=19.00 | Pred=11.00 | Gap=0.4211 | Hamming=10 | Exact=0
+K=5, n=51, m=188, rep=4 | Opt=17.00 | Pred=12.00 | Gap=0.2941 | Hamming=7 | Exact=0
+K=5, n=51, m=188, rep=5 | Opt=20.00 | Pred=13.00 | Gap=0.3500 | Hamming=10 | Exact=0
+K=5, n=51, m=188, rep=6 | Opt=17.00 | Pred=11.00 | Gap=0.3529 | Hamming=10 | Exact=0
+K=5, n=51, m=188, rep=7 | Opt=18.00 | Pred=17.00 | Gap=0.0556 | Hamming=6 | Exact=0
+K=5, n=51, m=188, rep=8 | Opt=19.00 | Pred=13.00 | Gap=0.3158 | Hamming=10 | Exact=0
+K=5, n=51, m=188, rep=9 | Opt=20.00 | Pred=15.00 | Gap=0.2500 | Hamming=9 | Exact=0
+K=5, n=51, m=188, rep=10 | Opt=15.00 | Pred=11.00 | Gap=0.2667 | Hamming=10 | Exact=0
+K=5, n=51, m=188, rep=11 | Opt=20.00 | Pred=14.00 | Gap=0.3000 | Hamming=10 | Exact=0
+K=5, n=51, m=188, rep=12 | Opt=18.00 | Pred=8.00 | Gap=0.5556 | Hamming=10 | Exact=0
+K=5, n=51, m=188, rep=13 | Opt=17.00 | Pred=13.00 | Gap=0.2353 | Hamming=10 | Exact=0
+K=5, n=51, m=188, rep=14 | Opt=16.00 | Pred=9.00 | Gap=0.4375 | Hamming=10 | Exact=0
+K=5, n=51, m=188, rep=15 | Opt=16.00 | Pred=9.00 | Gap=0.4375 | Hamming=10 | Exact=0
+K=5, n=51, m=188, rep=16 | Opt=20.00 | Pred=15.00 | Gap=0.2500 | Hamming=8 | Exact=0
+K=5, n=51, m=188, rep=17 | Opt=19.00 | Pred=16.00 | Gap=0.1579 | Hamming=10 | Exact=0
+K=5, n=51, m=188, rep=18 | Opt=17.00 | Pred=11.00 | Gap=0.3529 | Hamming=10 | Exact=0
+K=5, n=51, m=188, rep=19 | Opt=18.00 | Pred=12.00 | Gap=0.3333 | Hamming=10 | Exact=0
+K=5, n=51, m=188, rep=20 | Opt=17.00 | Pred=11.00 | Gap=0.3529 | Hamming=10 | Exact=0
+K=5, n=51, m=188, rep=21 | Opt=15.00 | Pred=8.00 | Gap=0.4667 | Hamming=8 | Exact=0
+K=5, n=51, m=188, rep=22 | Opt=19.00 | Pred=15.00 | Gap=0.2105 | Hamming=10 | Exact=0
+K=5, n=51, m=188, rep=23 | Opt=16.00 | Pred=12.00 | Gap=0.2500 | Hamming=10 | Exact=0
+K=5, n=51, m=188, rep=24 | Opt=19.00 | Pred=13.00 | Gap=0.3158 | Hamming=10 | Exact=0
+K=5, n=51, m=188, rep=25 | Opt=18.00 | Pred=13.00 | Gap=0.2778 | Hamming=6 | Exact=0
+K=5, n=51, m=188, rep=26 | Opt=17.00 | Pred=13.00 | Gap=0.2353 | Hamming=10 | Exact=0
+K=5, n=51, m=188, rep=27 | Opt=20.00 | Pred=18.00 | Gap=0.1000 | Hamming=6 | Exact=0
+K=5, n=51, m=188, rep=28 | Opt=22.00 | Pred=20.00 | Gap=0.0909 | Hamming=8 | Exact=0
+K=5, n=51, m=188, rep=29 | Opt=19.00 | Pred=15.00 | Gap=0.2105 | Hamming=5 | Exact=0
+K=5, n=66, m=254, rep=0 | Opt=22.00 | Pred=18.00 | Gap=0.1818 | Hamming=6 | Exact=0
+K=5, n=66, m=254, rep=1 | Opt=19.00 | Pred=15.00 | Gap=0.2105 | Hamming=8 | Exact=0
+K=5, n=66, m=254, rep=2 | Opt=18.00 | Pred=14.00 | Gap=0.2222 | Hamming=8 | Exact=0
+K=5, n=66, m=254, rep=3 | Opt=21.00 | Pred=18.00 | Gap=0.1429 | Hamming=8 | Exact=0
+K=5, n=66, m=254, rep=4 | Opt=19.00 | Pred=10.00 | Gap=0.4737 | Hamming=10 | Exact=0
+K=5, n=66, m=254, rep=5 | Opt=17.00 | Pred=13.00 | Gap=0.2353 | Hamming=10 | Exact=0
+K=5, n=66, m=254, rep=6 | Opt=20.00 | Pred=14.00 | Gap=0.3000 | Hamming=10 | Exact=0
+K=5, n=66, m=254, rep=7 | Opt=19.00 | Pred=13.00 | Gap=0.3158 | Hamming=10 | Exact=0
+K=5, n=66, m=254, rep=8 | Opt=19.00 | Pred=14.00 | Gap=0.2632 | Hamming=10 | Exact=0
+K=5, n=66, m=254, rep=9 | Opt=20.00 | Pred=16.00 | Gap=0.2000 | Hamming=8 | Exact=0
+K=5, n=66, m=254, rep=10 | Opt=21.00 | Pred=14.00 | Gap=0.3333 | Hamming=10 | Exact=0
+K=5, n=66, m=254, rep=11 | Opt=16.00 | Pred=13.00 | Gap=0.1875 | Hamming=10 | Exact=0
+K=5, n=66, m=254, rep=12 | Opt=17.00 | Pred=14.00 | Gap=0.1765 | Hamming=10 | Exact=0
+K=5, n=66, m=254, rep=13 | Opt=18.00 | Pred=14.00 | Gap=0.2222 | Hamming=8 | Exact=0
+K=5, n=66, m=254, rep=14 | Opt=19.00 | Pred=10.00 | Gap=0.4737 | Hamming=8 | Exact=0
+K=5, n=66, m=254, rep=15 | Opt=16.00 | Pred=11.00 | Gap=0.3125 | Hamming=10 | Exact=0
+K=5, n=66, m=254, rep=16 | Opt=21.00 | Pred=17.00 | Gap=0.1905 | Hamming=8 | Exact=0
+K=5, n=66, m=254, rep=17 | Opt=19.00 | Pred=11.00 | Gap=0.4211 | Hamming=10 | Exact=0
+K=5, n=66, m=254, rep=18 | Opt=21.00 | Pred=16.00 | Gap=0.2381 | Hamming=8 | Exact=0
+K=5, n=66, m=254, rep=19 | Opt=23.00 | Pred=17.00 | Gap=0.2609 | Hamming=9 | Exact=0
+K=5, n=66, m=254, rep=20 | Opt=18.00 | Pred=15.00 | Gap=0.1667 | Hamming=10 | Exact=0
+K=5, n=66, m=254, rep=21 | Opt=19.00 | Pred=18.00 | Gap=0.0526 | Hamming=10 | Exact=0
+K=5, n=66, m=254, rep=22 | Opt=16.00 | Pred=12.00 | Gap=0.2500 | Hamming=8 | Exact=0
+K=5, n=66, m=254, rep=23 | Opt=21.00 | Pred=17.00 | Gap=0.1905 | Hamming=10 | Exact=0
+K=5, n=66, m=254, rep=24 | Opt=21.00 | Pred=18.00 | Gap=0.1429 | Hamming=8 | Exact=0
+K=5, n=66, m=254, rep=25 | Opt=17.00 | Pred=10.00 | Gap=0.4118 | Hamming=6 | Exact=0
+K=5, n=66, m=254, rep=26 | Opt=15.00 | Pred=12.00 | Gap=0.2000 | Hamming=10 | Exact=0
+K=5, n=66, m=254, rep=27 | Opt=19.00 | Pred=12.00 | Gap=0.3684 | Hamming=10 | Exact=0
+K=5, n=66, m=254, rep=28 | Opt=20.00 | Pred=14.00 | Gap=0.3000 | Hamming=8 | Exact=0
+K=5, n=66, m=254, rep=29 | Opt=21.00 | Pred=18.00 | Gap=0.1429 | Hamming=8 | Exact=0
+K=5, n=83, m=330, rep=0 | Opt=24.00 | Pred=19.00 | Gap=0.2083 | Hamming=10 | Exact=0
+K=5, n=83, m=330, rep=1 | Opt=25.00 | Pred=21.00 | Gap=0.1600 | Hamming=10 | Exact=0
+K=5, n=83, m=330, rep=2 | Opt=21.00 | Pred=18.00 | Gap=0.1429 | Hamming=10 | Exact=0
+K=5, n=83, m=330, rep=3 | Opt=21.00 | Pred=15.00 | Gap=0.2857 | Hamming=8 | Exact=0
+K=5, n=83, m=330, rep=4 | Opt=22.00 | Pred=16.00 | Gap=0.2727 | Hamming=10 | Exact=0
+K=5, n=83, m=330, rep=5 | Opt=16.00 | Pred=11.00 | Gap=0.3125 | Hamming=7 | Exact=0
+K=5, n=83, m=330, rep=6 | Opt=20.00 | Pred=14.00 | Gap=0.3000 | Hamming=10 | Exact=0
+K=5, n=83, m=330, rep=7 | Opt=21.00 | Pred=16.00 | Gap=0.2381 | Hamming=10 | Exact=0
+K=5, n=83, m=330, rep=8 | Opt=19.00 | Pred=14.00 | Gap=0.2632 | Hamming=8 | Exact=0
+K=5, n=83, m=330, rep=9 | Opt=20.00 | Pred=16.00 | Gap=0.2000 | Hamming=10 | Exact=0
+K=5, n=83, m=330, rep=10 | Opt=20.00 | Pred=15.00 | Gap=0.2500 | Hamming=10 | Exact=0
+K=5, n=83, m=330, rep=11 | Opt=22.00 | Pred=19.00 | Gap=0.1364 | Hamming=10 | Exact=0
+K=5, n=83, m=330, rep=12 | Opt=23.00 | Pred=18.00 | Gap=0.2174 | Hamming=8 | Exact=0
+K=5, n=83, m=330, rep=13 | Opt=19.00 | Pred=15.00 | Gap=0.2105 | Hamming=10 | Exact=0
+K=5, n=83, m=330, rep=14 | Opt=17.00 | Pred=12.00 | Gap=0.2941 | Hamming=8 | Exact=0
+K=5, n=83, m=330, rep=15 | Opt=23.00 | Pred=18.00 | Gap=0.2174 | Hamming=8 | Exact=0
+K=5, n=83, m=330, rep=16 | Opt=22.00 | Pred=18.00 | Gap=0.1818 | Hamming=8 | Exact=0
+K=5, n=83, m=330, rep=17 | Opt=21.00 | Pred=13.00 | Gap=0.3810 | Hamming=10 | Exact=0
+K=5, n=83, m=330, rep=18 | Opt=24.00 | Pred=18.00 | Gap=0.2500 | Hamming=8 | Exact=0
+K=5, n=83, m=330, rep=19 | Opt=21.00 | Pred=14.00 | Gap=0.3333 | Hamming=10 | Exact=0
+K=5, n=83, m=330, rep=20 | Opt=22.00 | Pred=17.00 | Gap=0.2273 | Hamming=9 | Exact=0
+K=5, n=83, m=330, rep=21 | Opt=24.00 | Pred=16.00 | Gap=0.3333 | Hamming=10 | Exact=0
+K=5, n=83, m=330, rep=22 | Opt=23.00 | Pred=20.00 | Gap=0.1304 | Hamming=10 | Exact=0
+K=5, n=83, m=330, rep=23 | Opt=20.00 | Pred=18.00 | Gap=0.1000 | Hamming=10 | Exact=0
+K=5, n=83, m=330, rep=24 | Opt=20.00 | Pred=18.00 | Gap=0.1000 | Hamming=8 | Exact=0
+K=5, n=83, m=330, rep=25 | Opt=27.00 | Pred=23.00 | Gap=0.1481 | Hamming=10 | Exact=0
+K=5, n=83, m=330, rep=26 | Opt=21.00 | Pred=16.00 | Gap=0.2381 | Hamming=10 | Exact=0
+K=5, n=83, m=330, rep=27 | Opt=22.00 | Pred=18.00 | Gap=0.1818 | Hamming=8 | Exact=0
+K=5, n=83, m=330, rep=28 | Opt=21.00 | Pred=19.00 | Gap=0.0952 | Hamming=8 | Exact=0
+K=5, n=83, m=330, rep=29 | Opt=19.00 | Pred=17.00 | Gap=0.1053 | Hamming=6 | Exact=0
+K=5, n=146, m=618, rep=0 | Opt=27.00 | Pred=19.00 | Gap=0.2963 | Hamming=10 | Exact=0
+K=5, n=146, m=618, rep=1 | Opt=28.00 | Pred=23.00 | Gap=0.1786 | Hamming=10 | Exact=0
+K=5, n=146, m=618, rep=2 | Opt=27.00 | Pred=22.00 | Gap=0.1852 | Hamming=10 | Exact=0
+K=5, n=146, m=618, rep=3 | Opt=24.00 | Pred=19.00 | Gap=0.2083 | Hamming=8 | Exact=0
+K=5, n=146, m=618, rep=4 | Opt=27.00 | Pred=19.00 | Gap=0.2963 | Hamming=10 | Exact=0
+K=5, n=146, m=618, rep=5 | Opt=31.00 | Pred=26.00 | Gap=0.1613 | Hamming=10 | Exact=0
+K=5, n=146, m=618, rep=6 | Opt=26.00 | Pred=21.00 | Gap=0.1923 | Hamming=8 | Exact=0
+K=5, n=146, m=618, rep=7 | Opt=26.00 | Pred=22.00 | Gap=0.1538 | Hamming=10 | Exact=0
+K=5, n=146, m=618, rep=8 | Opt=31.00 | Pred=24.00 | Gap=0.2258 | Hamming=10 | Exact=0
+K=5, n=146, m=618, rep=9 | Opt=28.00 | Pred=20.00 | Gap=0.2857 | Hamming=10 | Exact=0
+K=5, n=146, m=618, rep=10 | Opt=24.00 | Pred=15.00 | Gap=0.3750 | Hamming=10 | Exact=0
+K=5, n=146, m=618, rep=11 | Opt=23.00 | Pred=17.00 | Gap=0.2609 | Hamming=10 | Exact=0
+K=5, n=146, m=618, rep=12 | Opt=26.00 | Pred=22.00 | Gap=0.1538 | Hamming=10 | Exact=0
+K=5, n=146, m=618, rep=13 | Opt=26.00 | Pred=22.00 | Gap=0.1538 | Hamming=10 | Exact=0
+K=5, n=146, m=618, rep=14 | Opt=27.00 | Pred=22.00 | Gap=0.1852 | Hamming=8 | Exact=0
+K=5, n=146, m=618, rep=15 | Opt=30.00 | Pred=23.00 | Gap=0.2333 | Hamming=8 | Exact=0
+K=5, n=146, m=618, rep=16 | Opt=27.00 | Pred=24.00 | Gap=0.1111 | Hamming=8 | Exact=0
+K=5, n=146, m=618, rep=17 | Opt=24.00 | Pred=20.00 | Gap=0.1667 | Hamming=10 | Exact=0
+K=5, n=146, m=618, rep=18 | Opt=29.00 | Pred=23.00 | Gap=0.2069 | Hamming=10 | Exact=0
+K=5, n=146, m=618, rep=19 | Opt=27.00 | Pred=22.00 | Gap=0.1852 | Hamming=10 | Exact=0
+K=5, n=146, m=618, rep=20 | Opt=26.00 | Pred=23.00 | Gap=0.1154 | Hamming=10 | Exact=0
+K=5, n=146, m=618, rep=21 | Opt=27.00 | Pred=21.00 | Gap=0.2222 | Hamming=10 | Exact=0
+K=5, n=146, m=618, rep=22 | Opt=27.00 | Pred=22.00 | Gap=0.1852 | Hamming=10 | Exact=0
+K=5, n=146, m=618, rep=23 | Opt=26.00 | Pred=18.00 | Gap=0.3077 | Hamming=10 | Exact=0
+K=5, n=146, m=618, rep=24 | Opt=28.00 | Pred=21.00 | Gap=0.2500 | Hamming=8 | Exact=0
+K=5, n=146, m=618, rep=25 | Opt=27.00 | Pred=23.00 | Gap=0.1481 | Hamming=10 | Exact=0
+K=5, n=146, m=618, rep=26 | Opt=28.00 | Pred=22.00 | Gap=0.2143 | Hamming=10 | Exact=0
+K=5, n=146, m=618, rep=27 | Opt=29.00 | Pred=21.00 | Gap=0.2759 | Hamming=10 | Exact=0
+K=5, n=146, m=618, rep=28 | Opt=25.00 | Pred=21.00 | Gap=0.1600 | Hamming=8 | Exact=0
+K=5, n=146, m=618, rep=29 | Opt=28.00 | Pred=25.00 | Gap=0.1071 | Hamming=8 | Exact=0
+
+FINAL TEST RESULTS FOR K=5
+Instances evaluated: 120
+Exact match rate: 0.0000
+Average Hamming distance: 9.0583
+Average objective gap: 0.2409
+Average MIP solve time: 1.266599 seconds
+Average model inference time: 0.004212 seconds
+
+Evaluating attack limit K=10
+K=10, n=51, m=188, rep=0 | Opt=16.00 | Pred=9.00 | Gap=0.4375 | Hamming=18 | Exact=0
+K=10, n=51, m=188, rep=1 | Opt=19.00 | Pred=14.00 | Gap=0.2632 | Hamming=14 | Exact=0
+K=10, n=51, m=188, rep=2 | Opt=18.00 | Pred=12.00 | Gap=0.3333 | Hamming=10 | Exact=0
+K=10, n=51, m=188, rep=3 | Opt=18.00 | Pred=9.00 | Gap=0.5000 | Hamming=20 | Exact=0
+K=10, n=51, m=188, rep=4 | Opt=18.00 | Pred=11.00 | Gap=0.3889 | Hamming=18 | Exact=0
+K=10, n=51, m=188, rep=5 | Opt=20.00 | Pred=15.00 | Gap=0.2500 | Hamming=12 | Exact=0
+K=10, n=51, m=188, rep=6 | Opt=22.00 | Pred=18.00 | Gap=0.1818 | Hamming=16 | Exact=0
+K=10, n=51, m=188, rep=7 | Opt=21.00 | Pred=14.00 | Gap=0.3333 | Hamming=10 | Exact=0
+K=10, n=51, m=188, rep=8 | Opt=22.00 | Pred=10.00 | Gap=0.5455 | Hamming=16 | Exact=0
+K=10, n=51, m=188, rep=9 | Opt=24.00 | Pred=16.00 | Gap=0.3333 | Hamming=12 | Exact=0
+K=10, n=51, m=188, rep=10 | Opt=19.00 | Pred=13.00 | Gap=0.3158 | Hamming=16 | Exact=0
+K=10, n=51, m=188, rep=11 | Opt=18.00 | Pred=11.00 | Gap=0.3889 | Hamming=16 | Exact=0
+K=10, n=51, m=188, rep=12 | Opt=25.00 | Pred=17.00 | Gap=0.3200 | Hamming=12 | Exact=0
+K=10, n=51, m=188, rep=13 | Opt=19.00 | Pred=12.00 | Gap=0.3684 | Hamming=16 | Exact=0
+K=10, n=51, m=188, rep=14 | Opt=21.00 | Pred=13.00 | Gap=0.3810 | Hamming=12 | Exact=0
+K=10, n=51, m=188, rep=15 | Opt=21.00 | Pred=14.00 | Gap=0.3333 | Hamming=18 | Exact=0
+K=10, n=51, m=188, rep=16 | Opt=20.00 | Pred=11.00 | Gap=0.4500 | Hamming=16 | Exact=0
+K=10, n=51, m=188, rep=17 | Opt=20.00 | Pred=9.00 | Gap=0.5500 | Hamming=16 | Exact=0
+K=10, n=51, m=188, rep=18 | Opt=18.00 | Pred=9.00 | Gap=0.5000 | Hamming=18 | Exact=0
+K=10, n=51, m=188, rep=19 | Opt=23.00 | Pred=19.00 | Gap=0.1739 | Hamming=12 | Exact=0
+K=10, n=51, m=188, rep=20 | Opt=19.00 | Pred=13.00 | Gap=0.3158 | Hamming=15 | Exact=0
+K=10, n=51, m=188, rep=21 | Opt=21.00 | Pred=13.00 | Gap=0.3810 | Hamming=16 | Exact=0
+K=10, n=51, m=188, rep=22 | Opt=23.00 | Pred=15.00 | Gap=0.3478 | Hamming=16 | Exact=0
+K=10, n=51, m=188, rep=23 | Opt=21.00 | Pred=16.00 | Gap=0.2381 | Hamming=12 | Exact=0
+K=10, n=51, m=188, rep=24 | Opt=21.00 | Pred=14.00 | Gap=0.3333 | Hamming=14 | Exact=0
+K=10, n=51, m=188, rep=25 | Opt=20.00 | Pred=11.00 | Gap=0.4500 | Hamming=18 | Exact=0
+K=10, n=51, m=188, rep=26 | Opt=22.00 | Pred=16.00 | Gap=0.2727 | Hamming=16 | Exact=0
+K=10, n=51, m=188, rep=27 | Opt=22.00 | Pred=14.00 | Gap=0.3636 | Hamming=20 | Exact=0
+K=10, n=51, m=188, rep=28 | Opt=22.00 | Pred=12.00 | Gap=0.4545 | Hamming=16 | Exact=0
+K=10, n=51, m=188, rep=29 | Opt=18.00 | Pred=14.00 | Gap=0.2222 | Hamming=18 | Exact=0
+K=10, n=66, m=254, rep=0 | Opt=21.00 | Pred=13.00 | Gap=0.3810 | Hamming=18 | Exact=0
+K=10, n=66, m=254, rep=1 | Opt=26.00 | Pred=17.00 | Gap=0.3462 | Hamming=16 | Exact=0
+K=10, n=66, m=254, rep=2 | Opt=26.00 | Pred=19.00 | Gap=0.2692 | Hamming=20 | Exact=0
+K=10, n=66, m=254, rep=3 | Opt=25.00 | Pred=15.00 | Gap=0.4000 | Hamming=15 | Exact=0
+K=10, n=66, m=254, rep=4 | Opt=20.00 | Pred=13.00 | Gap=0.3500 | Hamming=17 | Exact=0
+K=10, n=66, m=254, rep=5 | Opt=24.00 | Pred=11.00 | Gap=0.5417 | Hamming=20 | Exact=0
+K=10, n=66, m=254, rep=6 | Opt=20.00 | Pred=15.00 | Gap=0.2500 | Hamming=18 | Exact=0
+K=10, n=66, m=254, rep=7 | Opt=22.00 | Pred=18.00 | Gap=0.1818 | Hamming=16 | Exact=0
+K=10, n=66, m=254, rep=8 | Opt=23.00 | Pred=18.00 | Gap=0.2174 | Hamming=14 | Exact=0
+K=10, n=66, m=254, rep=9 | Opt=22.00 | Pred=12.00 | Gap=0.4545 | Hamming=20 | Exact=0
+K=10, n=66, m=254, rep=10 | Opt=25.00 | Pred=14.00 | Gap=0.4400 | Hamming=16 | Exact=0
+K=10, n=66, m=254, rep=11 | Opt=26.00 | Pred=17.00 | Gap=0.3462 | Hamming=14 | Exact=0
+K=10, n=66, m=254, rep=12 | Opt=23.00 | Pred=18.00 | Gap=0.2174 | Hamming=16 | Exact=0
+K=10, n=66, m=254, rep=13 | Opt=24.00 | Pred=16.00 | Gap=0.3333 | Hamming=14 | Exact=0
+K=10, n=66, m=254, rep=14 | Opt=25.00 | Pred=18.00 | Gap=0.2800 | Hamming=16 | Exact=0
+K=10, n=66, m=254, rep=15 | Opt=23.00 | Pred=17.00 | Gap=0.2609 | Hamming=14 | Exact=0
+K=10, n=66, m=254, rep=16 | Opt=21.00 | Pred=13.00 | Gap=0.3810 | Hamming=18 | Exact=0
+K=10, n=66, m=254, rep=17 | Opt=23.00 | Pred=16.00 | Gap=0.3043 | Hamming=16 | Exact=0
+K=10, n=66, m=254, rep=18 | Opt=21.00 | Pred=17.00 | Gap=0.1905 | Hamming=14 | Exact=0
+K=10, n=66, m=254, rep=19 | Opt=18.00 | Pred=11.00 | Gap=0.3889 | Hamming=16 | Exact=0
+K=10, n=66, m=254, rep=20 | Opt=21.00 | Pred=13.00 | Gap=0.3810 | Hamming=14 | Exact=0
+K=10, n=66, m=254, rep=21 | Opt=22.00 | Pred=15.00 | Gap=0.3182 | Hamming=16 | Exact=0
+K=10, n=66, m=254, rep=22 | Opt=21.00 | Pred=14.00 | Gap=0.3333 | Hamming=16 | Exact=0
+K=10, n=66, m=254, rep=23 | Opt=21.00 | Pred=15.00 | Gap=0.2857 | Hamming=17 | Exact=0
+K=10, n=66, m=254, rep=24 | Opt=22.00 | Pred=15.00 | Gap=0.3182 | Hamming=18 | Exact=0
+K=10, n=66, m=254, rep=25 | Opt=23.00 | Pred=16.00 | Gap=0.3043 | Hamming=12 | Exact=0
+K=10, n=66, m=254, rep=26 | Opt=21.00 | Pred=14.00 | Gap=0.3333 | Hamming=17 | Exact=0
+K=10, n=66, m=254, rep=27 | Opt=23.00 | Pred=13.00 | Gap=0.4348 | Hamming=14 | Exact=0
+K=10, n=66, m=254, rep=28 | Opt=22.00 | Pred=15.00 | Gap=0.3182 | Hamming=18 | Exact=0
+K=10, n=66, m=254, rep=29 | Opt=26.00 | Pred=19.00 | Gap=0.2692 | Hamming=16 | Exact=0
+K=10, n=83, m=330, rep=0 | Opt=25.00 | Pred=19.00 | Gap=0.2400 | Hamming=20 | Exact=0
+K=10, n=83, m=330, rep=1 | Opt=24.00 | Pred=14.00 | Gap=0.4167 | Hamming=16 | Exact=0
+K=10, n=83, m=330, rep=2 | Opt=25.00 | Pred=16.00 | Gap=0.3600 | Hamming=18 | Exact=0
+K=10, n=83, m=330, rep=3 | Opt=24.00 | Pred=16.00 | Gap=0.3333 | Hamming=16 | Exact=0
+K=10, n=83, m=330, rep=4 | Opt=22.00 | Pred=17.00 | Gap=0.2273 | Hamming=14 | Exact=0
+K=10, n=83, m=330, rep=5 | Opt=25.00 | Pred=17.00 | Gap=0.3200 | Hamming=18 | Exact=0
+K=10, n=83, m=330, rep=6 | Opt=22.00 | Pred=14.00 | Gap=0.3636 | Hamming=18 | Exact=0
+K=10, n=83, m=330, rep=7 | Opt=27.00 | Pred=19.00 | Gap=0.2963 | Hamming=13 | Exact=0
+K=10, n=83, m=330, rep=8 | Opt=25.00 | Pred=15.00 | Gap=0.4000 | Hamming=18 | Exact=0
+K=10, n=83, m=330, rep=9 | Opt=29.00 | Pred=19.00 | Gap=0.3448 | Hamming=14 | Exact=0
+K=10, n=83, m=330, rep=10 | Opt=25.00 | Pred=14.00 | Gap=0.4400 | Hamming=19 | Exact=0
+K=10, n=83, m=330, rep=11 | Opt=27.00 | Pred=17.00 | Gap=0.3704 | Hamming=18 | Exact=0
+K=10, n=83, m=330, rep=12 | Opt=24.00 | Pred=15.00 | Gap=0.3750 | Hamming=20 | Exact=0
+K=10, n=83, m=330, rep=13 | Opt=23.00 | Pred=14.00 | Gap=0.3913 | Hamming=18 | Exact=0
+K=10, n=83, m=330, rep=14 | Opt=23.00 | Pred=13.00 | Gap=0.4348 | Hamming=20 | Exact=0
+K=10, n=83, m=330, rep=15 | Opt=23.00 | Pred=17.00 | Gap=0.2609 | Hamming=18 | Exact=0
+K=10, n=83, m=330, rep=16 | Opt=24.00 | Pred=18.00 | Gap=0.2500 | Hamming=16 | Exact=0
+K=10, n=83, m=330, rep=17 | Opt=26.00 | Pred=16.00 | Gap=0.3846 | Hamming=16 | Exact=0
+K=10, n=83, m=330, rep=18 | Opt=22.00 | Pred=13.00 | Gap=0.4091 | Hamming=12 | Exact=0
+K=10, n=83, m=330, rep=19 | Opt=22.00 | Pred=14.00 | Gap=0.3636 | Hamming=20 | Exact=0
+K=10, n=83, m=330, rep=20 | Opt=23.00 | Pred=16.00 | Gap=0.3043 | Hamming=14 | Exact=0
+K=10, n=83, m=330, rep=21 | Opt=28.00 | Pred=24.00 | Gap=0.1429 | Hamming=14 | Exact=0
+K=10, n=83, m=330, rep=22 | Opt=23.00 | Pred=15.00 | Gap=0.3478 | Hamming=16 | Exact=0
+K=10, n=83, m=330, rep=23 | Opt=25.00 | Pred=18.00 | Gap=0.2800 | Hamming=20 | Exact=0
+K=10, n=83, m=330, rep=24 | Opt=23.00 | Pred=17.00 | Gap=0.2609 | Hamming=16 | Exact=0
+K=10, n=83, m=330, rep=25 | Opt=26.00 | Pred=19.00 | Gap=0.2692 | Hamming=14 | Exact=0
+K=10, n=83, m=330, rep=26 | Opt=24.00 | Pred=16.00 | Gap=0.3333 | Hamming=20 | Exact=0
+K=10, n=83, m=330, rep=27 | Opt=29.00 | Pred=20.00 | Gap=0.3103 | Hamming=16 | Exact=0
+K=10, n=83, m=330, rep=28 | Opt=24.00 | Pred=14.00 | Gap=0.4167 | Hamming=16 | Exact=0
+K=10, n=83, m=330, rep=29 | Opt=26.00 | Pred=19.00 | Gap=0.2692 | Hamming=14 | Exact=0
+K=10, n=146, m=618, rep=0 | Opt=28.00 | Pred=22.00 | Gap=0.2143 | Hamming=18 | Exact=0
+K=10, n=146, m=618, rep=1 | Opt=31.00 | Pred=22.00 | Gap=0.2903 | Hamming=18 | Exact=0
+K=10, n=146, m=618, rep=2 | Opt=30.00 | Pred=17.00 | Gap=0.4333 | Hamming=20 | Exact=0
+K=10, n=146, m=618, rep=3 | Opt=29.00 | Pred=19.00 | Gap=0.3448 | Hamming=18 | Exact=0
+K=10, n=146, m=618, rep=4 | Opt=31.00 | Pred=22.00 | Gap=0.2903 | Hamming=18 | Exact=0
+K=10, n=146, m=618, rep=5 | Opt=28.00 | Pred=21.00 | Gap=0.2500 | Hamming=14 | Exact=0
+K=10, n=146, m=618, rep=6 | Opt=29.00 | Pred=21.00 | Gap=0.2759 | Hamming=20 | Exact=0
+K=10, n=146, m=618, rep=7 | Opt=26.00 | Pred=16.00 | Gap=0.3846 | Hamming=20 | Exact=0
+K=10, n=146, m=618, rep=8 | Opt=31.00 | Pred=22.00 | Gap=0.2903 | Hamming=16 | Exact=0
+K=10, n=146, m=618, rep=9 | Opt=31.00 | Pred=22.00 | Gap=0.2903 | Hamming=20 | Exact=0
+K=10, n=146, m=618, rep=10 | Opt=31.00 | Pred=22.00 | Gap=0.2903 | Hamming=18 | Exact=0
+K=10, n=146, m=618, rep=11 | Opt=33.00 | Pred=24.00 | Gap=0.2727 | Hamming=20 | Exact=0
+K=10, n=146, m=618, rep=12 | Opt=30.00 | Pred=23.00 | Gap=0.2333 | Hamming=14 | Exact=0
+K=10, n=146, m=618, rep=13 | Opt=30.00 | Pred=24.00 | Gap=0.2000 | Hamming=20 | Exact=0
+K=10, n=146, m=618, rep=14 | Opt=29.00 | Pred=22.00 | Gap=0.2414 | Hamming=16 | Exact=0
+K=10, n=146, m=618, rep=15 | Opt=30.00 | Pred=19.00 | Gap=0.3667 | Hamming=20 | Exact=0
+K=10, n=146, m=618, rep=16 | Opt=31.00 | Pred=22.00 | Gap=0.2903 | Hamming=18 | Exact=0
+K=10, n=146, m=618, rep=17 | Opt=31.00 | Pred=22.00 | Gap=0.2903 | Hamming=18 | Exact=0
+K=10, n=146, m=618, rep=18 | Opt=30.00 | Pred=23.00 | Gap=0.2333 | Hamming=18 | Exact=0
+K=10, n=146, m=618, rep=19 | Opt=28.00 | Pred=20.00 | Gap=0.2857 | Hamming=20 | Exact=0
+K=10, n=146, m=618, rep=20 | Opt=31.00 | Pred=24.00 | Gap=0.2258 | Hamming=16 | Exact=0
+K=10, n=146, m=618, rep=21 | Opt=26.00 | Pred=15.00 | Gap=0.4231 | Hamming=20 | Exact=0
+K=10, n=146, m=618, rep=22 | Opt=34.00 | Pred=25.00 | Gap=0.2647 | Hamming=16 | Exact=0
+K=10, n=146, m=618, rep=23 | Opt=30.00 | Pred=22.00 | Gap=0.2667 | Hamming=18 | Exact=0
+K=10, n=146, m=618, rep=24 | Opt=33.00 | Pred=22.00 | Gap=0.3333 | Hamming=18 | Exact=0
+K=10, n=146, m=618, rep=25 | Opt=32.00 | Pred=24.00 | Gap=0.2500 | Hamming=18 | Exact=0
+K=10, n=146, m=618, rep=26 | Opt=29.00 | Pred=20.00 | Gap=0.3103 | Hamming=18 | Exact=0
+K=10, n=146, m=618, rep=27 | Opt=27.00 | Pred=21.00 | Gap=0.2222 | Hamming=18 | Exact=0
+K=10, n=146, m=618, rep=28 | Opt=30.00 | Pred=22.00 | Gap=0.2667 | Hamming=16 | Exact=0
+K=10, n=146, m=618, rep=29 | Opt=27.00 | Pred=21.00 | Gap=0.2222 | Hamming=17 | Exact=0
+
+FINAL TEST RESULTS FOR K=10
+Instances evaluated: 120
+Exact match rate: 0.0000
+Average Hamming distance: 16.5500
+Average objective gap: 0.3252
+Average MIP solve time: 4.351881 seconds
+Average model inference time: 0.002483 seconds
+
+Saved results/evaluation_results_transformer_shortest_path_wood_mixed_60_10_reps100_candidate4.csv
+
+Loaded 240 pre-generated evaluation graphs from evaluation_graphs/shortest_path_wood_graphs.pkl.
+
+Evaluating attack limit K=5
+K=5, n=51, m=188, rep=0 | Opt=18.00 | Pred=13.00 | Gap=0.2778 | Hamming=8 | Exact=0
+K=5, n=51, m=188, rep=1 | Opt=17.00 | Pred=14.00 | Gap=0.1765 | Hamming=8 | Exact=0
+K=5, n=51, m=188, rep=2 | Opt=19.00 | Pred=16.00 | Gap=0.1579 | Hamming=5 | Exact=0
+K=5, n=51, m=188, rep=3 | Opt=19.00 | Pred=11.00 | Gap=0.4211 | Hamming=10 | Exact=0
+K=5, n=51, m=188, rep=4 | Opt=17.00 | Pred=10.00 | Gap=0.4118 | Hamming=9 | Exact=0
+K=5, n=51, m=188, rep=5 | Opt=20.00 | Pred=16.00 | Gap=0.2000 | Hamming=10 | Exact=0
+K=5, n=51, m=188, rep=6 | Opt=17.00 | Pred=11.00 | Gap=0.3529 | Hamming=8 | Exact=0
+K=5, n=51, m=188, rep=7 | Opt=18.00 | Pred=13.00 | Gap=0.2778 | Hamming=8 | Exact=0
+K=5, n=51, m=188, rep=8 | Opt=19.00 | Pred=14.00 | Gap=0.2632 | Hamming=8 | Exact=0
+K=5, n=51, m=188, rep=9 | Opt=20.00 | Pred=18.00 | Gap=0.1000 | Hamming=7 | Exact=0
+K=5, n=51, m=188, rep=10 | Opt=15.00 | Pred=11.00 | Gap=0.2667 | Hamming=8 | Exact=0
+K=5, n=51, m=188, rep=11 | Opt=20.00 | Pred=14.00 | Gap=0.3000 | Hamming=10 | Exact=0
+K=5, n=51, m=188, rep=12 | Opt=18.00 | Pred=12.00 | Gap=0.3333 | Hamming=6 | Exact=0
+K=5, n=51, m=188, rep=13 | Opt=17.00 | Pred=13.00 | Gap=0.2353 | Hamming=10 | Exact=0
+K=5, n=51, m=188, rep=14 | Opt=16.00 | Pred=9.00 | Gap=0.4375 | Hamming=10 | Exact=0
+K=5, n=51, m=188, rep=15 | Opt=16.00 | Pred=9.00 | Gap=0.4375 | Hamming=10 | Exact=0
+K=5, n=51, m=188, rep=16 | Opt=20.00 | Pred=16.00 | Gap=0.2000 | Hamming=8 | Exact=0
+K=5, n=51, m=188, rep=17 | Opt=19.00 | Pred=14.00 | Gap=0.2632 | Hamming=10 | Exact=0
+K=5, n=51, m=188, rep=18 | Opt=17.00 | Pred=13.00 | Gap=0.2353 | Hamming=10 | Exact=0
+K=5, n=51, m=188, rep=19 | Opt=18.00 | Pred=13.00 | Gap=0.2778 | Hamming=10 | Exact=0
+K=5, n=51, m=188, rep=20 | Opt=17.00 | Pred=13.00 | Gap=0.2353 | Hamming=10 | Exact=0
+K=5, n=51, m=188, rep=21 | Opt=15.00 | Pred=8.00 | Gap=0.4667 | Hamming=8 | Exact=0
+K=5, n=51, m=188, rep=22 | Opt=19.00 | Pred=15.00 | Gap=0.2105 | Hamming=10 | Exact=0
+K=5, n=51, m=188, rep=23 | Opt=16.00 | Pred=10.00 | Gap=0.3750 | Hamming=8 | Exact=0
+K=5, n=51, m=188, rep=24 | Opt=19.00 | Pred=13.00 | Gap=0.3158 | Hamming=10 | Exact=0
+K=5, n=51, m=188, rep=25 | Opt=18.00 | Pred=13.00 | Gap=0.2778 | Hamming=8 | Exact=0
+K=5, n=51, m=188, rep=26 | Opt=17.00 | Pred=13.00 | Gap=0.2353 | Hamming=10 | Exact=0
+K=5, n=51, m=188, rep=27 | Opt=20.00 | Pred=18.00 | Gap=0.1000 | Hamming=6 | Exact=0
+K=5, n=51, m=188, rep=28 | Opt=22.00 | Pred=20.00 | Gap=0.0909 | Hamming=8 | Exact=0
+K=5, n=51, m=188, rep=29 | Opt=19.00 | Pred=19.00 | Gap=0.0000 | Hamming=1 | Exact=0
+K=5, n=66, m=254, rep=0 | Opt=22.00 | Pred=18.00 | Gap=0.1818 | Hamming=6 | Exact=0
+K=5, n=66, m=254, rep=1 | Opt=19.00 | Pred=15.00 | Gap=0.2105 | Hamming=10 | Exact=0
+K=5, n=66, m=254, rep=2 | Opt=18.00 | Pred=14.00 | Gap=0.2222 | Hamming=10 | Exact=0
+K=5, n=66, m=254, rep=3 | Opt=21.00 | Pred=18.00 | Gap=0.1429 | Hamming=8 | Exact=0
+K=5, n=66, m=254, rep=4 | Opt=19.00 | Pred=12.00 | Gap=0.3684 | Hamming=6 | Exact=0
+K=5, n=66, m=254, rep=5 | Opt=17.00 | Pred=13.00 | Gap=0.2353 | Hamming=10 | Exact=0
+K=5, n=66, m=254, rep=6 | Opt=20.00 | Pred=16.00 | Gap=0.2000 | Hamming=8 | Exact=0
+K=5, n=66, m=254, rep=7 | Opt=19.00 | Pred=13.00 | Gap=0.3158 | Hamming=10 | Exact=0
+K=5, n=66, m=254, rep=8 | Opt=19.00 | Pred=14.00 | Gap=0.2632 | Hamming=10 | Exact=0
+K=5, n=66, m=254, rep=9 | Opt=20.00 | Pred=16.00 | Gap=0.2000 | Hamming=8 | Exact=0
+K=5, n=66, m=254, rep=10 | Opt=21.00 | Pred=17.00 | Gap=0.1905 | Hamming=8 | Exact=0
+K=5, n=66, m=254, rep=11 | Opt=16.00 | Pred=15.00 | Gap=0.0625 | Hamming=6 | Exact=0
+K=5, n=66, m=254, rep=12 | Opt=17.00 | Pred=14.00 | Gap=0.1765 | Hamming=10 | Exact=0
+K=5, n=66, m=254, rep=13 | Opt=18.00 | Pred=14.00 | Gap=0.2222 | Hamming=8 | Exact=0
+K=5, n=66, m=254, rep=14 | Opt=19.00 | Pred=14.00 | Gap=0.2632 | Hamming=8 | Exact=0
+K=5, n=66, m=254, rep=15 | Opt=16.00 | Pred=12.00 | Gap=0.2500 | Hamming=8 | Exact=0
+K=5, n=66, m=254, rep=16 | Opt=21.00 | Pred=17.00 | Gap=0.1905 | Hamming=6 | Exact=0
+K=5, n=66, m=254, rep=17 | Opt=19.00 | Pred=14.00 | Gap=0.2632 | Hamming=8 | Exact=0
+K=5, n=66, m=254, rep=18 | Opt=21.00 | Pred=16.00 | Gap=0.2381 | Hamming=8 | Exact=0
+K=5, n=66, m=254, rep=19 | Opt=23.00 | Pred=17.00 | Gap=0.2609 | Hamming=9 | Exact=0
+K=5, n=66, m=254, rep=20 | Opt=18.00 | Pred=15.00 | Gap=0.1667 | Hamming=10 | Exact=0
+K=5, n=66, m=254, rep=21 | Opt=19.00 | Pred=16.00 | Gap=0.1579 | Hamming=10 | Exact=0
+K=5, n=66, m=254, rep=22 | Opt=16.00 | Pred=14.00 | Gap=0.1250 | Hamming=10 | Exact=0
+K=5, n=66, m=254, rep=23 | Opt=21.00 | Pred=18.00 | Gap=0.1429 | Hamming=10 | Exact=0
+K=5, n=66, m=254, rep=24 | Opt=21.00 | Pred=18.00 | Gap=0.1429 | Hamming=8 | Exact=0
+K=5, n=66, m=254, rep=25 | Opt=17.00 | Pred=13.00 | Gap=0.2353 | Hamming=8 | Exact=0
+K=5, n=66, m=254, rep=26 | Opt=15.00 | Pred=12.00 | Gap=0.2000 | Hamming=8 | Exact=0
+K=5, n=66, m=254, rep=27 | Opt=19.00 | Pred=12.00 | Gap=0.3684 | Hamming=8 | Exact=0
+K=5, n=66, m=254, rep=28 | Opt=20.00 | Pred=14.00 | Gap=0.3000 | Hamming=8 | Exact=0
+K=5, n=66, m=254, rep=29 | Opt=21.00 | Pred=19.00 | Gap=0.0952 | Hamming=6 | Exact=0
+K=5, n=83, m=330, rep=0 | Opt=24.00 | Pred=19.00 | Gap=0.2083 | Hamming=10 | Exact=0
+K=5, n=83, m=330, rep=1 | Opt=25.00 | Pred=21.00 | Gap=0.1600 | Hamming=10 | Exact=0
+K=5, n=83, m=330, rep=2 | Opt=21.00 | Pred=16.00 | Gap=0.2381 | Hamming=10 | Exact=0
+K=5, n=83, m=330, rep=3 | Opt=21.00 | Pred=15.00 | Gap=0.2857 | Hamming=10 | Exact=0
+K=5, n=83, m=330, rep=4 | Opt=22.00 | Pred=17.00 | Gap=0.2273 | Hamming=8 | Exact=0
+K=5, n=83, m=330, rep=5 | Opt=16.00 | Pred=14.00 | Gap=0.1250 | Hamming=5 | Exact=0
+K=5, n=83, m=330, rep=6 | Opt=20.00 | Pred=14.00 | Gap=0.3000 | Hamming=10 | Exact=0
+K=5, n=83, m=330, rep=7 | Opt=21.00 | Pred=13.00 | Gap=0.3810 | Hamming=8 | Exact=0
+K=5, n=83, m=330, rep=8 | Opt=19.00 | Pred=13.00 | Gap=0.3158 | Hamming=8 | Exact=0
+K=5, n=83, m=330, rep=9 | Opt=20.00 | Pred=17.00 | Gap=0.1500 | Hamming=10 | Exact=0
+K=5, n=83, m=330, rep=10 | Opt=20.00 | Pred=15.00 | Gap=0.2500 | Hamming=10 | Exact=0
+K=5, n=83, m=330, rep=11 | Opt=22.00 | Pred=19.00 | Gap=0.1364 | Hamming=10 | Exact=0
+K=5, n=83, m=330, rep=12 | Opt=23.00 | Pred=15.00 | Gap=0.3478 | Hamming=8 | Exact=0
+K=5, n=83, m=330, rep=13 | Opt=19.00 | Pred=15.00 | Gap=0.2105 | Hamming=8 | Exact=0
+K=5, n=83, m=330, rep=14 | Opt=17.00 | Pred=12.00 | Gap=0.2941 | Hamming=8 | Exact=0
+K=5, n=83, m=330, rep=15 | Opt=23.00 | Pred=18.00 | Gap=0.2174 | Hamming=6 | Exact=0
+K=5, n=83, m=330, rep=16 | Opt=22.00 | Pred=18.00 | Gap=0.1818 | Hamming=10 | Exact=0
+K=5, n=83, m=330, rep=17 | Opt=21.00 | Pred=15.00 | Gap=0.2857 | Hamming=8 | Exact=0
+K=5, n=83, m=330, rep=18 | Opt=24.00 | Pred=18.00 | Gap=0.2500 | Hamming=6 | Exact=0
+K=5, n=83, m=330, rep=19 | Opt=21.00 | Pred=14.00 | Gap=0.3333 | Hamming=10 | Exact=0
+K=5, n=83, m=330, rep=20 | Opt=22.00 | Pred=17.00 | Gap=0.2273 | Hamming=9 | Exact=0
+K=5, n=83, m=330, rep=21 | Opt=24.00 | Pred=16.00 | Gap=0.3333 | Hamming=10 | Exact=0
+K=5, n=83, m=330, rep=22 | Opt=23.00 | Pred=21.00 | Gap=0.0870 | Hamming=8 | Exact=0
+K=5, n=83, m=330, rep=23 | Opt=20.00 | Pred=18.00 | Gap=0.1000 | Hamming=10 | Exact=0
+K=5, n=83, m=330, rep=24 | Opt=20.00 | Pred=18.00 | Gap=0.1000 | Hamming=6 | Exact=0
+K=5, n=83, m=330, rep=25 | Opt=27.00 | Pred=23.00 | Gap=0.1481 | Hamming=10 | Exact=0
+K=5, n=83, m=330, rep=26 | Opt=21.00 | Pred=16.00 | Gap=0.2381 | Hamming=10 | Exact=0
+K=5, n=83, m=330, rep=27 | Opt=22.00 | Pred=18.00 | Gap=0.1818 | Hamming=8 | Exact=0
+K=5, n=83, m=330, rep=28 | Opt=21.00 | Pred=19.00 | Gap=0.0952 | Hamming=8 | Exact=0
+K=5, n=83, m=330, rep=29 | Opt=19.00 | Pred=13.00 | Gap=0.3158 | Hamming=10 | Exact=0
+K=5, n=146, m=618, rep=0 | Opt=27.00 | Pred=20.00 | Gap=0.2593 | Hamming=10 | Exact=0
+K=5, n=146, m=618, rep=1 | Opt=28.00 | Pred=23.00 | Gap=0.1786 | Hamming=10 | Exact=0
+K=5, n=146, m=618, rep=2 | Opt=27.00 | Pred=22.00 | Gap=0.1852 | Hamming=10 | Exact=0
+K=5, n=146, m=618, rep=3 | Opt=24.00 | Pred=18.00 | Gap=0.2500 | Hamming=10 | Exact=0
+K=5, n=146, m=618, rep=4 | Opt=27.00 | Pred=19.00 | Gap=0.2963 | Hamming=10 | Exact=0
+K=5, n=146, m=618, rep=5 | Opt=31.00 | Pred=26.00 | Gap=0.1613 | Hamming=10 | Exact=0
+K=5, n=146, m=618, rep=6 | Opt=26.00 | Pred=21.00 | Gap=0.1923 | Hamming=10 | Exact=0
+K=5, n=146, m=618, rep=7 | Opt=26.00 | Pred=23.00 | Gap=0.1154 | Hamming=10 | Exact=0
+K=5, n=146, m=618, rep=8 | Opt=31.00 | Pred=24.00 | Gap=0.2258 | Hamming=10 | Exact=0
+K=5, n=146, m=618, rep=9 | Opt=28.00 | Pred=20.00 | Gap=0.2857 | Hamming=10 | Exact=0
+K=5, n=146, m=618, rep=10 | Opt=24.00 | Pred=15.00 | Gap=0.3750 | Hamming=10 | Exact=0
+K=5, n=146, m=618, rep=11 | Opt=23.00 | Pred=17.00 | Gap=0.2609 | Hamming=10 | Exact=0
+K=5, n=146, m=618, rep=12 | Opt=26.00 | Pred=22.00 | Gap=0.1538 | Hamming=10 | Exact=0
+K=5, n=146, m=618, rep=13 | Opt=26.00 | Pred=22.00 | Gap=0.1538 | Hamming=10 | Exact=0
+K=5, n=146, m=618, rep=14 | Opt=27.00 | Pred=18.00 | Gap=0.3333 | Hamming=10 | Exact=0
+K=5, n=146, m=618, rep=15 | Opt=30.00 | Pred=23.00 | Gap=0.2333 | Hamming=8 | Exact=0
+K=5, n=146, m=618, rep=16 | Opt=27.00 | Pred=22.00 | Gap=0.1852 | Hamming=10 | Exact=0
+K=5, n=146, m=618, rep=17 | Opt=24.00 | Pred=20.00 | Gap=0.1667 | Hamming=10 | Exact=0
+K=5, n=146, m=618, rep=18 | Opt=29.00 | Pred=23.00 | Gap=0.2069 | Hamming=10 | Exact=0
+K=5, n=146, m=618, rep=19 | Opt=27.00 | Pred=22.00 | Gap=0.1852 | Hamming=10 | Exact=0
+K=5, n=146, m=618, rep=20 | Opt=26.00 | Pred=23.00 | Gap=0.1154 | Hamming=10 | Exact=0
+K=5, n=146, m=618, rep=21 | Opt=27.00 | Pred=21.00 | Gap=0.2222 | Hamming=10 | Exact=0
+K=5, n=146, m=618, rep=22 | Opt=27.00 | Pred=22.00 | Gap=0.1852 | Hamming=10 | Exact=0
+K=5, n=146, m=618, rep=23 | Opt=26.00 | Pred=22.00 | Gap=0.1538 | Hamming=8 | Exact=0
+K=5, n=146, m=618, rep=24 | Opt=28.00 | Pred=21.00 | Gap=0.2500 | Hamming=8 | Exact=0
+K=5, n=146, m=618, rep=25 | Opt=27.00 | Pred=24.00 | Gap=0.1111 | Hamming=10 | Exact=0
+K=5, n=146, m=618, rep=26 | Opt=28.00 | Pred=22.00 | Gap=0.2143 | Hamming=10 | Exact=0
+K=5, n=146, m=618, rep=27 | Opt=29.00 | Pred=25.00 | Gap=0.1379 | Hamming=8 | Exact=0
+K=5, n=146, m=618, rep=28 | Opt=25.00 | Pred=19.00 | Gap=0.2400 | Hamming=10 | Exact=0
+K=5, n=146, m=618, rep=29 | Opt=28.00 | Pred=25.00 | Gap=0.1071 | Hamming=10 | Exact=0
+
+FINAL TEST RESULTS FOR K=5
+Instances evaluated: 120
+Exact match rate: 0.0000
+Average Hamming distance: 8.8083
+Average objective gap: 0.2266
+Average MIP solve time: 1.257517 seconds
+Average model inference time: 0.003403 seconds
+
+Evaluating attack limit K=10
+K=10, n=51, m=188, rep=0 | Opt=16.00 | Pred=9.00 | Gap=0.4375 | Hamming=18 | Exact=0
+K=10, n=51, m=188, rep=1 | Opt=19.00 | Pred=14.00 | Gap=0.2632 | Hamming=14 | Exact=0
+K=10, n=51, m=188, rep=2 | Opt=18.00 | Pred=14.00 | Gap=0.2222 | Hamming=8 | Exact=0
+K=10, n=51, m=188, rep=3 | Opt=18.00 | Pred=11.00 | Gap=0.3889 | Hamming=18 | Exact=0
+K=10, n=51, m=188, rep=4 | Opt=18.00 | Pred=11.00 | Gap=0.3889 | Hamming=18 | Exact=0
+K=10, n=51, m=188, rep=5 | Opt=20.00 | Pred=15.00 | Gap=0.2500 | Hamming=14 | Exact=0
+K=10, n=51, m=188, rep=6 | Opt=22.00 | Pred=18.00 | Gap=0.1818 | Hamming=14 | Exact=0
+K=10, n=51, m=188, rep=7 | Opt=21.00 | Pred=14.00 | Gap=0.3333 | Hamming=10 | Exact=0
+K=10, n=51, m=188, rep=8 | Opt=22.00 | Pred=13.00 | Gap=0.4091 | Hamming=16 | Exact=0
+K=10, n=51, m=188, rep=9 | Opt=24.00 | Pred=16.00 | Gap=0.3333 | Hamming=12 | Exact=0
+K=10, n=51, m=188, rep=10 | Opt=19.00 | Pred=13.00 | Gap=0.3158 | Hamming=16 | Exact=0
+K=10, n=51, m=188, rep=11 | Opt=18.00 | Pred=11.00 | Gap=0.3889 | Hamming=14 | Exact=0
+K=10, n=51, m=188, rep=12 | Opt=25.00 | Pred=15.00 | Gap=0.4000 | Hamming=16 | Exact=0
+K=10, n=51, m=188, rep=13 | Opt=19.00 | Pred=12.00 | Gap=0.3684 | Hamming=16 | Exact=0
+K=10, n=51, m=188, rep=14 | Opt=21.00 | Pred=13.00 | Gap=0.3810 | Hamming=16 | Exact=0
+K=10, n=51, m=188, rep=15 | Opt=21.00 | Pred=14.00 | Gap=0.3333 | Hamming=16 | Exact=0
+K=10, n=51, m=188, rep=16 | Opt=20.00 | Pred=13.00 | Gap=0.3500 | Hamming=14 | Exact=0
+K=10, n=51, m=188, rep=17 | Opt=20.00 | Pred=15.00 | Gap=0.2500 | Hamming=12 | Exact=0
+K=10, n=51, m=188, rep=18 | Opt=18.00 | Pred=11.00 | Gap=0.3889 | Hamming=14 | Exact=0
+K=10, n=51, m=188, rep=19 | Opt=23.00 | Pred=19.00 | Gap=0.1739 | Hamming=12 | Exact=0
+K=10, n=51, m=188, rep=20 | Opt=19.00 | Pred=13.00 | Gap=0.3158 | Hamming=15 | Exact=0
+K=10, n=51, m=188, rep=21 | Opt=21.00 | Pred=16.00 | Gap=0.2381 | Hamming=14 | Exact=0
+K=10, n=51, m=188, rep=22 | Opt=23.00 | Pred=16.00 | Gap=0.3043 | Hamming=18 | Exact=0
+K=10, n=51, m=188, rep=23 | Opt=21.00 | Pred=16.00 | Gap=0.2381 | Hamming=12 | Exact=0
+K=10, n=51, m=188, rep=24 | Opt=21.00 | Pred=14.00 | Gap=0.3333 | Hamming=14 | Exact=0
+K=10, n=51, m=188, rep=25 | Opt=20.00 | Pred=11.00 | Gap=0.4500 | Hamming=16 | Exact=0
+K=10, n=51, m=188, rep=26 | Opt=22.00 | Pred=16.00 | Gap=0.2727 | Hamming=18 | Exact=0
+K=10, n=51, m=188, rep=27 | Opt=22.00 | Pred=16.00 | Gap=0.2727 | Hamming=18 | Exact=0
+K=10, n=51, m=188, rep=28 | Opt=22.00 | Pred=16.00 | Gap=0.2727 | Hamming=16 | Exact=0
+K=10, n=51, m=188, rep=29 | Opt=18.00 | Pred=14.00 | Gap=0.2222 | Hamming=20 | Exact=0
+K=10, n=66, m=254, rep=0 | Opt=21.00 | Pred=15.00 | Gap=0.2857 | Hamming=14 | Exact=0
+K=10, n=66, m=254, rep=1 | Opt=26.00 | Pred=20.00 | Gap=0.2308 | Hamming=14 | Exact=0
+K=10, n=66, m=254, rep=2 | Opt=26.00 | Pred=19.00 | Gap=0.2692 | Hamming=18 | Exact=0
+K=10, n=66, m=254, rep=3 | Opt=25.00 | Pred=15.00 | Gap=0.4000 | Hamming=13 | Exact=0
+K=10, n=66, m=254, rep=4 | Opt=20.00 | Pred=13.00 | Gap=0.3500 | Hamming=17 | Exact=0
+K=10, n=66, m=254, rep=5 | Opt=24.00 | Pred=11.00 | Gap=0.5417 | Hamming=20 | Exact=0
+K=10, n=66, m=254, rep=6 | Opt=20.00 | Pred=15.00 | Gap=0.2500 | Hamming=18 | Exact=0
+K=10, n=66, m=254, rep=7 | Opt=22.00 | Pred=14.00 | Gap=0.3636 | Hamming=16 | Exact=0
+K=10, n=66, m=254, rep=8 | Opt=23.00 | Pred=18.00 | Gap=0.2174 | Hamming=16 | Exact=0
+K=10, n=66, m=254, rep=9 | Opt=22.00 | Pred=12.00 | Gap=0.4545 | Hamming=18 | Exact=0
+K=10, n=66, m=254, rep=10 | Opt=25.00 | Pred=14.00 | Gap=0.4400 | Hamming=14 | Exact=0
+K=10, n=66, m=254, rep=11 | Opt=26.00 | Pred=17.00 | Gap=0.3462 | Hamming=16 | Exact=0
+K=10, n=66, m=254, rep=12 | Opt=23.00 | Pred=18.00 | Gap=0.2174 | Hamming=16 | Exact=0
+K=10, n=66, m=254, rep=13 | Opt=24.00 | Pred=18.00 | Gap=0.2500 | Hamming=10 | Exact=0
+K=10, n=66, m=254, rep=14 | Opt=25.00 | Pred=18.00 | Gap=0.2800 | Hamming=14 | Exact=0
+K=10, n=66, m=254, rep=15 | Opt=23.00 | Pred=17.00 | Gap=0.2609 | Hamming=12 | Exact=0
+K=10, n=66, m=254, rep=16 | Opt=21.00 | Pred=14.00 | Gap=0.3333 | Hamming=16 | Exact=0
+K=10, n=66, m=254, rep=17 | Opt=23.00 | Pred=16.00 | Gap=0.3043 | Hamming=16 | Exact=0
+K=10, n=66, m=254, rep=18 | Opt=21.00 | Pred=17.00 | Gap=0.1905 | Hamming=14 | Exact=0
+K=10, n=66, m=254, rep=19 | Opt=18.00 | Pred=11.00 | Gap=0.3889 | Hamming=18 | Exact=0
+K=10, n=66, m=254, rep=20 | Opt=21.00 | Pred=13.00 | Gap=0.3810 | Hamming=16 | Exact=0
+K=10, n=66, m=254, rep=21 | Opt=22.00 | Pred=15.00 | Gap=0.3182 | Hamming=16 | Exact=0
+K=10, n=66, m=254, rep=22 | Opt=21.00 | Pred=12.00 | Gap=0.4286 | Hamming=16 | Exact=0
+K=10, n=66, m=254, rep=23 | Opt=21.00 | Pred=16.00 | Gap=0.2381 | Hamming=15 | Exact=0
+K=10, n=66, m=254, rep=24 | Opt=22.00 | Pred=15.00 | Gap=0.3182 | Hamming=16 | Exact=0
+K=10, n=66, m=254, rep=25 | Opt=23.00 | Pred=18.00 | Gap=0.2174 | Hamming=16 | Exact=0
+K=10, n=66, m=254, rep=26 | Opt=21.00 | Pred=14.00 | Gap=0.3333 | Hamming=15 | Exact=0
+K=10, n=66, m=254, rep=27 | Opt=23.00 | Pred=15.00 | Gap=0.3478 | Hamming=10 | Exact=0
+K=10, n=66, m=254, rep=28 | Opt=22.00 | Pred=16.00 | Gap=0.2727 | Hamming=16 | Exact=0
+K=10, n=66, m=254, rep=29 | Opt=26.00 | Pred=19.00 | Gap=0.2692 | Hamming=18 | Exact=0
+K=10, n=83, m=330, rep=0 | Opt=25.00 | Pred=19.00 | Gap=0.2400 | Hamming=20 | Exact=0
+K=10, n=83, m=330, rep=1 | Opt=24.00 | Pred=14.00 | Gap=0.4167 | Hamming=16 | Exact=0
+K=10, n=83, m=330, rep=2 | Opt=25.00 | Pred=16.00 | Gap=0.3600 | Hamming=14 | Exact=0
+K=10, n=83, m=330, rep=3 | Opt=24.00 | Pred=20.00 | Gap=0.1667 | Hamming=14 | Exact=0
+K=10, n=83, m=330, rep=4 | Opt=22.00 | Pred=17.00 | Gap=0.2273 | Hamming=14 | Exact=0
+K=10, n=83, m=330, rep=5 | Opt=25.00 | Pred=19.00 | Gap=0.2400 | Hamming=16 | Exact=0
+K=10, n=83, m=330, rep=6 | Opt=22.00 | Pred=14.00 | Gap=0.3636 | Hamming=18 | Exact=0
+K=10, n=83, m=330, rep=7 | Opt=27.00 | Pred=20.00 | Gap=0.2593 | Hamming=13 | Exact=0
+K=10, n=83, m=330, rep=8 | Opt=25.00 | Pred=19.00 | Gap=0.2400 | Hamming=12 | Exact=0
+K=10, n=83, m=330, rep=9 | Opt=29.00 | Pred=19.00 | Gap=0.3448 | Hamming=14 | Exact=0
+K=10, n=83, m=330, rep=10 | Opt=25.00 | Pred=14.00 | Gap=0.4400 | Hamming=17 | Exact=0
+K=10, n=83, m=330, rep=11 | Opt=27.00 | Pred=17.00 | Gap=0.3704 | Hamming=16 | Exact=0
+K=10, n=83, m=330, rep=12 | Opt=24.00 | Pred=16.00 | Gap=0.3333 | Hamming=20 | Exact=0
+K=10, n=83, m=330, rep=13 | Opt=23.00 | Pred=14.00 | Gap=0.3913 | Hamming=14 | Exact=0
+K=10, n=83, m=330, rep=14 | Opt=23.00 | Pred=15.00 | Gap=0.3478 | Hamming=14 | Exact=0
+K=10, n=83, m=330, rep=15 | Opt=23.00 | Pred=16.00 | Gap=0.3043 | Hamming=18 | Exact=0
+K=10, n=83, m=330, rep=16 | Opt=24.00 | Pred=14.00 | Gap=0.4167 | Hamming=14 | Exact=0
+K=10, n=83, m=330, rep=17 | Opt=26.00 | Pred=17.00 | Gap=0.3462 | Hamming=18 | Exact=0
+K=10, n=83, m=330, rep=18 | Opt=22.00 | Pred=13.00 | Gap=0.4091 | Hamming=14 | Exact=0
+K=10, n=83, m=330, rep=19 | Opt=22.00 | Pred=17.00 | Gap=0.2273 | Hamming=18 | Exact=0
+K=10, n=83, m=330, rep=20 | Opt=23.00 | Pred=18.00 | Gap=0.2174 | Hamming=16 | Exact=0
+K=10, n=83, m=330, rep=21 | Opt=28.00 | Pred=22.00 | Gap=0.2143 | Hamming=14 | Exact=0
+K=10, n=83, m=330, rep=22 | Opt=23.00 | Pred=15.00 | Gap=0.3478 | Hamming=16 | Exact=0
+K=10, n=83, m=330, rep=23 | Opt=25.00 | Pred=18.00 | Gap=0.2800 | Hamming=20 | Exact=0
+K=10, n=83, m=330, rep=24 | Opt=23.00 | Pred=17.00 | Gap=0.2609 | Hamming=14 | Exact=0
+K=10, n=83, m=330, rep=25 | Opt=26.00 | Pred=19.00 | Gap=0.2692 | Hamming=14 | Exact=0
+K=10, n=83, m=330, rep=26 | Opt=24.00 | Pred=17.00 | Gap=0.2917 | Hamming=18 | Exact=0
+K=10, n=83, m=330, rep=27 | Opt=29.00 | Pred=20.00 | Gap=0.3103 | Hamming=16 | Exact=0
+K=10, n=83, m=330, rep=28 | Opt=24.00 | Pred=14.00 | Gap=0.4167 | Hamming=14 | Exact=0
+K=10, n=83, m=330, rep=29 | Opt=26.00 | Pred=18.00 | Gap=0.3077 | Hamming=18 | Exact=0
+K=10, n=146, m=618, rep=0 | Opt=28.00 | Pred=19.00 | Gap=0.3214 | Hamming=18 | Exact=0
+K=10, n=146, m=618, rep=1 | Opt=31.00 | Pred=23.00 | Gap=0.2581 | Hamming=18 | Exact=0
+K=10, n=146, m=618, rep=2 | Opt=30.00 | Pred=21.00 | Gap=0.3000 | Hamming=16 | Exact=0
+K=10, n=146, m=618, rep=3 | Opt=29.00 | Pred=19.00 | Gap=0.3448 | Hamming=16 | Exact=0
+K=10, n=146, m=618, rep=4 | Opt=31.00 | Pred=23.00 | Gap=0.2581 | Hamming=14 | Exact=0
+K=10, n=146, m=618, rep=5 | Opt=28.00 | Pred=17.00 | Gap=0.3929 | Hamming=20 | Exact=0
+K=10, n=146, m=618, rep=6 | Opt=29.00 | Pred=21.00 | Gap=0.2759 | Hamming=16 | Exact=0
+K=10, n=146, m=618, rep=7 | Opt=26.00 | Pred=18.00 | Gap=0.3077 | Hamming=16 | Exact=0
+K=10, n=146, m=618, rep=8 | Opt=31.00 | Pred=22.00 | Gap=0.2903 | Hamming=18 | Exact=0
+K=10, n=146, m=618, rep=9 | Opt=31.00 | Pred=23.00 | Gap=0.2581 | Hamming=18 | Exact=0
+K=10, n=146, m=618, rep=10 | Opt=31.00 | Pred=21.00 | Gap=0.3226 | Hamming=20 | Exact=0
+K=10, n=146, m=618, rep=11 | Opt=33.00 | Pred=24.00 | Gap=0.2727 | Hamming=16 | Exact=0
+K=10, n=146, m=618, rep=12 | Opt=30.00 | Pred=23.00 | Gap=0.2333 | Hamming=14 | Exact=0
+K=10, n=146, m=618, rep=13 | Opt=30.00 | Pred=24.00 | Gap=0.2000 | Hamming=20 | Exact=0
+K=10, n=146, m=618, rep=14 | Opt=29.00 | Pred=22.00 | Gap=0.2414 | Hamming=18 | Exact=0
+K=10, n=146, m=618, rep=15 | Opt=30.00 | Pred=19.00 | Gap=0.3667 | Hamming=18 | Exact=0
+K=10, n=146, m=618, rep=16 | Opt=31.00 | Pred=22.00 | Gap=0.2903 | Hamming=16 | Exact=0
+K=10, n=146, m=618, rep=17 | Opt=31.00 | Pred=22.00 | Gap=0.2903 | Hamming=14 | Exact=0
+K=10, n=146, m=618, rep=18 | Opt=30.00 | Pred=22.00 | Gap=0.2667 | Hamming=18 | Exact=0
+K=10, n=146, m=618, rep=19 | Opt=28.00 | Pred=19.00 | Gap=0.3214 | Hamming=20 | Exact=0
+K=10, n=146, m=618, rep=20 | Opt=31.00 | Pred=27.00 | Gap=0.1290 | Hamming=14 | Exact=0
+K=10, n=146, m=618, rep=21 | Opt=26.00 | Pred=17.00 | Gap=0.3462 | Hamming=20 | Exact=0
+K=10, n=146, m=618, rep=22 | Opt=34.00 | Pred=25.00 | Gap=0.2647 | Hamming=16 | Exact=0
+K=10, n=146, m=618, rep=23 | Opt=30.00 | Pred=23.00 | Gap=0.2333 | Hamming=20 | Exact=0
+K=10, n=146, m=618, rep=24 | Opt=33.00 | Pred=22.00 | Gap=0.3333 | Hamming=18 | Exact=0
+K=10, n=146, m=618, rep=25 | Opt=32.00 | Pred=24.00 | Gap=0.2500 | Hamming=16 | Exact=0
+K=10, n=146, m=618, rep=26 | Opt=29.00 | Pred=20.00 | Gap=0.3103 | Hamming=18 | Exact=0
+K=10, n=146, m=618, rep=27 | Opt=27.00 | Pred=21.00 | Gap=0.2222 | Hamming=20 | Exact=0
+K=10, n=146, m=618, rep=28 | Opt=30.00 | Pred=23.00 | Gap=0.2333 | Hamming=16 | Exact=0
+K=10, n=146, m=618, rep=29 | Opt=27.00 | Pred=21.00 | Gap=0.2222 | Hamming=19 | Exact=0
+
+FINAL TEST RESULTS FOR K=10
+Instances evaluated: 120
+Exact match rate: 0.0000
+Average Hamming distance: 15.9000
+Average objective gap: 0.3058
+Average MIP solve time: 4.307219 seconds
+Average model inference time: 0.001967 seconds
+
+Saved results/evaluation_results_edge_transformer_shortest_path_wood_mixed_60_10_reps100_candidate4.csv
+
+Loaded 240 pre-generated evaluation graphs from evaluation_graphs/shortest_path_wood_graphs.pkl.
+
+Evaluating attack limit K=5
+K=5, n=51, m=188, rep=0 | Opt=18.00 | Pred=11.00 | Gap=0.3889 | Hamming=10 | Exact=0
+K=5, n=51, m=188, rep=1 | Opt=17.00 | Pred=14.00 | Gap=0.1765 | Hamming=6 | Exact=0
+K=5, n=51, m=188, rep=2 | Opt=19.00 | Pred=14.00 | Gap=0.2632 | Hamming=7 | Exact=0
+K=5, n=51, m=188, rep=3 | Opt=19.00 | Pred=11.00 | Gap=0.4211 | Hamming=8 | Exact=0
+K=5, n=51, m=188, rep=4 | Opt=17.00 | Pred=12.00 | Gap=0.2941 | Hamming=7 | Exact=0
+K=5, n=51, m=188, rep=5 | Opt=20.00 | Pred=16.00 | Gap=0.2000 | Hamming=10 | Exact=0
+K=5, n=51, m=188, rep=6 | Opt=17.00 | Pred=11.00 | Gap=0.3529 | Hamming=10 | Exact=0
+K=5, n=51, m=188, rep=7 | Opt=18.00 | Pred=13.00 | Gap=0.2778 | Hamming=6 | Exact=0
+K=5, n=51, m=188, rep=8 | Opt=19.00 | Pred=13.00 | Gap=0.3158 | Hamming=8 | Exact=0
+K=5, n=51, m=188, rep=9 | Opt=20.00 | Pred=15.00 | Gap=0.2500 | Hamming=9 | Exact=0
+K=5, n=51, m=188, rep=10 | Opt=15.00 | Pred=10.00 | Gap=0.3333 | Hamming=10 | Exact=0
+K=5, n=51, m=188, rep=11 | Opt=20.00 | Pred=18.00 | Gap=0.1000 | Hamming=10 | Exact=0
+K=5, n=51, m=188, rep=12 | Opt=18.00 | Pred=14.00 | Gap=0.2222 | Hamming=6 | Exact=0
+K=5, n=51, m=188, rep=13 | Opt=17.00 | Pred=13.00 | Gap=0.2353 | Hamming=10 | Exact=0
+K=5, n=51, m=188, rep=14 | Opt=16.00 | Pred=9.00 | Gap=0.4375 | Hamming=10 | Exact=0
+K=5, n=51, m=188, rep=15 | Opt=16.00 | Pred=9.00 | Gap=0.4375 | Hamming=8 | Exact=0
+K=5, n=51, m=188, rep=16 | Opt=20.00 | Pred=15.00 | Gap=0.2500 | Hamming=6 | Exact=0
+K=5, n=51, m=188, rep=17 | Opt=19.00 | Pred=16.00 | Gap=0.1579 | Hamming=10 | Exact=0
+K=5, n=51, m=188, rep=18 | Opt=17.00 | Pred=11.00 | Gap=0.3529 | Hamming=8 | Exact=0
+K=5, n=51, m=188, rep=19 | Opt=18.00 | Pred=12.00 | Gap=0.3333 | Hamming=8 | Exact=0
+K=5, n=51, m=188, rep=20 | Opt=17.00 | Pred=11.00 | Gap=0.3529 | Hamming=10 | Exact=0
+K=5, n=51, m=188, rep=21 | Opt=15.00 | Pred=12.00 | Gap=0.2000 | Hamming=6 | Exact=0
+K=5, n=51, m=188, rep=22 | Opt=19.00 | Pred=15.00 | Gap=0.2105 | Hamming=8 | Exact=0
+K=5, n=51, m=188, rep=23 | Opt=16.00 | Pred=13.00 | Gap=0.1875 | Hamming=8 | Exact=0
+K=5, n=51, m=188, rep=24 | Opt=19.00 | Pred=15.00 | Gap=0.2105 | Hamming=6 | Exact=0
+K=5, n=51, m=188, rep=25 | Opt=18.00 | Pred=15.00 | Gap=0.1667 | Hamming=4 | Exact=0
+K=5, n=51, m=188, rep=26 | Opt=17.00 | Pred=15.00 | Gap=0.1176 | Hamming=6 | Exact=0
+K=5, n=51, m=188, rep=27 | Opt=20.00 | Pred=13.00 | Gap=0.3500 | Hamming=6 | Exact=0
+K=5, n=51, m=188, rep=28 | Opt=22.00 | Pred=20.00 | Gap=0.0909 | Hamming=8 | Exact=0
+K=5, n=51, m=188, rep=29 | Opt=19.00 | Pred=14.00 | Gap=0.2632 | Hamming=7 | Exact=0
+K=5, n=66, m=254, rep=0 | Opt=22.00 | Pred=12.00 | Gap=0.4545 | Hamming=10 | Exact=0
+K=5, n=66, m=254, rep=1 | Opt=19.00 | Pred=14.00 | Gap=0.2632 | Hamming=10 | Exact=0
+K=5, n=66, m=254, rep=2 | Opt=18.00 | Pred=14.00 | Gap=0.2222 | Hamming=10 | Exact=0
+K=5, n=66, m=254, rep=3 | Opt=21.00 | Pred=14.00 | Gap=0.3333 | Hamming=8 | Exact=0
+K=5, n=66, m=254, rep=4 | Opt=19.00 | Pred=10.00 | Gap=0.4737 | Hamming=10 | Exact=0
+K=5, n=66, m=254, rep=5 | Opt=17.00 | Pred=13.00 | Gap=0.2353 | Hamming=10 | Exact=0
+K=5, n=66, m=254, rep=6 | Opt=20.00 | Pred=14.00 | Gap=0.3000 | Hamming=8 | Exact=0
+K=5, n=66, m=254, rep=7 | Opt=19.00 | Pred=13.00 | Gap=0.3158 | Hamming=10 | Exact=0
+K=5, n=66, m=254, rep=8 | Opt=19.00 | Pred=14.00 | Gap=0.2632 | Hamming=8 | Exact=0
+K=5, n=66, m=254, rep=9 | Opt=20.00 | Pred=16.00 | Gap=0.2000 | Hamming=6 | Exact=0
+K=5, n=66, m=254, rep=10 | Opt=21.00 | Pred=15.00 | Gap=0.2857 | Hamming=10 | Exact=0
+K=5, n=66, m=254, rep=11 | Opt=16.00 | Pred=13.00 | Gap=0.1875 | Hamming=8 | Exact=0
+K=5, n=66, m=254, rep=12 | Opt=17.00 | Pred=14.00 | Gap=0.1765 | Hamming=10 | Exact=0
+K=5, n=66, m=254, rep=13 | Opt=18.00 | Pred=14.00 | Gap=0.2222 | Hamming=10 | Exact=0
+K=5, n=66, m=254, rep=14 | Opt=19.00 | Pred=13.00 | Gap=0.3158 | Hamming=6 | Exact=0
+K=5, n=66, m=254, rep=15 | Opt=16.00 | Pred=12.00 | Gap=0.2500 | Hamming=8 | Exact=0
+K=5, n=66, m=254, rep=16 | Opt=21.00 | Pred=17.00 | Gap=0.1905 | Hamming=6 | Exact=0
+K=5, n=66, m=254, rep=17 | Opt=19.00 | Pred=14.00 | Gap=0.2632 | Hamming=6 | Exact=0
+K=5, n=66, m=254, rep=18 | Opt=21.00 | Pred=16.00 | Gap=0.2381 | Hamming=8 | Exact=0
+K=5, n=66, m=254, rep=19 | Opt=23.00 | Pred=17.00 | Gap=0.2609 | Hamming=9 | Exact=0
+K=5, n=66, m=254, rep=20 | Opt=18.00 | Pred=15.00 | Gap=0.1667 | Hamming=10 | Exact=0
+K=5, n=66, m=254, rep=21 | Opt=19.00 | Pred=16.00 | Gap=0.1579 | Hamming=10 | Exact=0
+K=5, n=66, m=254, rep=22 | Opt=16.00 | Pred=12.00 | Gap=0.2500 | Hamming=8 | Exact=0
+K=5, n=66, m=254, rep=23 | Opt=21.00 | Pred=17.00 | Gap=0.1905 | Hamming=10 | Exact=0
+K=5, n=66, m=254, rep=24 | Opt=21.00 | Pred=19.00 | Gap=0.0952 | Hamming=8 | Exact=0
+K=5, n=66, m=254, rep=25 | Opt=17.00 | Pred=10.00 | Gap=0.4118 | Hamming=6 | Exact=0
+K=5, n=66, m=254, rep=26 | Opt=15.00 | Pred=12.00 | Gap=0.2000 | Hamming=8 | Exact=0
+K=5, n=66, m=254, rep=27 | Opt=19.00 | Pred=12.00 | Gap=0.3684 | Hamming=10 | Exact=0
+K=5, n=66, m=254, rep=28 | Opt=20.00 | Pred=16.00 | Gap=0.2000 | Hamming=6 | Exact=0
+K=5, n=66, m=254, rep=29 | Opt=21.00 | Pred=18.00 | Gap=0.1429 | Hamming=8 | Exact=0
+K=5, n=83, m=330, rep=0 | Opt=24.00 | Pred=19.00 | Gap=0.2083 | Hamming=8 | Exact=0
+K=5, n=83, m=330, rep=1 | Opt=25.00 | Pred=21.00 | Gap=0.1600 | Hamming=10 | Exact=0
+K=5, n=83, m=330, rep=2 | Opt=21.00 | Pred=17.00 | Gap=0.1905 | Hamming=10 | Exact=0
+K=5, n=83, m=330, rep=3 | Opt=21.00 | Pred=15.00 | Gap=0.2857 | Hamming=8 | Exact=0
+K=5, n=83, m=330, rep=4 | Opt=22.00 | Pred=17.00 | Gap=0.2273 | Hamming=8 | Exact=0
+K=5, n=83, m=330, rep=5 | Opt=16.00 | Pred=10.00 | Gap=0.3750 | Hamming=9 | Exact=0
+K=5, n=83, m=330, rep=6 | Opt=20.00 | Pred=14.00 | Gap=0.3000 | Hamming=8 | Exact=0
+K=5, n=83, m=330, rep=7 | Opt=21.00 | Pred=18.00 | Gap=0.1429 | Hamming=6 | Exact=0
+K=5, n=83, m=330, rep=8 | Opt=19.00 | Pred=14.00 | Gap=0.2632 | Hamming=8 | Exact=0
+K=5, n=83, m=330, rep=9 | Opt=20.00 | Pred=16.00 | Gap=0.2000 | Hamming=8 | Exact=0
+K=5, n=83, m=330, rep=10 | Opt=20.00 | Pred=15.00 | Gap=0.2500 | Hamming=8 | Exact=0
+K=5, n=83, m=330, rep=11 | Opt=22.00 | Pred=19.00 | Gap=0.1364 | Hamming=8 | Exact=0
+K=5, n=83, m=330, rep=12 | Opt=23.00 | Pred=15.00 | Gap=0.3478 | Hamming=10 | Exact=0
+K=5, n=83, m=330, rep=13 | Opt=19.00 | Pred=15.00 | Gap=0.2105 | Hamming=10 | Exact=0
+K=5, n=83, m=330, rep=14 | Opt=17.00 | Pred=14.00 | Gap=0.1765 | Hamming=8 | Exact=0
+K=5, n=83, m=330, rep=15 | Opt=23.00 | Pred=18.00 | Gap=0.2174 | Hamming=8 | Exact=0
+K=5, n=83, m=330, rep=16 | Opt=22.00 | Pred=17.00 | Gap=0.2273 | Hamming=10 | Exact=0
+K=5, n=83, m=330, rep=17 | Opt=21.00 | Pred=14.00 | Gap=0.3333 | Hamming=8 | Exact=0
+K=5, n=83, m=330, rep=18 | Opt=24.00 | Pred=17.00 | Gap=0.2917 | Hamming=10 | Exact=0
+K=5, n=83, m=330, rep=19 | Opt=21.00 | Pred=14.00 | Gap=0.3333 | Hamming=10 | Exact=0
+K=5, n=83, m=330, rep=20 | Opt=22.00 | Pred=17.00 | Gap=0.2273 | Hamming=7 | Exact=0
+K=5, n=83, m=330, rep=21 | Opt=24.00 | Pred=16.00 | Gap=0.3333 | Hamming=10 | Exact=0
+K=5, n=83, m=330, rep=22 | Opt=23.00 | Pred=19.00 | Gap=0.1739 | Hamming=10 | Exact=0
+K=5, n=83, m=330, rep=23 | Opt=20.00 | Pred=18.00 | Gap=0.1000 | Hamming=10 | Exact=0
+K=5, n=83, m=330, rep=24 | Opt=20.00 | Pred=18.00 | Gap=0.1000 | Hamming=8 | Exact=0
+K=5, n=83, m=330, rep=25 | Opt=27.00 | Pred=23.00 | Gap=0.1481 | Hamming=10 | Exact=0
+K=5, n=83, m=330, rep=26 | Opt=21.00 | Pred=16.00 | Gap=0.2381 | Hamming=10 | Exact=0
+K=5, n=83, m=330, rep=27 | Opt=22.00 | Pred=20.00 | Gap=0.0909 | Hamming=10 | Exact=0
+K=5, n=83, m=330, rep=28 | Opt=21.00 | Pred=17.00 | Gap=0.1905 | Hamming=6 | Exact=0
+K=5, n=83, m=330, rep=29 | Opt=19.00 | Pred=13.00 | Gap=0.3158 | Hamming=8 | Exact=0
+K=5, n=146, m=618, rep=0 | Opt=27.00 | Pred=19.00 | Gap=0.2963 | Hamming=10 | Exact=0
+K=5, n=146, m=618, rep=1 | Opt=28.00 | Pred=23.00 | Gap=0.1786 | Hamming=10 | Exact=0
+K=5, n=146, m=618, rep=2 | Opt=27.00 | Pred=24.00 | Gap=0.1111 | Hamming=10 | Exact=0
+K=5, n=146, m=618, rep=3 | Opt=24.00 | Pred=18.00 | Gap=0.2500 | Hamming=10 | Exact=0
+K=5, n=146, m=618, rep=4 | Opt=27.00 | Pred=19.00 | Gap=0.2963 | Hamming=8 | Exact=0
+K=5, n=146, m=618, rep=5 | Opt=31.00 | Pred=26.00 | Gap=0.1613 | Hamming=8 | Exact=0
+K=5, n=146, m=618, rep=6 | Opt=26.00 | Pred=23.00 | Gap=0.1154 | Hamming=10 | Exact=0
+K=5, n=146, m=618, rep=7 | Opt=26.00 | Pred=22.00 | Gap=0.1538 | Hamming=8 | Exact=0
+K=5, n=146, m=618, rep=8 | Opt=31.00 | Pred=24.00 | Gap=0.2258 | Hamming=10 | Exact=0
+K=5, n=146, m=618, rep=9 | Opt=28.00 | Pred=23.00 | Gap=0.1786 | Hamming=8 | Exact=0
+K=5, n=146, m=618, rep=10 | Opt=24.00 | Pred=15.00 | Gap=0.3750 | Hamming=10 | Exact=0
+K=5, n=146, m=618, rep=11 | Opt=23.00 | Pred=17.00 | Gap=0.2609 | Hamming=8 | Exact=0
+K=5, n=146, m=618, rep=12 | Opt=26.00 | Pred=22.00 | Gap=0.1538 | Hamming=10 | Exact=0
+K=5, n=146, m=618, rep=13 | Opt=26.00 | Pred=22.00 | Gap=0.1538 | Hamming=8 | Exact=0
+K=5, n=146, m=618, rep=14 | Opt=27.00 | Pred=18.00 | Gap=0.3333 | Hamming=10 | Exact=0
+K=5, n=146, m=618, rep=15 | Opt=30.00 | Pred=23.00 | Gap=0.2333 | Hamming=8 | Exact=0
+K=5, n=146, m=618, rep=16 | Opt=27.00 | Pred=21.00 | Gap=0.2222 | Hamming=10 | Exact=0
+K=5, n=146, m=618, rep=17 | Opt=24.00 | Pred=20.00 | Gap=0.1667 | Hamming=10 | Exact=0
+K=5, n=146, m=618, rep=18 | Opt=29.00 | Pred=23.00 | Gap=0.2069 | Hamming=10 | Exact=0
+K=5, n=146, m=618, rep=19 | Opt=27.00 | Pred=22.00 | Gap=0.1852 | Hamming=6 | Exact=0
+K=5, n=146, m=618, rep=20 | Opt=26.00 | Pred=23.00 | Gap=0.1154 | Hamming=8 | Exact=0
+K=5, n=146, m=618, rep=21 | Opt=27.00 | Pred=21.00 | Gap=0.2222 | Hamming=10 | Exact=0
+K=5, n=146, m=618, rep=22 | Opt=27.00 | Pred=22.00 | Gap=0.1852 | Hamming=10 | Exact=0
+K=5, n=146, m=618, rep=23 | Opt=26.00 | Pred=18.00 | Gap=0.3077 | Hamming=10 | Exact=0
+K=5, n=146, m=618, rep=24 | Opt=28.00 | Pred=22.00 | Gap=0.2143 | Hamming=8 | Exact=0
+K=5, n=146, m=618, rep=25 | Opt=27.00 | Pred=21.00 | Gap=0.2222 | Hamming=10 | Exact=0
+K=5, n=146, m=618, rep=26 | Opt=28.00 | Pred=22.00 | Gap=0.2143 | Hamming=10 | Exact=0
+K=5, n=146, m=618, rep=27 | Opt=29.00 | Pred=19.00 | Gap=0.3448 | Hamming=10 | Exact=0
+K=5, n=146, m=618, rep=28 | Opt=25.00 | Pred=20.00 | Gap=0.2000 | Hamming=8 | Exact=0
+K=5, n=146, m=618, rep=29 | Opt=28.00 | Pred=24.00 | Gap=0.1429 | Hamming=10 | Exact=0
+
+FINAL TEST RESULTS FOR K=5
+Instances evaluated: 120
+Exact match rate: 0.0000
+Average Hamming distance: 8.5750
+Average objective gap: 0.2401
+Average MIP solve time: 1.256248 seconds
+Average model inference time: 0.002635 seconds
+
+Evaluating attack limit K=10
+K=10, n=51, m=188, rep=0 | Opt=16.00 | Pred=9.00 | Gap=0.4375 | Hamming=18 | Exact=0
+K=10, n=51, m=188, rep=1 | Opt=19.00 | Pred=13.00 | Gap=0.3158 | Hamming=14 | Exact=0
+K=10, n=51, m=188, rep=2 | Opt=18.00 | Pred=15.00 | Gap=0.1667 | Hamming=12 | Exact=0
+K=10, n=51, m=188, rep=3 | Opt=18.00 | Pred=12.00 | Gap=0.3333 | Hamming=16 | Exact=0
+K=10, n=51, m=188, rep=4 | Opt=18.00 | Pred=7.00 | Gap=0.6111 | Hamming=20 | Exact=0
+K=10, n=51, m=188, rep=5 | Opt=20.00 | Pred=14.00 | Gap=0.3000 | Hamming=14 | Exact=0
+K=10, n=51, m=188, rep=6 | Opt=22.00 | Pred=17.00 | Gap=0.2273 | Hamming=18 | Exact=0
+K=10, n=51, m=188, rep=7 | Opt=21.00 | Pred=15.00 | Gap=0.2857 | Hamming=18 | Exact=0
+K=10, n=51, m=188, rep=8 | Opt=22.00 | Pred=13.00 | Gap=0.4091 | Hamming=18 | Exact=0
+K=10, n=51, m=188, rep=9 | Opt=24.00 | Pred=17.00 | Gap=0.2917 | Hamming=16 | Exact=0
+K=10, n=51, m=188, rep=10 | Opt=19.00 | Pred=13.00 | Gap=0.3158 | Hamming=16 | Exact=0
+K=10, n=51, m=188, rep=11 | Opt=18.00 | Pred=11.00 | Gap=0.3889 | Hamming=20 | Exact=0
+K=10, n=51, m=188, rep=12 | Opt=25.00 | Pred=15.00 | Gap=0.4000 | Hamming=16 | Exact=0
+K=10, n=51, m=188, rep=13 | Opt=19.00 | Pred=12.00 | Gap=0.3684 | Hamming=18 | Exact=0
+K=10, n=51, m=188, rep=14 | Opt=21.00 | Pred=13.00 | Gap=0.3810 | Hamming=14 | Exact=0
+K=10, n=51, m=188, rep=15 | Opt=21.00 | Pred=17.00 | Gap=0.1905 | Hamming=14 | Exact=0
+K=10, n=51, m=188, rep=16 | Opt=20.00 | Pred=13.00 | Gap=0.3500 | Hamming=14 | Exact=0
+K=10, n=51, m=188, rep=17 | Opt=20.00 | Pred=9.00 | Gap=0.5500 | Hamming=16 | Exact=0
+K=10, n=51, m=188, rep=18 | Opt=18.00 | Pred=11.00 | Gap=0.3889 | Hamming=16 | Exact=0
+K=10, n=51, m=188, rep=19 | Opt=23.00 | Pred=15.00 | Gap=0.3478 | Hamming=16 | Exact=0
+K=10, n=51, m=188, rep=20 | Opt=19.00 | Pred=12.00 | Gap=0.3684 | Hamming=15 | Exact=0
+K=10, n=51, m=188, rep=21 | Opt=21.00 | Pred=14.00 | Gap=0.3333 | Hamming=14 | Exact=0
+K=10, n=51, m=188, rep=22 | Opt=23.00 | Pred=16.00 | Gap=0.3043 | Hamming=18 | Exact=0
+K=10, n=51, m=188, rep=23 | Opt=21.00 | Pred=14.00 | Gap=0.3333 | Hamming=14 | Exact=0
+K=10, n=51, m=188, rep=24 | Opt=21.00 | Pred=16.00 | Gap=0.2381 | Hamming=16 | Exact=0
+K=10, n=51, m=188, rep=25 | Opt=20.00 | Pred=11.00 | Gap=0.4500 | Hamming=14 | Exact=0
+K=10, n=51, m=188, rep=26 | Opt=22.00 | Pred=16.00 | Gap=0.2727 | Hamming=18 | Exact=0
+K=10, n=51, m=188, rep=27 | Opt=22.00 | Pred=14.00 | Gap=0.3636 | Hamming=16 | Exact=0
+K=10, n=51, m=188, rep=28 | Opt=22.00 | Pred=14.00 | Gap=0.3636 | Hamming=16 | Exact=0
+K=10, n=51, m=188, rep=29 | Opt=18.00 | Pred=15.00 | Gap=0.1667 | Hamming=14 | Exact=0
+K=10, n=66, m=254, rep=0 | Opt=21.00 | Pred=13.00 | Gap=0.3810 | Hamming=14 | Exact=0
+K=10, n=66, m=254, rep=1 | Opt=26.00 | Pred=19.00 | Gap=0.2692 | Hamming=16 | Exact=0
+K=10, n=66, m=254, rep=2 | Opt=26.00 | Pred=19.00 | Gap=0.2692 | Hamming=18 | Exact=0
+K=10, n=66, m=254, rep=3 | Opt=25.00 | Pred=16.00 | Gap=0.3600 | Hamming=13 | Exact=0
+K=10, n=66, m=254, rep=4 | Opt=20.00 | Pred=15.00 | Gap=0.2500 | Hamming=15 | Exact=0
+K=10, n=66, m=254, rep=5 | Opt=24.00 | Pred=14.00 | Gap=0.4167 | Hamming=20 | Exact=0
+K=10, n=66, m=254, rep=6 | Opt=20.00 | Pred=15.00 | Gap=0.2500 | Hamming=18 | Exact=0
+K=10, n=66, m=254, rep=7 | Opt=22.00 | Pred=13.00 | Gap=0.4091 | Hamming=20 | Exact=0
+K=10, n=66, m=254, rep=8 | Opt=23.00 | Pred=16.00 | Gap=0.3043 | Hamming=18 | Exact=0
+K=10, n=66, m=254, rep=9 | Opt=22.00 | Pred=12.00 | Gap=0.4545 | Hamming=14 | Exact=0
+K=10, n=66, m=254, rep=10 | Opt=25.00 | Pred=18.00 | Gap=0.2800 | Hamming=12 | Exact=0
+K=10, n=66, m=254, rep=11 | Opt=26.00 | Pred=19.00 | Gap=0.2692 | Hamming=12 | Exact=0
+K=10, n=66, m=254, rep=12 | Opt=23.00 | Pred=15.00 | Gap=0.3478 | Hamming=18 | Exact=0
+K=10, n=66, m=254, rep=13 | Opt=24.00 | Pred=17.00 | Gap=0.2917 | Hamming=14 | Exact=0
+K=10, n=66, m=254, rep=14 | Opt=25.00 | Pred=18.00 | Gap=0.2800 | Hamming=16 | Exact=0
+K=10, n=66, m=254, rep=15 | Opt=23.00 | Pred=17.00 | Gap=0.2609 | Hamming=16 | Exact=0
+K=10, n=66, m=254, rep=16 | Opt=21.00 | Pred=15.00 | Gap=0.2857 | Hamming=18 | Exact=0
+K=10, n=66, m=254, rep=17 | Opt=23.00 | Pred=18.00 | Gap=0.2174 | Hamming=18 | Exact=0
+K=10, n=66, m=254, rep=18 | Opt=21.00 | Pred=15.00 | Gap=0.2857 | Hamming=20 | Exact=0
+K=10, n=66, m=254, rep=19 | Opt=18.00 | Pred=12.00 | Gap=0.3333 | Hamming=18 | Exact=0
+K=10, n=66, m=254, rep=20 | Opt=21.00 | Pred=13.00 | Gap=0.3810 | Hamming=18 | Exact=0
+K=10, n=66, m=254, rep=21 | Opt=22.00 | Pred=14.00 | Gap=0.3636 | Hamming=16 | Exact=0
+K=10, n=66, m=254, rep=22 | Opt=21.00 | Pred=14.00 | Gap=0.3333 | Hamming=14 | Exact=0
+K=10, n=66, m=254, rep=23 | Opt=21.00 | Pred=15.00 | Gap=0.2857 | Hamming=17 | Exact=0
+K=10, n=66, m=254, rep=24 | Opt=22.00 | Pred=16.00 | Gap=0.2727 | Hamming=18 | Exact=0
+K=10, n=66, m=254, rep=25 | Opt=23.00 | Pred=18.00 | Gap=0.2174 | Hamming=16 | Exact=0
+K=10, n=66, m=254, rep=26 | Opt=21.00 | Pred=12.00 | Gap=0.4286 | Hamming=15 | Exact=0
+K=10, n=66, m=254, rep=27 | Opt=23.00 | Pred=16.00 | Gap=0.3043 | Hamming=12 | Exact=0
+K=10, n=66, m=254, rep=28 | Opt=22.00 | Pred=18.00 | Gap=0.1818 | Hamming=16 | Exact=0
+K=10, n=66, m=254, rep=29 | Opt=26.00 | Pred=21.00 | Gap=0.1923 | Hamming=16 | Exact=0
+K=10, n=83, m=330, rep=0 | Opt=25.00 | Pred=19.00 | Gap=0.2400 | Hamming=20 | Exact=0
+K=10, n=83, m=330, rep=1 | Opt=24.00 | Pred=18.00 | Gap=0.2500 | Hamming=12 | Exact=0
+K=10, n=83, m=330, rep=2 | Opt=25.00 | Pred=16.00 | Gap=0.3600 | Hamming=18 | Exact=0
+K=10, n=83, m=330, rep=3 | Opt=24.00 | Pred=18.00 | Gap=0.2500 | Hamming=18 | Exact=0
+K=10, n=83, m=330, rep=4 | Opt=22.00 | Pred=17.00 | Gap=0.2273 | Hamming=16 | Exact=0
+K=10, n=83, m=330, rep=5 | Opt=25.00 | Pred=15.00 | Gap=0.4000 | Hamming=18 | Exact=0
+K=10, n=83, m=330, rep=6 | Opt=22.00 | Pred=14.00 | Gap=0.3636 | Hamming=18 | Exact=0
+K=10, n=83, m=330, rep=7 | Opt=27.00 | Pred=19.00 | Gap=0.2963 | Hamming=15 | Exact=0
+K=10, n=83, m=330, rep=8 | Opt=25.00 | Pred=17.00 | Gap=0.3200 | Hamming=16 | Exact=0
+K=10, n=83, m=330, rep=9 | Opt=29.00 | Pred=19.00 | Gap=0.3448 | Hamming=14 | Exact=0
+K=10, n=83, m=330, rep=10 | Opt=25.00 | Pred=14.00 | Gap=0.4400 | Hamming=19 | Exact=0
+K=10, n=83, m=330, rep=11 | Opt=27.00 | Pred=17.00 | Gap=0.3704 | Hamming=18 | Exact=0
+K=10, n=83, m=330, rep=12 | Opt=24.00 | Pred=15.00 | Gap=0.3750 | Hamming=20 | Exact=0
+K=10, n=83, m=330, rep=13 | Opt=23.00 | Pred=14.00 | Gap=0.3913 | Hamming=14 | Exact=0
+K=10, n=83, m=330, rep=14 | Opt=23.00 | Pred=16.00 | Gap=0.3043 | Hamming=18 | Exact=0
+K=10, n=83, m=330, rep=15 | Opt=23.00 | Pred=17.00 | Gap=0.2609 | Hamming=18 | Exact=0
+K=10, n=83, m=330, rep=16 | Opt=24.00 | Pred=15.00 | Gap=0.3750 | Hamming=18 | Exact=0
+K=10, n=83, m=330, rep=17 | Opt=26.00 | Pred=18.00 | Gap=0.3077 | Hamming=18 | Exact=0
+K=10, n=83, m=330, rep=18 | Opt=22.00 | Pred=13.00 | Gap=0.4091 | Hamming=12 | Exact=0
+K=10, n=83, m=330, rep=19 | Opt=22.00 | Pred=14.00 | Gap=0.3636 | Hamming=20 | Exact=0
+K=10, n=83, m=330, rep=20 | Opt=23.00 | Pred=17.00 | Gap=0.2609 | Hamming=14 | Exact=0
+K=10, n=83, m=330, rep=21 | Opt=28.00 | Pred=22.00 | Gap=0.2143 | Hamming=18 | Exact=0
+K=10, n=83, m=330, rep=22 | Opt=23.00 | Pred=16.00 | Gap=0.3043 | Hamming=14 | Exact=0
+K=10, n=83, m=330, rep=23 | Opt=25.00 | Pred=18.00 | Gap=0.2800 | Hamming=18 | Exact=0
+K=10, n=83, m=330, rep=24 | Opt=23.00 | Pred=14.00 | Gap=0.3913 | Hamming=16 | Exact=0
+K=10, n=83, m=330, rep=25 | Opt=26.00 | Pred=21.00 | Gap=0.1923 | Hamming=14 | Exact=0
+K=10, n=83, m=330, rep=26 | Opt=24.00 | Pred=17.00 | Gap=0.2917 | Hamming=20 | Exact=0
+K=10, n=83, m=330, rep=27 | Opt=29.00 | Pred=22.00 | Gap=0.2414 | Hamming=16 | Exact=0
+K=10, n=83, m=330, rep=28 | Opt=24.00 | Pred=17.00 | Gap=0.2917 | Hamming=18 | Exact=0
+K=10, n=83, m=330, rep=29 | Opt=26.00 | Pred=18.00 | Gap=0.3077 | Hamming=16 | Exact=0
+K=10, n=146, m=618, rep=0 | Opt=28.00 | Pred=22.00 | Gap=0.2143 | Hamming=16 | Exact=0
+K=10, n=146, m=618, rep=1 | Opt=31.00 | Pred=22.00 | Gap=0.2903 | Hamming=20 | Exact=0
+K=10, n=146, m=618, rep=2 | Opt=30.00 | Pred=20.00 | Gap=0.3333 | Hamming=16 | Exact=0
+K=10, n=146, m=618, rep=3 | Opt=29.00 | Pred=19.00 | Gap=0.3448 | Hamming=16 | Exact=0
+K=10, n=146, m=618, rep=4 | Opt=31.00 | Pred=23.00 | Gap=0.2581 | Hamming=18 | Exact=0
+K=10, n=146, m=618, rep=5 | Opt=28.00 | Pred=20.00 | Gap=0.2857 | Hamming=12 | Exact=0
+K=10, n=146, m=618, rep=6 | Opt=29.00 | Pred=23.00 | Gap=0.2069 | Hamming=16 | Exact=0
+K=10, n=146, m=618, rep=7 | Opt=26.00 | Pred=16.00 | Gap=0.3846 | Hamming=18 | Exact=0
+K=10, n=146, m=618, rep=8 | Opt=31.00 | Pred=21.00 | Gap=0.3226 | Hamming=18 | Exact=0
+K=10, n=146, m=618, rep=9 | Opt=31.00 | Pred=22.00 | Gap=0.2903 | Hamming=20 | Exact=0
+K=10, n=146, m=618, rep=10 | Opt=31.00 | Pred=18.00 | Gap=0.4194 | Hamming=20 | Exact=0
+K=10, n=146, m=618, rep=11 | Opt=33.00 | Pred=24.00 | Gap=0.2727 | Hamming=16 | Exact=0
+K=10, n=146, m=618, rep=12 | Opt=30.00 | Pred=16.00 | Gap=0.4667 | Hamming=20 | Exact=0
+K=10, n=146, m=618, rep=13 | Opt=30.00 | Pred=27.00 | Gap=0.1000 | Hamming=12 | Exact=0
+K=10, n=146, m=618, rep=14 | Opt=29.00 | Pred=22.00 | Gap=0.2414 | Hamming=14 | Exact=0
+K=10, n=146, m=618, rep=15 | Opt=30.00 | Pred=19.00 | Gap=0.3667 | Hamming=16 | Exact=0
+K=10, n=146, m=618, rep=16 | Opt=31.00 | Pred=22.00 | Gap=0.2903 | Hamming=20 | Exact=0
+K=10, n=146, m=618, rep=17 | Opt=31.00 | Pred=22.00 | Gap=0.2903 | Hamming=20 | Exact=0
+K=10, n=146, m=618, rep=18 | Opt=30.00 | Pred=22.00 | Gap=0.2667 | Hamming=20 | Exact=0
+K=10, n=146, m=618, rep=19 | Opt=28.00 | Pred=22.00 | Gap=0.2143 | Hamming=18 | Exact=0
+K=10, n=146, m=618, rep=20 | Opt=31.00 | Pred=24.00 | Gap=0.2258 | Hamming=18 | Exact=0
+K=10, n=146, m=618, rep=21 | Opt=26.00 | Pred=15.00 | Gap=0.4231 | Hamming=20 | Exact=0
+K=10, n=146, m=618, rep=22 | Opt=34.00 | Pred=27.00 | Gap=0.2059 | Hamming=14 | Exact=0
+K=10, n=146, m=618, rep=23 | Opt=30.00 | Pred=22.00 | Gap=0.2667 | Hamming=14 | Exact=0
+K=10, n=146, m=618, rep=24 | Opt=33.00 | Pred=22.00 | Gap=0.3333 | Hamming=18 | Exact=0
+K=10, n=146, m=618, rep=25 | Opt=32.00 | Pred=24.00 | Gap=0.2500 | Hamming=20 | Exact=0
+K=10, n=146, m=618, rep=26 | Opt=29.00 | Pred=20.00 | Gap=0.3103 | Hamming=16 | Exact=0
+K=10, n=146, m=618, rep=27 | Opt=27.00 | Pred=21.00 | Gap=0.2222 | Hamming=20 | Exact=0
+K=10, n=146, m=618, rep=28 | Opt=30.00 | Pred=22.00 | Gap=0.2667 | Hamming=12 | Exact=0
+K=10, n=146, m=618, rep=29 | Opt=27.00 | Pred=21.00 | Gap=0.2222 | Hamming=17 | Exact=0
+
+FINAL TEST RESULTS FOR K=10
+Instances evaluated: 120
+Exact match rate: 0.0000
+Average Hamming distance: 16.5333
+Average objective gap: 0.3120
+Average MIP solve time: 4.300427 seconds
+Average model inference time: 0.001164 seconds
+
+Saved results/evaluation_results_gnn_shortest_path_wood_mixed_60_10_reps100_candidate4.csv
