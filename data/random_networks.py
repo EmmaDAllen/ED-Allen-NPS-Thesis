@@ -596,11 +596,15 @@ def generate_star_mesh_network(n, m, cost_low=1, cost_high=10, penalty_low=1, pe
 
     """Generate a directed star-mesh / hub-and-spoke network.
 
-    A small number of hub nodes are created, peripheral nodes are assigned to hubs, hubs are
-    interconnected, and additional arcs are added while preserving the general hub-and-spoke structure.
+    A small number of hub nodes are created, peripheral nodes are assigned to hubs,
+    hubs are interconnected, and additional arcs are added while preserving the
+    general hub-and-spoke structure.
 
-    This topology is intended to represent transportation and logistics networks with regional hubs,
-    local connections, and limited cross-links.
+    Source-entry hubs and sink-exit hubs are kept disjoint so that the network
+    does not contain a trivial two-edge source-hub-sink path by construction.
+
+    This topology is intended to represent transportation and logistics networks
+    with regional hubs, local connections, and limited cross-links.
 
     Returns:
         G: directed NetworkX graph
@@ -626,12 +630,11 @@ def generate_star_mesh_network(n, m, cost_low=1, cost_high=10, penalty_low=1, pe
     G.add_nodes_from(range(n))
 
     # Number of hubs grows slowly with network size.
-    # This gives roughly 2-5 hubs for the network sizes in your training set.
+    # This gives roughly 2-5 hubs for the network sizes in the training set.
     n_hubs = max(2, min(5, round(math.sqrt(n) / 2)))
 
     # Exclude source and sink from hub selection.
     candidate_nodes = list(range(1, n - 1))
-
     hubs = rng.sample(candidate_nodes, n_hubs)
 
     peripheral_nodes = [node for node in candidate_nodes if node not in hubs]
@@ -644,27 +647,49 @@ def generate_star_mesh_network(n, m, cost_low=1, cost_high=10, penalty_low=1, pe
         hub_members[hub].append(node)
 
 
+    # SOURCE AND SINK HUB SELECTION
+
+    # Shuffle once and divide the hubs into disjoint source-entry and
+    # sink-exit sets. This prevents a hub from being directly connected
+    # to both s and t, eliminating a constructed s -> hub -> t shortcut.
+    shuffled_hubs = hubs.copy()
+    rng.shuffle(shuffled_hubs)
+
+    # With the current generator this gives:
+    #   2 hubs -> 1 source hub, 1 sink hub
+    #   3 hubs -> 1 source hub, up to 2 sink hubs
+    #   4+ hubs -> 2 source hubs, 2 sink hubs
+    num_source_hubs = min(2, max(1, len(hubs) // 2))
+
+    source_hubs = shuffled_hubs[:num_source_hubs]
+
+    remaining_hubs = [hub for hub in shuffled_hubs if hub not in source_hubs]
+
+    num_sink_hubs = min(2, len(remaining_hubs))
+    sink_hubs = remaining_hubs[:num_sink_hubs]
+
+    # Defensive check: source and sink hub sets must not overlap.
+    assert set(source_hubs).isdisjoint(set(sink_hubs))
+
 
     # SOURCE CONNECTION
 
-    # Connect the source to one or more hubs.
-    # Using multiple entry hubs avoids making a single source arc an unavoidable bottleneck
-    source_hubs = rng.sample(hubs, min(2, len(hubs)))
-
+    # Multiple entry hubs are used when enough hubs exist to avoid
+    # creating a single unavoidable source bottleneck.
     for hub in source_hubs:
         G.add_edge(s, hub)
 
 
-
     # HUB-TO-HUB MESH
 
-    # Ensure the hub network is connected by first creating a directed backbone
-    shuffled_hubs = hubs.copy()
-    rng.shuffle(shuffled_hubs)
+    # Ensure the hub network is connected by first creating a
+    # bidirectional backbone.
+    hub_backbone = hubs.copy()
+    rng.shuffle(hub_backbone)
 
-    for i in range(len(shuffled_hubs) - 1):
-        u = shuffled_hubs[i]
-        v = shuffled_hubs[i + 1]
+    for i in range(len(hub_backbone) - 1):
+        u = hub_backbone[i]
+        v = hub_backbone[i + 1]
 
         G.add_edge(u, v)
         G.add_edge(v, u)
@@ -680,7 +705,6 @@ def generate_star_mesh_network(n, m, cost_low=1, cost_high=10, penalty_low=1, pe
                     G.add_edge(u, v)
 
 
-
     # HUB-AND-SPOKE CONNECTIONS
 
     for hub, members in hub_members.items():
@@ -692,14 +716,10 @@ def generate_star_mesh_network(n, m, cost_low=1, cost_high=10, penalty_low=1, pe
             G.add_edge(hub, node)
 
 
-
     # SINK CONNECTION
-
-    sink_hubs = rng.sample(hubs, min(2, len(hubs)))
 
     for hub in sink_hubs:
         G.add_edge(hub, t)
-
 
 
     # GUARANTEE SOURCE-TO-SINK CONNECTIVITY
@@ -709,9 +729,8 @@ def generate_star_mesh_network(n, m, cost_low=1, cost_high=10, penalty_low=1, pe
         source_hub = source_hubs[0]
         sink_hub = sink_hubs[0]
 
-        if source_hub != sink_hub:
-            G.add_edge(source_hub, sink_hub)
-
+        # These should always be different because the sets are disjoint.
+        G.add_edge(source_hub, sink_hub)
 
 
     # ADD STRUCTURED CROSS-LINKS UNTIL m ARCS
@@ -723,10 +742,10 @@ def generate_star_mesh_network(n, m, cost_low=1, cost_high=10, penalty_low=1, pe
     possible_arcs = []
 
     # Prefer transportation-like links:
-    # 1. peripheral -> nearby/alternative hub
-    # 2. peripheral -> peripheral
-    # 3. hub -> peripheral
-
+    # 1. hub-related connections
+    # 2. peripheral-to-peripheral connections
+    # Source and sink are excluded so the additional-arc procedure cannot
+    # accidentally create new direct source/sink shortcuts.
     for u in range(1, n - 1):
         for v in range(1, n - 1):
 
@@ -760,12 +779,11 @@ def generate_star_mesh_network(n, m, cost_low=1, cost_high=10, penalty_low=1, pe
         G.add_edge(u, v)
 
 
-
     # ARC ATTRIBUTES
 
-    _assign_arc_attributes(G,rng, cost_low, cost_high, penalty_low, penalty_high, 
-                           capacity_low, capacity_high)
+    _assign_arc_attributes(G, rng, cost_low, cost_high, penalty_low, penalty_high,
+             capacity_low, capacity_high)
 
-    density = G.number_of_edges() / G.number_of_nodes()
+    density = (G.number_of_edges() / G.number_of_nodes())
 
     return G, s, t, density

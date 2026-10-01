@@ -11,7 +11,8 @@ import time
 import argparse
 import networkx as nx
 
-from data.random_networks import generate_one_in_network 
+from data.random_networks import (generate_one_in_network, generate_grid_network,
+    generate_geometric_network, generate_layered_network, generate_star_mesh_network)
 from optimization.mip import solve_instance
 
 # Constants for generating random networks
@@ -33,8 +34,118 @@ OBJECTIVE_NAMES = {
     "min_cost_flow": "min_cost_flow"}
 
 
-def generate_dataset(network_settings,replications_per_setting, attack_budgets, problem_type="shortest_path",
-                     base_seed=1,output_file="training_data.json"):
+
+# TOPOLOGY HELPERS
+
+def generate_graph_by_topology(topology,n, m, cost_low, cost_high, penalty_low, penalty_high,
+                                capacity_low, capacity_high, seed,):
+
+    """Generate one network using the requested topology.
+
+    Every topology generator must return:
+        G, s, t, density
+
+    This common interface allows the rest of the training-data generation
+    pipeline to remain independent of graph topology."""
+
+    if topology == "one_in":
+
+        return generate_one_in_network(n=n, m=m,cost_low=cost_low,cost_high=cost_high,penalty_low=penalty_low,
+                                       penalty_high=penalty_high,capacity_low=capacity_low,capacity_high=capacity_high,
+                                       seed=seed)
+
+    elif topology == "grid":
+
+        return generate_grid_network(n=n,m=m,cost_low=cost_low,cost_high=cost_high,penalty_low=penalty_low,
+                                     penalty_high=penalty_high,capacity_low=capacity_low,capacity_high=capacity_high,
+                                     seed=seed)
+
+    elif topology == "geometric":
+
+        return generate_geometric_network(n=n,m=m,cost_low=cost_low,cost_high=cost_high,penalty_low=penalty_low,
+                                          penalty_high=penalty_high,capacity_low=capacity_low,capacity_high=capacity_high,
+                                          seed=seed)
+
+    elif topology == "layered":
+
+        return generate_layered_network(n=n,m=m,cost_low=cost_low,cost_high=cost_high,penalty_low=penalty_low,
+                                        penalty_high=penalty_high,capacity_low=capacity_low,capacity_high=capacity_high,
+                                        seed=seed)
+
+
+    elif topology == "star_mesh":
+
+        return generate_star_mesh_network(n=n,m=m,cost_low=cost_low,cost_high=cost_high,penalty_low=penalty_low,
+                                          penalty_high=penalty_high,capacity_low=capacity_low,capacity_high=capacity_high,
+                                          seed=seed)
+
+    else:
+        raise ValueError(f"Unknown topology: {topology}")
+
+
+
+def build_topology_schedule(replications_per_setting, topology_mix):
+
+    """Create a deterministic topology assignment for the replications
+    associated with each (n, m) network setting.
+
+    Example for 50 replications and:
+        {"one_in": 0.70, "grid": 0.15, "layered": 0.15}
+
+    The total number of graphs remains exactly equal to
+    replications_per_setting."""
+
+    # make sure topology proportions sum to 1
+    total_weight = sum(topology_mix.values())
+
+    if not math.isclose(total_weight, 1.0, rel_tol=1e-9):
+        raise ValueError(f"Topology proportions must sum to 1.0, "
+            f"but received {total_weight:.4f}.")
+
+    topology_counts = {}
+    fractional_parts = []
+
+    # first assign the floor of the requested number of replications
+    for topology, weight in topology_mix.items():
+
+        exact_count = replications_per_setting * weight
+        base_count = int(math.floor(exact_count))
+
+        topology_counts[topology] = base_count
+
+        fractional_parts.append((exact_count - base_count, topology))
+
+    # distribute any remaining replications according to the largest fractional remainders
+    assigned = sum(topology_counts.values())
+    remaining = replications_per_setting - assigned
+
+    fractional_parts.sort(reverse=True)
+
+    for _, topology in fractional_parts[:remaining]:
+        topology_counts[topology] += 1
+
+    # construct the deterministic replication schedule
+    topology_schedule = []
+
+    for topology in topology_mix.keys():
+
+        topology_schedule.extend([topology] * topology_counts[topology])
+
+    if len(topology_schedule) != replications_per_setting:
+        raise RuntimeError("Topology schedule does not contain the expected number of replications.")
+
+    print("\nTopology schedule per (n, m) setting:")
+
+    for topology, count in topology_counts.items():
+        print(f"  {topology}: {count}")
+
+    return topology_schedule
+
+
+
+
+def generate_dataset(network_settings, replications_per_setting, attack_budgets, problem_type="shortest_path",
+    topology_mix=None, base_seed=1, output_file="training_data.json"):
     
     '''Generates dataset across multiple network sizes and densities.
 
@@ -58,6 +169,12 @@ def generate_dataset(network_settings,replications_per_setting, attack_budgets, 
     # establish the minimum required source-to-sink edge connectivity of an accepted training graph
     max_attack_budget = max(attack_budgets)
 
+    if topology_mix is None:
+        topology_mix = {"one_in": 1.0}
+
+    topology_schedule = build_topology_schedule(replications_per_setting=replications_per_setting,
+        topology_mix=topology_mix)
+
 
     # SHORTEST-PATH STRUCTURAL FILTERING SETTINGS
 
@@ -67,20 +184,20 @@ def generate_dataset(network_settings,replications_per_setting, attack_budgets, 
     # high-density graphs to be rare structural outliers
     MIN_SHORTEST_PATH_HOPS = {
     # n = 30
-    (30, 2.0): 4,
-    (30, 3.0): 4,
+    (30, 2.0): 6,
+    (30, 3.0): 5,
     (30, 4.0): 4,
     (30, 6.0): 3,
 
     # n = 50
-    (50, 2.0): 4,
-    (50, 3.0): 4,
-    (50, 4.0): 4,
-    (50, 6.0): 3,
+    (50, 2.0): 8,
+    (50, 3.0): 5,
+    (50, 4.0): 5,
+    (50, 6.0): 4,
 
     # n = 75
-    (75, 2.0): 5,
-    (75, 3.0): 5,
+    (75, 2.0): 8,
+    (75, 3.0): 6,
     (75, 4.0): 5,
     (75, 6.0): 4,}
 
@@ -98,6 +215,9 @@ def generate_dataset(network_settings,replications_per_setting, attack_budgets, 
             # construct a deterministic base seed from the graph dimensions and
             # replication number so the experimental instances are reproducible
             seed = base_seed + 100000 * n + 100 * m + rep
+
+            # select the topology assigned to this replication
+            topology = topology_schedule[rep]
 
 
             # MAX-FLOW GRAPH GENERATION
@@ -144,7 +264,7 @@ def generate_dataset(network_settings,replications_per_setting, attack_budgets, 
 
             # SHORTEST-PATH GRAPH GENERATION
 
-            elif problem_type == "shortest_path":
+            elif problem_type == "shortest_path" and topology == "one_in":
 
                 attempt = 0
 
@@ -172,10 +292,11 @@ def generate_dataset(network_settings,replications_per_setting, attack_budgets, 
 
 
                     # generate candidate One-In network
-                    G, s, t, density = generate_one_in_network(n=n, m=m, cost_low=COST_LOW,
-                                        cost_high=COST_HIGH, penalty_low=PENALTY_LOW,
-                                        penalty_high=PENALTY_HIGH, capacity_low=CAPACITY_LOW,
-                                        capacity_high=CAPACITY_HIGH, seed=candidate_seed)
+                    G, s, t, density = generate_graph_by_topology(topology=topology, n=n, 
+                                        m=m, cost_low=COST_LOW, cost_high=COST_HIGH,
+                                        penalty_low=PENALTY_LOW, penalty_high=PENALTY_HIGH,
+                                        capacity_low=CAPACITY_LOW, capacity_high=CAPACITY_HIGH,
+                                        seed=candidate_seed)
 
 
                     # STRUCTURAL SCREENING
@@ -207,15 +328,19 @@ def generate_dataset(network_settings,replications_per_setting, attack_budgets, 
 
                     break
 
+            elif problem_type == "shortest_path":
 
-            else:
+                G, s, t, density = generate_graph_by_topology(topology=topology,n=n,m=m,
+                                        cost_low=COST_LOW, cost_high=COST_HIGH, penalty_low=PENALTY_LOW,
+                                        penalty_high=PENALTY_HIGH, capacity_low=CAPACITY_LOW,
+                                        capacity_high=CAPACITY_HIGH, seed=seed)
 
-                # these problem types do not use the max-flow edge-connectivity filter;
-                # generate one One-In network directly from the deterministic graph seed
-                G, s, t, density = generate_one_in_network(n=n, m=m,cost_low=COST_LOW, cost_high=COST_HIGH,
-                                                penalty_low=PENALTY_LOW, penalty_high=PENALTY_HIGH,
-                                                capacity_low=CAPACITY_LOW, capacity_high=CAPACITY_HIGH,
-                                                seed=seed)
+                shortest_path_hops = nx.shortest_path_length(G, source=s, target=t)
+
+                edge_connectivity = nx.edge_connectivity(G, s, t)
+
+                attempt = 0
+
                 
             # min cost flow problem requires a feasible flow demand to be specified 
             # rather than a fixed value, we compute a flow demand based on the maximum flow of the network and 
@@ -253,13 +378,14 @@ def generate_dataset(network_settings,replications_per_setting, attack_budgets, 
                 sample["replication"] = rep
                 sample["attack_budget"] = attack_budget
                 sample["problem_type"] = problem_type
+                sample["topology"] = topology
 
                 # save structural statistics for shortest-path graphs
                 if problem_type == "shortest_path":
 
                     sample["shortest_path_hops"] = shortest_path_hops
                     sample["edge_connectivity"] = edge_connectivity
-                    sample["generation_attempts"] = attempt + 1
+                    sample["generation_attempts"] = attempt + 1 if topology == "one_in" else 1
 
                 # flow demand is a problem-specific parameter and therefore is stored
                 # only for minimum-cost-flow interdiction samples
@@ -286,6 +412,16 @@ def generate_dataset(network_settings,replications_per_setting, attack_budgets, 
     # report the total number of successfully solved and skipped instances
     print(f"\nGenerated {len(dataset)} solved training samples.")
     print(f"Skipped {skipped} instances.")
+
+
+    # report topology composition of the completed dataset
+    print("\nCompleted samples by topology:")
+
+    for topology in topology_mix:
+
+        count = sum(sample["topology"] == topology for sample in dataset)
+
+        print(f" {topology}: {count}")
 
     # save the complete training dataset as formatted JSON
     with open(output_file, "w") as f:
@@ -335,10 +471,26 @@ if __name__ == "__main__":
     # experiment design: attack budgets to test - subject to change based on desired interdiction budgets
     attack_budgets = [1, 2, 3, 4, 5]
 
+
+    # TOPOLOGY EXPERIMENT
+
+    # EXPERIMENT 1: Clean One-In control
+
+    #topology_mix = {"one_in": 1.0}
+
+
+    # EXPERIMENT 2: Topology-augmented training
+    # COMMENT OUT the One-In-only version above and uncomment this version when generating the
+    # topology-augmented dataset
+
+    topology_mix = {"one_in": 0.60, "grid": 0.10, "geometric": 0.10, "star_mesh": 0.10, "layered": 0.10}
+
+
     dataset = generate_dataset(
         network_settings=network_settings,
-        replications_per_setting=50,
+        replications_per_setting=100,
         attack_budgets=attack_budgets,
         problem_type=args.problem_type,
+        topology_mix=topology_mix,
         base_seed=1,
         output_file=output_file)
