@@ -70,12 +70,9 @@ REAL_WORLD_EVALUATION_NETWORKS = {
         "processed":
             "data/real_world_data/processed/berlin_mpf.pkl"},
 
-    "eastern_massachusetts": {
-        "raw":"data/real_world_data/" 
-            "Eastern-Massachusetts/"
-            "Eastern-Massachusetts_net.tntp",
-        "processed":
-            "data/real_world_data/processed/eastern_massachusetts.pkl"},
+"eastern_massachusetts": {
+    "raw": "data/real_world_data/Eastern-Massachusetts/EMA_net.tntp",
+    "processed": "data/real_world_data/processed/eastern_massachusetts.pkl"},
 }
 
 
