@@ -70,10 +70,11 @@ REAL_WORLD_EVALUATION_NETWORKS = {
         "processed":
             "data/real_world_data/processed/berlin_mpf.pkl"},
 
-"eastern_massachusetts": {
-    "raw": "data/real_world_data/Eastern-Massachusetts/EMA_net.tntp",
-    "processed": "data/real_world_data/processed/eastern_massachusetts.pkl"},
+    "berlin_tiergarten": {
+        "raw": "data/real_world_data/Berlin-Tiergarten/berlin-tiergarten_net.tntp",
+        "processed": "data/real_world_data/processed/berlin_tiergarten.pkl"}
 }
+
 
 
 
@@ -132,6 +133,12 @@ def load_tntp_network(filepath):
             metadata["number_of_links"] = int(stripped.split(">")[1].strip())
 
 
+    # TNTP nodes numbered below FIRST THRU NODE are centroid/zone nodes.
+    # These nodes and their artificial connector arcs are excluded because
+    # thesis instances sample source-sink pairs directly from the physical
+    # transportation network.
+
+    first_thru_node = metadata.get("first_thru_node", 1)
 
     # FIND LINK TABLE HEADER
 
@@ -166,6 +173,25 @@ def load_tntp_network(filepath):
     # Remove malformed rows if present.
     link_df = link_df.dropna(subset=["init_node","term_node"])
 
+
+    # REMOVE CENTROID CONNECTORS
+
+    # TNTP nodes with IDs below FIRST THRU NODE are centroid/zone nodes.
+    # Since the thesis uses the physical transportation network rather than
+    # the original TNTP OD-demand structure, remove all edges incident to
+    # those centroid nodes.
+
+    centroid_mask = ((link_df["init_node"] < first_thru_node) | (link_df["term_node"] < first_thru_node))
+
+    num_centroid_connectors = int(centroid_mask.sum())
+
+    if num_centroid_connectors > 0:
+        print(f"Removing {num_centroid_connectors} centroid connector edges "
+            f"(FIRST THRU NODE = {first_thru_node}).")
+
+    link_df = link_df.loc[~centroid_mask].copy()
+
+    metadata["centroid_connectors_removed"] = num_centroid_connectors
 
 
     # CHECK FOR DUPLICATE DIRECTED EDGES
