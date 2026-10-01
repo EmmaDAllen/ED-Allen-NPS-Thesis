@@ -54,21 +54,21 @@ REAL_WORLD_TRAINING_NETWORKS = {
         "raw":"data/real_world_data/Winnipeg/Winnipeg_net.tntp",
         "processed":"data/real_world_data/processed/winnipeg.pkl"},
 
-    "gold_coast": {
-        "raw": "data/real_world_data/GoldCoast/Goldcoast_network_2016_01.tntp",
-        "processed":"data/real_world_data/processed/gold_coast.pkl"}}
+    "berlin_mpf": {
+        "raw":"data/real_world_data/"
+            "Berlin-Mitte-Prenzlauerberg-Friedrichshain-Center/"
+            "Berlin-Mitte-Prenzlauerberg-Friedrichshain-Center_net.tntp",
+        "processed":
+            "data/real_world_data/processed/berlin_mpf.pkl"}}
 
 
 # Networks reserved entirely for held-out evaluation.
 
 REAL_WORLD_EVALUATION_NETWORKS = {
 
-    "berlin_mpf": {
-        "raw":"data/real_world_data/"
-            "Berlin-Mitte-Prenzlauerberg-Friedrichshain-Center/"
-            "Berlin-Mitte-Prenzlauerberg-Friedrichshain-Center_net.tntp",
-        "processed":
-            "data/real_world_data/processed/berlin_mpf.pkl"},
+    "gold_coast": {
+        "raw": "data/real_world_data/GoldCoast/Goldcoast_network_2016_01.tntp",
+        "processed":"data/real_world_data/processed/gold_coast.pkl"},
 
     "berlin_tiergarten": {
         "raw": "data/real_world_data/Berlin-Tiergarten/berlin-tiergarten_net.tntp",

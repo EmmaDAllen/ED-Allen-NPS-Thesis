@@ -10,10 +10,14 @@ import json
 import time
 import argparse
 import networkx as nx
+import math
 
 from data.random_networks import (generate_one_in_network, generate_grid_network,
     generate_geometric_network, generate_layered_network, generate_star_mesh_network)
+
 from optimization.mip import solve_instance
+
+from data.real_world_networks import (generate_real_world_network, REAL_WORLD_TRAINING_NETWORKS)
 
 # Constants for generating random networks
 # edge traversal costs
@@ -145,7 +149,7 @@ def build_topology_schedule(replications_per_setting, topology_mix):
 
 
 def generate_dataset(network_settings, replications_per_setting, attack_budgets, problem_type="shortest_path",
-    topology_mix=None, base_seed=1, output_file="training_data.json"):
+    topology_mix=None, base_seed=1, output_file="training_data.json",save_output=True,):
     
     '''Generates dataset across multiple network sizes and densities.
 
@@ -424,10 +428,117 @@ def generate_dataset(network_settings, replications_per_setting, attack_budgets,
         print(f" {topology}: {count}")
 
     # save the complete training dataset as formatted JSON
-    with open(output_file, "w") as f:
-        json.dump(dataset, f, indent=2)
+    if save_output:
+        with open(output_file, "w") as f:
+            json.dump(dataset, f, indent=2)
+
 
     return dataset
+
+
+def generate_real_world_dataset(attack_budgets,problem_type="shortest_path", instances_per_network=30,
+                                 base_seed=1):
+
+    """Generate balanced real-world transportation training instances.
+
+    Each preprocessed physical transportation network contributes the
+    same number of source-sink instances. The physical graph and its
+    edge attributes remain fixed; different instances are created by
+    sampling different valid source-sink pairs.
+
+    Real-world instances are generated separately from the synthetic
+    (n, m) DOE because their network dimensions are determined by the
+    original transportation datasets."""
+
+    if problem_type != "shortest_path":
+        raise ValueError("Real-world transportation training is currently defined "
+            "only for shortest-path interdiction.")
+
+    dataset = []
+    skipped = 0
+
+    # Six physical transportation networks used for training.
+    network_names = list(REAL_WORLD_TRAINING_NETWORKS.keys())
+
+    print("\n" + "=" * 70)
+    print("GENERATING REAL-WORLD TRAINING INSTANCES")
+    print("=" * 70)
+
+    print(f"Training networks: {network_names}")
+    print(f"Instances per network: {instances_per_network}")
+    print(f"Total real-world graphs: {len(network_names) * instances_per_network}")
+
+    for network_index, network_name in enumerate(network_names):
+
+        print("\n" + "-" * 70)
+        print(f"Real-world network: {network_name}")
+        print("-" * 70)
+
+        for rep in range(instances_per_network):
+
+            # Deterministic seed for source-sink selection.
+            seed = (base_seed + 10_000_000 + network_index * 100_000 + rep)
+
+            # Require some structural separation between source and sink.
+            # This prevents trivial adjacent-node OD pairs.
+            min_hops = 3
+
+            G, s, t, density = generate_real_world_network(network_name=network_name,
+                min_hops=min_hops, seed=seed)
+
+            shortest_path_hops = nx.shortest_path_length(G, source=s, target=t)
+
+            edge_connectivity = nx.edge_connectivity(G, s, t)
+
+            # Solve the same physical graph / OD pair for every K.
+            for attack_budget in attack_budgets:
+
+                sample = solve_instance(G=G, s=s, t=t, density=density, attack_limit=attack_budget,
+                    problem_type=problem_type, flow_demand=1)
+
+                if sample is None:
+                    skipped += 1
+                    continue
+
+                # IMPORTANT:
+                # All K versions of this exact physical-network / OD
+                # instance receive the same graph_seed so train.py keeps
+                # them in the same data partition.
+                sample["graph_seed"] = seed
+
+                sample["replication"] = rep
+                sample["attack_budget"] = attack_budget
+                sample["problem_type"] = problem_type
+                sample["topology"] = "real_world"
+
+                # Additional provenance.
+                sample["real_world_network"] = network_name
+
+                # Structural diagnostics.
+                sample["shortest_path_hops"] = shortest_path_hops
+                sample["edge_connectivity"] = edge_connectivity
+                sample["generation_attempts"] = 1
+
+                dataset.append(sample)
+
+                print(
+                    f"Solved real-world | "
+                    f"network={network_name} | "
+                    f"rep={rep} | "
+                    f"n={G.number_of_nodes()} | "
+                    f"m={G.number_of_edges()} | "
+                    f"hops={shortest_path_hops} | "
+                    f"K={attack_budget} | "
+                    f"objective={sample['path_length']:.2f} | "
+                    f"mip_time={sample['mip_solve_time']:.4f}"
+                )
+
+    print(f"\nGenerated {len(dataset)} solved real-world samples.")
+    print(f"Skipped {skipped} real-world samples.")
+
+    return dataset
+
+
 
 
 if __name__ == "__main__":
@@ -474,17 +585,9 @@ if __name__ == "__main__":
 
     # TOPOLOGY EXPERIMENT
 
-    # EXPERIMENT 1: Clean One-In control
+    # EXPERIMENT 1: FILTERED ONE-IN
 
-    #topology_mix = {"one_in": 1.0}
-
-
-    # EXPERIMENT 2: Topology-augmented training
-    # COMMENT OUT the One-In-only version above and uncomment this version when generating the
-    # topology-augmented dataset
-
-    topology_mix = {"one_in": 0.60, "grid": 0.10, "geometric": 0.10, "star_mesh": 0.10, "layered": 0.10}
-
+    topology_mix = {"one_in": 1.0}
 
     dataset = generate_dataset(
         network_settings=network_settings,
@@ -493,4 +596,63 @@ if __name__ == "__main__":
         problem_type=args.problem_type,
         topology_mix=topology_mix,
         base_seed=1,
-        output_file=output_file)
+        output_file=output_file,
+        save_output=True,)
+
+
+
+    # EXPERIMENT 2: FILTERED MIXED-TOPOLOGY 
+    # Overall target composition:
+    #   50% One-In
+    #   15% Grid
+    #   10% Geometric
+    #   10% Star-Mesh
+    #   15% Real-world transportation
+
+    # Synthetic graphs are generated within each (n, m) DOE setting.
+    # Real-world transportation instances are appended separately because
+    # their physical network sizes are fixed by the source datasets.
+
+    '''synthetic_topology_mix = {
+        "one_in": 50 / 85, "grid": 15 / 85, "geometric": 10 / 85, "star_mesh": 10 / 85}
+
+    synthetic_dataset = generate_dataset(
+        network_settings=network_settings,
+        replications_per_setting=85,
+        attack_budgets=attack_budgets,
+        problem_type=args.problem_type,
+        topology_mix=synthetic_topology_mix,
+        base_seed=1,
+        save_output=False)
+
+
+    # Generate 30 OD instances from each of the six real-world
+    # transportation training networks = 180 physical/OD instances.
+    real_world_dataset = generate_real_world_dataset(
+        attack_budgets=attack_budgets,
+        problem_type=args.problem_type,
+        instances_per_network=30,
+        base_seed=1)
+
+
+    # Combine synthetic and real-world solved samples.
+    dataset = synthetic_dataset + real_world_dataset
+
+
+    # Save the final combined training dataset.
+    with open(output_file, "w") as f:
+        json.dump(dataset, f, indent=2)
+
+
+    print("\n" + "=" * 70)
+    print("FINAL FILTERED TRAINING DATASET")
+    print("=" * 70)
+
+    print(f"Total solved samples: {len(dataset)}")
+
+    for topology in ["one_in","grid","geometric","star_mesh","real_world"]:
+        count = sum(sample["topology"] == topology for sample in dataset)
+
+        print(f"{topology}: {count}")'''
+
+
