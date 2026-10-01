@@ -1,5 +1,6 @@
 __pycache__/
 *.pyc
-training_data.json
+.ipynb_checkpoints/
+data/real_world_data/
 
 

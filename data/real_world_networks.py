@@ -55,7 +55,7 @@ REAL_WORLD_TRAINING_NETWORKS = {
         "processed":"data/real_world_data/processed/winnipeg.pkl"},
 
     "gold_coast": {
-        "raw":"data/real_world_data/GoldCoast/GoldCoast_net.tntp",
+        "raw": "data/real_world_data/GoldCoast/Goldcoast_network_2016_01.tntp",
         "processed":"data/real_world_data/processed/gold_coast.pkl"}}
 
 
