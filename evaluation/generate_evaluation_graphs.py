@@ -44,11 +44,13 @@ Usage:
 import os
 import sys
 import pickle
+import random
 import networkx as nx
 # import generators used for one-in, benchmark and real-world external evaluation networks
 from data.random_networks import generate_one_in_network
 from data.generate_wood_data import generate_wood_grid
 from data.generate_external_data import load_external_network
+from data.real_world_networks import load_processed_real_world_network
 
 
 def get_test_settings(eval_mode):
@@ -167,11 +169,14 @@ def get_test_settings(eval_mode):
             (19, 12, 12, 10, 5, 1, 5),
             (20, 12, 12, 10, 5, 1, 10),]
 
+
+
     elif eval_mode == "external":
 
-        # external networks are loaded directly from CSV files rather than
-        # generated from a predefined (n, m) experimental setting
+        # External networks are loaded directly rather than
+        # generated from predefined (n, m) settings.
         return None
+
 
     else:
         raise ValueError(f"Unknown eval_mode: {eval_mode}")
@@ -304,8 +309,6 @@ def generate_evaluation_graphs(problem_type, eval_mode):
 
     # EXTERNAL NETWORK GENERATION
 
-    # Load and save fixed source-sink evaluation instances from the
-    # real-world rail/road transportation network.
     if eval_mode == "external":
 
         # External evaluation is currently implemented only for
@@ -313,61 +316,153 @@ def generate_evaluation_graphs(problem_type, eval_mode):
         if problem_type != "shortest_path":
             raise ValueError("External evaluation currently supports shortest_path only.")
 
-        # Natural supply and demand nodes defined by the external network.
-        # These use the ORIGINAL external node identifiers.
+        evaluation_graphs = []
+
+
+        # ORIGINAL RAIL / ROAD TRANSPORTATION NETWORK
+
+        # Preserve the original external evaluation exactly as before:
+        # six supply nodes x five demand nodes = 30 fixed OD pairs.
         supply_nodes = [1, 2, 3, 4, 5, 10]
         demand_nodes = [6, 7, 8, 9, 1077]
-
-        # Store one evaluation instance for every reachable supply-demand pair.
-        evaluation_graphs = []
 
         for source in supply_nodes:
 
             for sink in demand_nodes:
 
-                # Load the same fixed physical network for each OD pair.
-                # load_external_network converts the original source and sink
-                # identifiers to the internal consecutive node IDs used by
-                # the model.
-                G, s, t, density = load_external_network(
-                    node_path="data/node_data.csv",
+                G, s, t, density = load_external_network(node_path="data/node_data.csv",
                     arc_path="data/arc_data_with_detour_penalties.csv",
                     source=source,sink=sink)
 
-                # Store the graph and OD-pair metadata in the same general
-                # format used by the other evaluation modes.
-                evaluation_graphs.append({"G": G,"s": s,"t": t, "density": density,
+                evaluation_graphs.append({"G": G,"s": s,"t": t,"density": density,
                     "n": G.number_of_nodes(),"m": G.number_of_edges(),
 
-                    # Preserve original external OD identifiers for analysis.
-                    "source_original": source,"sink_original": sink,
+                    # Original OD identifiers.
+                    "source_original": source,
+                    "sink_original": sink,
 
                     "network_name": "rail_road_transportation_network"})
 
-                print(f"Prepared external OD pair | "
+                print(f"Prepared rail/road OD pair | "
                     f"source={source} | "
                     f"sink={sink} | "
                     f"internal_source={s} | "
                     f"internal_sink={t}",
                     flush=True)
 
-        # Verify that the expected 6 x 5 = 30 OD pairs were created.
-        expected_pairs = len(supply_nodes) * len(demand_nodes)
+
+        # HELD-OUT TNTP EVALUATION NETWORKS
+
+        # These physical networks are never used during training.
+        held_out_networks = ["berlin_tiergarten", "gold_coast"]
+
+        # Generate the same number of OD instances for each physical
+        # held-out network as used for the original external network.
+        reps_per_network = 30
+
+        # Fixed seed makes the evaluation OD pairs reproducible.
+        base_seed = 5
+
+        for network_index, network_name in enumerate(held_out_networks):
+
+            # Load the already-preprocessed physical transportation network.
+            G_base = load_processed_real_world_network(network_name=network_name,
+                training=False)
+
+            nodes = list(G_base.nodes())
+
+            if len(nodes) < 2:
+                raise ValueError(f"{network_name} contains fewer than two nodes.")
+
+            density = (G_base.number_of_edges() / G_base.number_of_nodes())
+
+            # Track accepted OD pairs so the same pair is not used twice
+            # within one physical network.
+            used_pairs = set()
+
+            for rep in range(reps_per_network):
+
+                # Give each replication its own deterministic random stream.
+                seed = (base_seed + 10_000_000 + network_index * 100_000 + rep)
+
+                rng = random.Random(seed)
+
+                max_attempts = 10000
+
+                for attempt in range(1, max_attempts + 1):
+
+                    s, t = rng.sample(nodes, 2)
+
+                    # Do not duplicate an OD pair within this network.
+                    if (s, t) in used_pairs:
+                        continue
+
+                    # Require a feasible directed path.
+                    if not nx.has_path(G_base, s, t):
+                        continue
+
+                    # Accept this OD pair.
+                    used_pairs.add((s, t))
+
+                    # Give the evaluation instance its own graph object.
+                    G = G_base.copy()
+
+                    # Preserve original TNTP node identifiers for later
+                    # OD-level analysis.
+                    source_original = G.nodes[s].get("original_node", s)
+
+                    sink_original = G.nodes[t].get("original_node", t)
+
+                    shortest_path_hops = nx.shortest_path_length(G, source=s, target=t)
+
+                    evaluation_graphs.append({"G": G,"s": s,"t": t,"density": density,
+                        "n": G.number_of_nodes(),"m": G.number_of_edges(),
+
+                        "seed": seed,"rep": rep,
+
+                        "source_original": source_original,"sink_original": sink_original,
+
+                        "network_name": network_name,
+
+                        # Useful structural diagnostic.
+                        "shortest_path_hops": shortest_path_hops})
+
+                    print(f"Prepared held-out OD pair | "
+                        f"network={network_name} | "
+                        f"rep={rep + 1}/{reps_per_network} | "
+                        f"s={s} | "
+                        f"t={t} | "
+                        f"hops={shortest_path_hops} | "
+                        f"attempts={attempt}",
+                        flush=True)
+
+                    break
+
+                else:
+                    raise RuntimeError(f"Could not find a valid OD pair for "
+                        f"{network_name}, rep={rep}, after "
+                        f"{max_attempts} attempts.")
+
+
+        # VALIDATE AND SAVE
+
+        # 30 original rail/road pairs
+        # + 30 Berlin Tiergarten pairs
+        # + 30 Gold Coast pairs
+        expected_pairs = (len(supply_nodes)*len(demand_nodes) + len(held_out_networks)*reps_per_network)
 
         if len(evaluation_graphs) != expected_pairs:
-            raise ValueError(f"Expected {expected_pairs} external OD pairs, "
-                f"but generated {len(evaluation_graphs)}.")
+            raise ValueError(f"Expected {expected_pairs} external evaluation "
+                f"instances, but generated {len(evaluation_graphs)}.")
 
-        # Save one fixed external evaluation set so every trained model
-        # is evaluated on exactly the same physical network and OD pairs.
         with open(output_path, "wb") as f:
             pickle.dump(evaluation_graphs, f)
 
-        print(f"\nFinished. Saved {len(evaluation_graphs)} external OD pairs "
-            f"to {output_path}",flush=True)
+        print(f"\nFinished. Saved {len(evaluation_graphs)} "
+            f"external evaluation instances to {output_path}", flush=True)
 
-        # External graph preparation is complete; do not continue into
-        # synthetic graph generation.
+        # External graph preparation is complete; do not continue
+        # into synthetic graph generation.
         return
 
 

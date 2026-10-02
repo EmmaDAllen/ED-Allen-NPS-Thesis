@@ -327,8 +327,9 @@ def evaluate():
         evaluation_cases = [(k, graph_data) for k in test_attack_limits
                             for graph_data in evaluation_graphs]
 
-        # Six supply nodes x five demand nodes = 30 OD pairs.
-        expected_graphs = 30
+        # Six supply nodes x five demand nodes = 30 OD pairs + 60 additional OD pairs 
+        # generated from by the external network generator
+        expected_graphs = 90
 
 
     else:
