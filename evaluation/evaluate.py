@@ -291,15 +291,33 @@ def evaluate():
 
     # LOAD PRE-GENERATED EVALUATION GRAPHS
 
-    # construct the path to the pre-generated graph file corresponding to the
-    # selected interdiction problem and evaluation mode
-    graph_path = (f"evaluation_graphs/"
-                  f"{problem_type}_{eval_mode}_graphs.pkl")
+    # Use the structurally filtered synthetic evaluation graphs when explicitly
+    # requested. Otherwise, preserve the original evaluation graph sets.
+    if evaluation_tag == "eval_filtered":
+
+        # Filtered graph sets exist only for the synthetic One-In evaluations.
+        if eval_mode not in ("id_new", "value_ood", "ood_size"):
+            raise ValueError(f"Filtered evaluation graphs are not defined for eval_mode={eval_mode}.")
+
+        # construct the path to the pre-generated graph file corresponding to the
+        # selected interdiction problem and evaluation mode
+        graph_path = (
+            f"evaluation_graphs/"
+            f"{problem_type}_{eval_mode}_filtered_graphs.pkl")
+
+    else:
+
+        # construct the path to the pre-generated graph file corresponding to the
+        # selected interdiction problem and evaluation mode
+        graph_path = (
+            f"evaluation_graphs/"
+            f"{problem_type}_{eval_mode}_graphs.pkl")
 
     # load the fixed evaluation graph set so each trained model is evaluated
     # on the same previously generated network instances
     with open(graph_path, "rb") as f:
         evaluation_graphs = pickle.load(f)
+
 
 
 
