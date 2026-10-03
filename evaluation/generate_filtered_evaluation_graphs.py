@@ -545,14 +545,14 @@ def generate_evaluation_graphs(problem_type, eval_mode):
 
                         break
 
-                # otherwise reject and generate another candidate
-                attempt += 1
+                    # otherwise reject and generate another candidate
+                    attempt += 1
 
-                if attempt >= 100000:
-                    raise RuntimeError(
-                        f"Could not generate graph satisfying "
-                        f"min_hops={min_hops} for n={n}, m={m} "
-                        f"after {attempt} attempts.")
+                    if attempt >= 100000:
+                        raise RuntimeError(
+                            f"Could not generate graph satisfying "
+                            f"min_hops={min_hops} for n={n}, m={m} "
+                            f"after {attempt} attempts.")
 
 
             # MIN-COST-FLOW GRAPH GENERATION
