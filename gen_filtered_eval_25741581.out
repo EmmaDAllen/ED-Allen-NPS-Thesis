@@ -1,0 +1,4690 @@
+Generating filtered ID evaluation graphs...
+Accepted graph | n=30, m=60, rep=0 | hops=8 | min_hops=6 | attempts=14
+
+Generated and saved 1/360 evaluation graphs.
+Accepted graph | n=30, m=60, rep=1 | hops=7 | min_hops=6 | attempts=7
+
+Generated and saved 2/360 evaluation graphs.
+Accepted graph | n=30, m=60, rep=2 | hops=6 | min_hops=6 | attempts=8
+
+Generated and saved 3/360 evaluation graphs.
+Accepted graph | n=30, m=60, rep=3 | hops=7 | min_hops=6 | attempts=3
+
+Generated and saved 4/360 evaluation graphs.
+Accepted graph | n=30, m=60, rep=4 | hops=6 | min_hops=6 | attempts=12
+
+Generated and saved 5/360 evaluation graphs.
+Accepted graph | n=30, m=60, rep=5 | hops=8 | min_hops=6 | attempts=9
+
+Generated and saved 6/360 evaluation graphs.
+Accepted graph | n=30, m=60, rep=6 | hops=6 | min_hops=6 | attempts=12
+
+Generated and saved 7/360 evaluation graphs.
+Accepted graph | n=30, m=60, rep=7 | hops=7 | min_hops=6 | attempts=3
+
+Generated and saved 8/360 evaluation graphs.
+Accepted graph | n=30, m=60, rep=8 | hops=9 | min_hops=6 | attempts=1
+
+Generated and saved 9/360 evaluation graphs.
+Accepted graph | n=30, m=60, rep=9 | hops=6 | min_hops=6 | attempts=4
+
+Generated and saved 10/360 evaluation graphs.
+Accepted graph | n=30, m=60, rep=10 | hops=7 | min_hops=6 | attempts=1
+
+Generated and saved 11/360 evaluation graphs.
+Accepted graph | n=30, m=60, rep=11 | hops=6 | min_hops=6 | attempts=3
+
+Generated and saved 12/360 evaluation graphs.
+Accepted graph | n=30, m=60, rep=12 | hops=6 | min_hops=6 | attempts=4
+
+Generated and saved 13/360 evaluation graphs.
+Accepted graph | n=30, m=60, rep=13 | hops=8 | min_hops=6 | attempts=12
+
+Generated and saved 14/360 evaluation graphs.
+Accepted graph | n=30, m=60, rep=14 | hops=6 | min_hops=6 | attempts=1
+
+Generated and saved 15/360 evaluation graphs.
+Accepted graph | n=30, m=60, rep=15 | hops=7 | min_hops=6 | attempts=1
+
+Generated and saved 16/360 evaluation graphs.
+Accepted graph | n=30, m=60, rep=16 | hops=7 | min_hops=6 | attempts=11
+
+Generated and saved 17/360 evaluation graphs.
+Accepted graph | n=30, m=60, rep=17 | hops=6 | min_hops=6 | attempts=15
+
+Generated and saved 18/360 evaluation graphs.
+Accepted graph | n=30, m=60, rep=18 | hops=7 | min_hops=6 | attempts=8
+
+Generated and saved 19/360 evaluation graphs.
+Accepted graph | n=30, m=60, rep=19 | hops=6 | min_hops=6 | attempts=2
+
+Generated and saved 20/360 evaluation graphs.
+Accepted graph | n=30, m=60, rep=20 | hops=6 | min_hops=6 | attempts=9
+
+Generated and saved 21/360 evaluation graphs.
+Accepted graph | n=30, m=60, rep=21 | hops=6 | min_hops=6 | attempts=1
+
+Generated and saved 22/360 evaluation graphs.
+Accepted graph | n=30, m=60, rep=22 | hops=7 | min_hops=6 | attempts=4
+
+Generated and saved 23/360 evaluation graphs.
+Accepted graph | n=30, m=60, rep=23 | hops=8 | min_hops=6 | attempts=4
+
+Generated and saved 24/360 evaluation graphs.
+Accepted graph | n=30, m=60, rep=24 | hops=6 | min_hops=6 | attempts=2
+
+Generated and saved 25/360 evaluation graphs.
+Accepted graph | n=30, m=60, rep=25 | hops=6 | min_hops=6 | attempts=9
+
+Generated and saved 26/360 evaluation graphs.
+Accepted graph | n=30, m=60, rep=26 | hops=6 | min_hops=6 | attempts=2
+
+Generated and saved 27/360 evaluation graphs.
+Accepted graph | n=30, m=60, rep=27 | hops=7 | min_hops=6 | attempts=4
+
+Generated and saved 28/360 evaluation graphs.
+Accepted graph | n=30, m=60, rep=28 | hops=8 | min_hops=6 | attempts=2
+
+Generated and saved 29/360 evaluation graphs.
+Accepted graph | n=30, m=60, rep=29 | hops=6 | min_hops=6 | attempts=7
+
+Generated and saved 30/360 evaluation graphs.
+Accepted graph | n=30, m=90, rep=0 | hops=5 | min_hops=5 | attempts=27
+
+Generated and saved 31/360 evaluation graphs.
+Accepted graph | n=30, m=90, rep=1 | hops=6 | min_hops=5 | attempts=2
+
+Generated and saved 32/360 evaluation graphs.
+Accepted graph | n=30, m=90, rep=2 | hops=5 | min_hops=5 | attempts=6
+
+Generated and saved 33/360 evaluation graphs.
+Accepted graph | n=30, m=90, rep=3 | hops=5 | min_hops=5 | attempts=16
+
+Generated and saved 34/360 evaluation graphs.
+Accepted graph | n=30, m=90, rep=4 | hops=5 | min_hops=5 | attempts=12
+
+Generated and saved 35/360 evaluation graphs.
+Accepted graph | n=30, m=90, rep=5 | hops=5 | min_hops=5 | attempts=14
+
+Generated and saved 36/360 evaluation graphs.
+Accepted graph | n=30, m=90, rep=6 | hops=5 | min_hops=5 | attempts=29
+
+Generated and saved 37/360 evaluation graphs.
+Accepted graph | n=30, m=90, rep=7 | hops=5 | min_hops=5 | attempts=12
+
+Generated and saved 38/360 evaluation graphs.
+Accepted graph | n=30, m=90, rep=8 | hops=5 | min_hops=5 | attempts=17
+
+Generated and saved 39/360 evaluation graphs.
+Accepted graph | n=30, m=90, rep=9 | hops=5 | min_hops=5 | attempts=5
+
+Generated and saved 40/360 evaluation graphs.
+Accepted graph | n=30, m=90, rep=10 | hops=5 | min_hops=5 | attempts=3
+
+Generated and saved 41/360 evaluation graphs.
+Accepted graph | n=30, m=90, rep=11 | hops=5 | min_hops=5 | attempts=14
+
+Generated and saved 42/360 evaluation graphs.
+Accepted graph | n=30, m=90, rep=12 | hops=5 | min_hops=5 | attempts=8
+
+Generated and saved 43/360 evaluation graphs.
+Accepted graph | n=30, m=90, rep=13 | hops=5 | min_hops=5 | attempts=7
+
+Generated and saved 44/360 evaluation graphs.
+Accepted graph | n=30, m=90, rep=14 | hops=6 | min_hops=5 | attempts=10
+
+Generated and saved 45/360 evaluation graphs.
+Accepted graph | n=30, m=90, rep=15 | hops=6 | min_hops=5 | attempts=32
+
+Generated and saved 46/360 evaluation graphs.
+Accepted graph | n=30, m=90, rep=16 | hops=5 | min_hops=5 | attempts=10
+
+Generated and saved 47/360 evaluation graphs.
+Accepted graph | n=30, m=90, rep=17 | hops=5 | min_hops=5 | attempts=6
+
+Generated and saved 48/360 evaluation graphs.
+Accepted graph | n=30, m=90, rep=18 | hops=5 | min_hops=5 | attempts=6
+
+Generated and saved 49/360 evaluation graphs.
+Accepted graph | n=30, m=90, rep=19 | hops=7 | min_hops=5 | attempts=27
+
+Generated and saved 50/360 evaluation graphs.
+Accepted graph | n=30, m=90, rep=20 | hops=5 | min_hops=5 | attempts=3
+
+Generated and saved 51/360 evaluation graphs.
+Accepted graph | n=30, m=90, rep=21 | hops=5 | min_hops=5 | attempts=7
+
+Generated and saved 52/360 evaluation graphs.
+Accepted graph | n=30, m=90, rep=22 | hops=5 | min_hops=5 | attempts=46
+
+Generated and saved 53/360 evaluation graphs.
+Accepted graph | n=30, m=90, rep=23 | hops=5 | min_hops=5 | attempts=2
+
+Generated and saved 54/360 evaluation graphs.
+Accepted graph | n=30, m=90, rep=24 | hops=6 | min_hops=5 | attempts=52
+
+Generated and saved 55/360 evaluation graphs.
+Accepted graph | n=30, m=90, rep=25 | hops=5 | min_hops=5 | attempts=20
+
+Generated and saved 56/360 evaluation graphs.
+Accepted graph | n=30, m=90, rep=26 | hops=5 | min_hops=5 | attempts=34
+
+Generated and saved 57/360 evaluation graphs.
+Accepted graph | n=30, m=90, rep=27 | hops=6 | min_hops=5 | attempts=4
+
+Generated and saved 58/360 evaluation graphs.
+Accepted graph | n=30, m=90, rep=28 | hops=6 | min_hops=5 | attempts=7
+
+Generated and saved 59/360 evaluation graphs.
+Accepted graph | n=30, m=90, rep=29 | hops=5 | min_hops=5 | attempts=13
+
+Generated and saved 60/360 evaluation graphs.
+Accepted graph | n=30, m=120, rep=0 | hops=4 | min_hops=4 | attempts=15
+
+Generated and saved 61/360 evaluation graphs.
+Accepted graph | n=30, m=120, rep=1 | hops=4 | min_hops=4 | attempts=1
+
+Generated and saved 62/360 evaluation graphs.
+Accepted graph | n=30, m=120, rep=2 | hops=4 | min_hops=4 | attempts=12
+
+Generated and saved 63/360 evaluation graphs.
+Accepted graph | n=30, m=120, rep=3 | hops=4 | min_hops=4 | attempts=5
+
+Generated and saved 64/360 evaluation graphs.
+Accepted graph | n=30, m=120, rep=4 | hops=4 | min_hops=4 | attempts=3
+
+Generated and saved 65/360 evaluation graphs.
+Accepted graph | n=30, m=120, rep=5 | hops=4 | min_hops=4 | attempts=4
+
+Generated and saved 66/360 evaluation graphs.
+Accepted graph | n=30, m=120, rep=6 | hops=5 | min_hops=4 | attempts=2
+
+Generated and saved 67/360 evaluation graphs.
+Accepted graph | n=30, m=120, rep=7 | hops=4 | min_hops=4 | attempts=7
+
+Generated and saved 68/360 evaluation graphs.
+Accepted graph | n=30, m=120, rep=8 | hops=4 | min_hops=4 | attempts=4
+
+Generated and saved 69/360 evaluation graphs.
+Accepted graph | n=30, m=120, rep=9 | hops=4 | min_hops=4 | attempts=4
+
+Generated and saved 70/360 evaluation graphs.
+Accepted graph | n=30, m=120, rep=10 | hops=6 | min_hops=4 | attempts=7
+
+Generated and saved 71/360 evaluation graphs.
+Accepted graph | n=30, m=120, rep=11 | hops=4 | min_hops=4 | attempts=2
+
+Generated and saved 72/360 evaluation graphs.
+Accepted graph | n=30, m=120, rep=12 | hops=4 | min_hops=4 | attempts=11
+
+Generated and saved 73/360 evaluation graphs.
+Accepted graph | n=30, m=120, rep=13 | hops=4 | min_hops=4 | attempts=7
+
+Generated and saved 74/360 evaluation graphs.
+Accepted graph | n=30, m=120, rep=14 | hops=4 | min_hops=4 | attempts=2
+
+Generated and saved 75/360 evaluation graphs.
+Accepted graph | n=30, m=120, rep=15 | hops=4 | min_hops=4 | attempts=2
+
+Generated and saved 76/360 evaluation graphs.
+Accepted graph | n=30, m=120, rep=16 | hops=4 | min_hops=4 | attempts=2
+
+Generated and saved 77/360 evaluation graphs.
+Accepted graph | n=30, m=120, rep=17 | hops=4 | min_hops=4 | attempts=6
+
+Generated and saved 78/360 evaluation graphs.
+Accepted graph | n=30, m=120, rep=18 | hops=4 | min_hops=4 | attempts=1
+
+Generated and saved 79/360 evaluation graphs.
+Accepted graph | n=30, m=120, rep=19 | hops=4 | min_hops=4 | attempts=15
+
+Generated and saved 80/360 evaluation graphs.
+Accepted graph | n=30, m=120, rep=20 | hops=4 | min_hops=4 | attempts=3
+
+Generated and saved 81/360 evaluation graphs.
+Accepted graph | n=30, m=120, rep=21 | hops=4 | min_hops=4 | attempts=6
+
+Generated and saved 82/360 evaluation graphs.
+Accepted graph | n=30, m=120, rep=22 | hops=4 | min_hops=4 | attempts=7
+
+Generated and saved 83/360 evaluation graphs.
+Accepted graph | n=30, m=120, rep=23 | hops=4 | min_hops=4 | attempts=9
+
+Generated and saved 84/360 evaluation graphs.
+Accepted graph | n=30, m=120, rep=24 | hops=4 | min_hops=4 | attempts=5
+
+Generated and saved 85/360 evaluation graphs.
+Accepted graph | n=30, m=120, rep=25 | hops=4 | min_hops=4 | attempts=2
+
+Generated and saved 86/360 evaluation graphs.
+Accepted graph | n=30, m=120, rep=26 | hops=4 | min_hops=4 | attempts=3
+
+Generated and saved 87/360 evaluation graphs.
+Accepted graph | n=30, m=120, rep=27 | hops=4 | min_hops=4 | attempts=1
+
+Generated and saved 88/360 evaluation graphs.
+Accepted graph | n=30, m=120, rep=28 | hops=4 | min_hops=4 | attempts=3
+
+Generated and saved 89/360 evaluation graphs.
+Accepted graph | n=30, m=120, rep=29 | hops=4 | min_hops=4 | attempts=7
+
+Generated and saved 90/360 evaluation graphs.
+Accepted graph | n=30, m=180, rep=0 | hops=3 | min_hops=3 | attempts=9
+
+Generated and saved 91/360 evaluation graphs.
+Accepted graph | n=30, m=180, rep=1 | hops=3 | min_hops=3 | attempts=2
+
+Generated and saved 92/360 evaluation graphs.
+Accepted graph | n=30, m=180, rep=2 | hops=3 | min_hops=3 | attempts=15
+
+Generated and saved 93/360 evaluation graphs.
+Accepted graph | n=30, m=180, rep=3 | hops=3 | min_hops=3 | attempts=14
+
+Generated and saved 94/360 evaluation graphs.
+Accepted graph | n=30, m=180, rep=4 | hops=3 | min_hops=3 | attempts=1
+
+Generated and saved 95/360 evaluation graphs.
+Accepted graph | n=30, m=180, rep=5 | hops=3 | min_hops=3 | attempts=5
+
+Generated and saved 96/360 evaluation graphs.
+Accepted graph | n=30, m=180, rep=6 | hops=3 | min_hops=3 | attempts=4
+
+Generated and saved 97/360 evaluation graphs.
+Accepted graph | n=30, m=180, rep=7 | hops=3 | min_hops=3 | attempts=3
+
+Generated and saved 98/360 evaluation graphs.
+Accepted graph | n=30, m=180, rep=8 | hops=3 | min_hops=3 | attempts=1
+
+Generated and saved 99/360 evaluation graphs.
+Accepted graph | n=30, m=180, rep=9 | hops=3 | min_hops=3 | attempts=1
+
+Generated and saved 100/360 evaluation graphs.
+Accepted graph | n=30, m=180, rep=10 | hops=3 | min_hops=3 | attempts=5
+
+Generated and saved 101/360 evaluation graphs.
+Accepted graph | n=30, m=180, rep=11 | hops=3 | min_hops=3 | attempts=3
+
+Generated and saved 102/360 evaluation graphs.
+Accepted graph | n=30, m=180, rep=12 | hops=3 | min_hops=3 | attempts=4
+
+Generated and saved 103/360 evaluation graphs.
+Accepted graph | n=30, m=180, rep=13 | hops=3 | min_hops=3 | attempts=19
+
+Generated and saved 104/360 evaluation graphs.
+Accepted graph | n=30, m=180, rep=14 | hops=3 | min_hops=3 | attempts=3
+
+Generated and saved 105/360 evaluation graphs.
+Accepted graph | n=30, m=180, rep=15 | hops=3 | min_hops=3 | attempts=4
+
+Generated and saved 106/360 evaluation graphs.
+Accepted graph | n=30, m=180, rep=16 | hops=3 | min_hops=3 | attempts=1
+
+Generated and saved 107/360 evaluation graphs.
+Accepted graph | n=30, m=180, rep=17 | hops=3 | min_hops=3 | attempts=2
+
+Generated and saved 108/360 evaluation graphs.
+Accepted graph | n=30, m=180, rep=18 | hops=3 | min_hops=3 | attempts=1
+
+Generated and saved 109/360 evaluation graphs.
+Accepted graph | n=30, m=180, rep=19 | hops=3 | min_hops=3 | attempts=4
+
+Generated and saved 110/360 evaluation graphs.
+Accepted graph | n=30, m=180, rep=20 | hops=3 | min_hops=3 | attempts=1
+
+Generated and saved 111/360 evaluation graphs.
+Accepted graph | n=30, m=180, rep=21 | hops=3 | min_hops=3 | attempts=2
+
+Generated and saved 112/360 evaluation graphs.
+Accepted graph | n=30, m=180, rep=22 | hops=3 | min_hops=3 | attempts=6
+
+Generated and saved 113/360 evaluation graphs.
+Accepted graph | n=30, m=180, rep=23 | hops=3 | min_hops=3 | attempts=4
+
+Generated and saved 114/360 evaluation graphs.
+Accepted graph | n=30, m=180, rep=24 | hops=3 | min_hops=3 | attempts=2
+
+Generated and saved 115/360 evaluation graphs.
+Accepted graph | n=30, m=180, rep=25 | hops=3 | min_hops=3 | attempts=8
+
+Generated and saved 116/360 evaluation graphs.
+Accepted graph | n=30, m=180, rep=26 | hops=3 | min_hops=3 | attempts=2
+
+Generated and saved 117/360 evaluation graphs.
+Accepted graph | n=30, m=180, rep=27 | hops=3 | min_hops=3 | attempts=6
+
+Generated and saved 118/360 evaluation graphs.
+Accepted graph | n=30, m=180, rep=28 | hops=4 | min_hops=3 | attempts=2
+
+Generated and saved 119/360 evaluation graphs.
+Accepted graph | n=30, m=180, rep=29 | hops=3 | min_hops=3 | attempts=2
+
+Generated and saved 120/360 evaluation graphs.
+Accepted graph | n=50, m=100, rep=0 | hops=8 | min_hops=8 | attempts=2
+
+Generated and saved 121/360 evaluation graphs.
+Accepted graph | n=50, m=100, rep=1 | hops=8 | min_hops=8 | attempts=3
+
+Generated and saved 122/360 evaluation graphs.
+Accepted graph | n=50, m=100, rep=2 | hops=9 | min_hops=8 | attempts=1
+
+Generated and saved 123/360 evaluation graphs.
+Accepted graph | n=50, m=100, rep=3 | hops=8 | min_hops=8 | attempts=10
+
+Generated and saved 124/360 evaluation graphs.
+Accepted graph | n=50, m=100, rep=4 | hops=8 | min_hops=8 | attempts=3
+
+Generated and saved 125/360 evaluation graphs.
+Accepted graph | n=50, m=100, rep=5 | hops=8 | min_hops=8 | attempts=2
+
+Generated and saved 126/360 evaluation graphs.
+Accepted graph | n=50, m=100, rep=6 | hops=10 | min_hops=8 | attempts=10
+
+Generated and saved 127/360 evaluation graphs.
+Accepted graph | n=50, m=100, rep=7 | hops=9 | min_hops=8 | attempts=4
+
+Generated and saved 128/360 evaluation graphs.
+Accepted graph | n=50, m=100, rep=8 | hops=8 | min_hops=8 | attempts=3
+
+Generated and saved 129/360 evaluation graphs.
+Accepted graph | n=50, m=100, rep=9 | hops=11 | min_hops=8 | attempts=9
+
+Generated and saved 130/360 evaluation graphs.
+Accepted graph | n=50, m=100, rep=10 | hops=8 | min_hops=8 | attempts=28
+
+Generated and saved 131/360 evaluation graphs.
+Accepted graph | n=50, m=100, rep=11 | hops=8 | min_hops=8 | attempts=1
+
+Generated and saved 132/360 evaluation graphs.
+Accepted graph | n=50, m=100, rep=12 | hops=8 | min_hops=8 | attempts=15
+
+Generated and saved 133/360 evaluation graphs.
+Accepted graph | n=50, m=100, rep=13 | hops=8 | min_hops=8 | attempts=6
+
+Generated and saved 134/360 evaluation graphs.
+Accepted graph | n=50, m=100, rep=14 | hops=9 | min_hops=8 | attempts=7
+
+Generated and saved 135/360 evaluation graphs.
+Accepted graph | n=50, m=100, rep=15 | hops=9 | min_hops=8 | attempts=1
+
+Generated and saved 136/360 evaluation graphs.
+Accepted graph | n=50, m=100, rep=16 | hops=8 | min_hops=8 | attempts=6
+
+Generated and saved 137/360 evaluation graphs.
+Accepted graph | n=50, m=100, rep=17 | hops=8 | min_hops=8 | attempts=11
+
+Generated and saved 138/360 evaluation graphs.
+Accepted graph | n=50, m=100, rep=18 | hops=13 | min_hops=8 | attempts=1
+
+Generated and saved 139/360 evaluation graphs.
+Accepted graph | n=50, m=100, rep=19 | hops=8 | min_hops=8 | attempts=13
+
+Generated and saved 140/360 evaluation graphs.
+Accepted graph | n=50, m=100, rep=20 | hops=8 | min_hops=8 | attempts=2
+
+Generated and saved 141/360 evaluation graphs.
+Accepted graph | n=50, m=100, rep=21 | hops=12 | min_hops=8 | attempts=1
+
+Generated and saved 142/360 evaluation graphs.
+Accepted graph | n=50, m=100, rep=22 | hops=10 | min_hops=8 | attempts=16
+
+Generated and saved 143/360 evaluation graphs.
+Accepted graph | n=50, m=100, rep=23 | hops=8 | min_hops=8 | attempts=1
+
+Generated and saved 144/360 evaluation graphs.
+Accepted graph | n=50, m=100, rep=24 | hops=9 | min_hops=8 | attempts=12
+
+Generated and saved 145/360 evaluation graphs.
+Accepted graph | n=50, m=100, rep=25 | hops=8 | min_hops=8 | attempts=13
+
+Generated and saved 146/360 evaluation graphs.
+Accepted graph | n=50, m=100, rep=26 | hops=10 | min_hops=8 | attempts=12
+
+Generated and saved 147/360 evaluation graphs.
+Accepted graph | n=50, m=100, rep=27 | hops=9 | min_hops=8 | attempts=7
+
+Generated and saved 148/360 evaluation graphs.
+Accepted graph | n=50, m=100, rep=28 | hops=10 | min_hops=8 | attempts=23
+
+Generated and saved 149/360 evaluation graphs.
+Accepted graph | n=50, m=100, rep=29 | hops=9 | min_hops=8 | attempts=2
+
+Generated and saved 150/360 evaluation graphs.
+Accepted graph | n=50, m=150, rep=0 | hops=5 | min_hops=5 | attempts=13
+
+Generated and saved 151/360 evaluation graphs.
+Accepted graph | n=50, m=150, rep=1 | hops=5 | min_hops=5 | attempts=3
+
+Generated and saved 152/360 evaluation graphs.
+Accepted graph | n=50, m=150, rep=2 | hops=6 | min_hops=5 | attempts=1
+
+Generated and saved 153/360 evaluation graphs.
+Accepted graph | n=50, m=150, rep=3 | hops=5 | min_hops=5 | attempts=4
+
+Generated and saved 154/360 evaluation graphs.
+Accepted graph | n=50, m=150, rep=4 | hops=5 | min_hops=5 | attempts=9
+
+Generated and saved 155/360 evaluation graphs.
+Accepted graph | n=50, m=150, rep=5 | hops=5 | min_hops=5 | attempts=8
+
+Generated and saved 156/360 evaluation graphs.
+Accepted graph | n=50, m=150, rep=6 | hops=5 | min_hops=5 | attempts=4
+
+Generated and saved 157/360 evaluation graphs.
+Accepted graph | n=50, m=150, rep=7 | hops=5 | min_hops=5 | attempts=2
+
+Generated and saved 158/360 evaluation graphs.
+Accepted graph | n=50, m=150, rep=8 | hops=5 | min_hops=5 | attempts=3
+
+Generated and saved 159/360 evaluation graphs.
+Accepted graph | n=50, m=150, rep=9 | hops=5 | min_hops=5 | attempts=2
+
+Generated and saved 160/360 evaluation graphs.
+Accepted graph | n=50, m=150, rep=10 | hops=5 | min_hops=5 | attempts=2
+
+Generated and saved 161/360 evaluation graphs.
+Accepted graph | n=50, m=150, rep=11 | hops=5 | min_hops=5 | attempts=14
+
+Generated and saved 162/360 evaluation graphs.
+Accepted graph | n=50, m=150, rep=12 | hops=6 | min_hops=5 | attempts=2
+
+Generated and saved 163/360 evaluation graphs.
+Accepted graph | n=50, m=150, rep=13 | hops=6 | min_hops=5 | attempts=8
+
+Generated and saved 164/360 evaluation graphs.
+Accepted graph | n=50, m=150, rep=14 | hops=5 | min_hops=5 | attempts=16
+
+Generated and saved 165/360 evaluation graphs.
+Accepted graph | n=50, m=150, rep=15 | hops=5 | min_hops=5 | attempts=2
+
+Generated and saved 166/360 evaluation graphs.
+Accepted graph | n=50, m=150, rep=16 | hops=5 | min_hops=5 | attempts=5
+
+Generated and saved 167/360 evaluation graphs.
+Accepted graph | n=50, m=150, rep=17 | hops=5 | min_hops=5 | attempts=4
+
+Generated and saved 168/360 evaluation graphs.
+Accepted graph | n=50, m=150, rep=18 | hops=5 | min_hops=5 | attempts=1
+
+Generated and saved 169/360 evaluation graphs.
+Accepted graph | n=50, m=150, rep=19 | hops=5 | min_hops=5 | attempts=2
+
+Generated and saved 170/360 evaluation graphs.
+Accepted graph | n=50, m=150, rep=20 | hops=5 | min_hops=5 | attempts=2
+
+Generated and saved 171/360 evaluation graphs.
+Accepted graph | n=50, m=150, rep=21 | hops=5 | min_hops=5 | attempts=1
+
+Generated and saved 172/360 evaluation graphs.
+Accepted graph | n=50, m=150, rep=22 | hops=5 | min_hops=5 | attempts=1
+
+Generated and saved 173/360 evaluation graphs.
+Accepted graph | n=50, m=150, rep=23 | hops=6 | min_hops=5 | attempts=10
+
+Generated and saved 174/360 evaluation graphs.
+Accepted graph | n=50, m=150, rep=24 | hops=8 | min_hops=5 | attempts=5
+
+Generated and saved 175/360 evaluation graphs.
+Accepted graph | n=50, m=150, rep=25 | hops=5 | min_hops=5 | attempts=6
+
+Generated and saved 176/360 evaluation graphs.
+Accepted graph | n=50, m=150, rep=26 | hops=6 | min_hops=5 | attempts=13
+
+Generated and saved 177/360 evaluation graphs.
+Accepted graph | n=50, m=150, rep=27 | hops=5 | min_hops=5 | attempts=1
+
+Generated and saved 178/360 evaluation graphs.
+Accepted graph | n=50, m=150, rep=28 | hops=5 | min_hops=5 | attempts=8
+
+Generated and saved 179/360 evaluation graphs.
+Accepted graph | n=50, m=150, rep=29 | hops=7 | min_hops=5 | attempts=1
+
+Generated and saved 180/360 evaluation graphs.
+Accepted graph | n=50, m=200, rep=0 | hops=5 | min_hops=5 | attempts=6
+
+Generated and saved 181/360 evaluation graphs.
+Accepted graph | n=50, m=200, rep=1 | hops=5 | min_hops=5 | attempts=20
+
+Generated and saved 182/360 evaluation graphs.
+Accepted graph | n=50, m=200, rep=2 | hops=5 | min_hops=5 | attempts=15
+
+Generated and saved 183/360 evaluation graphs.
+Accepted graph | n=50, m=200, rep=3 | hops=5 | min_hops=5 | attempts=60
+
+Generated and saved 184/360 evaluation graphs.
+Accepted graph | n=50, m=200, rep=4 | hops=5 | min_hops=5 | attempts=2
+
+Generated and saved 185/360 evaluation graphs.
+Accepted graph | n=50, m=200, rep=5 | hops=5 | min_hops=5 | attempts=10
+
+Generated and saved 186/360 evaluation graphs.
+Accepted graph | n=50, m=200, rep=6 | hops=5 | min_hops=5 | attempts=17
+
+Generated and saved 187/360 evaluation graphs.
+Accepted graph | n=50, m=200, rep=7 | hops=5 | min_hops=5 | attempts=3
+
+Generated and saved 188/360 evaluation graphs.
+Accepted graph | n=50, m=200, rep=8 | hops=5 | min_hops=5 | attempts=9
+
+Generated and saved 189/360 evaluation graphs.
+Accepted graph | n=50, m=200, rep=9 | hops=5 | min_hops=5 | attempts=4
+
+Generated and saved 190/360 evaluation graphs.
+Accepted graph | n=50, m=200, rep=10 | hops=7 | min_hops=5 | attempts=15
+
+Generated and saved 191/360 evaluation graphs.
+Accepted graph | n=50, m=200, rep=11 | hops=5 | min_hops=5 | attempts=4
+
+Generated and saved 192/360 evaluation graphs.
+Accepted graph | n=50, m=200, rep=12 | hops=5 | min_hops=5 | attempts=70
+
+Generated and saved 193/360 evaluation graphs.
+Accepted graph | n=50, m=200, rep=13 | hops=5 | min_hops=5 | attempts=58
+
+Generated and saved 194/360 evaluation graphs.
+Accepted graph | n=50, m=200, rep=14 | hops=5 | min_hops=5 | attempts=23
+
+Generated and saved 195/360 evaluation graphs.
+Accepted graph | n=50, m=200, rep=15 | hops=5 | min_hops=5 | attempts=10
+
+Generated and saved 196/360 evaluation graphs.
+Accepted graph | n=50, m=200, rep=16 | hops=5 | min_hops=5 | attempts=8
+
+Generated and saved 197/360 evaluation graphs.
+Accepted graph | n=50, m=200, rep=17 | hops=5 | min_hops=5 | attempts=11
+
+Generated and saved 198/360 evaluation graphs.
+Accepted graph | n=50, m=200, rep=18 | hops=5 | min_hops=5 | attempts=88
+
+Generated and saved 199/360 evaluation graphs.
+Accepted graph | n=50, m=200, rep=19 | hops=5 | min_hops=5 | attempts=70
+
+Generated and saved 200/360 evaluation graphs.
+Accepted graph | n=50, m=200, rep=20 | hops=6 | min_hops=5 | attempts=34
+
+Generated and saved 201/360 evaluation graphs.
+Accepted graph | n=50, m=200, rep=21 | hops=5 | min_hops=5 | attempts=1
+
+Generated and saved 202/360 evaluation graphs.
+Accepted graph | n=50, m=200, rep=22 | hops=5 | min_hops=5 | attempts=24
+
+Generated and saved 203/360 evaluation graphs.
+Accepted graph | n=50, m=200, rep=23 | hops=5 | min_hops=5 | attempts=41
+
+Generated and saved 204/360 evaluation graphs.
+Accepted graph | n=50, m=200, rep=24 | hops=5 | min_hops=5 | attempts=12
+
+Generated and saved 205/360 evaluation graphs.
+Accepted graph | n=50, m=200, rep=25 | hops=5 | min_hops=5 | attempts=16
+
+Generated and saved 206/360 evaluation graphs.
+Accepted graph | n=50, m=200, rep=26 | hops=5 | min_hops=5 | attempts=2
+
+Generated and saved 207/360 evaluation graphs.
+Accepted graph | n=50, m=200, rep=27 | hops=5 | min_hops=5 | attempts=12
+
+Generated and saved 208/360 evaluation graphs.
+Accepted graph | n=50, m=200, rep=28 | hops=5 | min_hops=5 | attempts=25
+
+Generated and saved 209/360 evaluation graphs.
+Accepted graph | n=50, m=200, rep=29 | hops=5 | min_hops=5 | attempts=38
+
+Generated and saved 210/360 evaluation graphs.
+Accepted graph | n=50, m=300, rep=0 | hops=4 | min_hops=4 | attempts=51
+
+Generated and saved 211/360 evaluation graphs.
+Accepted graph | n=50, m=300, rep=1 | hops=5 | min_hops=4 | attempts=1
+
+Generated and saved 212/360 evaluation graphs.
+Accepted graph | n=50, m=300, rep=2 | hops=4 | min_hops=4 | attempts=23
+
+Generated and saved 213/360 evaluation graphs.
+Accepted graph | n=50, m=300, rep=3 | hops=4 | min_hops=4 | attempts=35
+
+Generated and saved 214/360 evaluation graphs.
+Accepted graph | n=50, m=300, rep=4 | hops=4 | min_hops=4 | attempts=10
+
+Generated and saved 215/360 evaluation graphs.
+Accepted graph | n=50, m=300, rep=5 | hops=4 | min_hops=4 | attempts=2
+
+Generated and saved 216/360 evaluation graphs.
+Accepted graph | n=50, m=300, rep=6 | hops=4 | min_hops=4 | attempts=5
+
+Generated and saved 217/360 evaluation graphs.
+Accepted graph | n=50, m=300, rep=7 | hops=4 | min_hops=4 | attempts=1
+
+Generated and saved 218/360 evaluation graphs.
+Accepted graph | n=50, m=300, rep=8 | hops=4 | min_hops=4 | attempts=11
+
+Generated and saved 219/360 evaluation graphs.
+Accepted graph | n=50, m=300, rep=9 | hops=4 | min_hops=4 | attempts=34
+
+Generated and saved 220/360 evaluation graphs.
+Accepted graph | n=50, m=300, rep=10 | hops=4 | min_hops=4 | attempts=18
+
+Generated and saved 221/360 evaluation graphs.
+Accepted graph | n=50, m=300, rep=11 | hops=4 | min_hops=4 | attempts=22
+
+Generated and saved 222/360 evaluation graphs.
+Accepted graph | n=50, m=300, rep=12 | hops=4 | min_hops=4 | attempts=34
+
+Generated and saved 223/360 evaluation graphs.
+Accepted graph | n=50, m=300, rep=13 | hops=4 | min_hops=4 | attempts=19
+
+Generated and saved 224/360 evaluation graphs.
+Accepted graph | n=50, m=300, rep=14 | hops=4 | min_hops=4 | attempts=9
+
+Generated and saved 225/360 evaluation graphs.
+Accepted graph | n=50, m=300, rep=15 | hops=4 | min_hops=4 | attempts=2
+
+Generated and saved 226/360 evaluation graphs.
+Accepted graph | n=50, m=300, rep=16 | hops=4 | min_hops=4 | attempts=5
+
+Generated and saved 227/360 evaluation graphs.
+Accepted graph | n=50, m=300, rep=17 | hops=4 | min_hops=4 | attempts=20
+
+Generated and saved 228/360 evaluation graphs.
+Accepted graph | n=50, m=300, rep=18 | hops=4 | min_hops=4 | attempts=6
+
+Generated and saved 229/360 evaluation graphs.
+Accepted graph | n=50, m=300, rep=19 | hops=4 | min_hops=4 | attempts=12
+
+Generated and saved 230/360 evaluation graphs.
+Accepted graph | n=50, m=300, rep=20 | hops=4 | min_hops=4 | attempts=22
+
+Generated and saved 231/360 evaluation graphs.
+Accepted graph | n=50, m=300, rep=21 | hops=4 | min_hops=4 | attempts=6
+
+Generated and saved 232/360 evaluation graphs.
+Accepted graph | n=50, m=300, rep=22 | hops=4 | min_hops=4 | attempts=5
+
+Generated and saved 233/360 evaluation graphs.
+Accepted graph | n=50, m=300, rep=23 | hops=4 | min_hops=4 | attempts=31
+
+Generated and saved 234/360 evaluation graphs.
+Accepted graph | n=50, m=300, rep=24 | hops=4 | min_hops=4 | attempts=76
+
+Generated and saved 235/360 evaluation graphs.
+Accepted graph | n=50, m=300, rep=25 | hops=4 | min_hops=4 | attempts=17
+
+Generated and saved 236/360 evaluation graphs.
+Accepted graph | n=50, m=300, rep=26 | hops=4 | min_hops=4 | attempts=33
+
+Generated and saved 237/360 evaluation graphs.
+Accepted graph | n=50, m=300, rep=27 | hops=4 | min_hops=4 | attempts=33
+
+Generated and saved 238/360 evaluation graphs.
+Accepted graph | n=50, m=300, rep=28 | hops=4 | min_hops=4 | attempts=5
+
+Generated and saved 239/360 evaluation graphs.
+Accepted graph | n=50, m=300, rep=29 | hops=4 | min_hops=4 | attempts=18
+
+Generated and saved 240/360 evaluation graphs.
+Accepted graph | n=75, m=150, rep=0 | hops=8 | min_hops=8 | attempts=5
+
+Generated and saved 241/360 evaluation graphs.
+Accepted graph | n=75, m=150, rep=1 | hops=11 | min_hops=8 | attempts=1
+
+Generated and saved 242/360 evaluation graphs.
+Accepted graph | n=75, m=150, rep=2 | hops=13 | min_hops=8 | attempts=6
+
+Generated and saved 243/360 evaluation graphs.
+Accepted graph | n=75, m=150, rep=3 | hops=10 | min_hops=8 | attempts=9
+
+Generated and saved 244/360 evaluation graphs.
+Accepted graph | n=75, m=150, rep=4 | hops=8 | min_hops=8 | attempts=2
+
+Generated and saved 245/360 evaluation graphs.
+Accepted graph | n=75, m=150, rep=5 | hops=9 | min_hops=8 | attempts=7
+
+Generated and saved 246/360 evaluation graphs.
+Accepted graph | n=75, m=150, rep=6 | hops=10 | min_hops=8 | attempts=1
+
+Generated and saved 247/360 evaluation graphs.
+Accepted graph | n=75, m=150, rep=7 | hops=8 | min_hops=8 | attempts=8
+
+Generated and saved 248/360 evaluation graphs.
+Accepted graph | n=75, m=150, rep=8 | hops=8 | min_hops=8 | attempts=1
+
+Generated and saved 249/360 evaluation graphs.
+Accepted graph | n=75, m=150, rep=9 | hops=10 | min_hops=8 | attempts=3
+
+Generated and saved 250/360 evaluation graphs.
+Accepted graph | n=75, m=150, rep=10 | hops=11 | min_hops=8 | attempts=13
+
+Generated and saved 251/360 evaluation graphs.
+Accepted graph | n=75, m=150, rep=11 | hops=8 | min_hops=8 | attempts=9
+
+Generated and saved 252/360 evaluation graphs.
+Accepted graph | n=75, m=150, rep=12 | hops=8 | min_hops=8 | attempts=5
+
+Generated and saved 253/360 evaluation graphs.
+Accepted graph | n=75, m=150, rep=13 | hops=9 | min_hops=8 | attempts=2
+
+Generated and saved 254/360 evaluation graphs.
+Accepted graph | n=75, m=150, rep=14 | hops=10 | min_hops=8 | attempts=12
+
+Generated and saved 255/360 evaluation graphs.
+Accepted graph | n=75, m=150, rep=15 | hops=10 | min_hops=8 | attempts=12
+
+Generated and saved 256/360 evaluation graphs.
+Accepted graph | n=75, m=150, rep=16 | hops=8 | min_hops=8 | attempts=6
+
+Generated and saved 257/360 evaluation graphs.
+Accepted graph | n=75, m=150, rep=17 | hops=9 | min_hops=8 | attempts=12
+
+Generated and saved 258/360 evaluation graphs.
+Accepted graph | n=75, m=150, rep=18 | hops=8 | min_hops=8 | attempts=12
+
+Generated and saved 259/360 evaluation graphs.
+Accepted graph | n=75, m=150, rep=19 | hops=9 | min_hops=8 | attempts=2
+
+Generated and saved 260/360 evaluation graphs.
+Accepted graph | n=75, m=150, rep=20 | hops=9 | min_hops=8 | attempts=9
+
+Generated and saved 261/360 evaluation graphs.
+Accepted graph | n=75, m=150, rep=21 | hops=10 | min_hops=8 | attempts=7
+
+Generated and saved 262/360 evaluation graphs.
+Accepted graph | n=75, m=150, rep=22 | hops=9 | min_hops=8 | attempts=2
+
+Generated and saved 263/360 evaluation graphs.
+Accepted graph | n=75, m=150, rep=23 | hops=9 | min_hops=8 | attempts=1
+
+Generated and saved 264/360 evaluation graphs.
+Accepted graph | n=75, m=150, rep=24 | hops=14 | min_hops=8 | attempts=2
+
+Generated and saved 265/360 evaluation graphs.
+Accepted graph | n=75, m=150, rep=25 | hops=8 | min_hops=8 | attempts=3
+
+Generated and saved 266/360 evaluation graphs.
+Accepted graph | n=75, m=150, rep=26 | hops=8 | min_hops=8 | attempts=10
+
+Generated and saved 267/360 evaluation graphs.
+Accepted graph | n=75, m=150, rep=27 | hops=8 | min_hops=8 | attempts=6
+
+Generated and saved 268/360 evaluation graphs.
+Accepted graph | n=75, m=150, rep=28 | hops=9 | min_hops=8 | attempts=2
+
+Generated and saved 269/360 evaluation graphs.
+Accepted graph | n=75, m=150, rep=29 | hops=9 | min_hops=8 | attempts=3
+
+Generated and saved 270/360 evaluation graphs.
+Accepted graph | n=75, m=225, rep=0 | hops=7 | min_hops=6 | attempts=11
+
+Generated and saved 271/360 evaluation graphs.
+Accepted graph | n=75, m=225, rep=1 | hops=6 | min_hops=6 | attempts=2
+
+Generated and saved 272/360 evaluation graphs.
+Accepted graph | n=75, m=225, rep=2 | hops=6 | min_hops=6 | attempts=4
+
+Generated and saved 273/360 evaluation graphs.
+Accepted graph | n=75, m=225, rep=3 | hops=7 | min_hops=6 | attempts=6
+
+Generated and saved 274/360 evaluation graphs.
+Accepted graph | n=75, m=225, rep=4 | hops=6 | min_hops=6 | attempts=1
+
+Generated and saved 275/360 evaluation graphs.
+Accepted graph | n=75, m=225, rep=5 | hops=6 | min_hops=6 | attempts=5
+
+Generated and saved 276/360 evaluation graphs.
+Accepted graph | n=75, m=225, rep=6 | hops=6 | min_hops=6 | attempts=17
+
+Generated and saved 277/360 evaluation graphs.
+Accepted graph | n=75, m=225, rep=7 | hops=6 | min_hops=6 | attempts=3
+
+Generated and saved 278/360 evaluation graphs.
+Accepted graph | n=75, m=225, rep=8 | hops=6 | min_hops=6 | attempts=20
+
+Generated and saved 279/360 evaluation graphs.
+Accepted graph | n=75, m=225, rep=9 | hops=6 | min_hops=6 | attempts=14
+
+Generated and saved 280/360 evaluation graphs.
+Accepted graph | n=75, m=225, rep=10 | hops=7 | min_hops=6 | attempts=1
+
+Generated and saved 281/360 evaluation graphs.
+Accepted graph | n=75, m=225, rep=11 | hops=6 | min_hops=6 | attempts=10
+
+Generated and saved 282/360 evaluation graphs.
+Accepted graph | n=75, m=225, rep=12 | hops=6 | min_hops=6 | attempts=1
+
+Generated and saved 283/360 evaluation graphs.
+Accepted graph | n=75, m=225, rep=13 | hops=6 | min_hops=6 | attempts=7
+
+Generated and saved 284/360 evaluation graphs.
+Accepted graph | n=75, m=225, rep=14 | hops=6 | min_hops=6 | attempts=5
+
+Generated and saved 285/360 evaluation graphs.
+Accepted graph | n=75, m=225, rep=15 | hops=6 | min_hops=6 | attempts=13
+
+Generated and saved 286/360 evaluation graphs.
+Accepted graph | n=75, m=225, rep=16 | hops=6 | min_hops=6 | attempts=19
+
+Generated and saved 287/360 evaluation graphs.
+Accepted graph | n=75, m=225, rep=17 | hops=6 | min_hops=6 | attempts=3
+
+Generated and saved 288/360 evaluation graphs.
+Accepted graph | n=75, m=225, rep=18 | hops=6 | min_hops=6 | attempts=17
+
+Generated and saved 289/360 evaluation graphs.
+Accepted graph | n=75, m=225, rep=19 | hops=6 | min_hops=6 | attempts=4
+
+Generated and saved 290/360 evaluation graphs.
+Accepted graph | n=75, m=225, rep=20 | hops=6 | min_hops=6 | attempts=8
+
+Generated and saved 291/360 evaluation graphs.
+Accepted graph | n=75, m=225, rep=21 | hops=6 | min_hops=6 | attempts=15
+
+Generated and saved 292/360 evaluation graphs.
+Accepted graph | n=75, m=225, rep=22 | hops=6 | min_hops=6 | attempts=38
+
+Generated and saved 293/360 evaluation graphs.
+Accepted graph | n=75, m=225, rep=23 | hops=6 | min_hops=6 | attempts=3
+
+Generated and saved 294/360 evaluation graphs.
+Accepted graph | n=75, m=225, rep=24 | hops=6 | min_hops=6 | attempts=7
+
+Generated and saved 295/360 evaluation graphs.
+Accepted graph | n=75, m=225, rep=25 | hops=7 | min_hops=6 | attempts=1
+
+Generated and saved 296/360 evaluation graphs.
+Accepted graph | n=75, m=225, rep=26 | hops=6 | min_hops=6 | attempts=12
+
+Generated and saved 297/360 evaluation graphs.
+Accepted graph | n=75, m=225, rep=27 | hops=6 | min_hops=6 | attempts=49
+
+Generated and saved 298/360 evaluation graphs.
+Accepted graph | n=75, m=225, rep=28 | hops=6 | min_hops=6 | attempts=9
+
+Generated and saved 299/360 evaluation graphs.
+Accepted graph | n=75, m=225, rep=29 | hops=6 | min_hops=6 | attempts=2
+
+Generated and saved 300/360 evaluation graphs.
+Accepted graph | n=75, m=300, rep=0 | hops=5 | min_hops=5 | attempts=11
+
+Generated and saved 301/360 evaluation graphs.
+Accepted graph | n=75, m=300, rep=1 | hops=5 | min_hops=5 | attempts=7
+
+Generated and saved 302/360 evaluation graphs.
+Accepted graph | n=75, m=300, rep=2 | hops=7 | min_hops=5 | attempts=4
+
+Generated and saved 303/360 evaluation graphs.
+Accepted graph | n=75, m=300, rep=3 | hops=5 | min_hops=5 | attempts=1
+
+Generated and saved 304/360 evaluation graphs.
+Accepted graph | n=75, m=300, rep=4 | hops=5 | min_hops=5 | attempts=8
+
+Generated and saved 305/360 evaluation graphs.
+Accepted graph | n=75, m=300, rep=5 | hops=5 | min_hops=5 | attempts=4
+
+Generated and saved 306/360 evaluation graphs.
+Accepted graph | n=75, m=300, rep=6 | hops=5 | min_hops=5 | attempts=29
+
+Generated and saved 307/360 evaluation graphs.
+Accepted graph | n=75, m=300, rep=7 | hops=5 | min_hops=5 | attempts=32
+
+Generated and saved 308/360 evaluation graphs.
+Accepted graph | n=75, m=300, rep=8 | hops=5 | min_hops=5 | attempts=1
+
+Generated and saved 309/360 evaluation graphs.
+Accepted graph | n=75, m=300, rep=9 | hops=5 | min_hops=5 | attempts=44
+
+Generated and saved 310/360 evaluation graphs.
+Accepted graph | n=75, m=300, rep=10 | hops=5 | min_hops=5 | attempts=6
+
+Generated and saved 311/360 evaluation graphs.
+Accepted graph | n=75, m=300, rep=11 | hops=5 | min_hops=5 | attempts=11
+
+Generated and saved 312/360 evaluation graphs.
+Accepted graph | n=75, m=300, rep=12 | hops=5 | min_hops=5 | attempts=20
+
+Generated and saved 313/360 evaluation graphs.
+Accepted graph | n=75, m=300, rep=13 | hops=5 | min_hops=5 | attempts=16
+
+Generated and saved 314/360 evaluation graphs.
+Accepted graph | n=75, m=300, rep=14 | hops=5 | min_hops=5 | attempts=6
+
+Generated and saved 315/360 evaluation graphs.
+Accepted graph | n=75, m=300, rep=15 | hops=5 | min_hops=5 | attempts=1
+
+Generated and saved 316/360 evaluation graphs.
+Accepted graph | n=75, m=300, rep=16 | hops=5 | min_hops=5 | attempts=12
+
+Generated and saved 317/360 evaluation graphs.
+Accepted graph | n=75, m=300, rep=17 | hops=5 | min_hops=5 | attempts=21
+
+Generated and saved 318/360 evaluation graphs.
+Accepted graph | n=75, m=300, rep=18 | hops=5 | min_hops=5 | attempts=9
+
+Generated and saved 319/360 evaluation graphs.
+Accepted graph | n=75, m=300, rep=19 | hops=5 | min_hops=5 | attempts=7
+
+Generated and saved 320/360 evaluation graphs.
+Accepted graph | n=75, m=300, rep=20 | hops=5 | min_hops=5 | attempts=4
+
+Generated and saved 321/360 evaluation graphs.
+Accepted graph | n=75, m=300, rep=21 | hops=5 | min_hops=5 | attempts=21
+
+Generated and saved 322/360 evaluation graphs.
+Accepted graph | n=75, m=300, rep=22 | hops=5 | min_hops=5 | attempts=5
+
+Generated and saved 323/360 evaluation graphs.
+Accepted graph | n=75, m=300, rep=23 | hops=5 | min_hops=5 | attempts=15
+
+Generated and saved 324/360 evaluation graphs.
+Accepted graph | n=75, m=300, rep=24 | hops=5 | min_hops=5 | attempts=2
+
+Generated and saved 325/360 evaluation graphs.
+Accepted graph | n=75, m=300, rep=25 | hops=6 | min_hops=5 | attempts=35
+
+Generated and saved 326/360 evaluation graphs.
+Accepted graph | n=75, m=300, rep=26 | hops=5 | min_hops=5 | attempts=21
+
+Generated and saved 327/360 evaluation graphs.
+Accepted graph | n=75, m=300, rep=27 | hops=5 | min_hops=5 | attempts=26
+
+Generated and saved 328/360 evaluation graphs.
+Accepted graph | n=75, m=300, rep=28 | hops=5 | min_hops=5 | attempts=3
+
+Generated and saved 329/360 evaluation graphs.
+Accepted graph | n=75, m=300, rep=29 | hops=5 | min_hops=5 | attempts=39
+
+Generated and saved 330/360 evaluation graphs.
+Accepted graph | n=75, m=450, rep=0 | hops=4 | min_hops=4 | attempts=18
+
+Generated and saved 331/360 evaluation graphs.
+Accepted graph | n=75, m=450, rep=1 | hops=4 | min_hops=4 | attempts=5
+
+Generated and saved 332/360 evaluation graphs.
+Accepted graph | n=75, m=450, rep=2 | hops=4 | min_hops=4 | attempts=6
+
+Generated and saved 333/360 evaluation graphs.
+Accepted graph | n=75, m=450, rep=3 | hops=4 | min_hops=4 | attempts=34
+
+Generated and saved 334/360 evaluation graphs.
+Accepted graph | n=75, m=450, rep=4 | hops=4 | min_hops=4 | attempts=6
+
+Generated and saved 335/360 evaluation graphs.
+Accepted graph | n=75, m=450, rep=5 | hops=4 | min_hops=4 | attempts=3
+
+Generated and saved 336/360 evaluation graphs.
+Accepted graph | n=75, m=450, rep=6 | hops=4 | min_hops=4 | attempts=9
+
+Generated and saved 337/360 evaluation graphs.
+Accepted graph | n=75, m=450, rep=7 | hops=4 | min_hops=4 | attempts=6
+
+Generated and saved 338/360 evaluation graphs.
+Accepted graph | n=75, m=450, rep=8 | hops=4 | min_hops=4 | attempts=3
+
+Generated and saved 339/360 evaluation graphs.
+Accepted graph | n=75, m=450, rep=9 | hops=4 | min_hops=4 | attempts=9
+
+Generated and saved 340/360 evaluation graphs.
+Accepted graph | n=75, m=450, rep=10 | hops=4 | min_hops=4 | attempts=7
+
+Generated and saved 341/360 evaluation graphs.
+Accepted graph | n=75, m=450, rep=11 | hops=4 | min_hops=4 | attempts=38
+
+Generated and saved 342/360 evaluation graphs.
+Accepted graph | n=75, m=450, rep=12 | hops=4 | min_hops=4 | attempts=11
+
+Generated and saved 343/360 evaluation graphs.
+Accepted graph | n=75, m=450, rep=13 | hops=4 | min_hops=4 | attempts=27
+
+Generated and saved 344/360 evaluation graphs.
+Accepted graph | n=75, m=450, rep=14 | hops=4 | min_hops=4 | attempts=1
+
+Generated and saved 345/360 evaluation graphs.
+Accepted graph | n=75, m=450, rep=15 | hops=4 | min_hops=4 | attempts=4
+
+Generated and saved 346/360 evaluation graphs.
+Accepted graph | n=75, m=450, rep=16 | hops=4 | min_hops=4 | attempts=29
+
+Generated and saved 347/360 evaluation graphs.
+Accepted graph | n=75, m=450, rep=17 | hops=4 | min_hops=4 | attempts=22
+
+Generated and saved 348/360 evaluation graphs.
+Accepted graph | n=75, m=450, rep=18 | hops=4 | min_hops=4 | attempts=1
+
+Generated and saved 349/360 evaluation graphs.
+Accepted graph | n=75, m=450, rep=19 | hops=4 | min_hops=4 | attempts=13
+
+Generated and saved 350/360 evaluation graphs.
+Accepted graph | n=75, m=450, rep=20 | hops=4 | min_hops=4 | attempts=6
+
+Generated and saved 351/360 evaluation graphs.
+Accepted graph | n=75, m=450, rep=21 | hops=4 | min_hops=4 | attempts=29
+
+Generated and saved 352/360 evaluation graphs.
+Accepted graph | n=75, m=450, rep=22 | hops=4 | min_hops=4 | attempts=1
+
+Generated and saved 353/360 evaluation graphs.
+Accepted graph | n=75, m=450, rep=23 | hops=4 | min_hops=4 | attempts=16
+
+Generated and saved 354/360 evaluation graphs.
+Accepted graph | n=75, m=450, rep=24 | hops=4 | min_hops=4 | attempts=2
+
+Generated and saved 355/360 evaluation graphs.
+Accepted graph | n=75, m=450, rep=25 | hops=4 | min_hops=4 | attempts=12
+
+Generated and saved 356/360 evaluation graphs.
+Accepted graph | n=75, m=450, rep=26 | hops=4 | min_hops=4 | attempts=9
+
+Generated and saved 357/360 evaluation graphs.
+Accepted graph | n=75, m=450, rep=27 | hops=4 | min_hops=4 | attempts=9
+
+Generated and saved 358/360 evaluation graphs.
+Accepted graph | n=75, m=450, rep=28 | hops=4 | min_hops=4 | attempts=54
+
+Generated and saved 359/360 evaluation graphs.
+Accepted graph | n=75, m=450, rep=29 | hops=4 | min_hops=4 | attempts=5
+
+Generated and saved 360/360 evaluation graphs.
+
+Finished. Saved 360 graphs to evaluation_graphs/shortest_path_id_new_filtered_graphs.pkl
+Generating filtered value OOD evaluation graphs...
+Accepted graph | n=30, m=60, rep=0 | hops=8 | min_hops=6 | attempts=14
+
+Generated and saved 1/360 evaluation graphs.
+Accepted graph | n=30, m=60, rep=1 | hops=7 | min_hops=6 | attempts=7
+
+Generated and saved 2/360 evaluation graphs.
+Accepted graph | n=30, m=60, rep=2 | hops=6 | min_hops=6 | attempts=8
+
+Generated and saved 3/360 evaluation graphs.
+Accepted graph | n=30, m=60, rep=3 | hops=7 | min_hops=6 | attempts=3
+
+Generated and saved 4/360 evaluation graphs.
+Accepted graph | n=30, m=60, rep=4 | hops=6 | min_hops=6 | attempts=12
+
+Generated and saved 5/360 evaluation graphs.
+Accepted graph | n=30, m=60, rep=5 | hops=8 | min_hops=6 | attempts=9
+
+Generated and saved 6/360 evaluation graphs.
+Accepted graph | n=30, m=60, rep=6 | hops=6 | min_hops=6 | attempts=12
+
+Generated and saved 7/360 evaluation graphs.
+Accepted graph | n=30, m=60, rep=7 | hops=7 | min_hops=6 | attempts=3
+
+Generated and saved 8/360 evaluation graphs.
+Accepted graph | n=30, m=60, rep=8 | hops=9 | min_hops=6 | attempts=1
+
+Generated and saved 9/360 evaluation graphs.
+Accepted graph | n=30, m=60, rep=9 | hops=6 | min_hops=6 | attempts=4
+
+Generated and saved 10/360 evaluation graphs.
+Accepted graph | n=30, m=60, rep=10 | hops=7 | min_hops=6 | attempts=1
+
+Generated and saved 11/360 evaluation graphs.
+Accepted graph | n=30, m=60, rep=11 | hops=6 | min_hops=6 | attempts=3
+
+Generated and saved 12/360 evaluation graphs.
+Accepted graph | n=30, m=60, rep=12 | hops=6 | min_hops=6 | attempts=4
+
+Generated and saved 13/360 evaluation graphs.
+Accepted graph | n=30, m=60, rep=13 | hops=8 | min_hops=6 | attempts=12
+
+Generated and saved 14/360 evaluation graphs.
+Accepted graph | n=30, m=60, rep=14 | hops=6 | min_hops=6 | attempts=1
+
+Generated and saved 15/360 evaluation graphs.
+Accepted graph | n=30, m=60, rep=15 | hops=7 | min_hops=6 | attempts=1
+
+Generated and saved 16/360 evaluation graphs.
+Accepted graph | n=30, m=60, rep=16 | hops=7 | min_hops=6 | attempts=11
+
+Generated and saved 17/360 evaluation graphs.
+Accepted graph | n=30, m=60, rep=17 | hops=6 | min_hops=6 | attempts=15
+
+Generated and saved 18/360 evaluation graphs.
+Accepted graph | n=30, m=60, rep=18 | hops=7 | min_hops=6 | attempts=8
+
+Generated and saved 19/360 evaluation graphs.
+Accepted graph | n=30, m=60, rep=19 | hops=6 | min_hops=6 | attempts=2
+
+Generated and saved 20/360 evaluation graphs.
+Accepted graph | n=30, m=60, rep=20 | hops=6 | min_hops=6 | attempts=9
+
+Generated and saved 21/360 evaluation graphs.
+Accepted graph | n=30, m=60, rep=21 | hops=6 | min_hops=6 | attempts=1
+
+Generated and saved 22/360 evaluation graphs.
+Accepted graph | n=30, m=60, rep=22 | hops=7 | min_hops=6 | attempts=4
+
+Generated and saved 23/360 evaluation graphs.
+Accepted graph | n=30, m=60, rep=23 | hops=8 | min_hops=6 | attempts=4
+
+Generated and saved 24/360 evaluation graphs.
+Accepted graph | n=30, m=60, rep=24 | hops=6 | min_hops=6 | attempts=2
+
+Generated and saved 25/360 evaluation graphs.
+Accepted graph | n=30, m=60, rep=25 | hops=6 | min_hops=6 | attempts=9
+
+Generated and saved 26/360 evaluation graphs.
+Accepted graph | n=30, m=60, rep=26 | hops=6 | min_hops=6 | attempts=2
+
+Generated and saved 27/360 evaluation graphs.
+Accepted graph | n=30, m=60, rep=27 | hops=7 | min_hops=6 | attempts=4
+
+Generated and saved 28/360 evaluation graphs.
+Accepted graph | n=30, m=60, rep=28 | hops=8 | min_hops=6 | attempts=2
+
+Generated and saved 29/360 evaluation graphs.
+Accepted graph | n=30, m=60, rep=29 | hops=6 | min_hops=6 | attempts=7
+
+Generated and saved 30/360 evaluation graphs.
+Accepted graph | n=30, m=90, rep=0 | hops=5 | min_hops=5 | attempts=27
+
+Generated and saved 31/360 evaluation graphs.
+Accepted graph | n=30, m=90, rep=1 | hops=6 | min_hops=5 | attempts=2
+
+Generated and saved 32/360 evaluation graphs.
+Accepted graph | n=30, m=90, rep=2 | hops=5 | min_hops=5 | attempts=6
+
+Generated and saved 33/360 evaluation graphs.
+Accepted graph | n=30, m=90, rep=3 | hops=5 | min_hops=5 | attempts=16
+
+Generated and saved 34/360 evaluation graphs.
+Accepted graph | n=30, m=90, rep=4 | hops=5 | min_hops=5 | attempts=12
+
+Generated and saved 35/360 evaluation graphs.
+Accepted graph | n=30, m=90, rep=5 | hops=5 | min_hops=5 | attempts=14
+
+Generated and saved 36/360 evaluation graphs.
+Accepted graph | n=30, m=90, rep=6 | hops=5 | min_hops=5 | attempts=29
+
+Generated and saved 37/360 evaluation graphs.
+Accepted graph | n=30, m=90, rep=7 | hops=5 | min_hops=5 | attempts=12
+
+Generated and saved 38/360 evaluation graphs.
+Accepted graph | n=30, m=90, rep=8 | hops=5 | min_hops=5 | attempts=17
+
+Generated and saved 39/360 evaluation graphs.
+Accepted graph | n=30, m=90, rep=9 | hops=5 | min_hops=5 | attempts=5
+
+Generated and saved 40/360 evaluation graphs.
+Accepted graph | n=30, m=90, rep=10 | hops=5 | min_hops=5 | attempts=3
+
+Generated and saved 41/360 evaluation graphs.
+Accepted graph | n=30, m=90, rep=11 | hops=5 | min_hops=5 | attempts=14
+
+Generated and saved 42/360 evaluation graphs.
+Accepted graph | n=30, m=90, rep=12 | hops=5 | min_hops=5 | attempts=8
+
+Generated and saved 43/360 evaluation graphs.
+Accepted graph | n=30, m=90, rep=13 | hops=5 | min_hops=5 | attempts=7
+
+Generated and saved 44/360 evaluation graphs.
+Accepted graph | n=30, m=90, rep=14 | hops=6 | min_hops=5 | attempts=10
+
+Generated and saved 45/360 evaluation graphs.
+Accepted graph | n=30, m=90, rep=15 | hops=6 | min_hops=5 | attempts=32
+
+Generated and saved 46/360 evaluation graphs.
+Accepted graph | n=30, m=90, rep=16 | hops=5 | min_hops=5 | attempts=10
+
+Generated and saved 47/360 evaluation graphs.
+Accepted graph | n=30, m=90, rep=17 | hops=5 | min_hops=5 | attempts=6
+
+Generated and saved 48/360 evaluation graphs.
+Accepted graph | n=30, m=90, rep=18 | hops=5 | min_hops=5 | attempts=6
+
+Generated and saved 49/360 evaluation graphs.
+Accepted graph | n=30, m=90, rep=19 | hops=7 | min_hops=5 | attempts=27
+
+Generated and saved 50/360 evaluation graphs.
+Accepted graph | n=30, m=90, rep=20 | hops=5 | min_hops=5 | attempts=3
+
+Generated and saved 51/360 evaluation graphs.
+Accepted graph | n=30, m=90, rep=21 | hops=5 | min_hops=5 | attempts=7
+
+Generated and saved 52/360 evaluation graphs.
+Accepted graph | n=30, m=90, rep=22 | hops=5 | min_hops=5 | attempts=46
+
+Generated and saved 53/360 evaluation graphs.
+Accepted graph | n=30, m=90, rep=23 | hops=5 | min_hops=5 | attempts=2
+
+Generated and saved 54/360 evaluation graphs.
+Accepted graph | n=30, m=90, rep=24 | hops=6 | min_hops=5 | attempts=52
+
+Generated and saved 55/360 evaluation graphs.
+Accepted graph | n=30, m=90, rep=25 | hops=5 | min_hops=5 | attempts=20
+
+Generated and saved 56/360 evaluation graphs.
+Accepted graph | n=30, m=90, rep=26 | hops=5 | min_hops=5 | attempts=34
+
+Generated and saved 57/360 evaluation graphs.
+Accepted graph | n=30, m=90, rep=27 | hops=6 | min_hops=5 | attempts=4
+
+Generated and saved 58/360 evaluation graphs.
+Accepted graph | n=30, m=90, rep=28 | hops=6 | min_hops=5 | attempts=7
+
+Generated and saved 59/360 evaluation graphs.
+Accepted graph | n=30, m=90, rep=29 | hops=5 | min_hops=5 | attempts=13
+
+Generated and saved 60/360 evaluation graphs.
+Accepted graph | n=30, m=120, rep=0 | hops=4 | min_hops=4 | attempts=15
+
+Generated and saved 61/360 evaluation graphs.
+Accepted graph | n=30, m=120, rep=1 | hops=4 | min_hops=4 | attempts=1
+
+Generated and saved 62/360 evaluation graphs.
+Accepted graph | n=30, m=120, rep=2 | hops=4 | min_hops=4 | attempts=12
+
+Generated and saved 63/360 evaluation graphs.
+Accepted graph | n=30, m=120, rep=3 | hops=4 | min_hops=4 | attempts=5
+
+Generated and saved 64/360 evaluation graphs.
+Accepted graph | n=30, m=120, rep=4 | hops=4 | min_hops=4 | attempts=3
+
+Generated and saved 65/360 evaluation graphs.
+Accepted graph | n=30, m=120, rep=5 | hops=4 | min_hops=4 | attempts=4
+
+Generated and saved 66/360 evaluation graphs.
+Accepted graph | n=30, m=120, rep=6 | hops=5 | min_hops=4 | attempts=2
+
+Generated and saved 67/360 evaluation graphs.
+Accepted graph | n=30, m=120, rep=7 | hops=4 | min_hops=4 | attempts=7
+
+Generated and saved 68/360 evaluation graphs.
+Accepted graph | n=30, m=120, rep=8 | hops=4 | min_hops=4 | attempts=4
+
+Generated and saved 69/360 evaluation graphs.
+Accepted graph | n=30, m=120, rep=9 | hops=4 | min_hops=4 | attempts=4
+
+Generated and saved 70/360 evaluation graphs.
+Accepted graph | n=30, m=120, rep=10 | hops=6 | min_hops=4 | attempts=7
+
+Generated and saved 71/360 evaluation graphs.
+Accepted graph | n=30, m=120, rep=11 | hops=4 | min_hops=4 | attempts=2
+
+Generated and saved 72/360 evaluation graphs.
+Accepted graph | n=30, m=120, rep=12 | hops=4 | min_hops=4 | attempts=11
+
+Generated and saved 73/360 evaluation graphs.
+Accepted graph | n=30, m=120, rep=13 | hops=4 | min_hops=4 | attempts=7
+
+Generated and saved 74/360 evaluation graphs.
+Accepted graph | n=30, m=120, rep=14 | hops=4 | min_hops=4 | attempts=2
+
+Generated and saved 75/360 evaluation graphs.
+Accepted graph | n=30, m=120, rep=15 | hops=4 | min_hops=4 | attempts=2
+
+Generated and saved 76/360 evaluation graphs.
+Accepted graph | n=30, m=120, rep=16 | hops=4 | min_hops=4 | attempts=2
+
+Generated and saved 77/360 evaluation graphs.
+Accepted graph | n=30, m=120, rep=17 | hops=4 | min_hops=4 | attempts=6
+
+Generated and saved 78/360 evaluation graphs.
+Accepted graph | n=30, m=120, rep=18 | hops=4 | min_hops=4 | attempts=1
+
+Generated and saved 79/360 evaluation graphs.
+Accepted graph | n=30, m=120, rep=19 | hops=4 | min_hops=4 | attempts=15
+
+Generated and saved 80/360 evaluation graphs.
+Accepted graph | n=30, m=120, rep=20 | hops=4 | min_hops=4 | attempts=3
+
+Generated and saved 81/360 evaluation graphs.
+Accepted graph | n=30, m=120, rep=21 | hops=4 | min_hops=4 | attempts=6
+
+Generated and saved 82/360 evaluation graphs.
+Accepted graph | n=30, m=120, rep=22 | hops=4 | min_hops=4 | attempts=7
+
+Generated and saved 83/360 evaluation graphs.
+Accepted graph | n=30, m=120, rep=23 | hops=4 | min_hops=4 | attempts=9
+
+Generated and saved 84/360 evaluation graphs.
+Accepted graph | n=30, m=120, rep=24 | hops=4 | min_hops=4 | attempts=5
+
+Generated and saved 85/360 evaluation graphs.
+Accepted graph | n=30, m=120, rep=25 | hops=4 | min_hops=4 | attempts=2
+
+Generated and saved 86/360 evaluation graphs.
+Accepted graph | n=30, m=120, rep=26 | hops=4 | min_hops=4 | attempts=3
+
+Generated and saved 87/360 evaluation graphs.
+Accepted graph | n=30, m=120, rep=27 | hops=4 | min_hops=4 | attempts=1
+
+Generated and saved 88/360 evaluation graphs.
+Accepted graph | n=30, m=120, rep=28 | hops=4 | min_hops=4 | attempts=3
+
+Generated and saved 89/360 evaluation graphs.
+Accepted graph | n=30, m=120, rep=29 | hops=4 | min_hops=4 | attempts=7
+
+Generated and saved 90/360 evaluation graphs.
+Accepted graph | n=30, m=180, rep=0 | hops=3 | min_hops=3 | attempts=9
+
+Generated and saved 91/360 evaluation graphs.
+Accepted graph | n=30, m=180, rep=1 | hops=3 | min_hops=3 | attempts=2
+
+Generated and saved 92/360 evaluation graphs.
+Accepted graph | n=30, m=180, rep=2 | hops=3 | min_hops=3 | attempts=15
+
+Generated and saved 93/360 evaluation graphs.
+Accepted graph | n=30, m=180, rep=3 | hops=3 | min_hops=3 | attempts=14
+
+Generated and saved 94/360 evaluation graphs.
+Accepted graph | n=30, m=180, rep=4 | hops=3 | min_hops=3 | attempts=1
+
+Generated and saved 95/360 evaluation graphs.
+Accepted graph | n=30, m=180, rep=5 | hops=3 | min_hops=3 | attempts=5
+
+Generated and saved 96/360 evaluation graphs.
+Accepted graph | n=30, m=180, rep=6 | hops=3 | min_hops=3 | attempts=4
+
+Generated and saved 97/360 evaluation graphs.
+Accepted graph | n=30, m=180, rep=7 | hops=3 | min_hops=3 | attempts=3
+
+Generated and saved 98/360 evaluation graphs.
+Accepted graph | n=30, m=180, rep=8 | hops=3 | min_hops=3 | attempts=1
+
+Generated and saved 99/360 evaluation graphs.
+Accepted graph | n=30, m=180, rep=9 | hops=3 | min_hops=3 | attempts=1
+
+Generated and saved 100/360 evaluation graphs.
+Accepted graph | n=30, m=180, rep=10 | hops=3 | min_hops=3 | attempts=5
+
+Generated and saved 101/360 evaluation graphs.
+Accepted graph | n=30, m=180, rep=11 | hops=3 | min_hops=3 | attempts=3
+
+Generated and saved 102/360 evaluation graphs.
+Accepted graph | n=30, m=180, rep=12 | hops=3 | min_hops=3 | attempts=4
+
+Generated and saved 103/360 evaluation graphs.
+Accepted graph | n=30, m=180, rep=13 | hops=3 | min_hops=3 | attempts=19
+
+Generated and saved 104/360 evaluation graphs.
+Accepted graph | n=30, m=180, rep=14 | hops=3 | min_hops=3 | attempts=3
+
+Generated and saved 105/360 evaluation graphs.
+Accepted graph | n=30, m=180, rep=15 | hops=3 | min_hops=3 | attempts=4
+
+Generated and saved 106/360 evaluation graphs.
+Accepted graph | n=30, m=180, rep=16 | hops=3 | min_hops=3 | attempts=1
+
+Generated and saved 107/360 evaluation graphs.
+Accepted graph | n=30, m=180, rep=17 | hops=3 | min_hops=3 | attempts=2
+
+Generated and saved 108/360 evaluation graphs.
+Accepted graph | n=30, m=180, rep=18 | hops=3 | min_hops=3 | attempts=1
+
+Generated and saved 109/360 evaluation graphs.
+Accepted graph | n=30, m=180, rep=19 | hops=3 | min_hops=3 | attempts=4
+
+Generated and saved 110/360 evaluation graphs.
+Accepted graph | n=30, m=180, rep=20 | hops=3 | min_hops=3 | attempts=1
+
+Generated and saved 111/360 evaluation graphs.
+Accepted graph | n=30, m=180, rep=21 | hops=3 | min_hops=3 | attempts=2
+
+Generated and saved 112/360 evaluation graphs.
+Accepted graph | n=30, m=180, rep=22 | hops=3 | min_hops=3 | attempts=6
+
+Generated and saved 113/360 evaluation graphs.
+Accepted graph | n=30, m=180, rep=23 | hops=3 | min_hops=3 | attempts=4
+
+Generated and saved 114/360 evaluation graphs.
+Accepted graph | n=30, m=180, rep=24 | hops=3 | min_hops=3 | attempts=2
+
+Generated and saved 115/360 evaluation graphs.
+Accepted graph | n=30, m=180, rep=25 | hops=3 | min_hops=3 | attempts=8
+
+Generated and saved 116/360 evaluation graphs.
+Accepted graph | n=30, m=180, rep=26 | hops=3 | min_hops=3 | attempts=2
+
+Generated and saved 117/360 evaluation graphs.
+Accepted graph | n=30, m=180, rep=27 | hops=3 | min_hops=3 | attempts=6
+
+Generated and saved 118/360 evaluation graphs.
+Accepted graph | n=30, m=180, rep=28 | hops=4 | min_hops=3 | attempts=2
+
+Generated and saved 119/360 evaluation graphs.
+Accepted graph | n=30, m=180, rep=29 | hops=3 | min_hops=3 | attempts=2
+
+Generated and saved 120/360 evaluation graphs.
+Accepted graph | n=50, m=100, rep=0 | hops=8 | min_hops=8 | attempts=2
+
+Generated and saved 121/360 evaluation graphs.
+Accepted graph | n=50, m=100, rep=1 | hops=8 | min_hops=8 | attempts=3
+
+Generated and saved 122/360 evaluation graphs.
+Accepted graph | n=50, m=100, rep=2 | hops=9 | min_hops=8 | attempts=1
+
+Generated and saved 123/360 evaluation graphs.
+Accepted graph | n=50, m=100, rep=3 | hops=8 | min_hops=8 | attempts=10
+
+Generated and saved 124/360 evaluation graphs.
+Accepted graph | n=50, m=100, rep=4 | hops=8 | min_hops=8 | attempts=3
+
+Generated and saved 125/360 evaluation graphs.
+Accepted graph | n=50, m=100, rep=5 | hops=8 | min_hops=8 | attempts=2
+
+Generated and saved 126/360 evaluation graphs.
+Accepted graph | n=50, m=100, rep=6 | hops=10 | min_hops=8 | attempts=10
+
+Generated and saved 127/360 evaluation graphs.
+Accepted graph | n=50, m=100, rep=7 | hops=9 | min_hops=8 | attempts=4
+
+Generated and saved 128/360 evaluation graphs.
+Accepted graph | n=50, m=100, rep=8 | hops=8 | min_hops=8 | attempts=3
+
+Generated and saved 129/360 evaluation graphs.
+Accepted graph | n=50, m=100, rep=9 | hops=11 | min_hops=8 | attempts=9
+
+Generated and saved 130/360 evaluation graphs.
+Accepted graph | n=50, m=100, rep=10 | hops=8 | min_hops=8 | attempts=28
+
+Generated and saved 131/360 evaluation graphs.
+Accepted graph | n=50, m=100, rep=11 | hops=8 | min_hops=8 | attempts=1
+
+Generated and saved 132/360 evaluation graphs.
+Accepted graph | n=50, m=100, rep=12 | hops=8 | min_hops=8 | attempts=15
+
+Generated and saved 133/360 evaluation graphs.
+Accepted graph | n=50, m=100, rep=13 | hops=8 | min_hops=8 | attempts=6
+
+Generated and saved 134/360 evaluation graphs.
+Accepted graph | n=50, m=100, rep=14 | hops=9 | min_hops=8 | attempts=7
+
+Generated and saved 135/360 evaluation graphs.
+Accepted graph | n=50, m=100, rep=15 | hops=9 | min_hops=8 | attempts=1
+
+Generated and saved 136/360 evaluation graphs.
+Accepted graph | n=50, m=100, rep=16 | hops=8 | min_hops=8 | attempts=6
+
+Generated and saved 137/360 evaluation graphs.
+Accepted graph | n=50, m=100, rep=17 | hops=8 | min_hops=8 | attempts=11
+
+Generated and saved 138/360 evaluation graphs.
+Accepted graph | n=50, m=100, rep=18 | hops=13 | min_hops=8 | attempts=1
+
+Generated and saved 139/360 evaluation graphs.
+Accepted graph | n=50, m=100, rep=19 | hops=8 | min_hops=8 | attempts=13
+
+Generated and saved 140/360 evaluation graphs.
+Accepted graph | n=50, m=100, rep=20 | hops=8 | min_hops=8 | attempts=2
+
+Generated and saved 141/360 evaluation graphs.
+Accepted graph | n=50, m=100, rep=21 | hops=12 | min_hops=8 | attempts=1
+
+Generated and saved 142/360 evaluation graphs.
+Accepted graph | n=50, m=100, rep=22 | hops=10 | min_hops=8 | attempts=16
+
+Generated and saved 143/360 evaluation graphs.
+Accepted graph | n=50, m=100, rep=23 | hops=8 | min_hops=8 | attempts=1
+
+Generated and saved 144/360 evaluation graphs.
+Accepted graph | n=50, m=100, rep=24 | hops=9 | min_hops=8 | attempts=12
+
+Generated and saved 145/360 evaluation graphs.
+Accepted graph | n=50, m=100, rep=25 | hops=8 | min_hops=8 | attempts=13
+
+Generated and saved 146/360 evaluation graphs.
+Accepted graph | n=50, m=100, rep=26 | hops=10 | min_hops=8 | attempts=12
+
+Generated and saved 147/360 evaluation graphs.
+Accepted graph | n=50, m=100, rep=27 | hops=9 | min_hops=8 | attempts=7
+
+Generated and saved 148/360 evaluation graphs.
+Accepted graph | n=50, m=100, rep=28 | hops=10 | min_hops=8 | attempts=23
+
+Generated and saved 149/360 evaluation graphs.
+Accepted graph | n=50, m=100, rep=29 | hops=9 | min_hops=8 | attempts=2
+
+Generated and saved 150/360 evaluation graphs.
+Accepted graph | n=50, m=150, rep=0 | hops=5 | min_hops=5 | attempts=13
+
+Generated and saved 151/360 evaluation graphs.
+Accepted graph | n=50, m=150, rep=1 | hops=5 | min_hops=5 | attempts=3
+
+Generated and saved 152/360 evaluation graphs.
+Accepted graph | n=50, m=150, rep=2 | hops=6 | min_hops=5 | attempts=1
+
+Generated and saved 153/360 evaluation graphs.
+Accepted graph | n=50, m=150, rep=3 | hops=5 | min_hops=5 | attempts=4
+
+Generated and saved 154/360 evaluation graphs.
+Accepted graph | n=50, m=150, rep=4 | hops=5 | min_hops=5 | attempts=9
+
+Generated and saved 155/360 evaluation graphs.
+Accepted graph | n=50, m=150, rep=5 | hops=5 | min_hops=5 | attempts=8
+
+Generated and saved 156/360 evaluation graphs.
+Accepted graph | n=50, m=150, rep=6 | hops=5 | min_hops=5 | attempts=4
+
+Generated and saved 157/360 evaluation graphs.
+Accepted graph | n=50, m=150, rep=7 | hops=5 | min_hops=5 | attempts=2
+
+Generated and saved 158/360 evaluation graphs.
+Accepted graph | n=50, m=150, rep=8 | hops=5 | min_hops=5 | attempts=3
+
+Generated and saved 159/360 evaluation graphs.
+Accepted graph | n=50, m=150, rep=9 | hops=5 | min_hops=5 | attempts=2
+
+Generated and saved 160/360 evaluation graphs.
+Accepted graph | n=50, m=150, rep=10 | hops=5 | min_hops=5 | attempts=2
+
+Generated and saved 161/360 evaluation graphs.
+Accepted graph | n=50, m=150, rep=11 | hops=5 | min_hops=5 | attempts=14
+
+Generated and saved 162/360 evaluation graphs.
+Accepted graph | n=50, m=150, rep=12 | hops=6 | min_hops=5 | attempts=2
+
+Generated and saved 163/360 evaluation graphs.
+Accepted graph | n=50, m=150, rep=13 | hops=6 | min_hops=5 | attempts=8
+
+Generated and saved 164/360 evaluation graphs.
+Accepted graph | n=50, m=150, rep=14 | hops=5 | min_hops=5 | attempts=16
+
+Generated and saved 165/360 evaluation graphs.
+Accepted graph | n=50, m=150, rep=15 | hops=5 | min_hops=5 | attempts=2
+
+Generated and saved 166/360 evaluation graphs.
+Accepted graph | n=50, m=150, rep=16 | hops=5 | min_hops=5 | attempts=5
+
+Generated and saved 167/360 evaluation graphs.
+Accepted graph | n=50, m=150, rep=17 | hops=5 | min_hops=5 | attempts=4
+
+Generated and saved 168/360 evaluation graphs.
+Accepted graph | n=50, m=150, rep=18 | hops=5 | min_hops=5 | attempts=1
+
+Generated and saved 169/360 evaluation graphs.
+Accepted graph | n=50, m=150, rep=19 | hops=5 | min_hops=5 | attempts=2
+
+Generated and saved 170/360 evaluation graphs.
+Accepted graph | n=50, m=150, rep=20 | hops=5 | min_hops=5 | attempts=2
+
+Generated and saved 171/360 evaluation graphs.
+Accepted graph | n=50, m=150, rep=21 | hops=5 | min_hops=5 | attempts=1
+
+Generated and saved 172/360 evaluation graphs.
+Accepted graph | n=50, m=150, rep=22 | hops=5 | min_hops=5 | attempts=1
+
+Generated and saved 173/360 evaluation graphs.
+Accepted graph | n=50, m=150, rep=23 | hops=6 | min_hops=5 | attempts=10
+
+Generated and saved 174/360 evaluation graphs.
+Accepted graph | n=50, m=150, rep=24 | hops=8 | min_hops=5 | attempts=5
+
+Generated and saved 175/360 evaluation graphs.
+Accepted graph | n=50, m=150, rep=25 | hops=5 | min_hops=5 | attempts=6
+
+Generated and saved 176/360 evaluation graphs.
+Accepted graph | n=50, m=150, rep=26 | hops=6 | min_hops=5 | attempts=13
+
+Generated and saved 177/360 evaluation graphs.
+Accepted graph | n=50, m=150, rep=27 | hops=5 | min_hops=5 | attempts=1
+
+Generated and saved 178/360 evaluation graphs.
+Accepted graph | n=50, m=150, rep=28 | hops=5 | min_hops=5 | attempts=8
+
+Generated and saved 179/360 evaluation graphs.
+Accepted graph | n=50, m=150, rep=29 | hops=7 | min_hops=5 | attempts=1
+
+Generated and saved 180/360 evaluation graphs.
+Accepted graph | n=50, m=200, rep=0 | hops=5 | min_hops=5 | attempts=6
+
+Generated and saved 181/360 evaluation graphs.
+Accepted graph | n=50, m=200, rep=1 | hops=5 | min_hops=5 | attempts=20
+
+Generated and saved 182/360 evaluation graphs.
+Accepted graph | n=50, m=200, rep=2 | hops=5 | min_hops=5 | attempts=15
+
+Generated and saved 183/360 evaluation graphs.
+Accepted graph | n=50, m=200, rep=3 | hops=5 | min_hops=5 | attempts=60
+
+Generated and saved 184/360 evaluation graphs.
+Accepted graph | n=50, m=200, rep=4 | hops=5 | min_hops=5 | attempts=2
+
+Generated and saved 185/360 evaluation graphs.
+Accepted graph | n=50, m=200, rep=5 | hops=5 | min_hops=5 | attempts=10
+
+Generated and saved 186/360 evaluation graphs.
+Accepted graph | n=50, m=200, rep=6 | hops=5 | min_hops=5 | attempts=17
+
+Generated and saved 187/360 evaluation graphs.
+Accepted graph | n=50, m=200, rep=7 | hops=5 | min_hops=5 | attempts=3
+
+Generated and saved 188/360 evaluation graphs.
+Accepted graph | n=50, m=200, rep=8 | hops=5 | min_hops=5 | attempts=9
+
+Generated and saved 189/360 evaluation graphs.
+Accepted graph | n=50, m=200, rep=9 | hops=5 | min_hops=5 | attempts=4
+
+Generated and saved 190/360 evaluation graphs.
+Accepted graph | n=50, m=200, rep=10 | hops=7 | min_hops=5 | attempts=15
+
+Generated and saved 191/360 evaluation graphs.
+Accepted graph | n=50, m=200, rep=11 | hops=5 | min_hops=5 | attempts=4
+
+Generated and saved 192/360 evaluation graphs.
+Accepted graph | n=50, m=200, rep=12 | hops=5 | min_hops=5 | attempts=70
+
+Generated and saved 193/360 evaluation graphs.
+Accepted graph | n=50, m=200, rep=13 | hops=5 | min_hops=5 | attempts=58
+
+Generated and saved 194/360 evaluation graphs.
+Accepted graph | n=50, m=200, rep=14 | hops=5 | min_hops=5 | attempts=23
+
+Generated and saved 195/360 evaluation graphs.
+Accepted graph | n=50, m=200, rep=15 | hops=5 | min_hops=5 | attempts=10
+
+Generated and saved 196/360 evaluation graphs.
+Accepted graph | n=50, m=200, rep=16 | hops=5 | min_hops=5 | attempts=8
+
+Generated and saved 197/360 evaluation graphs.
+Accepted graph | n=50, m=200, rep=17 | hops=5 | min_hops=5 | attempts=11
+
+Generated and saved 198/360 evaluation graphs.
+Accepted graph | n=50, m=200, rep=18 | hops=5 | min_hops=5 | attempts=88
+
+Generated and saved 199/360 evaluation graphs.
+Accepted graph | n=50, m=200, rep=19 | hops=5 | min_hops=5 | attempts=70
+
+Generated and saved 200/360 evaluation graphs.
+Accepted graph | n=50, m=200, rep=20 | hops=6 | min_hops=5 | attempts=34
+
+Generated and saved 201/360 evaluation graphs.
+Accepted graph | n=50, m=200, rep=21 | hops=5 | min_hops=5 | attempts=1
+
+Generated and saved 202/360 evaluation graphs.
+Accepted graph | n=50, m=200, rep=22 | hops=5 | min_hops=5 | attempts=24
+
+Generated and saved 203/360 evaluation graphs.
+Accepted graph | n=50, m=200, rep=23 | hops=5 | min_hops=5 | attempts=41
+
+Generated and saved 204/360 evaluation graphs.
+Accepted graph | n=50, m=200, rep=24 | hops=5 | min_hops=5 | attempts=12
+
+Generated and saved 205/360 evaluation graphs.
+Accepted graph | n=50, m=200, rep=25 | hops=5 | min_hops=5 | attempts=16
+
+Generated and saved 206/360 evaluation graphs.
+Accepted graph | n=50, m=200, rep=26 | hops=5 | min_hops=5 | attempts=2
+
+Generated and saved 207/360 evaluation graphs.
+Accepted graph | n=50, m=200, rep=27 | hops=5 | min_hops=5 | attempts=12
+
+Generated and saved 208/360 evaluation graphs.
+Accepted graph | n=50, m=200, rep=28 | hops=5 | min_hops=5 | attempts=25
+
+Generated and saved 209/360 evaluation graphs.
+Accepted graph | n=50, m=200, rep=29 | hops=5 | min_hops=5 | attempts=38
+
+Generated and saved 210/360 evaluation graphs.
+Accepted graph | n=50, m=300, rep=0 | hops=4 | min_hops=4 | attempts=51
+
+Generated and saved 211/360 evaluation graphs.
+Accepted graph | n=50, m=300, rep=1 | hops=5 | min_hops=4 | attempts=1
+
+Generated and saved 212/360 evaluation graphs.
+Accepted graph | n=50, m=300, rep=2 | hops=4 | min_hops=4 | attempts=23
+
+Generated and saved 213/360 evaluation graphs.
+Accepted graph | n=50, m=300, rep=3 | hops=4 | min_hops=4 | attempts=35
+
+Generated and saved 214/360 evaluation graphs.
+Accepted graph | n=50, m=300, rep=4 | hops=4 | min_hops=4 | attempts=10
+
+Generated and saved 215/360 evaluation graphs.
+Accepted graph | n=50, m=300, rep=5 | hops=4 | min_hops=4 | attempts=2
+
+Generated and saved 216/360 evaluation graphs.
+Accepted graph | n=50, m=300, rep=6 | hops=4 | min_hops=4 | attempts=5
+
+Generated and saved 217/360 evaluation graphs.
+Accepted graph | n=50, m=300, rep=7 | hops=4 | min_hops=4 | attempts=1
+
+Generated and saved 218/360 evaluation graphs.
+Accepted graph | n=50, m=300, rep=8 | hops=4 | min_hops=4 | attempts=11
+
+Generated and saved 219/360 evaluation graphs.
+Accepted graph | n=50, m=300, rep=9 | hops=4 | min_hops=4 | attempts=34
+
+Generated and saved 220/360 evaluation graphs.
+Accepted graph | n=50, m=300, rep=10 | hops=4 | min_hops=4 | attempts=18
+
+Generated and saved 221/360 evaluation graphs.
+Accepted graph | n=50, m=300, rep=11 | hops=4 | min_hops=4 | attempts=22
+
+Generated and saved 222/360 evaluation graphs.
+Accepted graph | n=50, m=300, rep=12 | hops=4 | min_hops=4 | attempts=34
+
+Generated and saved 223/360 evaluation graphs.
+Accepted graph | n=50, m=300, rep=13 | hops=4 | min_hops=4 | attempts=19
+
+Generated and saved 224/360 evaluation graphs.
+Accepted graph | n=50, m=300, rep=14 | hops=4 | min_hops=4 | attempts=9
+
+Generated and saved 225/360 evaluation graphs.
+Accepted graph | n=50, m=300, rep=15 | hops=4 | min_hops=4 | attempts=2
+
+Generated and saved 226/360 evaluation graphs.
+Accepted graph | n=50, m=300, rep=16 | hops=4 | min_hops=4 | attempts=5
+
+Generated and saved 227/360 evaluation graphs.
+Accepted graph | n=50, m=300, rep=17 | hops=4 | min_hops=4 | attempts=20
+
+Generated and saved 228/360 evaluation graphs.
+Accepted graph | n=50, m=300, rep=18 | hops=4 | min_hops=4 | attempts=6
+
+Generated and saved 229/360 evaluation graphs.
+Accepted graph | n=50, m=300, rep=19 | hops=4 | min_hops=4 | attempts=12
+
+Generated and saved 230/360 evaluation graphs.
+Accepted graph | n=50, m=300, rep=20 | hops=4 | min_hops=4 | attempts=22
+
+Generated and saved 231/360 evaluation graphs.
+Accepted graph | n=50, m=300, rep=21 | hops=4 | min_hops=4 | attempts=6
+
+Generated and saved 232/360 evaluation graphs.
+Accepted graph | n=50, m=300, rep=22 | hops=4 | min_hops=4 | attempts=5
+
+Generated and saved 233/360 evaluation graphs.
+Accepted graph | n=50, m=300, rep=23 | hops=4 | min_hops=4 | attempts=31
+
+Generated and saved 234/360 evaluation graphs.
+Accepted graph | n=50, m=300, rep=24 | hops=4 | min_hops=4 | attempts=76
+
+Generated and saved 235/360 evaluation graphs.
+Accepted graph | n=50, m=300, rep=25 | hops=4 | min_hops=4 | attempts=17
+
+Generated and saved 236/360 evaluation graphs.
+Accepted graph | n=50, m=300, rep=26 | hops=4 | min_hops=4 | attempts=33
+
+Generated and saved 237/360 evaluation graphs.
+Accepted graph | n=50, m=300, rep=27 | hops=4 | min_hops=4 | attempts=33
+
+Generated and saved 238/360 evaluation graphs.
+Accepted graph | n=50, m=300, rep=28 | hops=4 | min_hops=4 | attempts=5
+
+Generated and saved 239/360 evaluation graphs.
+Accepted graph | n=50, m=300, rep=29 | hops=4 | min_hops=4 | attempts=18
+
+Generated and saved 240/360 evaluation graphs.
+Accepted graph | n=75, m=150, rep=0 | hops=8 | min_hops=8 | attempts=5
+
+Generated and saved 241/360 evaluation graphs.
+Accepted graph | n=75, m=150, rep=1 | hops=11 | min_hops=8 | attempts=1
+
+Generated and saved 242/360 evaluation graphs.
+Accepted graph | n=75, m=150, rep=2 | hops=13 | min_hops=8 | attempts=6
+
+Generated and saved 243/360 evaluation graphs.
+Accepted graph | n=75, m=150, rep=3 | hops=10 | min_hops=8 | attempts=9
+
+Generated and saved 244/360 evaluation graphs.
+Accepted graph | n=75, m=150, rep=4 | hops=8 | min_hops=8 | attempts=2
+
+Generated and saved 245/360 evaluation graphs.
+Accepted graph | n=75, m=150, rep=5 | hops=9 | min_hops=8 | attempts=7
+
+Generated and saved 246/360 evaluation graphs.
+Accepted graph | n=75, m=150, rep=6 | hops=10 | min_hops=8 | attempts=1
+
+Generated and saved 247/360 evaluation graphs.
+Accepted graph | n=75, m=150, rep=7 | hops=8 | min_hops=8 | attempts=8
+
+Generated and saved 248/360 evaluation graphs.
+Accepted graph | n=75, m=150, rep=8 | hops=8 | min_hops=8 | attempts=1
+
+Generated and saved 249/360 evaluation graphs.
+Accepted graph | n=75, m=150, rep=9 | hops=10 | min_hops=8 | attempts=3
+
+Generated and saved 250/360 evaluation graphs.
+Accepted graph | n=75, m=150, rep=10 | hops=11 | min_hops=8 | attempts=13
+
+Generated and saved 251/360 evaluation graphs.
+Accepted graph | n=75, m=150, rep=11 | hops=8 | min_hops=8 | attempts=9
+
+Generated and saved 252/360 evaluation graphs.
+Accepted graph | n=75, m=150, rep=12 | hops=8 | min_hops=8 | attempts=5
+
+Generated and saved 253/360 evaluation graphs.
+Accepted graph | n=75, m=150, rep=13 | hops=9 | min_hops=8 | attempts=2
+
+Generated and saved 254/360 evaluation graphs.
+Accepted graph | n=75, m=150, rep=14 | hops=10 | min_hops=8 | attempts=12
+
+Generated and saved 255/360 evaluation graphs.
+Accepted graph | n=75, m=150, rep=15 | hops=10 | min_hops=8 | attempts=12
+
+Generated and saved 256/360 evaluation graphs.
+Accepted graph | n=75, m=150, rep=16 | hops=8 | min_hops=8 | attempts=6
+
+Generated and saved 257/360 evaluation graphs.
+Accepted graph | n=75, m=150, rep=17 | hops=9 | min_hops=8 | attempts=12
+
+Generated and saved 258/360 evaluation graphs.
+Accepted graph | n=75, m=150, rep=18 | hops=8 | min_hops=8 | attempts=12
+
+Generated and saved 259/360 evaluation graphs.
+Accepted graph | n=75, m=150, rep=19 | hops=9 | min_hops=8 | attempts=2
+
+Generated and saved 260/360 evaluation graphs.
+Accepted graph | n=75, m=150, rep=20 | hops=9 | min_hops=8 | attempts=9
+
+Generated and saved 261/360 evaluation graphs.
+Accepted graph | n=75, m=150, rep=21 | hops=10 | min_hops=8 | attempts=7
+
+Generated and saved 262/360 evaluation graphs.
+Accepted graph | n=75, m=150, rep=22 | hops=9 | min_hops=8 | attempts=2
+
+Generated and saved 263/360 evaluation graphs.
+Accepted graph | n=75, m=150, rep=23 | hops=9 | min_hops=8 | attempts=1
+
+Generated and saved 264/360 evaluation graphs.
+Accepted graph | n=75, m=150, rep=24 | hops=14 | min_hops=8 | attempts=2
+
+Generated and saved 265/360 evaluation graphs.
+Accepted graph | n=75, m=150, rep=25 | hops=8 | min_hops=8 | attempts=3
+
+Generated and saved 266/360 evaluation graphs.
+Accepted graph | n=75, m=150, rep=26 | hops=8 | min_hops=8 | attempts=10
+
+Generated and saved 267/360 evaluation graphs.
+Accepted graph | n=75, m=150, rep=27 | hops=8 | min_hops=8 | attempts=6
+
+Generated and saved 268/360 evaluation graphs.
+Accepted graph | n=75, m=150, rep=28 | hops=9 | min_hops=8 | attempts=2
+
+Generated and saved 269/360 evaluation graphs.
+Accepted graph | n=75, m=150, rep=29 | hops=9 | min_hops=8 | attempts=3
+
+Generated and saved 270/360 evaluation graphs.
+Accepted graph | n=75, m=225, rep=0 | hops=7 | min_hops=6 | attempts=11
+
+Generated and saved 271/360 evaluation graphs.
+Accepted graph | n=75, m=225, rep=1 | hops=6 | min_hops=6 | attempts=2
+
+Generated and saved 272/360 evaluation graphs.
+Accepted graph | n=75, m=225, rep=2 | hops=6 | min_hops=6 | attempts=4
+
+Generated and saved 273/360 evaluation graphs.
+Accepted graph | n=75, m=225, rep=3 | hops=7 | min_hops=6 | attempts=6
+
+Generated and saved 274/360 evaluation graphs.
+Accepted graph | n=75, m=225, rep=4 | hops=6 | min_hops=6 | attempts=1
+
+Generated and saved 275/360 evaluation graphs.
+Accepted graph | n=75, m=225, rep=5 | hops=6 | min_hops=6 | attempts=5
+
+Generated and saved 276/360 evaluation graphs.
+Accepted graph | n=75, m=225, rep=6 | hops=6 | min_hops=6 | attempts=17
+
+Generated and saved 277/360 evaluation graphs.
+Accepted graph | n=75, m=225, rep=7 | hops=6 | min_hops=6 | attempts=3
+
+Generated and saved 278/360 evaluation graphs.
+Accepted graph | n=75, m=225, rep=8 | hops=6 | min_hops=6 | attempts=20
+
+Generated and saved 279/360 evaluation graphs.
+Accepted graph | n=75, m=225, rep=9 | hops=6 | min_hops=6 | attempts=14
+
+Generated and saved 280/360 evaluation graphs.
+Accepted graph | n=75, m=225, rep=10 | hops=7 | min_hops=6 | attempts=1
+
+Generated and saved 281/360 evaluation graphs.
+Accepted graph | n=75, m=225, rep=11 | hops=6 | min_hops=6 | attempts=10
+
+Generated and saved 282/360 evaluation graphs.
+Accepted graph | n=75, m=225, rep=12 | hops=6 | min_hops=6 | attempts=1
+
+Generated and saved 283/360 evaluation graphs.
+Accepted graph | n=75, m=225, rep=13 | hops=6 | min_hops=6 | attempts=7
+
+Generated and saved 284/360 evaluation graphs.
+Accepted graph | n=75, m=225, rep=14 | hops=6 | min_hops=6 | attempts=5
+
+Generated and saved 285/360 evaluation graphs.
+Accepted graph | n=75, m=225, rep=15 | hops=6 | min_hops=6 | attempts=13
+
+Generated and saved 286/360 evaluation graphs.
+Accepted graph | n=75, m=225, rep=16 | hops=6 | min_hops=6 | attempts=19
+
+Generated and saved 287/360 evaluation graphs.
+Accepted graph | n=75, m=225, rep=17 | hops=6 | min_hops=6 | attempts=3
+
+Generated and saved 288/360 evaluation graphs.
+Accepted graph | n=75, m=225, rep=18 | hops=6 | min_hops=6 | attempts=17
+
+Generated and saved 289/360 evaluation graphs.
+Accepted graph | n=75, m=225, rep=19 | hops=6 | min_hops=6 | attempts=4
+
+Generated and saved 290/360 evaluation graphs.
+Accepted graph | n=75, m=225, rep=20 | hops=6 | min_hops=6 | attempts=8
+
+Generated and saved 291/360 evaluation graphs.
+Accepted graph | n=75, m=225, rep=21 | hops=6 | min_hops=6 | attempts=15
+
+Generated and saved 292/360 evaluation graphs.
+Accepted graph | n=75, m=225, rep=22 | hops=6 | min_hops=6 | attempts=38
+
+Generated and saved 293/360 evaluation graphs.
+Accepted graph | n=75, m=225, rep=23 | hops=6 | min_hops=6 | attempts=3
+
+Generated and saved 294/360 evaluation graphs.
+Accepted graph | n=75, m=225, rep=24 | hops=6 | min_hops=6 | attempts=7
+
+Generated and saved 295/360 evaluation graphs.
+Accepted graph | n=75, m=225, rep=25 | hops=7 | min_hops=6 | attempts=1
+
+Generated and saved 296/360 evaluation graphs.
+Accepted graph | n=75, m=225, rep=26 | hops=6 | min_hops=6 | attempts=12
+
+Generated and saved 297/360 evaluation graphs.
+Accepted graph | n=75, m=225, rep=27 | hops=6 | min_hops=6 | attempts=49
+
+Generated and saved 298/360 evaluation graphs.
+Accepted graph | n=75, m=225, rep=28 | hops=6 | min_hops=6 | attempts=9
+
+Generated and saved 299/360 evaluation graphs.
+Accepted graph | n=75, m=225, rep=29 | hops=6 | min_hops=6 | attempts=2
+
+Generated and saved 300/360 evaluation graphs.
+Accepted graph | n=75, m=300, rep=0 | hops=5 | min_hops=5 | attempts=11
+
+Generated and saved 301/360 evaluation graphs.
+Accepted graph | n=75, m=300, rep=1 | hops=5 | min_hops=5 | attempts=7
+
+Generated and saved 302/360 evaluation graphs.
+Accepted graph | n=75, m=300, rep=2 | hops=7 | min_hops=5 | attempts=4
+
+Generated and saved 303/360 evaluation graphs.
+Accepted graph | n=75, m=300, rep=3 | hops=5 | min_hops=5 | attempts=1
+
+Generated and saved 304/360 evaluation graphs.
+Accepted graph | n=75, m=300, rep=4 | hops=5 | min_hops=5 | attempts=8
+
+Generated and saved 305/360 evaluation graphs.
+Accepted graph | n=75, m=300, rep=5 | hops=5 | min_hops=5 | attempts=4
+
+Generated and saved 306/360 evaluation graphs.
+Accepted graph | n=75, m=300, rep=6 | hops=5 | min_hops=5 | attempts=29
+
+Generated and saved 307/360 evaluation graphs.
+Accepted graph | n=75, m=300, rep=7 | hops=5 | min_hops=5 | attempts=32
+
+Generated and saved 308/360 evaluation graphs.
+Accepted graph | n=75, m=300, rep=8 | hops=5 | min_hops=5 | attempts=1
+
+Generated and saved 309/360 evaluation graphs.
+Accepted graph | n=75, m=300, rep=9 | hops=5 | min_hops=5 | attempts=44
+
+Generated and saved 310/360 evaluation graphs.
+Accepted graph | n=75, m=300, rep=10 | hops=5 | min_hops=5 | attempts=6
+
+Generated and saved 311/360 evaluation graphs.
+Accepted graph | n=75, m=300, rep=11 | hops=5 | min_hops=5 | attempts=11
+
+Generated and saved 312/360 evaluation graphs.
+Accepted graph | n=75, m=300, rep=12 | hops=5 | min_hops=5 | attempts=20
+
+Generated and saved 313/360 evaluation graphs.
+Accepted graph | n=75, m=300, rep=13 | hops=5 | min_hops=5 | attempts=16
+
+Generated and saved 314/360 evaluation graphs.
+Accepted graph | n=75, m=300, rep=14 | hops=5 | min_hops=5 | attempts=6
+
+Generated and saved 315/360 evaluation graphs.
+Accepted graph | n=75, m=300, rep=15 | hops=5 | min_hops=5 | attempts=1
+
+Generated and saved 316/360 evaluation graphs.
+Accepted graph | n=75, m=300, rep=16 | hops=5 | min_hops=5 | attempts=12
+
+Generated and saved 317/360 evaluation graphs.
+Accepted graph | n=75, m=300, rep=17 | hops=5 | min_hops=5 | attempts=21
+
+Generated and saved 318/360 evaluation graphs.
+Accepted graph | n=75, m=300, rep=18 | hops=5 | min_hops=5 | attempts=9
+
+Generated and saved 319/360 evaluation graphs.
+Accepted graph | n=75, m=300, rep=19 | hops=5 | min_hops=5 | attempts=7
+
+Generated and saved 320/360 evaluation graphs.
+Accepted graph | n=75, m=300, rep=20 | hops=5 | min_hops=5 | attempts=4
+
+Generated and saved 321/360 evaluation graphs.
+Accepted graph | n=75, m=300, rep=21 | hops=5 | min_hops=5 | attempts=21
+
+Generated and saved 322/360 evaluation graphs.
+Accepted graph | n=75, m=300, rep=22 | hops=5 | min_hops=5 | attempts=5
+
+Generated and saved 323/360 evaluation graphs.
+Accepted graph | n=75, m=300, rep=23 | hops=5 | min_hops=5 | attempts=15
+
+Generated and saved 324/360 evaluation graphs.
+Accepted graph | n=75, m=300, rep=24 | hops=5 | min_hops=5 | attempts=2
+
+Generated and saved 325/360 evaluation graphs.
+Accepted graph | n=75, m=300, rep=25 | hops=6 | min_hops=5 | attempts=35
+
+Generated and saved 326/360 evaluation graphs.
+Accepted graph | n=75, m=300, rep=26 | hops=5 | min_hops=5 | attempts=21
+
+Generated and saved 327/360 evaluation graphs.
+Accepted graph | n=75, m=300, rep=27 | hops=5 | min_hops=5 | attempts=26
+
+Generated and saved 328/360 evaluation graphs.
+Accepted graph | n=75, m=300, rep=28 | hops=5 | min_hops=5 | attempts=3
+
+Generated and saved 329/360 evaluation graphs.
+Accepted graph | n=75, m=300, rep=29 | hops=5 | min_hops=5 | attempts=39
+
+Generated and saved 330/360 evaluation graphs.
+Accepted graph | n=75, m=450, rep=0 | hops=4 | min_hops=4 | attempts=18
+
+Generated and saved 331/360 evaluation graphs.
+Accepted graph | n=75, m=450, rep=1 | hops=4 | min_hops=4 | attempts=5
+
+Generated and saved 332/360 evaluation graphs.
+Accepted graph | n=75, m=450, rep=2 | hops=4 | min_hops=4 | attempts=6
+
+Generated and saved 333/360 evaluation graphs.
+Accepted graph | n=75, m=450, rep=3 | hops=4 | min_hops=4 | attempts=34
+
+Generated and saved 334/360 evaluation graphs.
+Accepted graph | n=75, m=450, rep=4 | hops=4 | min_hops=4 | attempts=6
+
+Generated and saved 335/360 evaluation graphs.
+Accepted graph | n=75, m=450, rep=5 | hops=4 | min_hops=4 | attempts=3
+
+Generated and saved 336/360 evaluation graphs.
+Accepted graph | n=75, m=450, rep=6 | hops=4 | min_hops=4 | attempts=9
+
+Generated and saved 337/360 evaluation graphs.
+Accepted graph | n=75, m=450, rep=7 | hops=4 | min_hops=4 | attempts=6
+
+Generated and saved 338/360 evaluation graphs.
+Accepted graph | n=75, m=450, rep=8 | hops=4 | min_hops=4 | attempts=3
+
+Generated and saved 339/360 evaluation graphs.
+Accepted graph | n=75, m=450, rep=9 | hops=4 | min_hops=4 | attempts=9
+
+Generated and saved 340/360 evaluation graphs.
+Accepted graph | n=75, m=450, rep=10 | hops=4 | min_hops=4 | attempts=7
+
+Generated and saved 341/360 evaluation graphs.
+Accepted graph | n=75, m=450, rep=11 | hops=4 | min_hops=4 | attempts=38
+
+Generated and saved 342/360 evaluation graphs.
+Accepted graph | n=75, m=450, rep=12 | hops=4 | min_hops=4 | attempts=11
+
+Generated and saved 343/360 evaluation graphs.
+Accepted graph | n=75, m=450, rep=13 | hops=4 | min_hops=4 | attempts=27
+
+Generated and saved 344/360 evaluation graphs.
+Accepted graph | n=75, m=450, rep=14 | hops=4 | min_hops=4 | attempts=1
+
+Generated and saved 345/360 evaluation graphs.
+Accepted graph | n=75, m=450, rep=15 | hops=4 | min_hops=4 | attempts=4
+
+Generated and saved 346/360 evaluation graphs.
+Accepted graph | n=75, m=450, rep=16 | hops=4 | min_hops=4 | attempts=29
+
+Generated and saved 347/360 evaluation graphs.
+Accepted graph | n=75, m=450, rep=17 | hops=4 | min_hops=4 | attempts=22
+
+Generated and saved 348/360 evaluation graphs.
+Accepted graph | n=75, m=450, rep=18 | hops=4 | min_hops=4 | attempts=1
+
+Generated and saved 349/360 evaluation graphs.
+Accepted graph | n=75, m=450, rep=19 | hops=4 | min_hops=4 | attempts=13
+
+Generated and saved 350/360 evaluation graphs.
+Accepted graph | n=75, m=450, rep=20 | hops=4 | min_hops=4 | attempts=6
+
+Generated and saved 351/360 evaluation graphs.
+Accepted graph | n=75, m=450, rep=21 | hops=4 | min_hops=4 | attempts=29
+
+Generated and saved 352/360 evaluation graphs.
+Accepted graph | n=75, m=450, rep=22 | hops=4 | min_hops=4 | attempts=1
+
+Generated and saved 353/360 evaluation graphs.
+Accepted graph | n=75, m=450, rep=23 | hops=4 | min_hops=4 | attempts=16
+
+Generated and saved 354/360 evaluation graphs.
+Accepted graph | n=75, m=450, rep=24 | hops=4 | min_hops=4 | attempts=2
+
+Generated and saved 355/360 evaluation graphs.
+Accepted graph | n=75, m=450, rep=25 | hops=4 | min_hops=4 | attempts=12
+
+Generated and saved 356/360 evaluation graphs.
+Accepted graph | n=75, m=450, rep=26 | hops=4 | min_hops=4 | attempts=9
+
+Generated and saved 357/360 evaluation graphs.
+Accepted graph | n=75, m=450, rep=27 | hops=4 | min_hops=4 | attempts=9
+
+Generated and saved 358/360 evaluation graphs.
+Accepted graph | n=75, m=450, rep=28 | hops=4 | min_hops=4 | attempts=54
+
+Generated and saved 359/360 evaluation graphs.
+Accepted graph | n=75, m=450, rep=29 | hops=4 | min_hops=4 | attempts=5
+
+Generated and saved 360/360 evaluation graphs.
+
+Finished. Saved 360 graphs to evaluation_graphs/shortest_path_value_ood_filtered_graphs.pkl
+Generating filtered size OOD evaluation graphs...
+Accepted graph | n=100, m=200, rep=0 | hops=10 | min_hops=9 | attempts=2
+
+Generated and saved 1/840 evaluation graphs.
+Accepted graph | n=100, m=200, rep=1 | hops=9 | min_hops=9 | attempts=12
+
+Generated and saved 2/840 evaluation graphs.
+Accepted graph | n=100, m=200, rep=2 | hops=10 | min_hops=9 | attempts=4
+
+Generated and saved 3/840 evaluation graphs.
+Accepted graph | n=100, m=200, rep=3 | hops=12 | min_hops=9 | attempts=3
+
+Generated and saved 4/840 evaluation graphs.
+Accepted graph | n=100, m=200, rep=4 | hops=10 | min_hops=9 | attempts=10
+
+Generated and saved 5/840 evaluation graphs.
+Accepted graph | n=100, m=200, rep=5 | hops=9 | min_hops=9 | attempts=5
+
+Generated and saved 6/840 evaluation graphs.
+Accepted graph | n=100, m=200, rep=6 | hops=10 | min_hops=9 | attempts=1
+
+Generated and saved 7/840 evaluation graphs.
+Accepted graph | n=100, m=200, rep=7 | hops=9 | min_hops=9 | attempts=1
+
+Generated and saved 8/840 evaluation graphs.
+Accepted graph | n=100, m=200, rep=8 | hops=13 | min_hops=9 | attempts=7
+
+Generated and saved 9/840 evaluation graphs.
+Accepted graph | n=100, m=200, rep=9 | hops=10 | min_hops=9 | attempts=3
+
+Generated and saved 10/840 evaluation graphs.
+Accepted graph | n=100, m=200, rep=10 | hops=9 | min_hops=9 | attempts=4
+
+Generated and saved 11/840 evaluation graphs.
+Accepted graph | n=100, m=200, rep=11 | hops=14 | min_hops=9 | attempts=9
+
+Generated and saved 12/840 evaluation graphs.
+Accepted graph | n=100, m=200, rep=12 | hops=10 | min_hops=9 | attempts=1
+
+Generated and saved 13/840 evaluation graphs.
+Accepted graph | n=100, m=200, rep=13 | hops=9 | min_hops=9 | attempts=14
+
+Generated and saved 14/840 evaluation graphs.
+Accepted graph | n=100, m=200, rep=14 | hops=10 | min_hops=9 | attempts=3
+
+Generated and saved 15/840 evaluation graphs.
+Accepted graph | n=100, m=200, rep=15 | hops=9 | min_hops=9 | attempts=4
+
+Generated and saved 16/840 evaluation graphs.
+Accepted graph | n=100, m=200, rep=16 | hops=9 | min_hops=9 | attempts=20
+
+Generated and saved 17/840 evaluation graphs.
+Accepted graph | n=100, m=200, rep=17 | hops=12 | min_hops=9 | attempts=8
+
+Generated and saved 18/840 evaluation graphs.
+Accepted graph | n=100, m=200, rep=18 | hops=10 | min_hops=9 | attempts=11
+
+Generated and saved 19/840 evaluation graphs.
+Accepted graph | n=100, m=200, rep=19 | hops=10 | min_hops=9 | attempts=6
+
+Generated and saved 20/840 evaluation graphs.
+Accepted graph | n=100, m=200, rep=20 | hops=11 | min_hops=9 | attempts=19
+
+Generated and saved 21/840 evaluation graphs.
+Accepted graph | n=100, m=200, rep=21 | hops=9 | min_hops=9 | attempts=2
+
+Generated and saved 22/840 evaluation graphs.
+Accepted graph | n=100, m=200, rep=22 | hops=10 | min_hops=9 | attempts=11
+
+Generated and saved 23/840 evaluation graphs.
+Accepted graph | n=100, m=200, rep=23 | hops=11 | min_hops=9 | attempts=21
+
+Generated and saved 24/840 evaluation graphs.
+Accepted graph | n=100, m=200, rep=24 | hops=9 | min_hops=9 | attempts=14
+
+Generated and saved 25/840 evaluation graphs.
+Accepted graph | n=100, m=200, rep=25 | hops=9 | min_hops=9 | attempts=9
+
+Generated and saved 26/840 evaluation graphs.
+Accepted graph | n=100, m=200, rep=26 | hops=9 | min_hops=9 | attempts=1
+
+Generated and saved 27/840 evaluation graphs.
+Accepted graph | n=100, m=200, rep=27 | hops=9 | min_hops=9 | attempts=5
+
+Generated and saved 28/840 evaluation graphs.
+Accepted graph | n=100, m=200, rep=28 | hops=12 | min_hops=9 | attempts=3
+
+Generated and saved 29/840 evaluation graphs.
+Accepted graph | n=100, m=200, rep=29 | hops=16 | min_hops=9 | attempts=1
+
+Generated and saved 30/840 evaluation graphs.
+Accepted graph | n=100, m=250, rep=0 | hops=7 | min_hops=7 | attempts=1
+
+Generated and saved 31/840 evaluation graphs.
+Accepted graph | n=100, m=250, rep=1 | hops=7 | min_hops=7 | attempts=6
+
+Generated and saved 32/840 evaluation graphs.
+Accepted graph | n=100, m=250, rep=2 | hops=7 | min_hops=7 | attempts=5
+
+Generated and saved 33/840 evaluation graphs.
+Accepted graph | n=100, m=250, rep=3 | hops=9 | min_hops=7 | attempts=5
+
+Generated and saved 34/840 evaluation graphs.
+Accepted graph | n=100, m=250, rep=4 | hops=7 | min_hops=7 | attempts=4
+
+Generated and saved 35/840 evaluation graphs.
+Accepted graph | n=100, m=250, rep=5 | hops=7 | min_hops=7 | attempts=5
+
+Generated and saved 36/840 evaluation graphs.
+Accepted graph | n=100, m=250, rep=6 | hops=7 | min_hops=7 | attempts=2
+
+Generated and saved 37/840 evaluation graphs.
+Accepted graph | n=100, m=250, rep=7 | hops=7 | min_hops=7 | attempts=1
+
+Generated and saved 38/840 evaluation graphs.
+Accepted graph | n=100, m=250, rep=8 | hops=7 | min_hops=7 | attempts=1
+
+Generated and saved 39/840 evaluation graphs.
+Accepted graph | n=100, m=250, rep=9 | hops=7 | min_hops=7 | attempts=1
+
+Generated and saved 40/840 evaluation graphs.
+Accepted graph | n=100, m=250, rep=10 | hops=8 | min_hops=7 | attempts=14
+
+Generated and saved 41/840 evaluation graphs.
+Accepted graph | n=100, m=250, rep=11 | hops=7 | min_hops=7 | attempts=1
+
+Generated and saved 42/840 evaluation graphs.
+Accepted graph | n=100, m=250, rep=12 | hops=8 | min_hops=7 | attempts=2
+
+Generated and saved 43/840 evaluation graphs.
+Accepted graph | n=100, m=250, rep=13 | hops=9 | min_hops=7 | attempts=14
+
+Generated and saved 44/840 evaluation graphs.
+Accepted graph | n=100, m=250, rep=14 | hops=7 | min_hops=7 | attempts=3
+
+Generated and saved 45/840 evaluation graphs.
+Accepted graph | n=100, m=250, rep=15 | hops=7 | min_hops=7 | attempts=1
+
+Generated and saved 46/840 evaluation graphs.
+Accepted graph | n=100, m=250, rep=16 | hops=9 | min_hops=7 | attempts=9
+
+Generated and saved 47/840 evaluation graphs.
+Accepted graph | n=100, m=250, rep=17 | hops=7 | min_hops=7 | attempts=3
+
+Generated and saved 48/840 evaluation graphs.
+Accepted graph | n=100, m=250, rep=18 | hops=8 | min_hops=7 | attempts=2
+
+Generated and saved 49/840 evaluation graphs.
+Accepted graph | n=100, m=250, rep=19 | hops=7 | min_hops=7 | attempts=24
+
+Generated and saved 50/840 evaluation graphs.
+Accepted graph | n=100, m=250, rep=20 | hops=9 | min_hops=7 | attempts=18
+
+Generated and saved 51/840 evaluation graphs.
+Accepted graph | n=100, m=250, rep=21 | hops=7 | min_hops=7 | attempts=1
+
+Generated and saved 52/840 evaluation graphs.
+Accepted graph | n=100, m=250, rep=22 | hops=8 | min_hops=7 | attempts=15
+
+Generated and saved 53/840 evaluation graphs.
+Accepted graph | n=100, m=250, rep=23 | hops=7 | min_hops=7 | attempts=1
+
+Generated and saved 54/840 evaluation graphs.
+Accepted graph | n=100, m=250, rep=24 | hops=7 | min_hops=7 | attempts=10
+
+Generated and saved 55/840 evaluation graphs.
+Accepted graph | n=100, m=250, rep=25 | hops=9 | min_hops=7 | attempts=1
+
+Generated and saved 56/840 evaluation graphs.
+Accepted graph | n=100, m=250, rep=26 | hops=7 | min_hops=7 | attempts=1
+
+Generated and saved 57/840 evaluation graphs.
+Accepted graph | n=100, m=250, rep=27 | hops=7 | min_hops=7 | attempts=1
+
+Generated and saved 58/840 evaluation graphs.
+Accepted graph | n=100, m=250, rep=28 | hops=8 | min_hops=7 | attempts=5
+
+Generated and saved 59/840 evaluation graphs.
+Accepted graph | n=100, m=250, rep=29 | hops=7 | min_hops=7 | attempts=1
+
+Generated and saved 60/840 evaluation graphs.
+Accepted graph | n=100, m=300, rep=0 | hops=6 | min_hops=6 | attempts=6
+
+Generated and saved 61/840 evaluation graphs.
+Accepted graph | n=100, m=300, rep=1 | hops=8 | min_hops=6 | attempts=17
+
+Generated and saved 62/840 evaluation graphs.
+Accepted graph | n=100, m=300, rep=2 | hops=6 | min_hops=6 | attempts=3
+
+Generated and saved 63/840 evaluation graphs.
+Accepted graph | n=100, m=300, rep=3 | hops=6 | min_hops=6 | attempts=10
+
+Generated and saved 64/840 evaluation graphs.
+Accepted graph | n=100, m=300, rep=4 | hops=6 | min_hops=6 | attempts=13
+
+Generated and saved 65/840 evaluation graphs.
+Accepted graph | n=100, m=300, rep=5 | hops=6 | min_hops=6 | attempts=7
+
+Generated and saved 66/840 evaluation graphs.
+Accepted graph | n=100, m=300, rep=6 | hops=6 | min_hops=6 | attempts=2
+
+Generated and saved 67/840 evaluation graphs.
+Accepted graph | n=100, m=300, rep=7 | hops=6 | min_hops=6 | attempts=4
+
+Generated and saved 68/840 evaluation graphs.
+Accepted graph | n=100, m=300, rep=8 | hops=6 | min_hops=6 | attempts=6
+
+Generated and saved 69/840 evaluation graphs.
+Accepted graph | n=100, m=300, rep=9 | hops=6 | min_hops=6 | attempts=4
+
+Generated and saved 70/840 evaluation graphs.
+Accepted graph | n=100, m=300, rep=10 | hops=6 | min_hops=6 | attempts=6
+
+Generated and saved 71/840 evaluation graphs.
+Accepted graph | n=100, m=300, rep=11 | hops=6 | min_hops=6 | attempts=3
+
+Generated and saved 72/840 evaluation graphs.
+Accepted graph | n=100, m=300, rep=12 | hops=6 | min_hops=6 | attempts=1
+
+Generated and saved 73/840 evaluation graphs.
+Accepted graph | n=100, m=300, rep=13 | hops=8 | min_hops=6 | attempts=1
+
+Generated and saved 74/840 evaluation graphs.
+Accepted graph | n=100, m=300, rep=14 | hops=6 | min_hops=6 | attempts=1
+
+Generated and saved 75/840 evaluation graphs.
+Accepted graph | n=100, m=300, rep=15 | hops=7 | min_hops=6 | attempts=1
+
+Generated and saved 76/840 evaluation graphs.
+Accepted graph | n=100, m=300, rep=16 | hops=6 | min_hops=6 | attempts=5
+
+Generated and saved 77/840 evaluation graphs.
+Accepted graph | n=100, m=300, rep=17 | hops=6 | min_hops=6 | attempts=2
+
+Generated and saved 78/840 evaluation graphs.
+Accepted graph | n=100, m=300, rep=18 | hops=8 | min_hops=6 | attempts=6
+
+Generated and saved 79/840 evaluation graphs.
+Accepted graph | n=100, m=300, rep=19 | hops=7 | min_hops=6 | attempts=2
+
+Generated and saved 80/840 evaluation graphs.
+Accepted graph | n=100, m=300, rep=20 | hops=6 | min_hops=6 | attempts=2
+
+Generated and saved 81/840 evaluation graphs.
+Accepted graph | n=100, m=300, rep=21 | hops=6 | min_hops=6 | attempts=21
+
+Generated and saved 82/840 evaluation graphs.
+Accepted graph | n=100, m=300, rep=22 | hops=6 | min_hops=6 | attempts=8
+
+Generated and saved 83/840 evaluation graphs.
+Accepted graph | n=100, m=300, rep=23 | hops=9 | min_hops=6 | attempts=12
+
+Generated and saved 84/840 evaluation graphs.
+Accepted graph | n=100, m=300, rep=24 | hops=6 | min_hops=6 | attempts=5
+
+Generated and saved 85/840 evaluation graphs.
+Accepted graph | n=100, m=300, rep=25 | hops=6 | min_hops=6 | attempts=5
+
+Generated and saved 86/840 evaluation graphs.
+Accepted graph | n=100, m=300, rep=26 | hops=6 | min_hops=6 | attempts=7
+
+Generated and saved 87/840 evaluation graphs.
+Accepted graph | n=100, m=300, rep=27 | hops=6 | min_hops=6 | attempts=6
+
+Generated and saved 88/840 evaluation graphs.
+Accepted graph | n=100, m=300, rep=28 | hops=7 | min_hops=6 | attempts=3
+
+Generated and saved 89/840 evaluation graphs.
+Accepted graph | n=100, m=300, rep=29 | hops=6 | min_hops=6 | attempts=5
+
+Generated and saved 90/840 evaluation graphs.
+Accepted graph | n=100, m=400, rep=0 | hops=5 | min_hops=5 | attempts=7
+
+Generated and saved 91/840 evaluation graphs.
+Accepted graph | n=100, m=400, rep=1 | hops=5 | min_hops=5 | attempts=2
+
+Generated and saved 92/840 evaluation graphs.
+Accepted graph | n=100, m=400, rep=2 | hops=5 | min_hops=5 | attempts=7
+
+Generated and saved 93/840 evaluation graphs.
+Accepted graph | n=100, m=400, rep=3 | hops=5 | min_hops=5 | attempts=3
+
+Generated and saved 94/840 evaluation graphs.
+Accepted graph | n=100, m=400, rep=4 | hops=5 | min_hops=5 | attempts=33
+
+Generated and saved 95/840 evaluation graphs.
+Accepted graph | n=100, m=400, rep=5 | hops=6 | min_hops=5 | attempts=11
+
+Generated and saved 96/840 evaluation graphs.
+Accepted graph | n=100, m=400, rep=6 | hops=5 | min_hops=5 | attempts=5
+
+Generated and saved 97/840 evaluation graphs.
+Accepted graph | n=100, m=400, rep=7 | hops=5 | min_hops=5 | attempts=1
+
+Generated and saved 98/840 evaluation graphs.
+Accepted graph | n=100, m=400, rep=8 | hops=5 | min_hops=5 | attempts=8
+
+Generated and saved 99/840 evaluation graphs.
+Accepted graph | n=100, m=400, rep=9 | hops=5 | min_hops=5 | attempts=14
+
+Generated and saved 100/840 evaluation graphs.
+Accepted graph | n=100, m=400, rep=10 | hops=5 | min_hops=5 | attempts=1
+
+Generated and saved 101/840 evaluation graphs.
+Accepted graph | n=100, m=400, rep=11 | hops=5 | min_hops=5 | attempts=8
+
+Generated and saved 102/840 evaluation graphs.
+Accepted graph | n=100, m=400, rep=12 | hops=5 | min_hops=5 | attempts=7
+
+Generated and saved 103/840 evaluation graphs.
+Accepted graph | n=100, m=400, rep=13 | hops=5 | min_hops=5 | attempts=26
+
+Generated and saved 104/840 evaluation graphs.
+Accepted graph | n=100, m=400, rep=14 | hops=5 | min_hops=5 | attempts=6
+
+Generated and saved 105/840 evaluation graphs.
+Accepted graph | n=100, m=400, rep=15 | hops=5 | min_hops=5 | attempts=7
+
+Generated and saved 106/840 evaluation graphs.
+Accepted graph | n=100, m=400, rep=16 | hops=5 | min_hops=5 | attempts=11
+
+Generated and saved 107/840 evaluation graphs.
+Accepted graph | n=100, m=400, rep=17 | hops=5 | min_hops=5 | attempts=4
+
+Generated and saved 108/840 evaluation graphs.
+Accepted graph | n=100, m=400, rep=18 | hops=5 | min_hops=5 | attempts=8
+
+Generated and saved 109/840 evaluation graphs.
+Accepted graph | n=100, m=400, rep=19 | hops=5 | min_hops=5 | attempts=8
+
+Generated and saved 110/840 evaluation graphs.
+Accepted graph | n=100, m=400, rep=20 | hops=5 | min_hops=5 | attempts=6
+
+Generated and saved 111/840 evaluation graphs.
+Accepted graph | n=100, m=400, rep=21 | hops=5 | min_hops=5 | attempts=8
+
+Generated and saved 112/840 evaluation graphs.
+Accepted graph | n=100, m=400, rep=22 | hops=5 | min_hops=5 | attempts=4
+
+Generated and saved 113/840 evaluation graphs.
+Accepted graph | n=100, m=400, rep=23 | hops=5 | min_hops=5 | attempts=8
+
+Generated and saved 114/840 evaluation graphs.
+Accepted graph | n=100, m=400, rep=24 | hops=5 | min_hops=5 | attempts=3
+
+Generated and saved 115/840 evaluation graphs.
+Accepted graph | n=100, m=400, rep=25 | hops=6 | min_hops=5 | attempts=3
+
+Generated and saved 116/840 evaluation graphs.
+Accepted graph | n=100, m=400, rep=26 | hops=5 | min_hops=5 | attempts=9
+
+Generated and saved 117/840 evaluation graphs.
+Accepted graph | n=100, m=400, rep=27 | hops=5 | min_hops=5 | attempts=7
+
+Generated and saved 118/840 evaluation graphs.
+Accepted graph | n=100, m=400, rep=28 | hops=5 | min_hops=5 | attempts=7
+
+Generated and saved 119/840 evaluation graphs.
+Accepted graph | n=100, m=400, rep=29 | hops=5 | min_hops=5 | attempts=9
+
+Generated and saved 120/840 evaluation graphs.
+Accepted graph | n=100, m=500, rep=0 | hops=4 | min_hops=4 | attempts=1
+
+Generated and saved 121/840 evaluation graphs.
+Accepted graph | n=100, m=500, rep=1 | hops=4 | min_hops=4 | attempts=3
+
+Generated and saved 122/840 evaluation graphs.
+Accepted graph | n=100, m=500, rep=2 | hops=4 | min_hops=4 | attempts=3
+
+Generated and saved 123/840 evaluation graphs.
+Accepted graph | n=100, m=500, rep=3 | hops=4 | min_hops=4 | attempts=4
+
+Generated and saved 124/840 evaluation graphs.
+Accepted graph | n=100, m=500, rep=4 | hops=4 | min_hops=4 | attempts=5
+
+Generated and saved 125/840 evaluation graphs.
+Accepted graph | n=100, m=500, rep=5 | hops=4 | min_hops=4 | attempts=1
+
+Generated and saved 126/840 evaluation graphs.
+Accepted graph | n=100, m=500, rep=6 | hops=5 | min_hops=4 | attempts=1
+
+Generated and saved 127/840 evaluation graphs.
+Accepted graph | n=100, m=500, rep=7 | hops=4 | min_hops=4 | attempts=2
+
+Generated and saved 128/840 evaluation graphs.
+Accepted graph | n=100, m=500, rep=8 | hops=5 | min_hops=4 | attempts=4
+
+Generated and saved 129/840 evaluation graphs.
+Accepted graph | n=100, m=500, rep=9 | hops=4 | min_hops=4 | attempts=6
+
+Generated and saved 130/840 evaluation graphs.
+Accepted graph | n=100, m=500, rep=10 | hops=4 | min_hops=4 | attempts=3
+
+Generated and saved 131/840 evaluation graphs.
+Accepted graph | n=100, m=500, rep=11 | hops=4 | min_hops=4 | attempts=1
+
+Generated and saved 132/840 evaluation graphs.
+Accepted graph | n=100, m=500, rep=12 | hops=4 | min_hops=4 | attempts=3
+
+Generated and saved 133/840 evaluation graphs.
+Accepted graph | n=100, m=500, rep=13 | hops=4 | min_hops=4 | attempts=1
+
+Generated and saved 134/840 evaluation graphs.
+Accepted graph | n=100, m=500, rep=14 | hops=4 | min_hops=4 | attempts=2
+
+Generated and saved 135/840 evaluation graphs.
+Accepted graph | n=100, m=500, rep=15 | hops=4 | min_hops=4 | attempts=7
+
+Generated and saved 136/840 evaluation graphs.
+Accepted graph | n=100, m=500, rep=16 | hops=4 | min_hops=4 | attempts=2
+
+Generated and saved 137/840 evaluation graphs.
+Accepted graph | n=100, m=500, rep=17 | hops=4 | min_hops=4 | attempts=4
+
+Generated and saved 138/840 evaluation graphs.
+Accepted graph | n=100, m=500, rep=18 | hops=4 | min_hops=4 | attempts=3
+
+Generated and saved 139/840 evaluation graphs.
+Accepted graph | n=100, m=500, rep=19 | hops=5 | min_hops=4 | attempts=1
+
+Generated and saved 140/840 evaluation graphs.
+Accepted graph | n=100, m=500, rep=20 | hops=4 | min_hops=4 | attempts=2
+
+Generated and saved 141/840 evaluation graphs.
+Accepted graph | n=100, m=500, rep=21 | hops=4 | min_hops=4 | attempts=4
+
+Generated and saved 142/840 evaluation graphs.
+Accepted graph | n=100, m=500, rep=22 | hops=4 | min_hops=4 | attempts=1
+
+Generated and saved 143/840 evaluation graphs.
+Accepted graph | n=100, m=500, rep=23 | hops=4 | min_hops=4 | attempts=3
+
+Generated and saved 144/840 evaluation graphs.
+Accepted graph | n=100, m=500, rep=24 | hops=4 | min_hops=4 | attempts=3
+
+Generated and saved 145/840 evaluation graphs.
+Accepted graph | n=100, m=500, rep=25 | hops=4 | min_hops=4 | attempts=7
+
+Generated and saved 146/840 evaluation graphs.
+Accepted graph | n=100, m=500, rep=26 | hops=4 | min_hops=4 | attempts=4
+
+Generated and saved 147/840 evaluation graphs.
+Accepted graph | n=100, m=500, rep=27 | hops=4 | min_hops=4 | attempts=8
+
+Generated and saved 148/840 evaluation graphs.
+Accepted graph | n=100, m=500, rep=28 | hops=4 | min_hops=4 | attempts=3
+
+Generated and saved 149/840 evaluation graphs.
+Accepted graph | n=100, m=500, rep=29 | hops=4 | min_hops=4 | attempts=2
+
+Generated and saved 150/840 evaluation graphs.
+Accepted graph | n=100, m=600, rep=0 | hops=4 | min_hops=4 | attempts=22
+
+Generated and saved 151/840 evaluation graphs.
+Accepted graph | n=100, m=600, rep=1 | hops=4 | min_hops=4 | attempts=9
+
+Generated and saved 152/840 evaluation graphs.
+Accepted graph | n=100, m=600, rep=2 | hops=4 | min_hops=4 | attempts=3
+
+Generated and saved 153/840 evaluation graphs.
+Accepted graph | n=100, m=600, rep=3 | hops=4 | min_hops=4 | attempts=12
+
+Generated and saved 154/840 evaluation graphs.
+Accepted graph | n=100, m=600, rep=4 | hops=4 | min_hops=4 | attempts=4
+
+Generated and saved 155/840 evaluation graphs.
+Accepted graph | n=100, m=600, rep=5 | hops=4 | min_hops=4 | attempts=5
+
+Generated and saved 156/840 evaluation graphs.
+Accepted graph | n=100, m=600, rep=6 | hops=4 | min_hops=4 | attempts=6
+
+Generated and saved 157/840 evaluation graphs.
+Accepted graph | n=100, m=600, rep=7 | hops=4 | min_hops=4 | attempts=14
+
+Generated and saved 158/840 evaluation graphs.
+Accepted graph | n=100, m=600, rep=8 | hops=4 | min_hops=4 | attempts=4
+
+Generated and saved 159/840 evaluation graphs.
+Accepted graph | n=100, m=600, rep=9 | hops=4 | min_hops=4 | attempts=7
+
+Generated and saved 160/840 evaluation graphs.
+Accepted graph | n=100, m=600, rep=10 | hops=4 | min_hops=4 | attempts=5
+
+Generated and saved 161/840 evaluation graphs.
+Accepted graph | n=100, m=600, rep=11 | hops=4 | min_hops=4 | attempts=2
+
+Generated and saved 162/840 evaluation graphs.
+Accepted graph | n=100, m=600, rep=12 | hops=4 | min_hops=4 | attempts=4
+
+Generated and saved 163/840 evaluation graphs.
+Accepted graph | n=100, m=600, rep=13 | hops=4 | min_hops=4 | attempts=2
+
+Generated and saved 164/840 evaluation graphs.
+Accepted graph | n=100, m=600, rep=14 | hops=4 | min_hops=4 | attempts=8
+
+Generated and saved 165/840 evaluation graphs.
+Accepted graph | n=100, m=600, rep=15 | hops=4 | min_hops=4 | attempts=6
+
+Generated and saved 166/840 evaluation graphs.
+Accepted graph | n=100, m=600, rep=16 | hops=4 | min_hops=4 | attempts=5
+
+Generated and saved 167/840 evaluation graphs.
+Accepted graph | n=100, m=600, rep=17 | hops=4 | min_hops=4 | attempts=3
+
+Generated and saved 168/840 evaluation graphs.
+Accepted graph | n=100, m=600, rep=18 | hops=4 | min_hops=4 | attempts=6
+
+Generated and saved 169/840 evaluation graphs.
+Accepted graph | n=100, m=600, rep=19 | hops=4 | min_hops=4 | attempts=11
+
+Generated and saved 170/840 evaluation graphs.
+Accepted graph | n=100, m=600, rep=20 | hops=4 | min_hops=4 | attempts=5
+
+Generated and saved 171/840 evaluation graphs.
+Accepted graph | n=100, m=600, rep=21 | hops=4 | min_hops=4 | attempts=8
+
+Generated and saved 172/840 evaluation graphs.
+Accepted graph | n=100, m=600, rep=22 | hops=4 | min_hops=4 | attempts=9
+
+Generated and saved 173/840 evaluation graphs.
+Accepted graph | n=100, m=600, rep=23 | hops=4 | min_hops=4 | attempts=5
+
+Generated and saved 174/840 evaluation graphs.
+Accepted graph | n=100, m=600, rep=24 | hops=4 | min_hops=4 | attempts=10
+
+Generated and saved 175/840 evaluation graphs.
+Accepted graph | n=100, m=600, rep=25 | hops=4 | min_hops=4 | attempts=3
+
+Generated and saved 176/840 evaluation graphs.
+Accepted graph | n=100, m=600, rep=26 | hops=4 | min_hops=4 | attempts=2
+
+Generated and saved 177/840 evaluation graphs.
+Accepted graph | n=100, m=600, rep=27 | hops=4 | min_hops=4 | attempts=11
+
+Generated and saved 178/840 evaluation graphs.
+Accepted graph | n=100, m=600, rep=28 | hops=4 | min_hops=4 | attempts=2
+
+Generated and saved 179/840 evaluation graphs.
+Accepted graph | n=100, m=600, rep=29 | hops=4 | min_hops=4 | attempts=23
+
+Generated and saved 180/840 evaluation graphs.
+Accepted graph | n=100, m=800, rep=0 | hops=3 | min_hops=3 | attempts=3
+
+Generated and saved 181/840 evaluation graphs.
+Accepted graph | n=100, m=800, rep=1 | hops=3 | min_hops=3 | attempts=1
+
+Generated and saved 182/840 evaluation graphs.
+Accepted graph | n=100, m=800, rep=2 | hops=3 | min_hops=3 | attempts=1
+
+Generated and saved 183/840 evaluation graphs.
+Accepted graph | n=100, m=800, rep=3 | hops=3 | min_hops=3 | attempts=1
+
+Generated and saved 184/840 evaluation graphs.
+Accepted graph | n=100, m=800, rep=4 | hops=3 | min_hops=3 | attempts=1
+
+Generated and saved 185/840 evaluation graphs.
+Accepted graph | n=100, m=800, rep=5 | hops=3 | min_hops=3 | attempts=1
+
+Generated and saved 186/840 evaluation graphs.
+Accepted graph | n=100, m=800, rep=6 | hops=4 | min_hops=3 | attempts=2
+
+Generated and saved 187/840 evaluation graphs.
+Accepted graph | n=100, m=800, rep=7 | hops=3 | min_hops=3 | attempts=1
+
+Generated and saved 188/840 evaluation graphs.
+Accepted graph | n=100, m=800, rep=8 | hops=3 | min_hops=3 | attempts=1
+
+Generated and saved 189/840 evaluation graphs.
+Accepted graph | n=100, m=800, rep=9 | hops=3 | min_hops=3 | attempts=1
+
+Generated and saved 190/840 evaluation graphs.
+Accepted graph | n=100, m=800, rep=10 | hops=3 | min_hops=3 | attempts=2
+
+Generated and saved 191/840 evaluation graphs.
+Accepted graph | n=100, m=800, rep=11 | hops=3 | min_hops=3 | attempts=6
+
+Generated and saved 192/840 evaluation graphs.
+Accepted graph | n=100, m=800, rep=12 | hops=3 | min_hops=3 | attempts=2
+
+Generated and saved 193/840 evaluation graphs.
+Accepted graph | n=100, m=800, rep=13 | hops=3 | min_hops=3 | attempts=1
+
+Generated and saved 194/840 evaluation graphs.
+Accepted graph | n=100, m=800, rep=14 | hops=3 | min_hops=3 | attempts=1
+
+Generated and saved 195/840 evaluation graphs.
+Accepted graph | n=100, m=800, rep=15 | hops=3 | min_hops=3 | attempts=2
+
+Generated and saved 196/840 evaluation graphs.
+Accepted graph | n=100, m=800, rep=16 | hops=3 | min_hops=3 | attempts=1
+
+Generated and saved 197/840 evaluation graphs.
+Accepted graph | n=100, m=800, rep=17 | hops=3 | min_hops=3 | attempts=2
+
+Generated and saved 198/840 evaluation graphs.
+Accepted graph | n=100, m=800, rep=18 | hops=3 | min_hops=3 | attempts=6
+
+Generated and saved 199/840 evaluation graphs.
+Accepted graph | n=100, m=800, rep=19 | hops=3 | min_hops=3 | attempts=2
+
+Generated and saved 200/840 evaluation graphs.
+Accepted graph | n=100, m=800, rep=20 | hops=3 | min_hops=3 | attempts=1
+
+Generated and saved 201/840 evaluation graphs.
+Accepted graph | n=100, m=800, rep=21 | hops=3 | min_hops=3 | attempts=2
+
+Generated and saved 202/840 evaluation graphs.
+Accepted graph | n=100, m=800, rep=22 | hops=3 | min_hops=3 | attempts=3
+
+Generated and saved 203/840 evaluation graphs.
+Accepted graph | n=100, m=800, rep=23 | hops=3 | min_hops=3 | attempts=10
+
+Generated and saved 204/840 evaluation graphs.
+Accepted graph | n=100, m=800, rep=24 | hops=3 | min_hops=3 | attempts=1
+
+Generated and saved 205/840 evaluation graphs.
+Accepted graph | n=100, m=800, rep=25 | hops=3 | min_hops=3 | attempts=1
+
+Generated and saved 206/840 evaluation graphs.
+Accepted graph | n=100, m=800, rep=26 | hops=3 | min_hops=3 | attempts=2
+
+Generated and saved 207/840 evaluation graphs.
+Accepted graph | n=100, m=800, rep=27 | hops=3 | min_hops=3 | attempts=1
+
+Generated and saved 208/840 evaluation graphs.
+Accepted graph | n=100, m=800, rep=28 | hops=3 | min_hops=3 | attempts=2
+
+Generated and saved 209/840 evaluation graphs.
+Accepted graph | n=100, m=800, rep=29 | hops=3 | min_hops=3 | attempts=1
+
+Generated and saved 210/840 evaluation graphs.
+Accepted graph | n=200, m=400, rep=0 | hops=12 | min_hops=10 | attempts=11
+
+Generated and saved 211/840 evaluation graphs.
+Accepted graph | n=200, m=400, rep=1 | hops=10 | min_hops=10 | attempts=1
+
+Generated and saved 212/840 evaluation graphs.
+Accepted graph | n=200, m=400, rep=2 | hops=12 | min_hops=10 | attempts=1
+
+Generated and saved 213/840 evaluation graphs.
+Accepted graph | n=200, m=400, rep=3 | hops=10 | min_hops=10 | attempts=2
+
+Generated and saved 214/840 evaluation graphs.
+Accepted graph | n=200, m=400, rep=4 | hops=10 | min_hops=10 | attempts=12
+
+Generated and saved 215/840 evaluation graphs.
+Accepted graph | n=200, m=400, rep=5 | hops=10 | min_hops=10 | attempts=3
+
+Generated and saved 216/840 evaluation graphs.
+Accepted graph | n=200, m=400, rep=6 | hops=10 | min_hops=10 | attempts=5
+
+Generated and saved 217/840 evaluation graphs.
+Accepted graph | n=200, m=400, rep=7 | hops=10 | min_hops=10 | attempts=3
+
+Generated and saved 218/840 evaluation graphs.
+Accepted graph | n=200, m=400, rep=8 | hops=10 | min_hops=10 | attempts=13
+
+Generated and saved 219/840 evaluation graphs.
+Accepted graph | n=200, m=400, rep=9 | hops=14 | min_hops=10 | attempts=10
+
+Generated and saved 220/840 evaluation graphs.
+Accepted graph | n=200, m=400, rep=10 | hops=10 | min_hops=10 | attempts=1
+
+Generated and saved 221/840 evaluation graphs.
+Accepted graph | n=200, m=400, rep=11 | hops=17 | min_hops=10 | attempts=8
+
+Generated and saved 222/840 evaluation graphs.
+Accepted graph | n=200, m=400, rep=12 | hops=12 | min_hops=10 | attempts=3
+
+Generated and saved 223/840 evaluation graphs.
+Accepted graph | n=200, m=400, rep=13 | hops=11 | min_hops=10 | attempts=17
+
+Generated and saved 224/840 evaluation graphs.
+Accepted graph | n=200, m=400, rep=14 | hops=10 | min_hops=10 | attempts=17
+
+Generated and saved 225/840 evaluation graphs.
+Accepted graph | n=200, m=400, rep=15 | hops=10 | min_hops=10 | attempts=2
+
+Generated and saved 226/840 evaluation graphs.
+Accepted graph | n=200, m=400, rep=16 | hops=12 | min_hops=10 | attempts=3
+
+Generated and saved 227/840 evaluation graphs.
+Accepted graph | n=200, m=400, rep=17 | hops=10 | min_hops=10 | attempts=7
+
+Generated and saved 228/840 evaluation graphs.
+Accepted graph | n=200, m=400, rep=18 | hops=11 | min_hops=10 | attempts=9
+
+Generated and saved 229/840 evaluation graphs.
+Accepted graph | n=200, m=400, rep=19 | hops=14 | min_hops=10 | attempts=9
+
+Generated and saved 230/840 evaluation graphs.
+Accepted graph | n=200, m=400, rep=20 | hops=10 | min_hops=10 | attempts=17
+
+Generated and saved 231/840 evaluation graphs.
+Accepted graph | n=200, m=400, rep=21 | hops=12 | min_hops=10 | attempts=1
+
+Generated and saved 232/840 evaluation graphs.
+Accepted graph | n=200, m=400, rep=22 | hops=11 | min_hops=10 | attempts=12
+
+Generated and saved 233/840 evaluation graphs.
+Accepted graph | n=200, m=400, rep=23 | hops=12 | min_hops=10 | attempts=17
+
+Generated and saved 234/840 evaluation graphs.
+Accepted graph | n=200, m=400, rep=24 | hops=10 | min_hops=10 | attempts=17
+
+Generated and saved 235/840 evaluation graphs.
+Accepted graph | n=200, m=400, rep=25 | hops=11 | min_hops=10 | attempts=1
+
+Generated and saved 236/840 evaluation graphs.
+Accepted graph | n=200, m=400, rep=26 | hops=10 | min_hops=10 | attempts=4
+
+Generated and saved 237/840 evaluation graphs.
+Accepted graph | n=200, m=400, rep=27 | hops=12 | min_hops=10 | attempts=4
+
+Generated and saved 238/840 evaluation graphs.
+Accepted graph | n=200, m=400, rep=28 | hops=10 | min_hops=10 | attempts=2
+
+Generated and saved 239/840 evaluation graphs.
+Accepted graph | n=200, m=400, rep=29 | hops=10 | min_hops=10 | attempts=10
+
+Generated and saved 240/840 evaluation graphs.
+Accepted graph | n=200, m=500, rep=0 | hops=12 | min_hops=8 | attempts=6
+
+Generated and saved 241/840 evaluation graphs.
+Accepted graph | n=200, m=500, rep=1 | hops=8 | min_hops=8 | attempts=4
+
+Generated and saved 242/840 evaluation graphs.
+Accepted graph | n=200, m=500, rep=2 | hops=8 | min_hops=8 | attempts=16
+
+Generated and saved 243/840 evaluation graphs.
+Accepted graph | n=200, m=500, rep=3 | hops=10 | min_hops=8 | attempts=1
+
+Generated and saved 244/840 evaluation graphs.
+Accepted graph | n=200, m=500, rep=4 | hops=9 | min_hops=8 | attempts=1
+
+Generated and saved 245/840 evaluation graphs.
+Accepted graph | n=200, m=500, rep=5 | hops=8 | min_hops=8 | attempts=21
+
+Generated and saved 246/840 evaluation graphs.
+Accepted graph | n=200, m=500, rep=6 | hops=9 | min_hops=8 | attempts=7
+
+Generated and saved 247/840 evaluation graphs.
+Accepted graph | n=200, m=500, rep=7 | hops=9 | min_hops=8 | attempts=5
+
+Generated and saved 248/840 evaluation graphs.
+Accepted graph | n=200, m=500, rep=8 | hops=9 | min_hops=8 | attempts=5
+
+Generated and saved 249/840 evaluation graphs.
+Accepted graph | n=200, m=500, rep=9 | hops=8 | min_hops=8 | attempts=20
+
+Generated and saved 250/840 evaluation graphs.
+Accepted graph | n=200, m=500, rep=10 | hops=8 | min_hops=8 | attempts=8
+
+Generated and saved 251/840 evaluation graphs.
+Accepted graph | n=200, m=500, rep=11 | hops=9 | min_hops=8 | attempts=4
+
+Generated and saved 252/840 evaluation graphs.
+Accepted graph | n=200, m=500, rep=12 | hops=9 | min_hops=8 | attempts=5
+
+Generated and saved 253/840 evaluation graphs.
+Accepted graph | n=200, m=500, rep=13 | hops=8 | min_hops=8 | attempts=2
+
+Generated and saved 254/840 evaluation graphs.
+Accepted graph | n=200, m=500, rep=14 | hops=9 | min_hops=8 | attempts=12
+
+Generated and saved 255/840 evaluation graphs.
+Accepted graph | n=200, m=500, rep=15 | hops=10 | min_hops=8 | attempts=9
+
+Generated and saved 256/840 evaluation graphs.
+Accepted graph | n=200, m=500, rep=16 | hops=8 | min_hops=8 | attempts=9
+
+Generated and saved 257/840 evaluation graphs.
+Accepted graph | n=200, m=500, rep=17 | hops=8 | min_hops=8 | attempts=11
+
+Generated and saved 258/840 evaluation graphs.
+Accepted graph | n=200, m=500, rep=18 | hops=9 | min_hops=8 | attempts=2
+
+Generated and saved 259/840 evaluation graphs.
+Accepted graph | n=200, m=500, rep=19 | hops=8 | min_hops=8 | attempts=16
+
+Generated and saved 260/840 evaluation graphs.
+Accepted graph | n=200, m=500, rep=20 | hops=8 | min_hops=8 | attempts=9
+
+Generated and saved 261/840 evaluation graphs.
+Accepted graph | n=200, m=500, rep=21 | hops=8 | min_hops=8 | attempts=9
+
+Generated and saved 262/840 evaluation graphs.
+Accepted graph | n=200, m=500, rep=22 | hops=8 | min_hops=8 | attempts=47
+
+Generated and saved 263/840 evaluation graphs.
+Accepted graph | n=200, m=500, rep=23 | hops=8 | min_hops=8 | attempts=1
+
+Generated and saved 264/840 evaluation graphs.
+Accepted graph | n=200, m=500, rep=24 | hops=8 | min_hops=8 | attempts=8
+
+Generated and saved 265/840 evaluation graphs.
+Accepted graph | n=200, m=500, rep=25 | hops=8 | min_hops=8 | attempts=2
+
+Generated and saved 266/840 evaluation graphs.
+Accepted graph | n=200, m=500, rep=26 | hops=9 | min_hops=8 | attempts=6
+
+Generated and saved 267/840 evaluation graphs.
+Accepted graph | n=200, m=500, rep=27 | hops=10 | min_hops=8 | attempts=20
+
+Generated and saved 268/840 evaluation graphs.
+Accepted graph | n=200, m=500, rep=28 | hops=8 | min_hops=8 | attempts=15
+
+Generated and saved 269/840 evaluation graphs.
+Accepted graph | n=200, m=500, rep=29 | hops=8 | min_hops=8 | attempts=1
+
+Generated and saved 270/840 evaluation graphs.
+Accepted graph | n=200, m=600, rep=0 | hops=7 | min_hops=7 | attempts=2
+
+Generated and saved 271/840 evaluation graphs.
+Accepted graph | n=200, m=600, rep=1 | hops=7 | min_hops=7 | attempts=35
+
+Generated and saved 272/840 evaluation graphs.
+Accepted graph | n=200, m=600, rep=2 | hops=7 | min_hops=7 | attempts=11
+
+Generated and saved 273/840 evaluation graphs.
+Accepted graph | n=200, m=600, rep=3 | hops=7 | min_hops=7 | attempts=8
+
+Generated and saved 274/840 evaluation graphs.
+Accepted graph | n=200, m=600, rep=4 | hops=7 | min_hops=7 | attempts=12
+
+Generated and saved 275/840 evaluation graphs.
+Accepted graph | n=200, m=600, rep=5 | hops=7 | min_hops=7 | attempts=12
+
+Generated and saved 276/840 evaluation graphs.
+Accepted graph | n=200, m=600, rep=6 | hops=8 | min_hops=7 | attempts=7
+
+Generated and saved 277/840 evaluation graphs.
+Accepted graph | n=200, m=600, rep=7 | hops=7 | min_hops=7 | attempts=3
+
+Generated and saved 278/840 evaluation graphs.
+Accepted graph | n=200, m=600, rep=8 | hops=7 | min_hops=7 | attempts=2
+
+Generated and saved 279/840 evaluation graphs.
+Accepted graph | n=200, m=600, rep=9 | hops=8 | min_hops=7 | attempts=3
+
+Generated and saved 280/840 evaluation graphs.
+Accepted graph | n=200, m=600, rep=10 | hops=8 | min_hops=7 | attempts=5
+
+Generated and saved 281/840 evaluation graphs.
+Accepted graph | n=200, m=600, rep=11 | hops=7 | min_hops=7 | attempts=10
+
+Generated and saved 282/840 evaluation graphs.
+Accepted graph | n=200, m=600, rep=12 | hops=7 | min_hops=7 | attempts=6
+
+Generated and saved 283/840 evaluation graphs.
+Accepted graph | n=200, m=600, rep=13 | hops=8 | min_hops=7 | attempts=6
+
+Generated and saved 284/840 evaluation graphs.
+Accepted graph | n=200, m=600, rep=14 | hops=8 | min_hops=7 | attempts=15
+
+Generated and saved 285/840 evaluation graphs.
+Accepted graph | n=200, m=600, rep=15 | hops=7 | min_hops=7 | attempts=13
+
+Generated and saved 286/840 evaluation graphs.
+Accepted graph | n=200, m=600, rep=16 | hops=7 | min_hops=7 | attempts=11
+
+Generated and saved 287/840 evaluation graphs.
+Accepted graph | n=200, m=600, rep=17 | hops=7 | min_hops=7 | attempts=7
+
+Generated and saved 288/840 evaluation graphs.
+Accepted graph | n=200, m=600, rep=18 | hops=8 | min_hops=7 | attempts=7
+
+Generated and saved 289/840 evaluation graphs.
+Accepted graph | n=200, m=600, rep=19 | hops=7 | min_hops=7 | attempts=12
+
+Generated and saved 290/840 evaluation graphs.
+Accepted graph | n=200, m=600, rep=20 | hops=7 | min_hops=7 | attempts=3
+
+Generated and saved 291/840 evaluation graphs.
+Accepted graph | n=200, m=600, rep=21 | hops=8 | min_hops=7 | attempts=7
+
+Generated and saved 292/840 evaluation graphs.
+Accepted graph | n=200, m=600, rep=22 | hops=9 | min_hops=7 | attempts=2
+
+Generated and saved 293/840 evaluation graphs.
+Accepted graph | n=200, m=600, rep=23 | hops=7 | min_hops=7 | attempts=10
+
+Generated and saved 294/840 evaluation graphs.
+Accepted graph | n=200, m=600, rep=24 | hops=7 | min_hops=7 | attempts=9
+
+Generated and saved 295/840 evaluation graphs.
+Accepted graph | n=200, m=600, rep=25 | hops=7 | min_hops=7 | attempts=10
+
+Generated and saved 296/840 evaluation graphs.
+Accepted graph | n=200, m=600, rep=26 | hops=7 | min_hops=7 | attempts=9
+
+Generated and saved 297/840 evaluation graphs.
+Accepted graph | n=200, m=600, rep=27 | hops=7 | min_hops=7 | attempts=3
+
+Generated and saved 298/840 evaluation graphs.
+Accepted graph | n=200, m=600, rep=28 | hops=8 | min_hops=7 | attempts=2
+
+Generated and saved 299/840 evaluation graphs.
+Accepted graph | n=200, m=600, rep=29 | hops=7 | min_hops=7 | attempts=9
+
+Generated and saved 300/840 evaluation graphs.
+Accepted graph | n=200, m=800, rep=0 | hops=6 | min_hops=6 | attempts=3
+
+Generated and saved 301/840 evaluation graphs.
+Accepted graph | n=200, m=800, rep=1 | hops=6 | min_hops=6 | attempts=24
+
+Generated and saved 302/840 evaluation graphs.
+Accepted graph | n=200, m=800, rep=2 | hops=6 | min_hops=6 | attempts=2
+
+Generated and saved 303/840 evaluation graphs.
+Accepted graph | n=200, m=800, rep=3 | hops=6 | min_hops=6 | attempts=65
+
+Generated and saved 304/840 evaluation graphs.
+Accepted graph | n=200, m=800, rep=4 | hops=6 | min_hops=6 | attempts=46
+
+Generated and saved 305/840 evaluation graphs.
+Accepted graph | n=200, m=800, rep=5 | hops=6 | min_hops=6 | attempts=4
+
+Generated and saved 306/840 evaluation graphs.
+Accepted graph | n=200, m=800, rep=6 | hops=6 | min_hops=6 | attempts=6
+
+Generated and saved 307/840 evaluation graphs.
+Accepted graph | n=200, m=800, rep=7 | hops=7 | min_hops=6 | attempts=14
+
+Generated and saved 308/840 evaluation graphs.
+Accepted graph | n=200, m=800, rep=8 | hops=6 | min_hops=6 | attempts=59
+
+Generated and saved 309/840 evaluation graphs.
+Accepted graph | n=200, m=800, rep=9 | hops=7 | min_hops=6 | attempts=9
+
+Generated and saved 310/840 evaluation graphs.
+Accepted graph | n=200, m=800, rep=10 | hops=6 | min_hops=6 | attempts=29
+
+Generated and saved 311/840 evaluation graphs.
+Accepted graph | n=200, m=800, rep=11 | hops=6 | min_hops=6 | attempts=3
+
+Generated and saved 312/840 evaluation graphs.
+Accepted graph | n=200, m=800, rep=12 | hops=6 | min_hops=6 | attempts=16
+
+Generated and saved 313/840 evaluation graphs.
+Accepted graph | n=200, m=800, rep=13 | hops=6 | min_hops=6 | attempts=6
+
+Generated and saved 314/840 evaluation graphs.
+Accepted graph | n=200, m=800, rep=14 | hops=7 | min_hops=6 | attempts=27
+
+Generated and saved 315/840 evaluation graphs.
+Accepted graph | n=200, m=800, rep=15 | hops=7 | min_hops=6 | attempts=22
+
+Generated and saved 316/840 evaluation graphs.
+Accepted graph | n=200, m=800, rep=16 | hops=6 | min_hops=6 | attempts=33
+
+Generated and saved 317/840 evaluation graphs.
+Accepted graph | n=200, m=800, rep=17 | hops=7 | min_hops=6 | attempts=50
+
+Generated and saved 318/840 evaluation graphs.
+Accepted graph | n=200, m=800, rep=18 | hops=6 | min_hops=6 | attempts=18
+
+Generated and saved 319/840 evaluation graphs.
+Accepted graph | n=200, m=800, rep=19 | hops=6 | min_hops=6 | attempts=53
+
+Generated and saved 320/840 evaluation graphs.
+Accepted graph | n=200, m=800, rep=20 | hops=6 | min_hops=6 | attempts=12
+
+Generated and saved 321/840 evaluation graphs.
+Accepted graph | n=200, m=800, rep=21 | hops=6 | min_hops=6 | attempts=52
+
+Generated and saved 322/840 evaluation graphs.
+Accepted graph | n=200, m=800, rep=22 | hops=7 | min_hops=6 | attempts=4
+
+Generated and saved 323/840 evaluation graphs.
+Accepted graph | n=200, m=800, rep=23 | hops=6 | min_hops=6 | attempts=14
+
+Generated and saved 324/840 evaluation graphs.
+Accepted graph | n=200, m=800, rep=24 | hops=6 | min_hops=6 | attempts=8
+
+Generated and saved 325/840 evaluation graphs.
+Accepted graph | n=200, m=800, rep=25 | hops=6 | min_hops=6 | attempts=13
+
+Generated and saved 326/840 evaluation graphs.
+Accepted graph | n=200, m=800, rep=26 | hops=7 | min_hops=6 | attempts=8
+
+Generated and saved 327/840 evaluation graphs.
+Accepted graph | n=200, m=800, rep=27 | hops=6 | min_hops=6 | attempts=14
+
+Generated and saved 328/840 evaluation graphs.
+Accepted graph | n=200, m=800, rep=28 | hops=6 | min_hops=6 | attempts=10
+
+Generated and saved 329/840 evaluation graphs.
+Accepted graph | n=200, m=800, rep=29 | hops=6 | min_hops=6 | attempts=27
+
+Generated and saved 330/840 evaluation graphs.
+Accepted graph | n=200, m=1000, rep=0 | hops=5 | min_hops=5 | attempts=10
+
+Generated and saved 331/840 evaluation graphs.
+Accepted graph | n=200, m=1000, rep=1 | hops=5 | min_hops=5 | attempts=13
+
+Generated and saved 332/840 evaluation graphs.
+Accepted graph | n=200, m=1000, rep=2 | hops=5 | min_hops=5 | attempts=26
+
+Generated and saved 333/840 evaluation graphs.
+Accepted graph | n=200, m=1000, rep=3 | hops=5 | min_hops=5 | attempts=2
+
+Generated and saved 334/840 evaluation graphs.
+Accepted graph | n=200, m=1000, rep=4 | hops=6 | min_hops=5 | attempts=13
+
+Generated and saved 335/840 evaluation graphs.
+Accepted graph | n=200, m=1000, rep=5 | hops=6 | min_hops=5 | attempts=20
+
+Generated and saved 336/840 evaluation graphs.
+Accepted graph | n=200, m=1000, rep=6 | hops=5 | min_hops=5 | attempts=16
+
+Generated and saved 337/840 evaluation graphs.
+Accepted graph | n=200, m=1000, rep=7 | hops=5 | min_hops=5 | attempts=8
+
+Generated and saved 338/840 evaluation graphs.
+Accepted graph | n=200, m=1000, rep=8 | hops=5 | min_hops=5 | attempts=17
+
+Generated and saved 339/840 evaluation graphs.
+Accepted graph | n=200, m=1000, rep=9 | hops=5 | min_hops=5 | attempts=5
+
+Generated and saved 340/840 evaluation graphs.
+Accepted graph | n=200, m=1000, rep=10 | hops=5 | min_hops=5 | attempts=4
+
+Generated and saved 341/840 evaluation graphs.
+Accepted graph | n=200, m=1000, rep=11 | hops=5 | min_hops=5 | attempts=29
+
+Generated and saved 342/840 evaluation graphs.
+Accepted graph | n=200, m=1000, rep=12 | hops=5 | min_hops=5 | attempts=11
+
+Generated and saved 343/840 evaluation graphs.
+Accepted graph | n=200, m=1000, rep=13 | hops=5 | min_hops=5 | attempts=16
+
+Generated and saved 344/840 evaluation graphs.
+Accepted graph | n=200, m=1000, rep=14 | hops=5 | min_hops=5 | attempts=6
+
+Generated and saved 345/840 evaluation graphs.
+Accepted graph | n=200, m=1000, rep=15 | hops=5 | min_hops=5 | attempts=8
+
+Generated and saved 346/840 evaluation graphs.
+Accepted graph | n=200, m=1000, rep=16 | hops=5 | min_hops=5 | attempts=2
+
+Generated and saved 347/840 evaluation graphs.
+Accepted graph | n=200, m=1000, rep=17 | hops=5 | min_hops=5 | attempts=1
+
+Generated and saved 348/840 evaluation graphs.
+Accepted graph | n=200, m=1000, rep=18 | hops=5 | min_hops=5 | attempts=11
+
+Generated and saved 349/840 evaluation graphs.
+Accepted graph | n=200, m=1000, rep=19 | hops=5 | min_hops=5 | attempts=3
+
+Generated and saved 350/840 evaluation graphs.
+Accepted graph | n=200, m=1000, rep=20 | hops=5 | min_hops=5 | attempts=1
+
+Generated and saved 351/840 evaluation graphs.
+Accepted graph | n=200, m=1000, rep=21 | hops=5 | min_hops=5 | attempts=4
+
+Generated and saved 352/840 evaluation graphs.
+Accepted graph | n=200, m=1000, rep=22 | hops=5 | min_hops=5 | attempts=7
+
+Generated and saved 353/840 evaluation graphs.
+Accepted graph | n=200, m=1000, rep=23 | hops=5 | min_hops=5 | attempts=6
+
+Generated and saved 354/840 evaluation graphs.
+Accepted graph | n=200, m=1000, rep=24 | hops=5 | min_hops=5 | attempts=40
+
+Generated and saved 355/840 evaluation graphs.
+Accepted graph | n=200, m=1000, rep=25 | hops=5 | min_hops=5 | attempts=2
+
+Generated and saved 356/840 evaluation graphs.
+Accepted graph | n=200, m=1000, rep=26 | hops=5 | min_hops=5 | attempts=29
+
+Generated and saved 357/840 evaluation graphs.
+Accepted graph | n=200, m=1000, rep=27 | hops=5 | min_hops=5 | attempts=15
+
+Generated and saved 358/840 evaluation graphs.
+Accepted graph | n=200, m=1000, rep=28 | hops=5 | min_hops=5 | attempts=2
+
+Generated and saved 359/840 evaluation graphs.
+Accepted graph | n=200, m=1000, rep=29 | hops=5 | min_hops=5 | attempts=25
+
+Generated and saved 360/840 evaluation graphs.
+Accepted graph | n=200, m=1200, rep=0 | hops=4 | min_hops=4 | attempts=5
+
+Generated and saved 361/840 evaluation graphs.
+Accepted graph | n=200, m=1200, rep=1 | hops=4 | min_hops=4 | attempts=3
+
+Generated and saved 362/840 evaluation graphs.
+Accepted graph | n=200, m=1200, rep=2 | hops=4 | min_hops=4 | attempts=1
+
+Generated and saved 363/840 evaluation graphs.
+Accepted graph | n=200, m=1200, rep=3 | hops=4 | min_hops=4 | attempts=4
+
+Generated and saved 364/840 evaluation graphs.
+Accepted graph | n=200, m=1200, rep=4 | hops=4 | min_hops=4 | attempts=1
+
+Generated and saved 365/840 evaluation graphs.
+Accepted graph | n=200, m=1200, rep=5 | hops=4 | min_hops=4 | attempts=2
+
+Generated and saved 366/840 evaluation graphs.
+Accepted graph | n=200, m=1200, rep=6 | hops=4 | min_hops=4 | attempts=1
+
+Generated and saved 367/840 evaluation graphs.
+Accepted graph | n=200, m=1200, rep=7 | hops=4 | min_hops=4 | attempts=16
+
+Generated and saved 368/840 evaluation graphs.
+Accepted graph | n=200, m=1200, rep=8 | hops=4 | min_hops=4 | attempts=3
+
+Generated and saved 369/840 evaluation graphs.
+Accepted graph | n=200, m=1200, rep=9 | hops=4 | min_hops=4 | attempts=1
+
+Generated and saved 370/840 evaluation graphs.
+Accepted graph | n=200, m=1200, rep=10 | hops=4 | min_hops=4 | attempts=5
+
+Generated and saved 371/840 evaluation graphs.
+Accepted graph | n=200, m=1200, rep=11 | hops=4 | min_hops=4 | attempts=3
+
+Generated and saved 372/840 evaluation graphs.
+Accepted graph | n=200, m=1200, rep=12 | hops=4 | min_hops=4 | attempts=2
+
+Generated and saved 373/840 evaluation graphs.
+Accepted graph | n=200, m=1200, rep=13 | hops=4 | min_hops=4 | attempts=2
+
+Generated and saved 374/840 evaluation graphs.
+Accepted graph | n=200, m=1200, rep=14 | hops=5 | min_hops=4 | attempts=1
+
+Generated and saved 375/840 evaluation graphs.
+Accepted graph | n=200, m=1200, rep=15 | hops=4 | min_hops=4 | attempts=2
+
+Generated and saved 376/840 evaluation graphs.
+Accepted graph | n=200, m=1200, rep=16 | hops=4 | min_hops=4 | attempts=2
+
+Generated and saved 377/840 evaluation graphs.
+Accepted graph | n=200, m=1200, rep=17 | hops=4 | min_hops=4 | attempts=2
+
+Generated and saved 378/840 evaluation graphs.
+Accepted graph | n=200, m=1200, rep=18 | hops=4 | min_hops=4 | attempts=1
+
+Generated and saved 379/840 evaluation graphs.
+Accepted graph | n=200, m=1200, rep=19 | hops=4 | min_hops=4 | attempts=2
+
+Generated and saved 380/840 evaluation graphs.
+Accepted graph | n=200, m=1200, rep=20 | hops=4 | min_hops=4 | attempts=3
+
+Generated and saved 381/840 evaluation graphs.
+Accepted graph | n=200, m=1200, rep=21 | hops=4 | min_hops=4 | attempts=1
+
+Generated and saved 382/840 evaluation graphs.
+Accepted graph | n=200, m=1200, rep=22 | hops=4 | min_hops=4 | attempts=2
+
+Generated and saved 383/840 evaluation graphs.
+Accepted graph | n=200, m=1200, rep=23 | hops=4 | min_hops=4 | attempts=1
+
+Generated and saved 384/840 evaluation graphs.
+Accepted graph | n=200, m=1200, rep=24 | hops=4 | min_hops=4 | attempts=3
+
+Generated and saved 385/840 evaluation graphs.
+Accepted graph | n=200, m=1200, rep=25 | hops=4 | min_hops=4 | attempts=1
+
+Generated and saved 386/840 evaluation graphs.
+Accepted graph | n=200, m=1200, rep=26 | hops=4 | min_hops=4 | attempts=1
+
+Generated and saved 387/840 evaluation graphs.
+Accepted graph | n=200, m=1200, rep=27 | hops=4 | min_hops=4 | attempts=10
+
+Generated and saved 388/840 evaluation graphs.
+Accepted graph | n=200, m=1200, rep=28 | hops=4 | min_hops=4 | attempts=3
+
+Generated and saved 389/840 evaluation graphs.
+Accepted graph | n=200, m=1200, rep=29 | hops=4 | min_hops=4 | attempts=1
+
+Generated and saved 390/840 evaluation graphs.
+Accepted graph | n=200, m=1600, rep=0 | hops=4 | min_hops=4 | attempts=5
+
+Generated and saved 391/840 evaluation graphs.
+Accepted graph | n=200, m=1600, rep=1 | hops=4 | min_hops=4 | attempts=2
+
+Generated and saved 392/840 evaluation graphs.
+Accepted graph | n=200, m=1600, rep=2 | hops=4 | min_hops=4 | attempts=3
+
+Generated and saved 393/840 evaluation graphs.
+Accepted graph | n=200, m=1600, rep=3 | hops=4 | min_hops=4 | attempts=21
+
+Generated and saved 394/840 evaluation graphs.
+Accepted graph | n=200, m=1600, rep=4 | hops=4 | min_hops=4 | attempts=6
+
+Generated and saved 395/840 evaluation graphs.
+Accepted graph | n=200, m=1600, rep=5 | hops=4 | min_hops=4 | attempts=44
+
+Generated and saved 396/840 evaluation graphs.
+Accepted graph | n=200, m=1600, rep=6 | hops=4 | min_hops=4 | attempts=16
+
+Generated and saved 397/840 evaluation graphs.
+Accepted graph | n=200, m=1600, rep=7 | hops=4 | min_hops=4 | attempts=2
+
+Generated and saved 398/840 evaluation graphs.
+Accepted graph | n=200, m=1600, rep=8 | hops=4 | min_hops=4 | attempts=20
+
+Generated and saved 399/840 evaluation graphs.
+Accepted graph | n=200, m=1600, rep=9 | hops=4 | min_hops=4 | attempts=13
+
+Generated and saved 400/840 evaluation graphs.
+Accepted graph | n=200, m=1600, rep=10 | hops=4 | min_hops=4 | attempts=8
+
+Generated and saved 401/840 evaluation graphs.
+Accepted graph | n=200, m=1600, rep=11 | hops=4 | min_hops=4 | attempts=33
+
+Generated and saved 402/840 evaluation graphs.
+Accepted graph | n=200, m=1600, rep=12 | hops=4 | min_hops=4 | attempts=9
+
+Generated and saved 403/840 evaluation graphs.
+Accepted graph | n=200, m=1600, rep=13 | hops=4 | min_hops=4 | attempts=7
+
+Generated and saved 404/840 evaluation graphs.
+Accepted graph | n=200, m=1600, rep=14 | hops=4 | min_hops=4 | attempts=5
+
+Generated and saved 405/840 evaluation graphs.
+Accepted graph | n=200, m=1600, rep=15 | hops=4 | min_hops=4 | attempts=4
+
+Generated and saved 406/840 evaluation graphs.
+Accepted graph | n=200, m=1600, rep=16 | hops=4 | min_hops=4 | attempts=2
+
+Generated and saved 407/840 evaluation graphs.
+Accepted graph | n=200, m=1600, rep=17 | hops=4 | min_hops=4 | attempts=8
+
+Generated and saved 408/840 evaluation graphs.
+Accepted graph | n=200, m=1600, rep=18 | hops=4 | min_hops=4 | attempts=7
+
+Generated and saved 409/840 evaluation graphs.
+Accepted graph | n=200, m=1600, rep=19 | hops=4 | min_hops=4 | attempts=18
+
+Generated and saved 410/840 evaluation graphs.
+Accepted graph | n=200, m=1600, rep=20 | hops=4 | min_hops=4 | attempts=4
+
+Generated and saved 411/840 evaluation graphs.
+Accepted graph | n=200, m=1600, rep=21 | hops=4 | min_hops=4 | attempts=3
+
+Generated and saved 412/840 evaluation graphs.
+Accepted graph | n=200, m=1600, rep=22 | hops=4 | min_hops=4 | attempts=4
+
+Generated and saved 413/840 evaluation graphs.
+Accepted graph | n=200, m=1600, rep=23 | hops=4 | min_hops=4 | attempts=1
+
+Generated and saved 414/840 evaluation graphs.
+Accepted graph | n=200, m=1600, rep=24 | hops=4 | min_hops=4 | attempts=7
+
+Generated and saved 415/840 evaluation graphs.
+Accepted graph | n=200, m=1600, rep=25 | hops=4 | min_hops=4 | attempts=5
+
+Generated and saved 416/840 evaluation graphs.
+Accepted graph | n=200, m=1600, rep=26 | hops=4 | min_hops=4 | attempts=14
+
+Generated and saved 417/840 evaluation graphs.
+Accepted graph | n=200, m=1600, rep=27 | hops=4 | min_hops=4 | attempts=1
+
+Generated and saved 418/840 evaluation graphs.
+Accepted graph | n=200, m=1600, rep=28 | hops=4 | min_hops=4 | attempts=1
+
+Generated and saved 419/840 evaluation graphs.
+Accepted graph | n=200, m=1600, rep=29 | hops=4 | min_hops=4 | attempts=13
+
+Generated and saved 420/840 evaluation graphs.
+Accepted graph | n=400, m=800, rep=0 | hops=11 | min_hops=11 | attempts=5
+
+Generated and saved 421/840 evaluation graphs.
+Accepted graph | n=400, m=800, rep=1 | hops=14 | min_hops=11 | attempts=5
+
+Generated and saved 422/840 evaluation graphs.
+Accepted graph | n=400, m=800, rep=2 | hops=11 | min_hops=11 | attempts=2
+
+Generated and saved 423/840 evaluation graphs.
+Accepted graph | n=400, m=800, rep=3 | hops=13 | min_hops=11 | attempts=1
+
+Generated and saved 424/840 evaluation graphs.
+Accepted graph | n=400, m=800, rep=4 | hops=13 | min_hops=11 | attempts=8
+
+Generated and saved 425/840 evaluation graphs.
+Accepted graph | n=400, m=800, rep=5 | hops=17 | min_hops=11 | attempts=2
+
+Generated and saved 426/840 evaluation graphs.
+Accepted graph | n=400, m=800, rep=6 | hops=14 | min_hops=11 | attempts=27
+
+Generated and saved 427/840 evaluation graphs.
+Accepted graph | n=400, m=800, rep=7 | hops=13 | min_hops=11 | attempts=2
+
+Generated and saved 428/840 evaluation graphs.
+Accepted graph | n=400, m=800, rep=8 | hops=11 | min_hops=11 | attempts=2
+
+Generated and saved 429/840 evaluation graphs.
+Accepted graph | n=400, m=800, rep=9 | hops=13 | min_hops=11 | attempts=6
+
+Generated and saved 430/840 evaluation graphs.
+Accepted graph | n=400, m=800, rep=10 | hops=11 | min_hops=11 | attempts=2
+
+Generated and saved 431/840 evaluation graphs.
+Accepted graph | n=400, m=800, rep=11 | hops=11 | min_hops=11 | attempts=5
+
+Generated and saved 432/840 evaluation graphs.
+Accepted graph | n=400, m=800, rep=12 | hops=11 | min_hops=11 | attempts=3
+
+Generated and saved 433/840 evaluation graphs.
+Accepted graph | n=400, m=800, rep=13 | hops=12 | min_hops=11 | attempts=4
+
+Generated and saved 434/840 evaluation graphs.
+Accepted graph | n=400, m=800, rep=14 | hops=11 | min_hops=11 | attempts=6
+
+Generated and saved 435/840 evaluation graphs.
+Accepted graph | n=400, m=800, rep=15 | hops=17 | min_hops=11 | attempts=4
+
+Generated and saved 436/840 evaluation graphs.
+Accepted graph | n=400, m=800, rep=16 | hops=11 | min_hops=11 | attempts=4
+
+Generated and saved 437/840 evaluation graphs.
+Accepted graph | n=400, m=800, rep=17 | hops=12 | min_hops=11 | attempts=11
+
+Generated and saved 438/840 evaluation graphs.
+Accepted graph | n=400, m=800, rep=18 | hops=11 | min_hops=11 | attempts=6
+
+Generated and saved 439/840 evaluation graphs.
+Accepted graph | n=400, m=800, rep=19 | hops=11 | min_hops=11 | attempts=4
+
+Generated and saved 440/840 evaluation graphs.
+Accepted graph | n=400, m=800, rep=20 | hops=16 | min_hops=11 | attempts=2
+
+Generated and saved 441/840 evaluation graphs.
+Accepted graph | n=400, m=800, rep=21 | hops=11 | min_hops=11 | attempts=10
+
+Generated and saved 442/840 evaluation graphs.
+Accepted graph | n=400, m=800, rep=22 | hops=15 | min_hops=11 | attempts=10
+
+Generated and saved 443/840 evaluation graphs.
+Accepted graph | n=400, m=800, rep=23 | hops=11 | min_hops=11 | attempts=1
+
+Generated and saved 444/840 evaluation graphs.
+Accepted graph | n=400, m=800, rep=24 | hops=15 | min_hops=11 | attempts=2
+
+Generated and saved 445/840 evaluation graphs.
+Accepted graph | n=400, m=800, rep=25 | hops=13 | min_hops=11 | attempts=2
+
+Generated and saved 446/840 evaluation graphs.
+Accepted graph | n=400, m=800, rep=26 | hops=11 | min_hops=11 | attempts=5
+
+Generated and saved 447/840 evaluation graphs.
+Accepted graph | n=400, m=800, rep=27 | hops=13 | min_hops=11 | attempts=11
+
+Generated and saved 448/840 evaluation graphs.
+Accepted graph | n=400, m=800, rep=28 | hops=12 | min_hops=11 | attempts=5
+
+Generated and saved 449/840 evaluation graphs.
+Accepted graph | n=400, m=800, rep=29 | hops=12 | min_hops=11 | attempts=3
+
+Generated and saved 450/840 evaluation graphs.
+Accepted graph | n=400, m=1000, rep=0 | hops=9 | min_hops=9 | attempts=17
+
+Generated and saved 451/840 evaluation graphs.
+Accepted graph | n=400, m=1000, rep=1 | hops=9 | min_hops=9 | attempts=24
+
+Generated and saved 452/840 evaluation graphs.
+Accepted graph | n=400, m=1000, rep=2 | hops=9 | min_hops=9 | attempts=26
+
+Generated and saved 453/840 evaluation graphs.
+Accepted graph | n=400, m=1000, rep=3 | hops=9 | min_hops=9 | attempts=7
+
+Generated and saved 454/840 evaluation graphs.
+Accepted graph | n=400, m=1000, rep=4 | hops=10 | min_hops=9 | attempts=11
+
+Generated and saved 455/840 evaluation graphs.
+Accepted graph | n=400, m=1000, rep=5 | hops=9 | min_hops=9 | attempts=3
+
+Generated and saved 456/840 evaluation graphs.
+Accepted graph | n=400, m=1000, rep=6 | hops=10 | min_hops=9 | attempts=3
+
+Generated and saved 457/840 evaluation graphs.
+Accepted graph | n=400, m=1000, rep=7 | hops=9 | min_hops=9 | attempts=7
+
+Generated and saved 458/840 evaluation graphs.
+Accepted graph | n=400, m=1000, rep=8 | hops=11 | min_hops=9 | attempts=12
+
+Generated and saved 459/840 evaluation graphs.
+Accepted graph | n=400, m=1000, rep=9 | hops=9 | min_hops=9 | attempts=7
+
+Generated and saved 460/840 evaluation graphs.
+Accepted graph | n=400, m=1000, rep=10 | hops=9 | min_hops=9 | attempts=14
+
+Generated and saved 461/840 evaluation graphs.
+Accepted graph | n=400, m=1000, rep=11 | hops=9 | min_hops=9 | attempts=7
+
+Generated and saved 462/840 evaluation graphs.
+Accepted graph | n=400, m=1000, rep=12 | hops=9 | min_hops=9 | attempts=2
+
+Generated and saved 463/840 evaluation graphs.
+Accepted graph | n=400, m=1000, rep=13 | hops=9 | min_hops=9 | attempts=8
+
+Generated and saved 464/840 evaluation graphs.
+Accepted graph | n=400, m=1000, rep=14 | hops=9 | min_hops=9 | attempts=1
+
+Generated and saved 465/840 evaluation graphs.
+Accepted graph | n=400, m=1000, rep=15 | hops=11 | min_hops=9 | attempts=7
+
+Generated and saved 466/840 evaluation graphs.
+Accepted graph | n=400, m=1000, rep=16 | hops=9 | min_hops=9 | attempts=3
+
+Generated and saved 467/840 evaluation graphs.
+Accepted graph | n=400, m=1000, rep=17 | hops=10 | min_hops=9 | attempts=5
+
+Generated and saved 468/840 evaluation graphs.
+Accepted graph | n=400, m=1000, rep=18 | hops=10 | min_hops=9 | attempts=11
+
+Generated and saved 469/840 evaluation graphs.
+Accepted graph | n=400, m=1000, rep=19 | hops=9 | min_hops=9 | attempts=19
+
+Generated and saved 470/840 evaluation graphs.
+Accepted graph | n=400, m=1000, rep=20 | hops=9 | min_hops=9 | attempts=4
+
+Generated and saved 471/840 evaluation graphs.
+Accepted graph | n=400, m=1000, rep=21 | hops=9 | min_hops=9 | attempts=21
+
+Generated and saved 472/840 evaluation graphs.
+Accepted graph | n=400, m=1000, rep=22 | hops=10 | min_hops=9 | attempts=1
+
+Generated and saved 473/840 evaluation graphs.
+Accepted graph | n=400, m=1000, rep=23 | hops=9 | min_hops=9 | attempts=4
+
+Generated and saved 474/840 evaluation graphs.
+Accepted graph | n=400, m=1000, rep=24 | hops=9 | min_hops=9 | attempts=17
+
+Generated and saved 475/840 evaluation graphs.
+Accepted graph | n=400, m=1000, rep=25 | hops=11 | min_hops=9 | attempts=17
+
+Generated and saved 476/840 evaluation graphs.
+Accepted graph | n=400, m=1000, rep=26 | hops=9 | min_hops=9 | attempts=12
+
+Generated and saved 477/840 evaluation graphs.
+Accepted graph | n=400, m=1000, rep=27 | hops=10 | min_hops=9 | attempts=8
+
+Generated and saved 478/840 evaluation graphs.
+Accepted graph | n=400, m=1000, rep=28 | hops=11 | min_hops=9 | attempts=7
+
+Generated and saved 479/840 evaluation graphs.
+Accepted graph | n=400, m=1000, rep=29 | hops=10 | min_hops=9 | attempts=7
+
+Generated and saved 480/840 evaluation graphs.
+Accepted graph | n=400, m=1200, rep=0 | hops=9 | min_hops=8 | attempts=2
+
+Generated and saved 481/840 evaluation graphs.
+Accepted graph | n=400, m=1200, rep=1 | hops=9 | min_hops=8 | attempts=3
+
+Generated and saved 482/840 evaluation graphs.
+Accepted graph | n=400, m=1200, rep=2 | hops=10 | min_hops=8 | attempts=22
+
+Generated and saved 483/840 evaluation graphs.
+Accepted graph | n=400, m=1200, rep=3 | hops=8 | min_hops=8 | attempts=5
+
+Generated and saved 484/840 evaluation graphs.
+Accepted graph | n=400, m=1200, rep=4 | hops=8 | min_hops=8 | attempts=7
+
+Generated and saved 485/840 evaluation graphs.
+Accepted graph | n=400, m=1200, rep=5 | hops=8 | min_hops=8 | attempts=16
+
+Generated and saved 486/840 evaluation graphs.
+Accepted graph | n=400, m=1200, rep=6 | hops=8 | min_hops=8 | attempts=8
+
+Generated and saved 487/840 evaluation graphs.
+Accepted graph | n=400, m=1200, rep=7 | hops=8 | min_hops=8 | attempts=24
+
+Generated and saved 488/840 evaluation graphs.
+Accepted graph | n=400, m=1200, rep=8 | hops=8 | min_hops=8 | attempts=27
+
+Generated and saved 489/840 evaluation graphs.
+Accepted graph | n=400, m=1200, rep=9 | hops=10 | min_hops=8 | attempts=12
+
+Generated and saved 490/840 evaluation graphs.
+Accepted graph | n=400, m=1200, rep=10 | hops=8 | min_hops=8 | attempts=42
+
+Generated and saved 491/840 evaluation graphs.
+Accepted graph | n=400, m=1200, rep=11 | hops=9 | min_hops=8 | attempts=25
+
+Generated and saved 492/840 evaluation graphs.
+Accepted graph | n=400, m=1200, rep=12 | hops=12 | min_hops=8 | attempts=15
+
+Generated and saved 493/840 evaluation graphs.
+Accepted graph | n=400, m=1200, rep=13 | hops=10 | min_hops=8 | attempts=77
+
+Generated and saved 494/840 evaluation graphs.
+Accepted graph | n=400, m=1200, rep=14 | hops=8 | min_hops=8 | attempts=115
+
+Generated and saved 495/840 evaluation graphs.
+Accepted graph | n=400, m=1200, rep=15 | hops=9 | min_hops=8 | attempts=2
+
+Generated and saved 496/840 evaluation graphs.
+Accepted graph | n=400, m=1200, rep=16 | hops=8 | min_hops=8 | attempts=8
+
+Generated and saved 497/840 evaluation graphs.
+Accepted graph | n=400, m=1200, rep=17 | hops=8 | min_hops=8 | attempts=26
+
+Generated and saved 498/840 evaluation graphs.
+Accepted graph | n=400, m=1200, rep=18 | hops=8 | min_hops=8 | attempts=29
+
+Generated and saved 499/840 evaluation graphs.
+Accepted graph | n=400, m=1200, rep=19 | hops=9 | min_hops=8 | attempts=2
+
+Generated and saved 500/840 evaluation graphs.
+Accepted graph | n=400, m=1200, rep=20 | hops=8 | min_hops=8 | attempts=5
+
+Generated and saved 501/840 evaluation graphs.
+Accepted graph | n=400, m=1200, rep=21 | hops=8 | min_hops=8 | attempts=1
+
+Generated and saved 502/840 evaluation graphs.
+Accepted graph | n=400, m=1200, rep=22 | hops=10 | min_hops=8 | attempts=11
+
+Generated and saved 503/840 evaluation graphs.
+Accepted graph | n=400, m=1200, rep=23 | hops=9 | min_hops=8 | attempts=11
+
+Generated and saved 504/840 evaluation graphs.
+Accepted graph | n=400, m=1200, rep=24 | hops=9 | min_hops=8 | attempts=17
+
+Generated and saved 505/840 evaluation graphs.
+Accepted graph | n=400, m=1200, rep=25 | hops=8 | min_hops=8 | attempts=2
+
+Generated and saved 506/840 evaluation graphs.
+Accepted graph | n=400, m=1200, rep=26 | hops=8 | min_hops=8 | attempts=3
+
+Generated and saved 507/840 evaluation graphs.
+Accepted graph | n=400, m=1200, rep=27 | hops=11 | min_hops=8 | attempts=1
+
+Generated and saved 508/840 evaluation graphs.
+Accepted graph | n=400, m=1200, rep=28 | hops=8 | min_hops=8 | attempts=8
+
+Generated and saved 509/840 evaluation graphs.
+Accepted graph | n=400, m=1200, rep=29 | hops=8 | min_hops=8 | attempts=29
+
+Generated and saved 510/840 evaluation graphs.
+Accepted graph | n=400, m=1600, rep=0 | hops=6 | min_hops=6 | attempts=9
+
+Generated and saved 511/840 evaluation graphs.
+Accepted graph | n=400, m=1600, rep=1 | hops=6 | min_hops=6 | attempts=2
+
+Generated and saved 512/840 evaluation graphs.
+Accepted graph | n=400, m=1600, rep=2 | hops=7 | min_hops=6 | attempts=10
+
+Generated and saved 513/840 evaluation graphs.
+Accepted graph | n=400, m=1600, rep=3 | hops=6 | min_hops=6 | attempts=7
+
+Generated and saved 514/840 evaluation graphs.
+Accepted graph | n=400, m=1600, rep=4 | hops=6 | min_hops=6 | attempts=1
+
+Generated and saved 515/840 evaluation graphs.
+Accepted graph | n=400, m=1600, rep=5 | hops=6 | min_hops=6 | attempts=2
+
+Generated and saved 516/840 evaluation graphs.
+Accepted graph | n=400, m=1600, rep=6 | hops=6 | min_hops=6 | attempts=10
+
+Generated and saved 517/840 evaluation graphs.
+Accepted graph | n=400, m=1600, rep=7 | hops=6 | min_hops=6 | attempts=5
+
+Generated and saved 518/840 evaluation graphs.
+Accepted graph | n=400, m=1600, rep=8 | hops=6 | min_hops=6 | attempts=18
+
+Generated and saved 519/840 evaluation graphs.
+Accepted graph | n=400, m=1600, rep=9 | hops=6 | min_hops=6 | attempts=5
+
+Generated and saved 520/840 evaluation graphs.
+Accepted graph | n=400, m=1600, rep=10 | hops=6 | min_hops=6 | attempts=6
+
+Generated and saved 521/840 evaluation graphs.
+Accepted graph | n=400, m=1600, rep=11 | hops=6 | min_hops=6 | attempts=3
+
+Generated and saved 522/840 evaluation graphs.
+Accepted graph | n=400, m=1600, rep=12 | hops=6 | min_hops=6 | attempts=1
+
+Generated and saved 523/840 evaluation graphs.
+Accepted graph | n=400, m=1600, rep=13 | hops=6 | min_hops=6 | attempts=2
+
+Generated and saved 524/840 evaluation graphs.
+Accepted graph | n=400, m=1600, rep=14 | hops=6 | min_hops=6 | attempts=8
+
+Generated and saved 525/840 evaluation graphs.
+Accepted graph | n=400, m=1600, rep=15 | hops=7 | min_hops=6 | attempts=2
+
+Generated and saved 526/840 evaluation graphs.
+Accepted graph | n=400, m=1600, rep=16 | hops=6 | min_hops=6 | attempts=12
+
+Generated and saved 527/840 evaluation graphs.
+Accepted graph | n=400, m=1600, rep=17 | hops=8 | min_hops=6 | attempts=6
+
+Generated and saved 528/840 evaluation graphs.
+Accepted graph | n=400, m=1600, rep=18 | hops=6 | min_hops=6 | attempts=1
+
+Generated and saved 529/840 evaluation graphs.
+Accepted graph | n=400, m=1600, rep=19 | hops=6 | min_hops=6 | attempts=4
+
+Generated and saved 530/840 evaluation graphs.
+Accepted graph | n=400, m=1600, rep=20 | hops=6 | min_hops=6 | attempts=9
+
+Generated and saved 531/840 evaluation graphs.
+Accepted graph | n=400, m=1600, rep=21 | hops=6 | min_hops=6 | attempts=5
+
+Generated and saved 532/840 evaluation graphs.
+Accepted graph | n=400, m=1600, rep=22 | hops=7 | min_hops=6 | attempts=10
+
+Generated and saved 533/840 evaluation graphs.
+Accepted graph | n=400, m=1600, rep=23 | hops=6 | min_hops=6 | attempts=2
+
+Generated and saved 534/840 evaluation graphs.
+Accepted graph | n=400, m=1600, rep=24 | hops=6 | min_hops=6 | attempts=9
+
+Generated and saved 535/840 evaluation graphs.
+Accepted graph | n=400, m=1600, rep=25 | hops=6 | min_hops=6 | attempts=1
+
+Generated and saved 536/840 evaluation graphs.
+Accepted graph | n=400, m=1600, rep=26 | hops=6 | min_hops=6 | attempts=6
+
+Generated and saved 537/840 evaluation graphs.
+Accepted graph | n=400, m=1600, rep=27 | hops=6 | min_hops=6 | attempts=9
+
+Generated and saved 538/840 evaluation graphs.
+Accepted graph | n=400, m=1600, rep=28 | hops=6 | min_hops=6 | attempts=3
+
+Generated and saved 539/840 evaluation graphs.
+Accepted graph | n=400, m=1600, rep=29 | hops=7 | min_hops=6 | attempts=10
+
+Generated and saved 540/840 evaluation graphs.
+Accepted graph | n=400, m=2000, rep=0 | hops=5 | min_hops=5 | attempts=1
+
+Generated and saved 541/840 evaluation graphs.
+Accepted graph | n=400, m=2000, rep=1 | hops=5 | min_hops=5 | attempts=2
+
+Generated and saved 542/840 evaluation graphs.
+Accepted graph | n=400, m=2000, rep=2 | hops=5 | min_hops=5 | attempts=3
+
+Generated and saved 543/840 evaluation graphs.
+Accepted graph | n=400, m=2000, rep=3 | hops=5 | min_hops=5 | attempts=19
+
+Generated and saved 544/840 evaluation graphs.
+Accepted graph | n=400, m=2000, rep=4 | hops=5 | min_hops=5 | attempts=2
+
+Generated and saved 545/840 evaluation graphs.
+Accepted graph | n=400, m=2000, rep=5 | hops=6 | min_hops=5 | attempts=2
+
+Generated and saved 546/840 evaluation graphs.
+Accepted graph | n=400, m=2000, rep=6 | hops=5 | min_hops=5 | attempts=5
+
+Generated and saved 547/840 evaluation graphs.
+Accepted graph | n=400, m=2000, rep=7 | hops=5 | min_hops=5 | attempts=4
+
+Generated and saved 548/840 evaluation graphs.
+Accepted graph | n=400, m=2000, rep=8 | hops=5 | min_hops=5 | attempts=2
+
+Generated and saved 549/840 evaluation graphs.
+Accepted graph | n=400, m=2000, rep=9 | hops=5 | min_hops=5 | attempts=4
+
+Generated and saved 550/840 evaluation graphs.
+Accepted graph | n=400, m=2000, rep=10 | hops=5 | min_hops=5 | attempts=7
+
+Generated and saved 551/840 evaluation graphs.
+Accepted graph | n=400, m=2000, rep=11 | hops=5 | min_hops=5 | attempts=4
+
+Generated and saved 552/840 evaluation graphs.
+Accepted graph | n=400, m=2000, rep=12 | hops=5 | min_hops=5 | attempts=5
+
+Generated and saved 553/840 evaluation graphs.
+Accepted graph | n=400, m=2000, rep=13 | hops=5 | min_hops=5 | attempts=3
+
+Generated and saved 554/840 evaluation graphs.
+Accepted graph | n=400, m=2000, rep=14 | hops=5 | min_hops=5 | attempts=1
+
+Generated and saved 555/840 evaluation graphs.
+Accepted graph | n=400, m=2000, rep=15 | hops=5 | min_hops=5 | attempts=9
+
+Generated and saved 556/840 evaluation graphs.
+Accepted graph | n=400, m=2000, rep=16 | hops=5 | min_hops=5 | attempts=8
+
+Generated and saved 557/840 evaluation graphs.
+Accepted graph | n=400, m=2000, rep=17 | hops=5 | min_hops=5 | attempts=4
+
+Generated and saved 558/840 evaluation graphs.
+Accepted graph | n=400, m=2000, rep=18 | hops=5 | min_hops=5 | attempts=3
+
+Generated and saved 559/840 evaluation graphs.
+Accepted graph | n=400, m=2000, rep=19 | hops=5 | min_hops=5 | attempts=20
+
+Generated and saved 560/840 evaluation graphs.
+Accepted graph | n=400, m=2000, rep=20 | hops=5 | min_hops=5 | attempts=9
+
+Generated and saved 561/840 evaluation graphs.
+Accepted graph | n=400, m=2000, rep=21 | hops=5 | min_hops=5 | attempts=4
+
+Generated and saved 562/840 evaluation graphs.
+Accepted graph | n=400, m=2000, rep=22 | hops=5 | min_hops=5 | attempts=2
+
+Generated and saved 563/840 evaluation graphs.
+Accepted graph | n=400, m=2000, rep=23 | hops=6 | min_hops=5 | attempts=1
+
+Generated and saved 564/840 evaluation graphs.
+Accepted graph | n=400, m=2000, rep=24 | hops=5 | min_hops=5 | attempts=1
+
+Generated and saved 565/840 evaluation graphs.
+Accepted graph | n=400, m=2000, rep=25 | hops=5 | min_hops=5 | attempts=8
+
+Generated and saved 566/840 evaluation graphs.
+Accepted graph | n=400, m=2000, rep=26 | hops=5 | min_hops=5 | attempts=1
+
+Generated and saved 567/840 evaluation graphs.
+Accepted graph | n=400, m=2000, rep=27 | hops=5 | min_hops=5 | attempts=4
+
+Generated and saved 568/840 evaluation graphs.
+Accepted graph | n=400, m=2000, rep=28 | hops=5 | min_hops=5 | attempts=1
+
+Generated and saved 569/840 evaluation graphs.
+Accepted graph | n=400, m=2000, rep=29 | hops=5 | min_hops=5 | attempts=2
+
+Generated and saved 570/840 evaluation graphs.
+Accepted graph | n=400, m=2400, rep=0 | hops=5 | min_hops=5 | attempts=6
+
+Generated and saved 571/840 evaluation graphs.
+Accepted graph | n=400, m=2400, rep=1 | hops=5 | min_hops=5 | attempts=5
+
+Generated and saved 572/840 evaluation graphs.
+Accepted graph | n=400, m=2400, rep=2 | hops=5 | min_hops=5 | attempts=1
+
+Generated and saved 573/840 evaluation graphs.
+Accepted graph | n=400, m=2400, rep=3 | hops=5 | min_hops=5 | attempts=12
+
+Generated and saved 574/840 evaluation graphs.
+Accepted graph | n=400, m=2400, rep=4 | hops=5 | min_hops=5 | attempts=26
+
+Generated and saved 575/840 evaluation graphs.
+Accepted graph | n=400, m=2400, rep=5 | hops=5 | min_hops=5 | attempts=37
+
+Generated and saved 576/840 evaluation graphs.
+Accepted graph | n=400, m=2400, rep=6 | hops=5 | min_hops=5 | attempts=28
+
+Generated and saved 577/840 evaluation graphs.
+Accepted graph | n=400, m=2400, rep=7 | hops=5 | min_hops=5 | attempts=4
+
+Generated and saved 578/840 evaluation graphs.
+Accepted graph | n=400, m=2400, rep=8 | hops=5 | min_hops=5 | attempts=1
+
+Generated and saved 579/840 evaluation graphs.
+Accepted graph | n=400, m=2400, rep=9 | hops=5 | min_hops=5 | attempts=22
+
+Generated and saved 580/840 evaluation graphs.
+Accepted graph | n=400, m=2400, rep=10 | hops=5 | min_hops=5 | attempts=1
+
+Generated and saved 581/840 evaluation graphs.
+Accepted graph | n=400, m=2400, rep=11 | hops=5 | min_hops=5 | attempts=6
+
+Generated and saved 582/840 evaluation graphs.
+Accepted graph | n=400, m=2400, rep=12 | hops=5 | min_hops=5 | attempts=3
+
+Generated and saved 583/840 evaluation graphs.
+Accepted graph | n=400, m=2400, rep=13 | hops=5 | min_hops=5 | attempts=20
+
+Generated and saved 584/840 evaluation graphs.
+Accepted graph | n=400, m=2400, rep=14 | hops=5 | min_hops=5 | attempts=1
+
+Generated and saved 585/840 evaluation graphs.
+Accepted graph | n=400, m=2400, rep=15 | hops=5 | min_hops=5 | attempts=13
+
+Generated and saved 586/840 evaluation graphs.
+Accepted graph | n=400, m=2400, rep=16 | hops=5 | min_hops=5 | attempts=14
+
+Generated and saved 587/840 evaluation graphs.
+Accepted graph | n=400, m=2400, rep=17 | hops=5 | min_hops=5 | attempts=9
+
+Generated and saved 588/840 evaluation graphs.
+Accepted graph | n=400, m=2400, rep=18 | hops=5 | min_hops=5 | attempts=37
+
+Generated and saved 589/840 evaluation graphs.
+Accepted graph | n=400, m=2400, rep=19 | hops=5 | min_hops=5 | attempts=2
+
+Generated and saved 590/840 evaluation graphs.
+Accepted graph | n=400, m=2400, rep=20 | hops=5 | min_hops=5 | attempts=16
+
+Generated and saved 591/840 evaluation graphs.
+Accepted graph | n=400, m=2400, rep=21 | hops=5 | min_hops=5 | attempts=1
+
+Generated and saved 592/840 evaluation graphs.
+Accepted graph | n=400, m=2400, rep=22 | hops=5 | min_hops=5 | attempts=17
+
+Generated and saved 593/840 evaluation graphs.
+Accepted graph | n=400, m=2400, rep=23 | hops=5 | min_hops=5 | attempts=2
+
+Generated and saved 594/840 evaluation graphs.
+Accepted graph | n=400, m=2400, rep=24 | hops=5 | min_hops=5 | attempts=6
+
+Generated and saved 595/840 evaluation graphs.
+Accepted graph | n=400, m=2400, rep=25 | hops=5 | min_hops=5 | attempts=3
+
+Generated and saved 596/840 evaluation graphs.
+Accepted graph | n=400, m=2400, rep=26 | hops=5 | min_hops=5 | attempts=5
+
+Generated and saved 597/840 evaluation graphs.
+Accepted graph | n=400, m=2400, rep=27 | hops=5 | min_hops=5 | attempts=8
+
+Generated and saved 598/840 evaluation graphs.
+Accepted graph | n=400, m=2400, rep=28 | hops=5 | min_hops=5 | attempts=20
+
+Generated and saved 599/840 evaluation graphs.
+Accepted graph | n=400, m=2400, rep=29 | hops=5 | min_hops=5 | attempts=4
+
+Generated and saved 600/840 evaluation graphs.
+Accepted graph | n=400, m=3200, rep=0 | hops=4 | min_hops=4 | attempts=2
+
+Generated and saved 601/840 evaluation graphs.
+Accepted graph | n=400, m=3200, rep=1 | hops=4 | min_hops=4 | attempts=7
+
+Generated and saved 602/840 evaluation graphs.
+Accepted graph | n=400, m=3200, rep=2 | hops=4 | min_hops=4 | attempts=7
+
+Generated and saved 603/840 evaluation graphs.
+Accepted graph | n=400, m=3200, rep=3 | hops=4 | min_hops=4 | attempts=5
+
+Generated and saved 604/840 evaluation graphs.
+Accepted graph | n=400, m=3200, rep=4 | hops=4 | min_hops=4 | attempts=14
+
+Generated and saved 605/840 evaluation graphs.
+Accepted graph | n=400, m=3200, rep=5 | hops=4 | min_hops=4 | attempts=9
+
+Generated and saved 606/840 evaluation graphs.
+Accepted graph | n=400, m=3200, rep=6 | hops=4 | min_hops=4 | attempts=1
+
+Generated and saved 607/840 evaluation graphs.
+Accepted graph | n=400, m=3200, rep=7 | hops=4 | min_hops=4 | attempts=1
+
+Generated and saved 608/840 evaluation graphs.
+Accepted graph | n=400, m=3200, rep=8 | hops=4 | min_hops=4 | attempts=2
+
+Generated and saved 609/840 evaluation graphs.
+Accepted graph | n=400, m=3200, rep=9 | hops=4 | min_hops=4 | attempts=3
+
+Generated and saved 610/840 evaluation graphs.
+Accepted graph | n=400, m=3200, rep=10 | hops=4 | min_hops=4 | attempts=3
+
+Generated and saved 611/840 evaluation graphs.
+Accepted graph | n=400, m=3200, rep=11 | hops=4 | min_hops=4 | attempts=1
+
+Generated and saved 612/840 evaluation graphs.
+Accepted graph | n=400, m=3200, rep=12 | hops=4 | min_hops=4 | attempts=3
+
+Generated and saved 613/840 evaluation graphs.
+Accepted graph | n=400, m=3200, rep=13 | hops=4 | min_hops=4 | attempts=1
+
+Generated and saved 614/840 evaluation graphs.
+Accepted graph | n=400, m=3200, rep=14 | hops=4 | min_hops=4 | attempts=11
+
+Generated and saved 615/840 evaluation graphs.
+Accepted graph | n=400, m=3200, rep=15 | hops=4 | min_hops=4 | attempts=1
+
+Generated and saved 616/840 evaluation graphs.
+Accepted graph | n=400, m=3200, rep=16 | hops=4 | min_hops=4 | attempts=5
+
+Generated and saved 617/840 evaluation graphs.
+Accepted graph | n=400, m=3200, rep=17 | hops=4 | min_hops=4 | attempts=11
+
+Generated and saved 618/840 evaluation graphs.
+Accepted graph | n=400, m=3200, rep=18 | hops=4 | min_hops=4 | attempts=1
+
+Generated and saved 619/840 evaluation graphs.
+Accepted graph | n=400, m=3200, rep=19 | hops=4 | min_hops=4 | attempts=2
+
+Generated and saved 620/840 evaluation graphs.
+Accepted graph | n=400, m=3200, rep=20 | hops=4 | min_hops=4 | attempts=4
+
+Generated and saved 621/840 evaluation graphs.
+Accepted graph | n=400, m=3200, rep=21 | hops=4 | min_hops=4 | attempts=2
+
+Generated and saved 622/840 evaluation graphs.
+Accepted graph | n=400, m=3200, rep=22 | hops=4 | min_hops=4 | attempts=4
+
+Generated and saved 623/840 evaluation graphs.
+Accepted graph | n=400, m=3200, rep=23 | hops=4 | min_hops=4 | attempts=3
+
+Generated and saved 624/840 evaluation graphs.
+Accepted graph | n=400, m=3200, rep=24 | hops=4 | min_hops=4 | attempts=2
+
+Generated and saved 625/840 evaluation graphs.
+Accepted graph | n=400, m=3200, rep=25 | hops=4 | min_hops=4 | attempts=5
+
+Generated and saved 626/840 evaluation graphs.
+Accepted graph | n=400, m=3200, rep=26 | hops=4 | min_hops=4 | attempts=8
+
+Generated and saved 627/840 evaluation graphs.
+Accepted graph | n=400, m=3200, rep=27 | hops=4 | min_hops=4 | attempts=6
+
+Generated and saved 628/840 evaluation graphs.
+Accepted graph | n=400, m=3200, rep=28 | hops=4 | min_hops=4 | attempts=6
+
+Generated and saved 629/840 evaluation graphs.
+Accepted graph | n=400, m=3200, rep=29 | hops=4 | min_hops=4 | attempts=2
+
+Generated and saved 630/840 evaluation graphs.
+Accepted graph | n=600, m=1200, rep=0 | hops=11 | min_hops=11 | attempts=3
+
+Generated and saved 631/840 evaluation graphs.
+Accepted graph | n=600, m=1200, rep=1 | hops=11 | min_hops=11 | attempts=3
+
+Generated and saved 632/840 evaluation graphs.
+Accepted graph | n=600, m=1200, rep=2 | hops=11 | min_hops=11 | attempts=2
+
+Generated and saved 633/840 evaluation graphs.
+Accepted graph | n=600, m=1200, rep=3 | hops=11 | min_hops=11 | attempts=3
+
+Generated and saved 634/840 evaluation graphs.
+Accepted graph | n=600, m=1200, rep=4 | hops=11 | min_hops=11 | attempts=1
+
+Generated and saved 635/840 evaluation graphs.
+Accepted graph | n=600, m=1200, rep=5 | hops=11 | min_hops=11 | attempts=1
+
+Generated and saved 636/840 evaluation graphs.
+Accepted graph | n=600, m=1200, rep=6 | hops=12 | min_hops=11 | attempts=2
+
+Generated and saved 637/840 evaluation graphs.
+Accepted graph | n=600, m=1200, rep=7 | hops=11 | min_hops=11 | attempts=2
+
+Generated and saved 638/840 evaluation graphs.
+Accepted graph | n=600, m=1200, rep=8 | hops=15 | min_hops=11 | attempts=1
+
+Generated and saved 639/840 evaluation graphs.
+Accepted graph | n=600, m=1200, rep=9 | hops=11 | min_hops=11 | attempts=7
+
+Generated and saved 640/840 evaluation graphs.
+Accepted graph | n=600, m=1200, rep=10 | hops=11 | min_hops=11 | attempts=3
+
+Generated and saved 641/840 evaluation graphs.
+Accepted graph | n=600, m=1200, rep=11 | hops=11 | min_hops=11 | attempts=2
+
+Generated and saved 642/840 evaluation graphs.
+Accepted graph | n=600, m=1200, rep=12 | hops=11 | min_hops=11 | attempts=1
+
+Generated and saved 643/840 evaluation graphs.
+Accepted graph | n=600, m=1200, rep=13 | hops=12 | min_hops=11 | attempts=1
+
+Generated and saved 644/840 evaluation graphs.
+Accepted graph | n=600, m=1200, rep=14 | hops=12 | min_hops=11 | attempts=3
+
+Generated and saved 645/840 evaluation graphs.
+Accepted graph | n=600, m=1200, rep=15 | hops=13 | min_hops=11 | attempts=3
+
+Generated and saved 646/840 evaluation graphs.
+Accepted graph | n=600, m=1200, rep=16 | hops=11 | min_hops=11 | attempts=2
+
+Generated and saved 647/840 evaluation graphs.
+Accepted graph | n=600, m=1200, rep=17 | hops=11 | min_hops=11 | attempts=7
+
+Generated and saved 648/840 evaluation graphs.
+Accepted graph | n=600, m=1200, rep=18 | hops=11 | min_hops=11 | attempts=8
+
+Generated and saved 649/840 evaluation graphs.
+Accepted graph | n=600, m=1200, rep=19 | hops=15 | min_hops=11 | attempts=9
+
+Generated and saved 650/840 evaluation graphs.
+Accepted graph | n=600, m=1200, rep=20 | hops=12 | min_hops=11 | attempts=9
+
+Generated and saved 651/840 evaluation graphs.
+Accepted graph | n=600, m=1200, rep=21 | hops=11 | min_hops=11 | attempts=1
+
+Generated and saved 652/840 evaluation graphs.
+Accepted graph | n=600, m=1200, rep=22 | hops=11 | min_hops=11 | attempts=4
+
+Generated and saved 653/840 evaluation graphs.
+Accepted graph | n=600, m=1200, rep=23 | hops=11 | min_hops=11 | attempts=6
+
+Generated and saved 654/840 evaluation graphs.
+Accepted graph | n=600, m=1200, rep=24 | hops=11 | min_hops=11 | attempts=20
+
+Generated and saved 655/840 evaluation graphs.
+Accepted graph | n=600, m=1200, rep=25 | hops=14 | min_hops=11 | attempts=2
+
+Generated and saved 656/840 evaluation graphs.
+Accepted graph | n=600, m=1200, rep=26 | hops=12 | min_hops=11 | attempts=4
+
+Generated and saved 657/840 evaluation graphs.
+Accepted graph | n=600, m=1200, rep=27 | hops=11 | min_hops=11 | attempts=4
+
+Generated and saved 658/840 evaluation graphs.
+Accepted graph | n=600, m=1200, rep=28 | hops=11 | min_hops=11 | attempts=4
+
+Generated and saved 659/840 evaluation graphs.
+Accepted graph | n=600, m=1200, rep=29 | hops=15 | min_hops=11 | attempts=4
+
+Generated and saved 660/840 evaluation graphs.
+Accepted graph | n=600, m=1500, rep=0 | hops=9 | min_hops=9 | attempts=3
+
+Generated and saved 661/840 evaluation graphs.
+Accepted graph | n=600, m=1500, rep=1 | hops=10 | min_hops=9 | attempts=1
+
+Generated and saved 662/840 evaluation graphs.
+Accepted graph | n=600, m=1500, rep=2 | hops=9 | min_hops=9 | attempts=7
+
+Generated and saved 663/840 evaluation graphs.
+Accepted graph | n=600, m=1500, rep=3 | hops=10 | min_hops=9 | attempts=22
+
+Generated and saved 664/840 evaluation graphs.
+Accepted graph | n=600, m=1500, rep=4 | hops=10 | min_hops=9 | attempts=7
+
+Generated and saved 665/840 evaluation graphs.
+Accepted graph | n=600, m=1500, rep=5 | hops=9 | min_hops=9 | attempts=1
+
+Generated and saved 666/840 evaluation graphs.
+Accepted graph | n=600, m=1500, rep=6 | hops=10 | min_hops=9 | attempts=3
+
+Generated and saved 667/840 evaluation graphs.
+Accepted graph | n=600, m=1500, rep=7 | hops=9 | min_hops=9 | attempts=4
+
+Generated and saved 668/840 evaluation graphs.
+Accepted graph | n=600, m=1500, rep=8 | hops=9 | min_hops=9 | attempts=1
+
+Generated and saved 669/840 evaluation graphs.
+Accepted graph | n=600, m=1500, rep=9 | hops=10 | min_hops=9 | attempts=3
+
+Generated and saved 670/840 evaluation graphs.
+Accepted graph | n=600, m=1500, rep=10 | hops=9 | min_hops=9 | attempts=2
+
+Generated and saved 671/840 evaluation graphs.
+Accepted graph | n=600, m=1500, rep=11 | hops=9 | min_hops=9 | attempts=12
+
+Generated and saved 672/840 evaluation graphs.
+Accepted graph | n=600, m=1500, rep=12 | hops=11 | min_hops=9 | attempts=8
+
+Generated and saved 673/840 evaluation graphs.
+Accepted graph | n=600, m=1500, rep=13 | hops=9 | min_hops=9 | attempts=1
+
+Generated and saved 674/840 evaluation graphs.
+Accepted graph | n=600, m=1500, rep=14 | hops=9 | min_hops=9 | attempts=10
+
+Generated and saved 675/840 evaluation graphs.
+Accepted graph | n=600, m=1500, rep=15 | hops=9 | min_hops=9 | attempts=4
+
+Generated and saved 676/840 evaluation graphs.
+Accepted graph | n=600, m=1500, rep=16 | hops=10 | min_hops=9 | attempts=3
+
+Generated and saved 677/840 evaluation graphs.
+Accepted graph | n=600, m=1500, rep=17 | hops=10 | min_hops=9 | attempts=3
+
+Generated and saved 678/840 evaluation graphs.
+Accepted graph | n=600, m=1500, rep=18 | hops=10 | min_hops=9 | attempts=3
+
+Generated and saved 679/840 evaluation graphs.
+Accepted graph | n=600, m=1500, rep=19 | hops=10 | min_hops=9 | attempts=3
+
+Generated and saved 680/840 evaluation graphs.
+Accepted graph | n=600, m=1500, rep=20 | hops=9 | min_hops=9 | attempts=7
+
+Generated and saved 681/840 evaluation graphs.
+Accepted graph | n=600, m=1500, rep=21 | hops=9 | min_hops=9 | attempts=12
+
+Generated and saved 682/840 evaluation graphs.
+Accepted graph | n=600, m=1500, rep=22 | hops=10 | min_hops=9 | attempts=8
+
+Generated and saved 683/840 evaluation graphs.
+Accepted graph | n=600, m=1500, rep=23 | hops=11 | min_hops=9 | attempts=2
+
+Generated and saved 684/840 evaluation graphs.
+Accepted graph | n=600, m=1500, rep=24 | hops=9 | min_hops=9 | attempts=11
+
+Generated and saved 685/840 evaluation graphs.
+Accepted graph | n=600, m=1500, rep=25 | hops=9 | min_hops=9 | attempts=1
+
+Generated and saved 686/840 evaluation graphs.
+Accepted graph | n=600, m=1500, rep=26 | hops=10 | min_hops=9 | attempts=3
+
+Generated and saved 687/840 evaluation graphs.
+Accepted graph | n=600, m=1500, rep=27 | hops=9 | min_hops=9 | attempts=9
+
+Generated and saved 688/840 evaluation graphs.
+Accepted graph | n=600, m=1500, rep=28 | hops=9 | min_hops=9 | attempts=6
+
+Generated and saved 689/840 evaluation graphs.
+Accepted graph | n=600, m=1500, rep=29 | hops=9 | min_hops=9 | attempts=2
+
+Generated and saved 690/840 evaluation graphs.
+Accepted graph | n=600, m=1800, rep=0 | hops=9 | min_hops=8 | attempts=2
+
+Generated and saved 691/840 evaluation graphs.
+Accepted graph | n=600, m=1800, rep=1 | hops=8 | min_hops=8 | attempts=22
+
+Generated and saved 692/840 evaluation graphs.
+Accepted graph | n=600, m=1800, rep=2 | hops=9 | min_hops=8 | attempts=26
+
+Generated and saved 693/840 evaluation graphs.
+Accepted graph | n=600, m=1800, rep=3 | hops=8 | min_hops=8 | attempts=6
+
+Generated and saved 694/840 evaluation graphs.
+Accepted graph | n=600, m=1800, rep=4 | hops=10 | min_hops=8 | attempts=13
+
+Generated and saved 695/840 evaluation graphs.
+Accepted graph | n=600, m=1800, rep=5 | hops=8 | min_hops=8 | attempts=3
+
+Generated and saved 696/840 evaluation graphs.
+Accepted graph | n=600, m=1800, rep=6 | hops=8 | min_hops=8 | attempts=1
+
+Generated and saved 697/840 evaluation graphs.
+Accepted graph | n=600, m=1800, rep=7 | hops=8 | min_hops=8 | attempts=8
+
+Generated and saved 698/840 evaluation graphs.
+Accepted graph | n=600, m=1800, rep=8 | hops=8 | min_hops=8 | attempts=1
+
+Generated and saved 699/840 evaluation graphs.
+Accepted graph | n=600, m=1800, rep=9 | hops=8 | min_hops=8 | attempts=9
+
+Generated and saved 700/840 evaluation graphs.
+Accepted graph | n=600, m=1800, rep=10 | hops=9 | min_hops=8 | attempts=28
+
+Generated and saved 701/840 evaluation graphs.
+Accepted graph | n=600, m=1800, rep=11 | hops=8 | min_hops=8 | attempts=3
+
+Generated and saved 702/840 evaluation graphs.
+Accepted graph | n=600, m=1800, rep=12 | hops=10 | min_hops=8 | attempts=2
+
+Generated and saved 703/840 evaluation graphs.
+Accepted graph | n=600, m=1800, rep=13 | hops=11 | min_hops=8 | attempts=6
+
+Generated and saved 704/840 evaluation graphs.
+Accepted graph | n=600, m=1800, rep=14 | hops=9 | min_hops=8 | attempts=6
+
+Generated and saved 705/840 evaluation graphs.
+Accepted graph | n=600, m=1800, rep=15 | hops=8 | min_hops=8 | attempts=16
+
+Generated and saved 706/840 evaluation graphs.
+Accepted graph | n=600, m=1800, rep=16 | hops=8 | min_hops=8 | attempts=1
+
+Generated and saved 707/840 evaluation graphs.
+Accepted graph | n=600, m=1800, rep=17 | hops=10 | min_hops=8 | attempts=6
+
+Generated and saved 708/840 evaluation graphs.
+Accepted graph | n=600, m=1800, rep=18 | hops=8 | min_hops=8 | attempts=9
+
+Generated and saved 709/840 evaluation graphs.
+Accepted graph | n=600, m=1800, rep=19 | hops=9 | min_hops=8 | attempts=16
+
+Generated and saved 710/840 evaluation graphs.
+Accepted graph | n=600, m=1800, rep=20 | hops=9 | min_hops=8 | attempts=2
+
+Generated and saved 711/840 evaluation graphs.
+Accepted graph | n=600, m=1800, rep=21 | hops=8 | min_hops=8 | attempts=8
+
+Generated and saved 712/840 evaluation graphs.
+Accepted graph | n=600, m=1800, rep=22 | hops=8 | min_hops=8 | attempts=4
+
+Generated and saved 713/840 evaluation graphs.
+Accepted graph | n=600, m=1800, rep=23 | hops=8 | min_hops=8 | attempts=8
+
+Generated and saved 714/840 evaluation graphs.
+Accepted graph | n=600, m=1800, rep=24 | hops=8 | min_hops=8 | attempts=3
+
+Generated and saved 715/840 evaluation graphs.
+Accepted graph | n=600, m=1800, rep=25 | hops=8 | min_hops=8 | attempts=6
+
+Generated and saved 716/840 evaluation graphs.
+Accepted graph | n=600, m=1800, rep=26 | hops=8 | min_hops=8 | attempts=2
+
+Generated and saved 717/840 evaluation graphs.
+Accepted graph | n=600, m=1800, rep=27 | hops=8 | min_hops=8 | attempts=1
+
+Generated and saved 718/840 evaluation graphs.
+Accepted graph | n=600, m=1800, rep=28 | hops=9 | min_hops=8 | attempts=19
+
+Generated and saved 719/840 evaluation graphs.
+Accepted graph | n=600, m=1800, rep=29 | hops=9 | min_hops=8 | attempts=20
+
+Generated and saved 720/840 evaluation graphs.
+Accepted graph | n=600, m=2400, rep=0 | hops=6 | min_hops=6 | attempts=2
+
+Generated and saved 721/840 evaluation graphs.
+Accepted graph | n=600, m=2400, rep=1 | hops=6 | min_hops=6 | attempts=1
+
+Generated and saved 722/840 evaluation graphs.
+Accepted graph | n=600, m=2400, rep=2 | hops=6 | min_hops=6 | attempts=2
+
+Generated and saved 723/840 evaluation graphs.
+Accepted graph | n=600, m=2400, rep=3 | hops=6 | min_hops=6 | attempts=6
+
+Generated and saved 724/840 evaluation graphs.
+Accepted graph | n=600, m=2400, rep=4 | hops=6 | min_hops=6 | attempts=4
+
+Generated and saved 725/840 evaluation graphs.
+Accepted graph | n=600, m=2400, rep=5 | hops=6 | min_hops=6 | attempts=10
+
+Generated and saved 726/840 evaluation graphs.
+Accepted graph | n=600, m=2400, rep=6 | hops=8 | min_hops=6 | attempts=4
+
+Generated and saved 727/840 evaluation graphs.
+Accepted graph | n=600, m=2400, rep=7 | hops=6 | min_hops=6 | attempts=7
+
+Generated and saved 728/840 evaluation graphs.
+Accepted graph | n=600, m=2400, rep=8 | hops=6 | min_hops=6 | attempts=4
+
+Generated and saved 729/840 evaluation graphs.
+Accepted graph | n=600, m=2400, rep=9 | hops=6 | min_hops=6 | attempts=2
+
+Generated and saved 730/840 evaluation graphs.
+Accepted graph | n=600, m=2400, rep=10 | hops=6 | min_hops=6 | attempts=2
+
+Generated and saved 731/840 evaluation graphs.
+Accepted graph | n=600, m=2400, rep=11 | hops=7 | min_hops=6 | attempts=1
+
+Generated and saved 732/840 evaluation graphs.
+Accepted graph | n=600, m=2400, rep=12 | hops=8 | min_hops=6 | attempts=4
+
+Generated and saved 733/840 evaluation graphs.
+Accepted graph | n=600, m=2400, rep=13 | hops=8 | min_hops=6 | attempts=1
+
+Generated and saved 734/840 evaluation graphs.
+Accepted graph | n=600, m=2400, rep=14 | hops=7 | min_hops=6 | attempts=1
+
+Generated and saved 735/840 evaluation graphs.
+Accepted graph | n=600, m=2400, rep=15 | hops=6 | min_hops=6 | attempts=5
+
+Generated and saved 736/840 evaluation graphs.
+Accepted graph | n=600, m=2400, rep=16 | hops=7 | min_hops=6 | attempts=14
+
+Generated and saved 737/840 evaluation graphs.
+Accepted graph | n=600, m=2400, rep=17 | hops=6 | min_hops=6 | attempts=3
+
+Generated and saved 738/840 evaluation graphs.
+Accepted graph | n=600, m=2400, rep=18 | hops=6 | min_hops=6 | attempts=5
+
+Generated and saved 739/840 evaluation graphs.
+Accepted graph | n=600, m=2400, rep=19 | hops=6 | min_hops=6 | attempts=4
+
+Generated and saved 740/840 evaluation graphs.
+Accepted graph | n=600, m=2400, rep=20 | hops=6 | min_hops=6 | attempts=1
+
+Generated and saved 741/840 evaluation graphs.
+Accepted graph | n=600, m=2400, rep=21 | hops=7 | min_hops=6 | attempts=1
+
+Generated and saved 742/840 evaluation graphs.
+Accepted graph | n=600, m=2400, rep=22 | hops=6 | min_hops=6 | attempts=13
+
+Generated and saved 743/840 evaluation graphs.
+Accepted graph | n=600, m=2400, rep=23 | hops=6 | min_hops=6 | attempts=5
+
+Generated and saved 744/840 evaluation graphs.
+Accepted graph | n=600, m=2400, rep=24 | hops=6 | min_hops=6 | attempts=3
+
+Generated and saved 745/840 evaluation graphs.
+Accepted graph | n=600, m=2400, rep=25 | hops=6 | min_hops=6 | attempts=8
+
+Generated and saved 746/840 evaluation graphs.
+Accepted graph | n=600, m=2400, rep=26 | hops=8 | min_hops=6 | attempts=2
+
+Generated and saved 747/840 evaluation graphs.
+Accepted graph | n=600, m=2400, rep=27 | hops=6 | min_hops=6 | attempts=4
+
+Generated and saved 748/840 evaluation graphs.
+Accepted graph | n=600, m=2400, rep=28 | hops=6 | min_hops=6 | attempts=3
+
+Generated and saved 749/840 evaluation graphs.
+Accepted graph | n=600, m=2400, rep=29 | hops=7 | min_hops=6 | attempts=7
+
+Generated and saved 750/840 evaluation graphs.
+Accepted graph | n=600, m=3000, rep=0 | hops=6 | min_hops=6 | attempts=10
+
+Generated and saved 751/840 evaluation graphs.
+Accepted graph | n=600, m=3000, rep=1 | hops=7 | min_hops=6 | attempts=51
+
+Generated and saved 752/840 evaluation graphs.
+Accepted graph | n=600, m=3000, rep=2 | hops=6 | min_hops=6 | attempts=17
+
+Generated and saved 753/840 evaluation graphs.
+Accepted graph | n=600, m=3000, rep=3 | hops=6 | min_hops=6 | attempts=49
+
+Generated and saved 754/840 evaluation graphs.
+Accepted graph | n=600, m=3000, rep=4 | hops=6 | min_hops=6 | attempts=12
+
+Generated and saved 755/840 evaluation graphs.
+Accepted graph | n=600, m=3000, rep=5 | hops=6 | min_hops=6 | attempts=9
+
+Generated and saved 756/840 evaluation graphs.
+Accepted graph | n=600, m=3000, rep=6 | hops=6 | min_hops=6 | attempts=1
+
+Generated and saved 757/840 evaluation graphs.
+Accepted graph | n=600, m=3000, rep=7 | hops=6 | min_hops=6 | attempts=5
+
+Generated and saved 758/840 evaluation graphs.
+Accepted graph | n=600, m=3000, rep=8 | hops=6 | min_hops=6 | attempts=49
+
+Generated and saved 759/840 evaluation graphs.
+Accepted graph | n=600, m=3000, rep=9 | hops=6 | min_hops=6 | attempts=25
+
+Generated and saved 760/840 evaluation graphs.
+Accepted graph | n=600, m=3000, rep=10 | hops=6 | min_hops=6 | attempts=40
+
+Generated and saved 761/840 evaluation graphs.
+Accepted graph | n=600, m=3000, rep=11 | hops=6 | min_hops=6 | attempts=11
+
+Generated and saved 762/840 evaluation graphs.
+Accepted graph | n=600, m=3000, rep=12 | hops=6 | min_hops=6 | attempts=20
+
+Generated and saved 763/840 evaluation graphs.
+Accepted graph | n=600, m=3000, rep=13 | hops=6 | min_hops=6 | attempts=98
+
+Generated and saved 764/840 evaluation graphs.
+Accepted graph | n=600, m=3000, rep=14 | hops=6 | min_hops=6 | attempts=37
+
+Generated and saved 765/840 evaluation graphs.
+Accepted graph | n=600, m=3000, rep=15 | hops=6 | min_hops=6 | attempts=1
+
+Generated and saved 766/840 evaluation graphs.
+Accepted graph | n=600, m=3000, rep=16 | hops=6 | min_hops=6 | attempts=3
+
+Generated and saved 767/840 evaluation graphs.
+Accepted graph | n=600, m=3000, rep=17 | hops=7 | min_hops=6 | attempts=5
+
+Generated and saved 768/840 evaluation graphs.
+Accepted graph | n=600, m=3000, rep=18 | hops=6 | min_hops=6 | attempts=22
+
+Generated and saved 769/840 evaluation graphs.
+Accepted graph | n=600, m=3000, rep=19 | hops=6 | min_hops=6 | attempts=75
+
+Generated and saved 770/840 evaluation graphs.
+Accepted graph | n=600, m=3000, rep=20 | hops=6 | min_hops=6 | attempts=17
+
+Generated and saved 771/840 evaluation graphs.
+Accepted graph | n=600, m=3000, rep=21 | hops=6 | min_hops=6 | attempts=22
+
+Generated and saved 772/840 evaluation graphs.
+Accepted graph | n=600, m=3000, rep=22 | hops=6 | min_hops=6 | attempts=42
+
+Generated and saved 773/840 evaluation graphs.
+Accepted graph | n=600, m=3000, rep=23 | hops=6 | min_hops=6 | attempts=11
+
+Generated and saved 774/840 evaluation graphs.
+Accepted graph | n=600, m=3000, rep=24 | hops=6 | min_hops=6 | attempts=12
+
+Generated and saved 775/840 evaluation graphs.
+Accepted graph | n=600, m=3000, rep=25 | hops=6 | min_hops=6 | attempts=10
+
+Generated and saved 776/840 evaluation graphs.
+Accepted graph | n=600, m=3000, rep=26 | hops=6 | min_hops=6 | attempts=32
+
+Generated and saved 777/840 evaluation graphs.
+Accepted graph | n=600, m=3000, rep=27 | hops=6 | min_hops=6 | attempts=1
+
+Generated and saved 778/840 evaluation graphs.
+Accepted graph | n=600, m=3000, rep=28 | hops=6 | min_hops=6 | attempts=3
+
+Generated and saved 779/840 evaluation graphs.
+Accepted graph | n=600, m=3000, rep=29 | hops=6 | min_hops=6 | attempts=7
+
+Generated and saved 780/840 evaluation graphs.
+Accepted graph | n=600, m=3600, rep=0 | hops=5 | min_hops=5 | attempts=2
+
+Generated and saved 781/840 evaluation graphs.
+Accepted graph | n=600, m=3600, rep=1 | hops=5 | min_hops=5 | attempts=2
+
+Generated and saved 782/840 evaluation graphs.
+Accepted graph | n=600, m=3600, rep=2 | hops=5 | min_hops=5 | attempts=13
+
+Generated and saved 783/840 evaluation graphs.
+Accepted graph | n=600, m=3600, rep=3 | hops=5 | min_hops=5 | attempts=7
+
+Generated and saved 784/840 evaluation graphs.
+Accepted graph | n=600, m=3600, rep=4 | hops=5 | min_hops=5 | attempts=2
+
+Generated and saved 785/840 evaluation graphs.
+Accepted graph | n=600, m=3600, rep=5 | hops=5 | min_hops=5 | attempts=5
+
+Generated and saved 786/840 evaluation graphs.
+Accepted graph | n=600, m=3600, rep=6 | hops=5 | min_hops=5 | attempts=1
+
+Generated and saved 787/840 evaluation graphs.
+Accepted graph | n=600, m=3600, rep=7 | hops=5 | min_hops=5 | attempts=16
+
+Generated and saved 788/840 evaluation graphs.
+Accepted graph | n=600, m=3600, rep=8 | hops=5 | min_hops=5 | attempts=17
+
+Generated and saved 789/840 evaluation graphs.
+Accepted graph | n=600, m=3600, rep=9 | hops=5 | min_hops=5 | attempts=3
+
+Generated and saved 790/840 evaluation graphs.
+Accepted graph | n=600, m=3600, rep=10 | hops=5 | min_hops=5 | attempts=5
+
+Generated and saved 791/840 evaluation graphs.
+Accepted graph | n=600, m=3600, rep=11 | hops=5 | min_hops=5 | attempts=3
+
+Generated and saved 792/840 evaluation graphs.
+Accepted graph | n=600, m=3600, rep=12 | hops=5 | min_hops=5 | attempts=13
+
+Generated and saved 793/840 evaluation graphs.
+Accepted graph | n=600, m=3600, rep=13 | hops=5 | min_hops=5 | attempts=4
+
+Generated and saved 794/840 evaluation graphs.
+Accepted graph | n=600, m=3600, rep=14 | hops=5 | min_hops=5 | attempts=3
+
+Generated and saved 795/840 evaluation graphs.
+Accepted graph | n=600, m=3600, rep=15 | hops=5 | min_hops=5 | attempts=6
+
+Generated and saved 796/840 evaluation graphs.
+Accepted graph | n=600, m=3600, rep=16 | hops=5 | min_hops=5 | attempts=3
+
+Generated and saved 797/840 evaluation graphs.
+Accepted graph | n=600, m=3600, rep=17 | hops=5 | min_hops=5 | attempts=15
+
+Generated and saved 798/840 evaluation graphs.
+Accepted graph | n=600, m=3600, rep=18 | hops=5 | min_hops=5 | attempts=1
+
+Generated and saved 799/840 evaluation graphs.
+Accepted graph | n=600, m=3600, rep=19 | hops=5 | min_hops=5 | attempts=2
+
+Generated and saved 800/840 evaluation graphs.
+Accepted graph | n=600, m=3600, rep=20 | hops=5 | min_hops=5 | attempts=7
+
+Generated and saved 801/840 evaluation graphs.
+Accepted graph | n=600, m=3600, rep=21 | hops=5 | min_hops=5 | attempts=20
+
+Generated and saved 802/840 evaluation graphs.
+Accepted graph | n=600, m=3600, rep=22 | hops=5 | min_hops=5 | attempts=1
+
+Generated and saved 803/840 evaluation graphs.
+Accepted graph | n=600, m=3600, rep=23 | hops=5 | min_hops=5 | attempts=6
+
+Generated and saved 804/840 evaluation graphs.
+Accepted graph | n=600, m=3600, rep=24 | hops=5 | min_hops=5 | attempts=1
+
+Generated and saved 805/840 evaluation graphs.
+Accepted graph | n=600, m=3600, rep=25 | hops=5 | min_hops=5 | attempts=14
+
+Generated and saved 806/840 evaluation graphs.
+Accepted graph | n=600, m=3600, rep=26 | hops=5 | min_hops=5 | attempts=10
+
+Generated and saved 807/840 evaluation graphs.
+Accepted graph | n=600, m=3600, rep=27 | hops=5 | min_hops=5 | attempts=12
+
+Generated and saved 808/840 evaluation graphs.
+Accepted graph | n=600, m=3600, rep=28 | hops=5 | min_hops=5 | attempts=1
+
+Generated and saved 809/840 evaluation graphs.
+Accepted graph | n=600, m=3600, rep=29 | hops=5 | min_hops=5 | attempts=2
+
+Generated and saved 810/840 evaluation graphs.
+Accepted graph | n=600, m=4800, rep=0 | hops=4 | min_hops=4 | attempts=2
+
+Generated and saved 811/840 evaluation graphs.
+Accepted graph | n=600, m=4800, rep=1 | hops=4 | min_hops=4 | attempts=2
+
+Generated and saved 812/840 evaluation graphs.
+Accepted graph | n=600, m=4800, rep=2 | hops=4 | min_hops=4 | attempts=1
+
+Generated and saved 813/840 evaluation graphs.
+Accepted graph | n=600, m=4800, rep=3 | hops=4 | min_hops=4 | attempts=1
+
+Generated and saved 814/840 evaluation graphs.
+Accepted graph | n=600, m=4800, rep=4 | hops=4 | min_hops=4 | attempts=1
+
+Generated and saved 815/840 evaluation graphs.
+Accepted graph | n=600, m=4800, rep=5 | hops=4 | min_hops=4 | attempts=3
+
+Generated and saved 816/840 evaluation graphs.
+Accepted graph | n=600, m=4800, rep=6 | hops=4 | min_hops=4 | attempts=1
+
+Generated and saved 817/840 evaluation graphs.
+Accepted graph | n=600, m=4800, rep=7 | hops=4 | min_hops=4 | attempts=5
+
+Generated and saved 818/840 evaluation graphs.
+Accepted graph | n=600, m=4800, rep=8 | hops=4 | min_hops=4 | attempts=4
+
+Generated and saved 819/840 evaluation graphs.
+Accepted graph | n=600, m=4800, rep=9 | hops=4 | min_hops=4 | attempts=2
+
+Generated and saved 820/840 evaluation graphs.
+Accepted graph | n=600, m=4800, rep=10 | hops=4 | min_hops=4 | attempts=2
+
+Generated and saved 821/840 evaluation graphs.
+Accepted graph | n=600, m=4800, rep=11 | hops=4 | min_hops=4 | attempts=4
+
+Generated and saved 822/840 evaluation graphs.
+Accepted graph | n=600, m=4800, rep=12 | hops=4 | min_hops=4 | attempts=2
+
+Generated and saved 823/840 evaluation graphs.
+Accepted graph | n=600, m=4800, rep=13 | hops=4 | min_hops=4 | attempts=2
+
+Generated and saved 824/840 evaluation graphs.
+Accepted graph | n=600, m=4800, rep=14 | hops=4 | min_hops=4 | attempts=2
+
+Generated and saved 825/840 evaluation graphs.
+Accepted graph | n=600, m=4800, rep=15 | hops=4 | min_hops=4 | attempts=3
+
+Generated and saved 826/840 evaluation graphs.
+Accepted graph | n=600, m=4800, rep=16 | hops=4 | min_hops=4 | attempts=2
+
+Generated and saved 827/840 evaluation graphs.
+Accepted graph | n=600, m=4800, rep=17 | hops=4 | min_hops=4 | attempts=4
+
+Generated and saved 828/840 evaluation graphs.
+Accepted graph | n=600, m=4800, rep=18 | hops=4 | min_hops=4 | attempts=1
+
+Generated and saved 829/840 evaluation graphs.
+Accepted graph | n=600, m=4800, rep=19 | hops=4 | min_hops=4 | attempts=5
+
+Generated and saved 830/840 evaluation graphs.
+Accepted graph | n=600, m=4800, rep=20 | hops=4 | min_hops=4 | attempts=4
+
+Generated and saved 831/840 evaluation graphs.
+Accepted graph | n=600, m=4800, rep=21 | hops=4 | min_hops=4 | attempts=1
+
+Generated and saved 832/840 evaluation graphs.
+Accepted graph | n=600, m=4800, rep=22 | hops=4 | min_hops=4 | attempts=3
+
+Generated and saved 833/840 evaluation graphs.
+Accepted graph | n=600, m=4800, rep=23 | hops=4 | min_hops=4 | attempts=2
+
+Generated and saved 834/840 evaluation graphs.
+Accepted graph | n=600, m=4800, rep=24 | hops=4 | min_hops=4 | attempts=3
+
+Generated and saved 835/840 evaluation graphs.
+Accepted graph | n=600, m=4800, rep=25 | hops=4 | min_hops=4 | attempts=2
+
+Generated and saved 836/840 evaluation graphs.
+Accepted graph | n=600, m=4800, rep=26 | hops=4 | min_hops=4 | attempts=1
+
+Generated and saved 837/840 evaluation graphs.
+Accepted graph | n=600, m=4800, rep=27 | hops=4 | min_hops=4 | attempts=2
+
+Generated and saved 838/840 evaluation graphs.
+Accepted graph | n=600, m=4800, rep=28 | hops=4 | min_hops=4 | attempts=3
+
+Generated and saved 839/840 evaluation graphs.
+Accepted graph | n=600, m=4800, rep=29 | hops=4 | min_hops=4 | attempts=4
+
+Generated and saved 840/840 evaluation graphs.
+
+Finished. Saved 840 graphs to evaluation_graphs/shortest_path_ood_size_filtered_graphs.pkl
+All filtered evaluation graph generation complete.

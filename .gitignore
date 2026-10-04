@@ -4,3 +4,4 @@ __pycache__/
 data/real_world_data/
 
 
+training_data_*.json
