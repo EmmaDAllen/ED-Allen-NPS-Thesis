@@ -248,6 +248,13 @@ def train():
     # graph under one attack budget and includes edge features, edge bias, attack labels, and a mask
     dataset = InterdictionDataset(dataset_file)
 
+    print("\nDATASET CHECK")
+    print(f"Experiment tag: {experiment_tag}")
+    print(f"Dataset file: {dataset_file}")
+    print(f"Total samples: {len(dataset)}")
+    print(f"Unique graphs: "
+        f"{len(set(sample['graph_seed'] for sample in dataset.data))}")
+
 
 
     # GRAPH-LEVEL TRAIN/VALIDATION/TEST SPLIT
@@ -309,6 +316,13 @@ def train():
 
     # collect every dataset index associated with a test graph
     test_indices = sorted(index for seed in test_seeds for index in seed_to_indices[seed])
+
+    print("\nSPLIT CHECK")
+    print(f"Train: {len(train_seeds)} graphs, {len(train_indices)} samples")
+    print(f"Val:   {len(val_seeds)} graphs, {len(val_indices)} samples")
+    print(f"Test:  {len(test_seeds)} graphs, {len(test_indices)} samples")
+
+
 
     # include the optional experiment tag in the run name so evaluation loads the
     # checkpoint associated with the correct training run
