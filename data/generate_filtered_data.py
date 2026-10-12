@@ -613,7 +613,7 @@ if __name__ == "__main__":
     # Real-world transportation instances are appended separately because
     # their physical network sizes are fixed by the source datasets.
 
-    synthetic_topology_mix = {
+    '''synthetic_topology_mix = {
         "one_in": 50 / 85, "grid": 15 / 85, "geometric": 10 / 85, "star_mesh": 10 / 85}
 
     synthetic_dataset = generate_dataset(
@@ -636,7 +636,32 @@ if __name__ == "__main__":
 
 
     # Combine synthetic and real-world solved samples.
-    dataset = synthetic_dataset + real_world_dataset
+    dataset = synthetic_dataset + real_world_dataset'''
+
+
+    # EXPERIMENT 3: FILTERED MIXED 55/15
+    # Overall topology composition:
+    #   55% Filtered One-In
+    #   15% Grid
+    #   10% Layered
+    #   10% Geometric
+    #   10% Star-Mesh
+    #
+    # Only One-In networks undergo shortest-path structural filtering.
+    # No real-world transportation networks are included.
+
+    topology_mix = {"one_in": 0.55, "grid": 0.15, "layered": 0.10, "geometric": 0.10,
+                     "star_mesh": 0.10}
+
+    dataset = generate_dataset(
+        network_settings=network_settings,
+        replications_per_setting=100,
+        attack_budgets=attack_budgets,
+        problem_type=args.problem_type,
+        topology_mix=topology_mix,
+        base_seed=1,
+        output_file=output_file,
+        save_output=True)
 
 
     # Save the final combined training dataset.
