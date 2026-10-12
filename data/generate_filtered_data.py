@@ -636,32 +636,8 @@ if __name__ == "__main__":
 
 
     # Combine synthetic and real-world solved samples.
-    dataset = synthetic_dataset + real_world_dataset'''
+    dataset = synthetic_dataset + real_world_dataset
 
-
-    # EXPERIMENT 3: FILTERED MIXED 55/15
-    # Overall topology composition:
-    #   55% Filtered One-In
-    #   15% Grid
-    #   10% Layered
-    #   10% Geometric
-    #   10% Star-Mesh
-    #
-    # Only One-In networks undergo shortest-path structural filtering.
-    # No real-world transportation networks are included.
-
-    topology_mix = {"one_in": 0.55, "grid": 0.15, "layered": 0.10, "geometric": 0.10,
-                     "star_mesh": 0.10}
-
-    dataset = generate_dataset(
-        network_settings=network_settings,
-        replications_per_setting=100,
-        attack_budgets=attack_budgets,
-        problem_type=args.problem_type,
-        topology_mix=topology_mix,
-        base_seed=1,
-        output_file=output_file,
-        save_output=True)
 
 
     # Save the final combined training dataset.
@@ -678,6 +654,30 @@ if __name__ == "__main__":
     for topology in ["one_in","grid","geometric","star_mesh","real_world"]:
         count = sum(sample["topology"] == topology for sample in dataset)
 
-        print(f"{topology}: {count}")
+        print(f"{topology}: {count}")'''
+
+
+        # EXPERIMENT 3: FILTERED MIXED 55/15
+    # Overall topology composition:
+    #   55% Filtered One-In
+    #   15% Grid
+    #   10% Layered
+    #   10% Geometric
+    #   10% Star-Mesh
+    #
+    # Only One-In networks undergo shortest-path structural filtering.
+    # No real-world transportation networks are included.
+
+    topology_mix = {"one_in": 0.55, "grid": 0.15, "layered": 0.10, "geometric": 0.10,"star_mesh": 0.10}
+
+    dataset = generate_dataset(
+        network_settings=network_settings,
+        replications_per_setting=100,
+        attack_budgets=attack_budgets,
+        problem_type=args.problem_type,
+        topology_mix=topology_mix,
+        base_seed=1,
+        output_file=output_file,
+        save_output=True)
 
 
