@@ -395,7 +395,7 @@ if __name__ == "__main__":
     # COMMENT OUT the One-In-only version above and uncomment this version when generating the
     # topology-augmented dataset
 
-    topology_mix = {"one_in": 0.60, "grid": 0.10, "geometric": 0.10, "star_mesh": 0.10, "layered": 0.10}
+    topology_mix = {"one_in": 0.55, "grid": 0.15, "geometric": 0.10, "star_mesh": 0.10, "layered": 0.10}
 
 
     dataset = generate_dataset(
