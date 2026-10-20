@@ -343,7 +343,7 @@ def train():
 
     # save both the graph seeds and the resulting dataset indices - reusing this file allows 
     # all model architectures to use exactly the same graph partitions
-    torch.save({"split_seed": seed,
+    torch.save({"split_seed": 1,
             "train_seeds": sorted(train_seeds),
             "val_seeds": sorted(val_seeds),
             "test_seeds": sorted(test_seeds),
