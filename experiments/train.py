@@ -159,7 +159,7 @@ def train():
 
     # use one seed for Python randomness, PyTorch initialization,
     # CUDA operations, DataLoader shuffling, and the graph split
-    seed = 1
+    seed = int(sys.argv[3].rsplit("_v", 1)[1]) if len(sys.argv) > 3 and sys.argv[3].endswith(("_v2", "_v3", "_v4", "_v5")) else 1
 
     # control Python's built-in random-number generator
     random.seed(seed)
@@ -231,6 +231,10 @@ def train():
 
         elif experiment_tag == "mixed_filtered":
             dataset_file = "training_data_shortest_path_mixed_filtered.json" 
+
+        elif experiment_tag and experiment_tag.endswith(("_v2", "_v3", "_v4", "_v5")):
+            base_tag = experiment_tag.rsplit("_v", 1)[0]
+            dataset_file = f"training_data_shortest_path_{base_tag}.json"
 
         elif experiment_tag is None:
             dataset_file = "training_data_shortest_path.json"
