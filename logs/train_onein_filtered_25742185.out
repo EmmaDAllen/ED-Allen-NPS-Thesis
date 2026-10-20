@@ -1,0 +1,34 @@
+Tue Oct  6 07:50:27 2026       
++-----------------------------------------------------------------------------------------+
+| NVIDIA-SMI 595.58.03              Driver Version: 595.58.03      CUDA Version: 13.2     |
++-----------------------------------------+------------------------+----------------------+
+| GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |
+|                                         |                        |               MIG M. |
+|=========================================+========================+======================|
+|   0  NVIDIA A40                     On  |   00000000:03:00.0 Off |                    0 |
+|  0%   28C    P8             22W /  300W |       0MiB /  46068MiB |      0%      Default |
+|                                         |                        |                  N/A |
++-----------------------------------------+------------------------+----------------------+
+
++-----------------------------------------------------------------------------------------+
+| Processes:                                                                              |
+|  GPU   GI   CI              PID   Type   Process name                        GPU Memory |
+|        ID   ID                                                               Usage      |
+|=========================================================================================|
+|  No running processes found                                                             |
++-----------------------------------------------------------------------------------------+
+Saved new best model at epoch 1 with validation loss 0.651771
+Epoch 001 | Train Loss: 0.7985 | Val Loss: 0.6518 | Acc: 0.9828 | Prec: 0.4207 | Rec: 0.4228 | F1: 0.4218 | Hamming: 3.46 | Exact: 0.0911 | Time: 20.01s
+Saved new best model at epoch 2 with validation loss 0.632545
+Epoch 002 | Train Loss: 0.6682 | Val Loss: 0.6325 | Acc: 0.9831 | Prec: 0.4311 | Rec: 0.4332 | F1: 0.4322 | Hamming: 3.40 | Exact: 0.0944 | Time: 19.27s
+Saved new best model at epoch 3 with validation loss 0.626792
+Epoch 003 | Train Loss: 0.6422 | Val Loss: 0.6268 | Acc: 0.9834 | Prec: 0.4419 | Rec: 0.4440 | F1: 0.4429 | Hamming: 3.33 | Exact: 0.0967 | Time: 19.35s
+Saved new best model at epoch 4 with validation loss 0.620779
+Epoch 004 | Train Loss: 0.6324 | Val Loss: 0.6208 | Acc: 0.9834 | Prec: 0.4426 | Rec: 0.4447 | F1: 0.4437 | Hamming: 3.33 | Exact: 0.1022 | Time: 19.27s
+Saved new best model at epoch 5 with validation loss 0.613439
+Epoch 005 | Train Loss: 0.6240 | Val Loss: 0.6134 | Acc: 0.9836 | Prec: 0.4493 | Rec: 0.4514 | F1: 0.4503 | Hamming: 3.29 | Exact: 0.1078 | Time: 19.15s
+Saved new best model at epoch 6 with validation loss 0.607668
+Epoch 006 | Train Loss: 0.6181 | Val Loss: 0.6077 | Acc: 0.9838 | Prec: 0.4559 | Rec: 0.4581 | F1: 0.4570 | Hamming: 3.25 | Exact: 0.1067 | Time: 19.36s
+Saved new best model at epoch 7 with validation loss 0.606104
+Epoch 007 | Train Loss: 0.6148 | Val Loss: 0.6061 | Acc: 0.9840 | Prec: 0.4607 | Rec: 0.4630 | F1: 0.4619 | Hamming: 3.22 | Exact: 0.1111 | Time: 19.31s
