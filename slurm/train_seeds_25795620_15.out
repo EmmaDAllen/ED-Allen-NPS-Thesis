@@ -1,0 +1,29 @@
+========================================
+SLURM Job: 25795643
+Array Task: 15
+Model: tropical_v2
+Dataset: mixed_filtered
+Experiment Tag: mixed_filtered_v4
+Training Seed: 4
+========================================
+
+DATASET CHECK
+Experiment tag: mixed_filtered_v4
+Dataset file: training_data_shortest_path_mixed_filtered.json
+Total samples: 6000
+Unique graphs: 1200
+
+SPLIT CHECK
+Train: 840 graphs, 4200 samples
+Val:   180 graphs, 900 samples
+Test:  180 graphs, 900 samples
+Saved new best model at epoch 1 with validation loss 0.562695
+Epoch 001 | Train Loss: 0.7634 | Val Loss: 0.5627 | Acc: 0.9928 | Prec: 0.3585 | Rec: 0.3752 | F1: 0.3667 | Hamming: 3.72 | Exact: 0.0844 | Time: 87.29s
+Saved new best model at epoch 2 with validation loss 0.532864
+Epoch 002 | Train Loss: 0.5843 | Val Loss: 0.5329 | Acc: 0.9930 | Prec: 0.3744 | Rec: 0.3919 | F1: 0.3830 | Hamming: 3.62 | Exact: 0.0922 | Time: 89.52s
+Saved new best model at epoch 3 with validation loss 0.496390
+Epoch 003 | Train Loss: 0.5443 | Val Loss: 0.4964 | Acc: 0.9929 | Prec: 0.3707 | Rec: 0.3880 | F1: 0.3792 | Hamming: 3.64 | Exact: 0.0956 | Time: 87.49s
+Saved new best model at epoch 4 with validation loss 0.485002
+Epoch 004 | Train Loss: 0.5128 | Val Loss: 0.4850 | Acc: 0.9931 | Prec: 0.3885 | Rec: 0.4066 | F1: 0.3973 | Hamming: 3.54 | Exact: 0.0978 | Time: 89.29s
+Epoch 005 | Train Loss: 0.4975 | Val Loss: 0.4923 | Acc: 0.9932 | Prec: 0.3933 | Rec: 0.4116 | F1: 0.4023 | Hamming: 3.51 | Exact: 0.1000 | Time: 87.43s
+Epoch 006 | Train Loss: 0.4914 | Val Loss: 0.4876 | Acc: 0.9933 | Prec: 0.3993 | Rec: 0.4178 | F1: 0.4083 | Hamming: 3.47 | Exact: 0.1022 | Time: 87.16s

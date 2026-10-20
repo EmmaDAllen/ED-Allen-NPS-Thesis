@@ -1,0 +1,37 @@
+========================================
+SLURM Job: 25795644
+Array Task: 16
+Model: edge_transformer
+Dataset: mixed_filtered
+Experiment Tag: mixed_filtered_v4
+Training Seed: 4
+========================================
+
+DATASET CHECK
+Experiment tag: mixed_filtered_v4
+Dataset file: training_data_shortest_path_mixed_filtered.json
+Total samples: 6000
+Unique graphs: 1200
+
+SPLIT CHECK
+Train: 840 graphs, 4200 samples
+Val:   180 graphs, 900 samples
+Test:  180 graphs, 900 samples
+Saved new best model at epoch 1 with validation loss 0.607936
+Epoch 001 | Train Loss: 0.7770 | Val Loss: 0.6079 | Acc: 0.9927 | Prec: 0.3511 | Rec: 0.3674 | F1: 0.3591 | Hamming: 3.76 | Exact: 0.0911 | Time: 51.62s
+Saved new best model at epoch 2 with validation loss 0.582541
+Epoch 002 | Train Loss: 0.6241 | Val Loss: 0.5825 | Acc: 0.9929 | Prec: 0.3693 | Rec: 0.3864 | F1: 0.3777 | Hamming: 3.65 | Exact: 0.1000 | Time: 51.89s
+Saved new best model at epoch 3 with validation loss 0.578587
+Epoch 003 | Train Loss: 0.6085 | Val Loss: 0.5786 | Acc: 0.9929 | Prec: 0.3715 | Rec: 0.3888 | F1: 0.3799 | Hamming: 3.64 | Exact: 0.1000 | Time: 50.81s
+Saved new best model at epoch 4 with validation loss 0.571890
+Epoch 004 | Train Loss: 0.5954 | Val Loss: 0.5719 | Acc: 0.9930 | Prec: 0.3785 | Rec: 0.3961 | F1: 0.3871 | Hamming: 3.60 | Exact: 0.1078 | Time: 52.01s
+Saved new best model at epoch 5 with validation loss 0.571231
+Epoch 005 | Train Loss: 0.5805 | Val Loss: 0.5712 | Acc: 0.9930 | Prec: 0.3793 | Rec: 0.3969 | F1: 0.3879 | Hamming: 3.59 | Exact: 0.1011 | Time: 51.15s
+Saved new best model at epoch 6 with validation loss 0.568429
+Epoch 006 | Train Loss: 0.5696 | Val Loss: 0.5684 | Acc: 0.9931 | Prec: 0.3819 | Rec: 0.3996 | F1: 0.3905 | Hamming: 3.58 | Exact: 0.1033 | Time: 50.63s
+Saved new best model at epoch 7 with validation loss 0.563114
+Epoch 007 | Train Loss: 0.5627 | Val Loss: 0.5631 | Acc: 0.9931 | Prec: 0.3859 | Rec: 0.4039 | F1: 0.3947 | Hamming: 3.55 | Exact: 0.1044 | Time: 51.98s
+Saved new best model at epoch 8 with validation loss 0.562373
+Epoch 008 | Train Loss: 0.5530 | Val Loss: 0.5624 | Acc: 0.9932 | Prec: 0.3941 | Rec: 0.4124 | F1: 0.4030 | Hamming: 3.50 | Exact: 0.1111 | Time: 51.61s
+Saved new best model at epoch 9 with validation loss 0.557821
+Epoch 009 | Train Loss: 0.5481 | Val Loss: 0.5578 | Acc: 0.9932 | Prec: 0.3974 | Rec: 0.4159 | F1: 0.4064 | Hamming: 3.48 | Exact: 0.1144 | Time: 51.68s
