@@ -334,9 +334,9 @@ def train():
     # include the optional experiment tag in the run name so evaluation loads the
     # checkpoint associated with the correct training run
     if experiment_tag:
-        split_path = f"results/data_split_{problem_type}_{experiment_tag}.pt"
+        split_path = f"results/data_split_{model_type}_{problem_type}_{experiment_tag}.pt"
     else:
-        split_path = f"results/data_split_{problem_type}.pt"
+        split_path = f"results/data_split_{model_type}_{problem_type}.pt"
 
     # ensure the results directory exists before attempting to save the split file
     os.makedirs("results", exist_ok=True)
