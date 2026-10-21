@@ -15,10 +15,10 @@ source ~/thesis/bin/activate
 cd ~/ED-Allen-NPS-Thesis
 
 # Select training replication
-VERSION=${1:?Please provide version 2, 3, 4, or 5}
+VERSION=${1:?Please provide version 1, 2, 3, 4, or 5}
 
-if [[ ! "$VERSION" =~ ^[2-5]$ ]]; then
-    echo "ERROR: Version must be 2, 3, 4, or 5."
+if [[ ! "$VERSION" =~ ^[1-5]$ ]]; then
+    echo "ERROR: Version must be 1, 2, 3, 4, or 5."
     exit 1
 fi
 
@@ -46,7 +46,13 @@ MODEL_INDEX=$((SLURM_ARRAY_TASK_ID % 3))
 DATASET=${DATASETS[$DATASET_INDEX]}
 MODEL=${MODELS[$MODEL_INDEX]}
 
-EXPERIMENT_TAG="${DATASET}_v${VERSION}"
+# Seed 1 uses the original experiment tag without a version suffix
+if [[ "$VERSION" == "1" ]]; then
+    EXPERIMENT_TAG="${DATASET}"
+else
+    EXPERIMENT_TAG="${DATASET}_v${VERSION}"
+fi
+
 
 echo "========================================"
 echo "Job ID: $SLURM_JOB_ID"
