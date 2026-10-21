@@ -480,6 +480,9 @@ def evaluate():
             if sample is None:
                 continue
 
+            # Start timing the complete ML-guided solution procedure
+            hybrid_start = time.perf_counter()
+
 
 
             # CONVERT SOLVED SAMPLE TO MOPDEL INPUT TENSORS
@@ -507,9 +510,13 @@ def evaluate():
 
             # GPU WARM-UP
 
+            warmup_time = 0.0
+
             # Run five untimed forward passes to reduce initial GPU startup overhead
             # Warm-up is performed once per model evaluation run
             if not warmed_up:
+
+                warmup_start = time.perf_counter()
 
                 with torch.no_grad():
                     for _ in range(5):
@@ -519,7 +526,11 @@ def evaluate():
                 if device == "cuda":
                     torch.cuda.synchronize()
 
+                warmup_time = time.perf_counter() - warmup_start
+
                 warmed_up = True
+
+
 
             # MODEL INFERENCE TIMING 
 
@@ -570,7 +581,6 @@ def evaluate():
 
 
             # CONVERT LOGITS TO A DISCRETE INTERDICTION SET
-
 
             # identify which edges are eligible for interdiction Wood source/first-column and last-
             # column /sink arcs have interdictable=False, One-In edges and external default to True
@@ -624,6 +634,9 @@ def evaluate():
             candidate_end = time.perf_counter()
 
             candidate_search_time = candidate_end - candidate_start
+
+            # Complete ML-guided solution time, excluding one-time warm-up
+            hybrid_total_time = candidate_end - hybrid_start - warmup_time
 
 
             # retrieve the MIP-optimal binary attack vector - the ordering matches the 
@@ -795,7 +808,7 @@ def evaluate():
                     "candidate_search_time": candidate_search_time,
 
                     # complete runtime of model inference plus candidate refinement
-                    "hybrid_total_time": inference_time + candidate_search_time,
+                    "hybrid_total_time": hybrid_total_time,
 
                     "candidate_exact_match": candidate_exact,
                     "candidate_hamming_distance": candidate_hamming,
