@@ -280,6 +280,9 @@ def evaluate():
     # disables training-specific behavior such as dropout
     model.eval()
 
+    # Track whether GPU warm-up has been completed
+    warmed_up = False
+
     # evaluate all five interdiction budgets used in the experiments
     test_attack_limits = [1, 2, 3, 4, 5]
 
@@ -502,7 +505,21 @@ def evaluate():
             mask = torch.ones(1, edge_features.shape[1], dtype=torch.bool,device=device)
 
 
+            # GPU WARM-UP
 
+            # Run five untimed forward passes to reduce initial GPU startup overhead
+            # Warm-up is performed once per model evaluation run
+            if not warmed_up:
+
+                with torch.no_grad():
+                    for _ in range(5):
+                        _ = model(edge_features, edge_bias=edge_bias, mask=mask)
+
+                # Ensure all warm-up GPU operations finish before timing begins
+                if device == "cuda":
+                    torch.cuda.synchronize()
+
+                warmed_up = True
 
             # MODEL INFERENCE TIMING 
 
