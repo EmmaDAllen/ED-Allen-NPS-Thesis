@@ -1,0 +1,88 @@
+========================================
+SLURM Job: 25796664
+Array Task: 10
+Model: edge_transformer
+Dataset: mixed_60_10_reps100
+Experiment Tag: mixed_60_10_reps100_v5
+Training Seed: 5
+========================================
+
+DATASET CHECK
+Experiment tag: mixed_60_10_reps100_v5
+Dataset file: training_data_shortest_path_mixed_60_10_reps100.json
+Total samples: 6000
+Unique graphs: 1200
+
+SPLIT CHECK
+Train: 840 graphs, 4200 samples
+Val:   180 graphs, 900 samples
+Test:  180 graphs, 900 samples
+Saved new best model at epoch 1 with validation loss 0.719939
+Epoch 001 | Train Loss: 0.8091 | Val Loss: 0.7199 | Acc: 0.9829 | Prec: 0.3904 | Rec: 0.4223 | F1: 0.4057 | Hamming: 3.43 | Exact: 0.1067 | Time: 11.70s
+Saved new best model at epoch 2 with validation loss 0.705135
+Epoch 002 | Train Loss: 0.6890 | Val Loss: 0.7051 | Acc: 0.9841 | Prec: 0.4311 | Rec: 0.4663 | F1: 0.4480 | Hamming: 3.19 | Exact: 0.1300 | Time: 11.09s
+Saved new best model at epoch 3 with validation loss 0.683601
+Epoch 003 | Train Loss: 0.6584 | Val Loss: 0.6836 | Acc: 0.9842 | Prec: 0.4341 | Rec: 0.4696 | F1: 0.4511 | Hamming: 3.17 | Exact: 0.1289 | Time: 11.03s
+Saved new best model at epoch 4 with validation loss 0.661895
+Epoch 004 | Train Loss: 0.6355 | Val Loss: 0.6619 | Acc: 0.9843 | Prec: 0.4363 | Rec: 0.4720 | F1: 0.4534 | Hamming: 3.16 | Exact: 0.1344 | Time: 11.11s
+Saved new best model at epoch 5 with validation loss 0.652611
+Epoch 005 | Train Loss: 0.6179 | Val Loss: 0.6526 | Acc: 0.9845 | Prec: 0.4430 | Rec: 0.4792 | F1: 0.4604 | Hamming: 3.12 | Exact: 0.1389 | Time: 11.16s
+Saved new best model at epoch 6 with validation loss 0.637701
+Epoch 006 | Train Loss: 0.6062 | Val Loss: 0.6377 | Acc: 0.9845 | Prec: 0.4430 | Rec: 0.4792 | F1: 0.4604 | Hamming: 3.12 | Exact: 0.1356 | Time: 11.00s
+Saved new best model at epoch 7 with validation loss 0.634185
+Epoch 007 | Train Loss: 0.5949 | Val Loss: 0.6342 | Acc: 0.9845 | Prec: 0.4430 | Rec: 0.4792 | F1: 0.4604 | Hamming: 3.12 | Exact: 0.1378 | Time: 11.21s
+Saved new best model at epoch 8 with validation loss 0.626393
+Epoch 008 | Train Loss: 0.5858 | Val Loss: 0.6264 | Acc: 0.9846 | Prec: 0.4470 | Rec: 0.4836 | F1: 0.4646 | Hamming: 3.09 | Exact: 0.1422 | Time: 11.07s
+Saved new best model at epoch 9 with validation loss 0.621093
+Epoch 009 | Train Loss: 0.5754 | Val Loss: 0.6211 | Acc: 0.9846 | Prec: 0.4459 | Rec: 0.4824 | F1: 0.4634 | Hamming: 3.10 | Exact: 0.1467 | Time: 11.13s
+Saved new best model at epoch 10 with validation loss 0.618661
+Epoch 010 | Train Loss: 0.5689 | Val Loss: 0.6187 | Acc: 0.9846 | Prec: 0.4470 | Rec: 0.4836 | F1: 0.4646 | Hamming: 3.09 | Exact: 0.1456 | Time: 11.06s
+Saved new best model at epoch 11 with validation loss 0.615673
+Epoch 011 | Train Loss: 0.5645 | Val Loss: 0.6157 | Acc: 0.9847 | Prec: 0.4485 | Rec: 0.4852 | F1: 0.4661 | Hamming: 3.08 | Exact: 0.1467 | Time: 11.08s
+Saved new best model at epoch 12 with validation loss 0.614565
+Epoch 012 | Train Loss: 0.5554 | Val Loss: 0.6146 | Acc: 0.9847 | Prec: 0.4489 | Rec: 0.4856 | F1: 0.4665 | Hamming: 3.08 | Exact: 0.1433 | Time: 11.10s
+Epoch 013 | Train Loss: 0.5486 | Val Loss: 0.6168 | Acc: 0.9848 | Prec: 0.4526 | Rec: 0.4896 | F1: 0.4704 | Hamming: 3.06 | Exact: 0.1444 | Time: 11.18s
+Epoch 014 | Train Loss: 0.5451 | Val Loss: 0.6210 | Acc: 0.9848 | Prec: 0.4533 | Rec: 0.4904 | F1: 0.4711 | Hamming: 3.05 | Exact: 0.1467 | Time: 11.19s
+Epoch 015 | Train Loss: 0.5392 | Val Loss: 0.6276 | Acc: 0.9848 | Prec: 0.4544 | Rec: 0.4916 | F1: 0.4723 | Hamming: 3.05 | Exact: 0.1478 | Time: 10.97s
+Epoch 016 | Train Loss: 0.5293 | Val Loss: 0.6307 | Acc: 0.9848 | Prec: 0.4541 | Rec: 0.4912 | F1: 0.4719 | Hamming: 3.05 | Exact: 0.1489 | Time: 11.24s
+Epoch 017 | Train Loss: 0.5303 | Val Loss: 0.6349 | Acc: 0.9848 | Prec: 0.4533 | Rec: 0.4904 | F1: 0.4711 | Hamming: 3.05 | Exact: 0.1467 | Time: 11.16s
+Epoch 018 | Train Loss: 0.5195 | Val Loss: 0.6360 | Acc: 0.9848 | Prec: 0.4522 | Rec: 0.4892 | F1: 0.4700 | Hamming: 3.06 | Exact: 0.1467 | Time: 11.09s
+Epoch 019 | Train Loss: 0.5146 | Val Loss: 0.6400 | Acc: 0.9848 | Prec: 0.4530 | Rec: 0.4900 | F1: 0.4707 | Hamming: 3.06 | Exact: 0.1444 | Time: 11.09s
+Epoch 020 | Train Loss: 0.5117 | Val Loss: 0.6466 | Acc: 0.9849 | Prec: 0.4548 | Rec: 0.4920 | F1: 0.4727 | Hamming: 3.04 | Exact: 0.1456 | Time: 11.08s
+Epoch 021 | Train Loss: 0.5077 | Val Loss: 0.6519 | Acc: 0.9849 | Prec: 0.4567 | Rec: 0.4940 | F1: 0.4746 | Hamming: 3.03 | Exact: 0.1478 | Time: 11.14s
+Epoch 022 | Train Loss: 0.5041 | Val Loss: 0.6593 | Acc: 0.9849 | Prec: 0.4559 | Rec: 0.4932 | F1: 0.4738 | Hamming: 3.04 | Exact: 0.1467 | Time: 11.13s
+Epoch 023 | Train Loss: 0.4977 | Val Loss: 0.6654 | Acc: 0.9849 | Prec: 0.4563 | Rec: 0.4936 | F1: 0.4742 | Hamming: 3.04 | Exact: 0.1467 | Time: 11.10s
+Epoch 024 | Train Loss: 0.4930 | Val Loss: 0.6708 | Acc: 0.9849 | Prec: 0.4570 | Rec: 0.4944 | F1: 0.4750 | Hamming: 3.03 | Exact: 0.1478 | Time: 11.17s
+Epoch 025 | Train Loss: 0.4884 | Val Loss: 0.6766 | Acc: 0.9849 | Prec: 0.4570 | Rec: 0.4944 | F1: 0.4750 | Hamming: 3.03 | Exact: 0.1489 | Time: 11.15s
+Epoch 026 | Train Loss: 0.4863 | Val Loss: 0.6810 | Acc: 0.9849 | Prec: 0.4548 | Rec: 0.4920 | F1: 0.4727 | Hamming: 3.04 | Exact: 0.1456 | Time: 11.07s
+Epoch 027 | Train Loss: 0.4791 | Val Loss: 0.6878 | Acc: 0.9849 | Prec: 0.4552 | Rec: 0.4924 | F1: 0.4731 | Hamming: 3.04 | Exact: 0.1422 | Time: 11.15s
+Epoch 028 | Train Loss: 0.4732 | Val Loss: 0.6961 | Acc: 0.9848 | Prec: 0.4533 | Rec: 0.4904 | F1: 0.4711 | Hamming: 3.05 | Exact: 0.1411 | Time: 11.08s
+Epoch 029 | Train Loss: 0.4697 | Val Loss: 0.7051 | Acc: 0.9848 | Prec: 0.4544 | Rec: 0.4916 | F1: 0.4723 | Hamming: 3.05 | Exact: 0.1456 | Time: 11.14s
+Epoch 030 | Train Loss: 0.4676 | Val Loss: 0.7169 | Acc: 0.9848 | Prec: 0.4541 | Rec: 0.4912 | F1: 0.4719 | Hamming: 3.05 | Exact: 0.1467 | Time: 11.18s
+Epoch 031 | Train Loss: 0.4599 | Val Loss: 0.7265 | Acc: 0.9848 | Prec: 0.4541 | Rec: 0.4912 | F1: 0.4719 | Hamming: 3.05 | Exact: 0.1478 | Time: 11.25s
+Epoch 032 | Train Loss: 0.4553 | Val Loss: 0.7411 | Acc: 0.9847 | Prec: 0.4511 | Rec: 0.4880 | F1: 0.4688 | Hamming: 3.07 | Exact: 0.1467 | Time: 11.23s
+Epoch 033 | Train Loss: 0.4571 | Val Loss: 0.7516 | Acc: 0.9848 | Prec: 0.4515 | Rec: 0.4884 | F1: 0.4692 | Hamming: 3.06 | Exact: 0.1500 | Time: 11.11s
+Epoch 034 | Train Loss: 0.4519 | Val Loss: 0.7614 | Acc: 0.9847 | Prec: 0.4507 | Rec: 0.4876 | F1: 0.4684 | Hamming: 3.07 | Exact: 0.1500 | Time: 11.11s
+Epoch 035 | Train Loss: 0.4450 | Val Loss: 0.7742 | Acc: 0.9848 | Prec: 0.4522 | Rec: 0.4892 | F1: 0.4700 | Hamming: 3.06 | Exact: 0.1511 | Time: 11.08s
+Epoch 036 | Train Loss: 0.4402 | Val Loss: 0.7885 | Acc: 0.9847 | Prec: 0.4511 | Rec: 0.4880 | F1: 0.4688 | Hamming: 3.07 | Exact: 0.1489 | Time: 10.99s
+Epoch 037 | Train Loss: 0.4351 | Val Loss: 0.8000 | Acc: 0.9848 | Prec: 0.4522 | Rec: 0.4892 | F1: 0.4700 | Hamming: 3.06 | Exact: 0.1500 | Time: 11.01s
+Epoch 038 | Train Loss: 0.4329 | Val Loss: 0.8121 | Acc: 0.9848 | Prec: 0.4530 | Rec: 0.4900 | F1: 0.4707 | Hamming: 3.06 | Exact: 0.1500 | Time: 11.20s
+Epoch 039 | Train Loss: 0.4344 | Val Loss: 0.8236 | Acc: 0.9848 | Prec: 0.4537 | Rec: 0.4908 | F1: 0.4715 | Hamming: 3.05 | Exact: 0.1467 | Time: 11.05s
+Epoch 040 | Train Loss: 0.4273 | Val Loss: 0.8327 | Acc: 0.9849 | Prec: 0.4548 | Rec: 0.4920 | F1: 0.4727 | Hamming: 3.04 | Exact: 0.1467 | Time: 11.32s
+Epoch 041 | Train Loss: 0.4214 | Val Loss: 0.8442 | Acc: 0.9849 | Prec: 0.4548 | Rec: 0.4920 | F1: 0.4727 | Hamming: 3.04 | Exact: 0.1444 | Time: 11.07s
+Epoch 042 | Train Loss: 0.4200 | Val Loss: 0.8578 | Acc: 0.9849 | Prec: 0.4548 | Rec: 0.4920 | F1: 0.4727 | Hamming: 3.04 | Exact: 0.1456 | Time: 11.14s
+Epoch 043 | Train Loss: 0.4145 | Val Loss: 0.8706 | Acc: 0.9849 | Prec: 0.4552 | Rec: 0.4924 | F1: 0.4731 | Hamming: 3.04 | Exact: 0.1478 | Time: 11.25s
+Epoch 044 | Train Loss: 0.4108 | Val Loss: 0.8865 | Acc: 0.9848 | Prec: 0.4537 | Rec: 0.4908 | F1: 0.4715 | Hamming: 3.05 | Exact: 0.1467 | Time: 11.14s
+Epoch 045 | Train Loss: 0.4034 | Val Loss: 0.8991 | Acc: 0.9848 | Prec: 0.4522 | Rec: 0.4892 | F1: 0.4700 | Hamming: 3.06 | Exact: 0.1478 | Time: 11.16s
+Epoch 046 | Train Loss: 0.4004 | Val Loss: 0.9140 | Acc: 0.9848 | Prec: 0.4526 | Rec: 0.4896 | F1: 0.4704 | Hamming: 3.06 | Exact: 0.1444 | Time: 11.23s
+Epoch 047 | Train Loss: 0.4009 | Val Loss: 0.9263 | Acc: 0.9847 | Prec: 0.4511 | Rec: 0.4880 | F1: 0.4688 | Hamming: 3.07 | Exact: 0.1444 | Time: 11.26s
+Epoch 048 | Train Loss: 0.3966 | Val Loss: 0.9414 | Acc: 0.9848 | Prec: 0.4526 | Rec: 0.4896 | F1: 0.4704 | Hamming: 3.06 | Exact: 0.1478 | Time: 11.15s
+Epoch 049 | Train Loss: 0.3988 | Val Loss: 0.9567 | Acc: 0.9847 | Prec: 0.4504 | Rec: 0.4872 | F1: 0.4681 | Hamming: 3.07 | Exact: 0.1444 | Time: 11.13s
+Epoch 050 | Train Loss: 0.3900 | Val Loss: 0.9693 | Acc: 0.9847 | Prec: 0.4507 | Rec: 0.4876 | F1: 0.4684 | Hamming: 3.07 | Exact: 0.1444 | Time: 10.94s
+
+Total training time for edge_transformer_shortest_path_mixed_60_10_reps100_v5: 557.03 seconds
+Average epoch time: 11.14 seconds
+Best epoch: 12 | Best validation loss: 0.614565
+Best model saved to: saved_models/edge_transformer_shortest_path_mixed_60_10_reps100_v5_best_model.pt
+Final model saved to: saved_models/edge_transformer_shortest_path_mixed_60_10_reps100_v5_final_model.pt
+Completed training: edge_transformer / mixed_60_10_reps100_v5
