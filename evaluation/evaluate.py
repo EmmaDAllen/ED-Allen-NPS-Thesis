@@ -481,6 +481,10 @@ def evaluate():
                 continue
 
             # Start timing the complete ML-guided solution procedure
+            if device == "cuda":
+                torch.cuda.synchronize()
+
+            # Start timing the complete ML-guided solution procedure
             hybrid_start = time.perf_counter()
 
 
@@ -630,6 +634,10 @@ def evaluate():
                  candidate_search(sample=sample,masked_logits=masked_logits,
                                          interdictable_mask=interdictable_mask, k=k,
                                          problem_type=problem_type,candidate_pool_extra=4,))
+
+            # Ensure all GPU operations have completed
+            if device == "cuda":
+                torch.cuda.synchronize()
 
             candidate_end = time.perf_counter()
 
