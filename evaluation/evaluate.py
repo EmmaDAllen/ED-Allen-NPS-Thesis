@@ -326,7 +326,7 @@ def evaluate():
 
     # BUILD PROBLEM-SPECIFIC EVALUATION CASES
 
-    if eval_mode == "wood":
+    if eval_mode in ("wood", "wood_exp"):
 
         # Wood benchmark instances specify their own interdiction budget rather than
         # applying every K=1,...,5 value to every graph. Pair each graph with the
