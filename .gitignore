@@ -2,6 +2,9 @@ __pycache__/
 *.pyc
 .ipynb_checkpoints/
 data/real_world_data/
-
+# SLURM output and error logs
+slurm/*.out
+slurm/*.err
+results_pre_final_archive.tar.gz
 
 training_data_*.json
