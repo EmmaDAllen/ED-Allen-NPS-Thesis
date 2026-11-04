@@ -26,56 +26,120 @@ EVALUATIONS = ('wood_exp', 'value_ood', 'ood_size', 'id_new', 'external', 'wood'
 PREFIX = 'evaluation_results_'
 
 
+
 def parse_filename(path):
-    """Return metadata or a reason the filename is not recognized."""
+    """Parse final SPIP experiments and classify historical files."""
     name = path.stem
+
     if not name.startswith(PREFIX):
         return None, 'unexpected prefix'
+
     rest = name[len(PREFIX):]
-    model = next((x for x in MODELS if rest.startswith(x + '_')), None)
+
+    model = next(
+        (x for x in MODELS if rest.startswith(x + '_')),
+        None
+    )
     if model is None:
         return None, 'unrecognized model'
+
     rest = rest[len(model) + 1:]
+
     if not rest.startswith('shortest_path_'):
         return None, 'not a shortest_path result'
+
     rest = rest[len('shortest_path_'):]
-    evaluation = next((x for x in EVALUATIONS if rest.startswith(x + '_')), None)
+
+    evaluation = next(
+        (x for x in EVALUATIONS if rest.startswith(x + '_')),
+        None
+    )
     if evaluation is None:
         return None, 'unrecognized evaluation'
+
     rest = rest[len(evaluation) + 1:]
+
+    # Remove candidate configuration first.
+    candidate_config = 'default'
+    if rest.endswith('_candidate4'):
+        rest = rest[:-len('_candidate4')]
+        candidate_config = 'candidate4'
+
+    # Evaluation condition.
     condition = 'unspecified'
-    for suffix, label in (('_eval_unfiltered', 'unfiltered'), ('_eval_filtered', 'filtered')):
+    for suffix, label in (
+        ('_eval_unfiltered', 'unfiltered'),
+        ('_eval_filtered', 'filtered')
+    ):
         if rest.endswith(suffix):
             rest = rest[:-len(suffix)]
             condition = label
             break
-    match = re.search(r'_v([1-9][0-9]*)$', rest)
-    seed = int(match.group(1)) if match else 1
-    if match:
-        rest = rest[:match.start()]
-    if rest not in TRAINING_DISTRIBUTIONS:
-        return None, 'unrecognized training distribution: ' + rest
-    return dict(model=model, training_distribution=rest, training_seed=seed,
-                evaluation=evaluation, evaluation_condition=condition), None
+
+    # Match known distributions before interpreting seed suffixes.
+    distribution = None
+    seed = 1
+
+    for dist in TRAINING_DISTRIBUTIONS:
+        if rest == dist:
+            distribution = dist
+            break
+
+        match = re.fullmatch(
+            re.escape(dist) + r'_v([1-9][0-9]*)',
+            rest
+        )
+        if match:
+            distribution = dist
+            seed = int(match.group(1))
+            break
+
+    if distribution is None:
+        return None, 'historical_or_unclassified: ' + rest
+
+    experiment_group = (
+        'primary'
+        if model in ('tropical_v2', 'edge_transformer', 'gnn')
+        else 'supplementary'
+    )
+
+    return dict(
+        model=model,
+        training_distribution=distribution,
+        training_seed=seed,
+        evaluation=evaluation,
+        evaluation_condition=condition,
+        candidate_config=candidate_config,
+        experiment_group=experiment_group
+    ), None
+
 
 
 def main():
     if not RESULTS_DIR.is_dir():
         raise SystemExit('Cannot find results/. Run this script from the thesis repository root.')
     OUTPUT_DIR.mkdir(exist_ok=True)
-    paths = sorted(RESULTS_DIR.glob('evaluation_results_*.csv'))
+    # Search both final and historical evaluation folders.
+    final_dir = RESULTS_DIR / 'final_results'
+    old_dir = RESULTS_DIR / 'old_results'
+
+    paths = sorted(
+        list(final_dir.glob('evaluation_results_*.csv')) +
+        list(old_dir.glob('evaluation_results_*.csv')))
+
     inventory, problems, frames = [], [], []
     reference_columns = None
     for path in paths:
         meta, reason = parse_filename(path)
         if reason:
-            inventory.append({'filename': path.name, 'status': 'not_imported', 'reason': reason})
+            inventory.append({'filename': path.name, 'result_folder': path.parent.name,
+            'status': 'not_imported', 'reason': reason})
             continue
         try:
             df = pd.read_csv(path, low_memory=False)
         except Exception as exc:
-            inventory.append({'filename': path.name, **meta, 'status': 'read_error', 'reason': str(exc)})
-            problems.append({'filename': path.name, 'issue': 'read_error', 'details': str(exc)})
+            inventory.append({'filename': path.name, 'result_folder': path.parent.name, 'status': 'read_error', 'reason': str(exc)})
+            problems.append({'filename': path.name, 'result_folder': path.parent.name, 'issue': 'read_error', 'details': str(exc)})
             continue
         columns = set(df.columns)
         if reference_columns is None:
@@ -105,11 +169,14 @@ def main():
             if dup_count:
                 problems.append({'filename': path.name, 'issue': 'possible_duplicate_rows',
                                  'details': f'{dup_count} duplicates on {key}'})
-        inventory.append({'filename': path.name, **meta, 'status': 'imported',
-                          'reason': '', 'rows': len(df), 'columns': len(df.columns)})
+
+        inventory.append({'filename': path.name, 'result_folder': path.parent.name, **meta,
+        'status': 'imported', 'reason': '','rows': len(df),'columns': len(df.columns)})
+
         for k, v in meta.items():
             df[k if k not in df.columns else 'file_' + k] = v
         df['source_file'] = path.name
+        df['result_folder'] = path.parent.name
         frames.append(df)
 
     inv = pd.DataFrame(inventory)
@@ -119,24 +186,86 @@ def main():
 
     # A seed is expected only where a model/distribution/evaluation/condition
     # combination exists. This avoids inventing experimental configurations.
+    # Only primary robustness experiments require five seeds.
+    # Check all expected final five-seed experiments.
+    from itertools import product
+
     missing = []
-    imported = inv[inv['status'].eq('imported')] if not inv.empty else pd.DataFrame()
-    grouping = ['model', 'training_distribution', 'evaluation', 'evaluation_condition']
-    if not imported.empty:
-        for keys, group in imported.groupby(grouping, dropna=False):
-            observed = set(group['training_seed'].astype(int))
-            for seed in EXPECTED_SEEDS:
-                if seed not in observed:
-                    missing.append(dict(zip(grouping, keys), missing_seed=seed,
-                                        present_seeds=','.join(map(str, sorted(observed)))))
-    pd.DataFrame(missing, columns=grouping + ['missing_seed', 'present_seeds']).to_csv(
-        OUTPUT_DIR / 'missing_seeds.csv', index=False)
+
+    imported = inv[inv['status'].eq('imported')].copy()
+
+    final_models = ('tropical_v2', 'edge_transformer', 'gnn')
+
+    expected_evaluations = [
+        ('id_new', 'unfiltered'),
+        ('value_ood', 'unfiltered'),
+        ('ood_size', 'unfiltered'),
+        ('id_new', 'filtered'),
+        ('value_ood', 'filtered'),
+        ('ood_size', 'filtered'),
+        ('wood', 'unspecified'),
+        ('external', 'unspecified'),
+    ]
+
+    primary = imported[
+        (imported['model'].isin(final_models)) &
+        (imported['candidate_config'] == 'default')
+    ]
+
+    for model, distribution, seed, eval_pair in product(
+        final_models,
+        TRAINING_DISTRIBUTIONS,
+        EXPECTED_SEEDS,
+        expected_evaluations
+    ):
+        evaluation, condition = eval_pair
+
+        match = primary[
+            (primary['model'] == model) &
+            (primary['training_distribution'] == distribution) &
+            (primary['training_seed'] == seed) &
+            (primary['evaluation'] == evaluation) &
+            (primary['evaluation_condition'] == condition)
+        ]
+
+        if match.empty:
+            missing.append({
+                'model': model,
+                'training_distribution': distribution,
+                'training_seed': seed,
+                'evaluation': evaluation,
+                'evaluation_condition': condition,
+                'issue': 'missing_expected_file'
+            })
+
+    pd.DataFrame(
+        missing,
+        columns=[
+            'model',
+            'training_distribution',
+            'training_seed',
+            'evaluation',
+            'evaluation_condition',
+            'issue'
+        ]
+    ).to_csv(
+        OUTPUT_DIR / 'missing_seeds.csv',
+        index=False
+    )
+
+
 
     if frames:
         master = pd.concat(frames, ignore_index=True, sort=False)
         # Extra metadata columns are placed first for convenient JMP grouping.
-        metadata = ['model', 'training_distribution', 'training_seed', 'evaluation',
-                    'evaluation_condition', 'source_file']
+        metadata = [
+        'model',
+        'training_distribution',
+        'training_seed',
+        'evaluation',
+        'evaluation_condition',
+        'result_folder',
+        'source_file']
         master = master[metadata + [c for c in master.columns if c not in metadata]]
         master.to_csv(OUTPUT_DIR / 'jmp_master_results.csv', index=False)
         print(f'Imported {len(frames):,} files and {len(master):,} observations.')

@@ -8,3 +8,7 @@ data/real_world_data/
 results_pre_final_archive.tar.gz
 
 training_data_*.json
+
+# Generated JMP analysis datasets
+analysis/jmp_final_results.csv
+analysis/jmp_master_results.csv
