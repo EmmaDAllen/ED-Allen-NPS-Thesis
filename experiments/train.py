@@ -514,6 +514,11 @@ def train():
         total_train_loss = 0.0
         # number of non-padded edges processed during the epoch
         total_train_edges = 0
+
+        # Track graph-balanced training loss separately.
+        total_graph_loss = 0.0
+        total_graph_samples = 0
+
         # sum of gradient norms across optimizer updates
         total_gradient_norm = 0.0
         # largest pre-clipping gradient norm observed during the epoch
@@ -614,13 +619,28 @@ def train():
             # count number of read edges in this batch
             num_valid_edges = mask.sum().item()
 
-            # loss is the mean loss for this batch - multiplying it by the number of valid edges
-            # converts it back to the summed loss contribution for the batch
-            # this allows the final epoch average to weight batches by edge count instead of treating
-            # a small graph batch and a large graph batch equally
-            total_train_loss += loss.item() * num_valid_edges
-            # accumulate the number of real edges used in training
-            total_train_edges += num_valid_edges
+            # Original edge-weighted loss reporting.
+            if experiment_tag != "mixed_filtered_graphloss":
+
+                # loss is the mean loss for this batch - multiplying it by the number of valid edges
+                # converts it back to the summed loss contribution for the batch
+                # this allows the final epoch average to weight batches by edge count instead of treating
+                # a small graph batch and a large graph batch equally
+                total_train_loss += loss.item() * num_valid_edges
+                # accumulate the number of real edges used in training
+                total_train_edges += num_valid_edges
+
+            # Graph-balanced loss reporting.
+            else:
+
+                num_graphs = mask.shape[0]
+
+                total_graph_loss += loss.item() * num_graphs
+                total_graph_samples += num_graphs
+
+                # Retain valid-edge count for the existing sanity checks.
+                total_train_edges += num_valid_edges
+
 
         # the epoch cannot produce a meaningful loss if no valid edges were processed
         if total_train_edges == 0:
@@ -756,8 +776,15 @@ def train():
         # total wall-clock seconds required for the epoch
         epoch_time = epoch_end_time - epoch_start_time
 
-        # compute mean training loss per real edge across the full training partition
-        avg_train_loss = total_train_loss / total_train_edges
+        if experiment_tag == "mixed_filtered_graphloss":
+
+            # compute mean training loss per graph across the full training partition
+            avg_train_loss = total_graph_loss / total_graph_samples
+
+        else:
+
+            # compute mean training loss per real edge across the full training partition
+            avg_train_loss = total_train_loss / total_train_edges
 
         # compute mean validation loss per real edge across the full validation partition  
         avg_val_loss = total_val_loss / total_val_edges 
