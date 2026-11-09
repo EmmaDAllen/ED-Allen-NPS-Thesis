@@ -236,6 +236,9 @@ def train():
             base_tag = experiment_tag.rsplit("_v", 1)[0]
             dataset_file = f"training_data_shortest_path_{base_tag}.json"
 
+        elif experiment_tag == "mixed_filtered_graphloss":
+            dataset_file = "training_data_shortest_path_mixed_filtered.json"
+
         elif experiment_tag is None:
             dataset_file = "training_data_shortest_path.json"
 
@@ -555,20 +558,37 @@ def train():
             # loss_matrix shape matches logits and y: (batch_size, padded_num_edges)
             loss_matrix = loss_fn(logits, y)
 
-            # retain only losses corresponding to actual graph edges - losses at padded positions 
-            # must not influence training
-            valid_edge_losses = loss_matrix[mask]
+            if experiment_tag == "mixed_filtered_graphloss":
 
-            # a properly formed batch should contain valid edges - guard prevents mean() from being 
-            # called on an empty tensor if an invalid batch is encountered
-            if valid_edge_losses.numel() == 0:
-                continue 
+                # Sum weighted BCE losses across valid edges within each graph.
+                graph_loss_sum = (loss_matrix * mask.float()).sum(dim=1)
 
-            # average binary cross-entropy over all real edges in the current batch
-            loss = valid_edge_losses.mean()
+                # Count the number of valid edges in each graph.
+                graph_edge_counts = mask.sum(dim=1).clamp(min=1)
+
+                # Compute average edge loss separately for each graph.
+                graph_losses = graph_loss_sum / graph_edge_counts
+
+                # Give each graph equal weight in the batch loss.
+                loss = graph_losses.mean()
+
+            else:
+
+                # retain only losses corresponding to actual graph edges - losses at padded positions 
+                # must not influence training
+                valid_edge_losses = loss_matrix[mask]
+
+                # a properly formed batch should contain valid edges - guard prevents mean() from being 
+                # called on an empty tensor if an invalid batch is encountered
+                if valid_edge_losses.numel() == 0:
+                    continue
+
+                # average binary cross-entropy over all real edges in the current batch
+                loss = valid_edge_losses.mean()
+
 
             # backpropagate the batch loss and populate the .grad attribute of each trainable
-            #  model parameter
+            # model parameter
             loss.backward()
 
             # compute the total gradient norm and clip gradients whose combined norm exceeds 1.0
