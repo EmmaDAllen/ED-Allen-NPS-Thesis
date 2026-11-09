@@ -566,7 +566,7 @@ def train():
             if experiment_tag == "mixed_filtered_graphloss":
 
                 # Sum weighted BCE losses across valid edges within each graph.
-                graph_loss_sum = (loss_matrix * mask.float()).sum(dim=1)
+                graph_loss_sum = loss_matrix.masked_fill(~mask, 0.0).sum(dim=1)
 
                 # Count the number of valid edges in each graph.
                 graph_edge_counts = mask.sum(dim=1).clamp(min=1)
