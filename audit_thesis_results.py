@@ -6,6 +6,7 @@ Run from the repository root:
 Dependencies: pandas (pip install pandas)
 Original files in results/ are never changed.
 """
+from itertools import product
 from pathlib import Path
 import re
 import pandas as pd
@@ -18,6 +19,7 @@ TRAINING_DISTRIBUTIONS = (
     'mixed_55_15_filtered_reps100',
     'mixed_55_15_reps100',
     'mixed_60_10_reps100',
+    'mixed_filtered_graphloss',
     'mixed_filtered',
     'onein_filtered',
     'onein_reps100',
@@ -212,12 +214,14 @@ def main():
         (imported['candidate_config'] == 'default')
     ]
 
+    robustness_distributions = tuple(dist for dist in TRAINING_DISTRIBUTIONS if dist != 'mixed_filtered_graphloss')
+
     for model, distribution, seed, eval_pair in product(
         final_models,
-        TRAINING_DISTRIBUTIONS,
+        robustness_distributions,
         EXPECTED_SEEDS,
-        expected_evaluations
-    ):
+        expected_evaluations):
+
         evaluation, condition = eval_pair
 
         match = primary[
@@ -267,7 +271,9 @@ def main():
         'result_folder',
         'source_file']
         master = master[metadata + [c for c in master.columns if c not in metadata]]
-        master.to_csv(OUTPUT_DIR / 'jmp_master_results.csv', index=False)
+        master.to_csv(OUTPUT_DIR / 'jmp_master_results_with_graphloss.csv',
+    index=False
+)
         print(f'Imported {len(frames):,} files and {len(master):,} observations.')
     else:
         print('No recognized SPIP evaluation files imported.')
