@@ -613,7 +613,7 @@ if __name__ == "__main__":
     # Real-world transportation instances are appended separately because
     # their physical network sizes are fixed by the source datasets.
 
-    '''synthetic_topology_mix = {
+    synthetic_topology_mix = {
         "one_in": 50 / 85, "grid": 15 / 85, "geometric": 10 / 85, "star_mesh": 10 / 85}
 
     synthetic_dataset = generate_dataset(
@@ -654,9 +654,9 @@ if __name__ == "__main__":
     for topology in ["one_in","grid","geometric","star_mesh","real_world"]:
         count = sum(sample["topology"] == topology for sample in dataset)
 
-        print(f"{topology}: {count}")'''
+        print(f"{topology}: {count}")
 
-
+'''
     # EXPERIMENT 3: FILTERED MIXED 55/15
     # Overall topology composition:
     #   55% Filtered One-In
@@ -679,5 +679,5 @@ if __name__ == "__main__":
         base_seed=1,
         output_file=output_file,
         save_output=True)
-
+'''
 
