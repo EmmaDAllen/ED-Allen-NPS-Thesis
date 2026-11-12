@@ -15,13 +15,13 @@ synthetic shortest-path networks:
     dist
     penalty
     capacity
-    interdictable
-"""
+    interdictable"""
 
 import os
 import pickle
 import random
 
+from importlib_metadata import metadata
 import networkx as nx
 import numpy as np
 import pandas as pd
@@ -139,6 +139,14 @@ def load_tntp_network(filepath):
     # transportation network.
 
     first_thru_node = metadata.get("first_thru_node", 1)
+
+    # Chicago Sketch has 387 zones but FIRST THRU NODE = 1.
+    # Its 774 zero-time arcs are all incident to nodes 1–387.
+    # Treat these nodes as zone centroids for preprocessing.
+    if "ChicagoSketch_net.tntp" in str(filepath):
+        first_thru_node = metadata["number_of_zones"] + 1
+
+    metadata["centroid_filter_threshold"] = first_thru_node
 
     # FIND LINK TABLE HEADER
 
