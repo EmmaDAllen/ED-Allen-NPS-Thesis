@@ -239,6 +239,9 @@ def train():
         elif experiment_tag == "mixed_filtered_graphloss":
             dataset_file = "training_data_shortest_path_mixed_filtered.json"
 
+        elif experiment_tag == "mixed_filtered_corrected_reps100":
+            dataset_file = "training_data_shortest_path_mixed_filtered_corrected_reps100.json"
+
         elif experiment_tag is None:
             dataset_file = "training_data_shortest_path.json"
 
