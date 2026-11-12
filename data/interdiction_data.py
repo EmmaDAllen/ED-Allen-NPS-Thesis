@@ -20,7 +20,9 @@ from torch.utils.data import Dataset
 COST_HIGH = 10
 PENALTY_HIGH = 10
 CAPACITY_HIGH = 20
-
+COST_HIGH_EXP = 55
+PENALTY_HIGH_EXP = 157
+CAPACITY_HIGH_EXP = 20
 
 def sample_to_tensors(sample):
 
