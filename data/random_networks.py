@@ -189,7 +189,28 @@ def generate_grid_network(n,m, cost_low=1, cost_high=10, penalty_low=1,penalty_h
     # choose approximately square grid dimensions based on the number of
     # interior nodes
     rows = max(2, round(math.sqrt(num_grid_nodes)))
+
+    # Find a layout where the final row has at least two nodes.
+    while rows >= 2:
+        cols = math.ceil(num_grid_nodes / rows)
+        final_row_size = num_grid_nodes - (rows - 1) * cols
+
+        if final_row_size >= 2:
+            break
+
+        rows -= 1
+
+    if rows < 2:
+        raise ValueError("Unable to construct a valid grid layout.")
+
     cols = math.ceil(num_grid_nodes / rows)
+
+    # Prevent the final row from containing only one interior node.
+    # A single-node row would create a zero-cost s-t path because
+    # source and sink connector arcs both have zero traversal cost.
+    while num_grid_nodes - (rows - 1) * cols == 1:
+        rows -= 1
+        cols = math.ceil(num_grid_nodes / rows)
 
     # initialize directed graph and explicitly add all n nodes
     G = nx.DiGraph()
@@ -389,6 +410,19 @@ def generate_grid_network(n,m, cost_low=1, cost_high=10, penalty_low=1,penalty_h
     # requested number of arcs exactly
     if G.number_of_edges() != m:
         raise RuntimeError(f"Expected {m} arcs but generated {G.number_of_edges()}.")
+
+    # Validate that the source and sink are distinct.
+    assert s != t, "Grid source and sink must be different."
+
+    # Validate that a directed source-to-sink path exists.
+    assert nx.has_path(G, s, t), "Grid must contain an s-t path."
+
+    # Verify that every shortest path has positive traversal cost.
+    # This prevents unintended zero-cost paths from entering training.
+    baseline_distance = nx.shortest_path_length(G, source=s, target=t, weight="dist")
+
+    if baseline_distance <= 0:
+        raise RuntimeError(f"Invalid grid network: zero-cost s-t path for n={n}, m={m}, seed={seed}")
 
     # return the completed network and metadata used by the training pipeline
     return G, s, t, density
