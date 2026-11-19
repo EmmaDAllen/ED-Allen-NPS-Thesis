@@ -15,14 +15,17 @@ for transformer training."""
 import json
 import torch
 from torch.utils.data import Dataset
+import os
 
 # Reference maximum values used for feature normalization.
 COST_HIGH = 10
 PENALTY_HIGH = 10
 CAPACITY_HIGH = 20
-COST_HIGH_EXP = 55
-PENALTY_HIGH_EXP = 157
-CAPACITY_HIGH_EXP = 20
+
+# Alternative normalization constants for sensitivity analysis.
+COST_HIGH_NORMMAX = 55.0
+PENALTY_HIGH_NORMMAX = 157.0
+
 
 def sample_to_tensors(sample):
 
@@ -38,6 +41,14 @@ def sample_to_tensors(sample):
     Feature construction depends on the interdiction problem type so that
     each model receives only the attributes relevant to that optimization
     problem."""
+
+    # Select normalization constants for this experiment.
+    if os.environ.get("SPIP_NORMMAX", "0") == "1":
+        cost_high = COST_HIGH_NORMMAX
+        penalty_high = PENALTY_HIGH_NORMMAX
+    else:
+        cost_high = COST_HIGH
+        penalty_high = PENALTY_HIGH
     
     # number of nodes used to normalize node indices
     n = sample["n_nodes"]
@@ -58,7 +69,7 @@ def sample_to_tensors(sample):
     # normalize numerical features to approximately [0,1] to improve optimization during neural network training
     u_norm = u / max(n - 1, 1)
     v_norm = v / max(n - 1, 1)
-    penalty_norm = penalty / PENALTY_HIGH # reference max penalty value
+    penalty_norm = penalty / penalty_high # reference max penalty value
 
     # source flag = 1 if edge leaves source node
     source_flag = (u == sample["source"]).float()
@@ -78,7 +89,7 @@ def sample_to_tensors(sample):
 
         # shortest path uses distances
         dist = torch.tensor(sample["dist"], dtype=torch.float32)
-        dist_norm = dist / COST_HIGH # normalize to improve optimization
+        dist_norm = dist / cost_high # normalize to improve optimization
 
          # Edge feature matrix: [tail, head, distance, source flag, sink flag, density, budget, penalty]
         edge_features = torch.stack([u_norm, v_norm, dist_norm, source_flag, sink_flag, 

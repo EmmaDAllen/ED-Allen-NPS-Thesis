@@ -249,6 +249,17 @@ def evaluate():
     # so different candidate-search settings do not overwrite one another
     evaluation_tag = sys.argv[5] if len(sys.argv) > 5 else None
 
+    # Identify the base experiment independently of the training seed.
+    base_experiment_tag = experiment_tag
+
+    if experiment_tag and experiment_tag.endswith(("_v2", "_v3", "_v4", "_v5")):
+        base_experiment_tag = experiment_tag.rsplit("_v", 1)[0]
+
+    # Use alternative normalization only for normmax experiments.
+    is_normmax = base_experiment_tag == "mixed_filtered_normmax"
+
+    os.environ["SPIP_NORMMAX"] = "1" if is_normmax else "0"
+
 
 
     # MODEL AND CHECKPOINT LOADING

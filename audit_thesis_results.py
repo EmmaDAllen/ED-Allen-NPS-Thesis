@@ -14,13 +14,14 @@ import pandas as pd
 RESULTS_DIR = Path('results')
 OUTPUT_DIR = Path('analysis')
 EXPECTED_SEEDS = (1, 2, 3, 4, 5)
-MODELS = ('edge_transformer', 'tropical_v2', 'gnn', 'tropical', 'transformer')
+MODELS = ('edge_transformer', 'tropical_v2', 'gnn')
 TRAINING_DISTRIBUTIONS = (
-    'mixed_55_15_filtered_reps100',
-    'mixed_55_15_reps100',
-    'mixed_60_10_reps100',
+    'mixed_55_15_filtered_reps100_corrected',
+    'mixed_55_15_reps100_corrected',
+    'mixed_60_10_reps100_corrected',
+    'mixed_filtered_corrected',
     'mixed_filtered_graphloss',
-    'mixed_filtered',
+    'mixed_filtered_normmax',
     'onein_filtered',
     'onein_reps100',
 )
@@ -122,17 +123,29 @@ def main():
         raise SystemExit('Cannot find results/. Run this script from the thesis repository root.')
     OUTPUT_DIR.mkdir(exist_ok=True)
     # Search both final and historical evaluation folders.
+    # Search new evaluation results and previously finalized results.
+    # Exclude old_results because those files are historical.
     final_dir = RESULTS_DIR / 'final_results'
-    old_dir = RESULTS_DIR / 'old_results'
 
     paths = sorted(
-        list(final_dir.glob('evaluation_results_*.csv')) +
-        list(old_dir.glob('evaluation_results_*.csv')))
+        list(RESULTS_DIR.glob('evaluation_results_*.csv')) +
+        list(final_dir.glob('evaluation_results_*.csv')))
 
     inventory, problems, frames = [], [], []
     reference_columns = None
     for path in paths:
         meta, reason = parse_filename(path)
+        # Use corrected experiments and sensitivity results from results/.
+        # Keep the unaffected One-In experiments from final_results/.
+        if meta is not None:
+            distribution = meta['training_distribution']
+
+            if distribution in ('onein_filtered', 'onein_reps100'):
+                if path.parent != final_dir:
+                    continue
+            else:
+                if path.parent != RESULTS_DIR:
+                    continue
         if reason:
             inventory.append({'filename': path.name, 'result_folder': path.parent.name,
             'status': 'not_imported', 'reason': reason})
@@ -196,8 +209,25 @@ def main():
 
     imported = inv[inv['status'].eq('imported')].copy()
 
+    # Ensure each experiment configuration is represented by one CSV.
+    experiment_keys = [
+    'model',
+    'training_distribution',
+    'training_seed',
+    'evaluation',
+    'evaluation_condition',
+    'candidate_config']
+
+    duplicates = imported[imported.duplicated(subset=experiment_keys, keep=False)]
+
+    if not duplicates.empty:
+        print("\nWARNING: Duplicate experiment configurations found:")
+        print(duplicates[experiment_keys + ['filename']].to_string(index=False))
+
     final_models = ('tropical_v2', 'edge_transformer', 'gnn')
 
+
+    # Every final experiment is evaluated on nine configurations.
     expected_evaluations = [
         ('id_new', 'unfiltered'),
         ('value_ood', 'unfiltered'),
@@ -206,6 +236,7 @@ def main():
         ('value_ood', 'filtered'),
         ('ood_size', 'filtered'),
         ('wood', 'unspecified'),
+        ('wood_exp', 'unspecified'),
         ('external', 'unspecified'),
     ]
 
@@ -214,13 +245,14 @@ def main():
         (imported['candidate_config'] == 'default')
     ]
 
-    robustness_distributions = tuple(dist for dist in TRAINING_DISTRIBUTIONS if dist != 'mixed_filtered_graphloss')
-
+    # Check all eight final training distributions,
+    # including graph-loss and normmax sensitivity experiments.
     for model, distribution, seed, eval_pair in product(
         final_models,
-        robustness_distributions,
+        TRAINING_DISTRIBUTIONS,
         EXPECTED_SEEDS,
-        expected_evaluations):
+        expected_evaluations
+    ):
 
         evaluation, condition = eval_pair
 
@@ -252,10 +284,7 @@ def main():
             'evaluation_condition',
             'issue'
         ]
-    ).to_csv(
-        OUTPUT_DIR / 'missing_seeds.csv',
-        index=False
-    )
+    ).to_csv(OUTPUT_DIR / 'missing_seeds.csv', index=False)
 
 
 
@@ -271,9 +300,8 @@ def main():
         'result_folder',
         'source_file']
         master = master[metadata + [c for c in master.columns if c not in metadata]]
-        master.to_csv(OUTPUT_DIR / 'jmp_master_results_with_graphloss.csv',
-    index=False
-)
+        master.to_csv(OUTPUT_DIR / 'jmp_master_results_corrected.csv', index=False)
+
         print(f'Imported {len(frames):,} files and {len(master):,} observations.')
     else:
         print('No recognized SPIP evaluation files imported.')

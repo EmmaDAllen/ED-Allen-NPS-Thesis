@@ -195,6 +195,20 @@ def train():
     # models from previous runs and prevent checkpoints/results from being overwritten
     experiment_tag = sys.argv[3] if len(sys.argv) > 3 else None
 
+    # Remove training-seed suffix to identify the base experiment.
+    base_experiment_tag = experiment_tag
+
+    if experiment_tag and experiment_tag.endswith(("_v2", "_v3", "_v4", "_v5")):
+        base_experiment_tag = experiment_tag.rsplit("_v", 1)[0]
+
+    # Sensitivity experiment indicators.
+    is_graphloss = base_experiment_tag == "mixed_filtered_graphloss"
+    is_normmax = base_experiment_tag == "mixed_filtered_normmax"
+
+    # Select the matching feature normalization.
+    # Applies before any dataset samples are converted to tensors.
+    os.environ["SPIP_NORMMAX"] = "1" if is_normmax else "0" 
+
 
 
     # DATASET LOADING 
@@ -232,15 +246,32 @@ def train():
         elif experiment_tag == "mixed_filtered":
             dataset_file = "training_data_shortest_path_mixed_filtered.json" 
 
+        # Graph-balanced BCE sensitivity analysis.
+        # Reuse corrected mixed-filtered training data.
+        elif base_experiment_tag == "mixed_filtered_graphloss":
+            dataset_file = "training_data_shortest_path_mixed_filtered_corrected.json"
+
+        # Maximum-based normalization sensitivity analysis.
+        # Reuse the same corrected training data.
+        elif base_experiment_tag == "mixed_filtered_normmax":
+            dataset_file = "training_data_shortest_path_mixed_filtered_corrected.json"
+
+        # Seeds 2-5 of the other experiments.
         elif experiment_tag and experiment_tag.endswith(("_v2", "_v3", "_v4", "_v5")):
-            base_tag = experiment_tag.rsplit("_v", 1)[0]
-            dataset_file = f"training_data_shortest_path_{base_tag}.json"
+            dataset_file = f"training_data_shortest_path_{base_experiment_tag}.json"    
 
-        elif experiment_tag == "mixed_filtered_graphloss":
-            dataset_file = "training_data_shortest_path_mixed_filtered.json"
+        # Corrected mixed-topology training distributions
+        elif experiment_tag == "mixed_55_15_reps100_corrected":
+            dataset_file = "training_data_shortest_path_mixed_55_15_reps100_corrected.json"
 
-        elif experiment_tag == "mixed_filtered_corrected_reps100":
-            dataset_file = "training_data_shortest_path_mixed_filtered_corrected_reps100.json"
+        elif experiment_tag == "mixed_60_10_reps100_corrected":
+            dataset_file = "training_data_shortest_path_mixed_60_10_reps100_corrected.json"
+
+        elif experiment_tag == "mixed_55_15_filtered_reps100_corrected":
+            dataset_file = "training_data_shortest_path_mixed_55_15_filtered_reps100_corrected.json"
+
+        elif experiment_tag == "mixed_filtered_corrected":
+            dataset_file = "training_data_shortest_path_mixed_filtered_corrected.json"
 
         elif experiment_tag is None:
             dataset_file = "training_data_shortest_path.json"
@@ -566,7 +597,7 @@ def train():
             # loss_matrix shape matches logits and y: (batch_size, padded_num_edges)
             loss_matrix = loss_fn(logits, y)
 
-            if experiment_tag == "mixed_filtered_graphloss":
+            if is_graphloss:
 
                 # Sum weighted BCE losses across valid edges within each graph.
                 graph_loss_sum = loss_matrix.masked_fill(~mask, 0.0).sum(dim=1)
@@ -623,7 +654,7 @@ def train():
             num_valid_edges = mask.sum().item()
 
             # Original edge-weighted loss reporting.
-            if experiment_tag != "mixed_filtered_graphloss":
+            if not is_graphloss:
 
                 # loss is the mean loss for this batch - multiplying it by the number of valid edges
                 # converts it back to the summed loss contribution for the batch
@@ -779,7 +810,7 @@ def train():
         # total wall-clock seconds required for the epoch
         epoch_time = epoch_end_time - epoch_start_time
 
-        if experiment_tag == "mixed_filtered_graphloss":
+        if is_graphloss:
 
             # compute mean training loss per graph across the full training partition
             avg_train_loss = total_graph_loss / total_graph_samples
