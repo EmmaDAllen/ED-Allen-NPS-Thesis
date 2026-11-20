@@ -203,7 +203,7 @@ def train():
 
     # Sensitivity experiment indicators.
     is_graphloss = base_experiment_tag == "mixed_filtered_graphloss"
-    is_normmax = base_experiment_tag == "mixed_filtered_normmax"
+    is_normmax = base_experiment_tag in ("mixed_filtered_normmax", "external_only")
 
     # Select the matching feature normalization.
     # Applies before any dataset samples are converted to tensors.
@@ -272,6 +272,13 @@ def train():
 
         elif experiment_tag == "mixed_filtered_corrected":
             dataset_file = "training_data_shortest_path_mixed_filtered_corrected.json"
+
+        # Specialized training distributions
+        elif base_experiment_tag == "wood_only":
+            dataset_file = "data/training_data_shortest_path_wood_only.json"
+
+        elif base_experiment_tag == "external_only":
+            dataset_file = "data/training_data_shortest_path_external_only.json"
 
         elif experiment_tag is None:
             dataset_file = "training_data_shortest_path.json"
