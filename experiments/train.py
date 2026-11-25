@@ -256,6 +256,10 @@ def train():
         elif base_experiment_tag == "mixed_filtered_normmax":
             dataset_file = "training_data_shortest_path_mixed_filtered_corrected.json"
 
+        # Wood-only 6,000 sample experiment (all training seeds)
+        elif base_experiment_tag == "wood_only_6000":
+            dataset_file = "data/training_data_shortest_path_wood_only_6000.json"
+
         # Seeds 2-5 of the other experiments.
         elif experiment_tag and experiment_tag.endswith(("_v2", "_v3", "_v4", "_v5")):
             dataset_file = f"training_data_shortest_path_{base_experiment_tag}.json"    
@@ -273,12 +277,12 @@ def train():
         elif experiment_tag == "mixed_filtered_corrected":
             dataset_file = "training_data_shortest_path_mixed_filtered_corrected.json"
 
-        # Specialized training distributions
-        elif base_experiment_tag == "wood_only":
-            dataset_file = "data/training_data_shortest_path_wood_only.json"
-
         elif base_experiment_tag == "external_only":
             dataset_file = "data/training_data_shortest_path_external_only.json"
+
+        # Wood-only training with 6,000 labeled samples
+        elif base_experiment_tag == "wood_only_6000":
+            dataset_file = "data/training_data_shortest_path_wood_only_6000.json"
 
         elif experiment_tag is None:
             dataset_file = "training_data_shortest_path.json"

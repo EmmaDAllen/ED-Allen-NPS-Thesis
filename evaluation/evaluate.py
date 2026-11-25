@@ -249,6 +249,9 @@ def evaluate():
     # so different candidate-search settings do not overwrite one another
     evaluation_tag = sys.argv[5] if len(sys.argv) > 5 else None
 
+    # Optional candidate pool size; defaults to K+4
+    candidate_pool_extra = int(sys.argv[6]) if len(sys.argv) > 6 else 4
+
     # Identify the base experiment independently of the training seed.
     base_experiment_tag = experiment_tag
 
@@ -256,7 +259,7 @@ def evaluate():
         base_experiment_tag = experiment_tag.rsplit("_v", 1)[0]
 
     # Use alternative normalization only for normmax experiments.
-    is_normmax = base_experiment_tag == "mixed_filtered_normmax"
+    is_normmax = base_experiment_tag in ("mixed_filtered_normmax", "external_only")
 
     os.environ["SPIP_NORMMAX"] = "1" if is_normmax else "0"
 
@@ -644,7 +647,7 @@ def evaluate():
             candidate_attack_list, candidate_objective, candidate_pool_size, num_candidates = (
                  candidate_search(sample=sample,masked_logits=masked_logits,
                                          interdictable_mask=interdictable_mask, k=k,
-                                         problem_type=problem_type,candidate_pool_extra=4,))
+                                         problem_type=problem_type,candidate_pool_extra=candidate_pool_extra,))
 
             # Ensure all GPU operations have completed
             if device == "cuda":
@@ -927,6 +930,13 @@ def evaluate():
     else:
         results_path = ("results/" f"evaluation_results_" f"{model_type}_"
             f"{problem_type}_" f"{eval_mode}.csv")
+    
+    # Add candidate configuration to filename for sensitivity runs
+    if candidate_pool_extra != 4:
+        results_path = results_path.replace(
+            ".csv",
+            f"_candidate{candidate_pool_extra}.csv"
+        )
 
 
     # write one CSV row per successfully evaluated graph instance
